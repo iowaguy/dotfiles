@@ -423,6 +423,7 @@ doesn't require any additional setup. I've bound its most useful command to
 #+begin_src emacs-lisp
   (use-package dumb-jump
     :config
+    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
     (setq dumb-jump-selector 'ivy))
 #+end_src
 

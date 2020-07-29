@@ -45,4 +45,5 @@ brew install jpeg \
              xz \
              zsh-syntax-highlighting \
              zsh \
-             ispell
+             ispell \
+             iterm
