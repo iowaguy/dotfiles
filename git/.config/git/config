@@ -43,8 +43,7 @@
 [rebase]
   autosquash = true
 [user]
-  name = Harry R. Schwartz
-  email = hello@harryrschwartz.com
-  signingkey = 25AE721B
+  name = Ben Weintraub
+  email = ben@weintraub.xyz
 [github]
-  user = hrs
+  user = iowaguy

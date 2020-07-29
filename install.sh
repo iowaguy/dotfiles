@@ -11,11 +11,11 @@
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 upgrade_oh_my_zsh
 
-stow --dotfiles zsh
-stow --dotfiles emacs
-stow --dotfiles email
-stow --dotfiles firefox
-stow --dotfiles git
+stow -t ~ --dotfiles zsh
+stow -t ~ --dotfiles emacs
+stow -t ~ --dotfiles email
+stow -t ~ --dotfiles firefox
+stow -t ~ --dotfiles git
 
 # Many of the tools in this repo are written in Ruby, and some depend on
 # external libraries. This installs those.

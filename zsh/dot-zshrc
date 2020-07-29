@@ -141,6 +141,7 @@ pathmunge () {
 
 pathmunge /usr/local/opt/ruby/bin
 pathmunge $HOME/.bin/ after
+pathmunge $HOME/bin/ after
 pathmunge $HOME/.cabal/ after
 pathmunge $HOME/.local/ after
 pathmunge $GOPATH/bin after

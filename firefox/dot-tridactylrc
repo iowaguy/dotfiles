@@ -17,8 +17,5 @@ bind k scrollline -5
 bind gh followpage prev
 bind gl followpage next
 
-" Open the current page (presumably a video) with mpv, my preferred media player.
-bind v js tri.native.run(`mpv '${document.location.href}'`)
-
 " Download the current page (presumably a video), with a youtube-dl wrapper.
 bind nn js tri.native.run(`~/bin/smart-download '${document.location.href}'`)
