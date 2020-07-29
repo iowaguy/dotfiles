@@ -484,6 +484,14 @@ I like tree-based undo management. I only rarely need it, but when I do, oh boy.
   (use-package undo-tree)
 #+end_src
 
+** Weekly plan
+
+Load my weekly plan tool.
+
+#+begin_src emacs-lisp
+  (require 'weekly-plan)
+#+end_src
+
 * Programming environments
 
 I like shallow indentation, but tabs are displayed as 8 characters by default.
@@ -852,13 +860,33 @@ Automagically do an =ls= when entering a new directory.
 (setq eshell-list-files-after-cd t)
 #+end_src
 
-Set a theme for eshell.
+Set a theme for eshell which has the git status in the prompt.
 
 #+begin_src emacs-lisp
   (use-package eshell-git-prompt
     :config
     (eshell-git-prompt-use-theme 'robbyrussell))
 #+end_src
+
+Open new eshell prompt with =F1= key.
+
+#+begin_src emacs-lisp
+  (global-set-key [f1] 'eshell)
+#+end_src
+
+Add some fun tools for viewing shell history and finding files.
+
+#+begin_src emacs-lisp
+  (add-hook 'eshell-mode-hook
+    (lambda ()
+      (define-key eshell-mode-map (kbd "C-c C-i") 'helm-eshell-history)))
+
+  (add-hook 'eshell-mode-hook
+    (lambda ()
+      (define-key eshell-mode-map (kbd "C-c C-f") 'helm-find-files)))
+
+#+end_src
+
 * Publishing and task management with Org-mode
 
 Including =org-tempo= restores the =<s=-style easy-templates that were
