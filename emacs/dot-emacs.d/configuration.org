@@ -284,7 +284,7 @@ Note that this overrides the default font-related keybindings from
 
 #+begin_src emacs-lisp
   (setq hrs/default-font "Inconsolata")
-  (setq hrs/default-font-size 17)
+  (setq hrs/default-font-size 16)
   (setq hrs/current-font-size hrs/default-font-size)
 
   (setq hrs/font-change-increment 1.1)
@@ -475,6 +475,37 @@ history of a file.
   (use-package git-timemachine)
 #+end_src
 
+** =projectile=
+
+Projectile's default binding of =projectile-ag= to =C-c p s s= is clunky enough
+that I rarely use it (and forget it when I need it). This binds it to the
+easier-to-type =C-c v= to useful searches.
+
+Bind =C-p= to fuzzy-finding files in the current project. We also need to
+explicitly set that in a few other modes.
+
+I use =ivy= as my completion system.
+
+When I visit a project with =projectile-switch-project=, the default action is
+to search for a file in that project. I'd rather just open up the top-level
+directory of the project in =dired= and find (or create) new files from there.
+
+I'd like to /always/ be able to recursively fuzzy-search for files, not just
+when I'm in a Projectile-defined project. I use the current directory as a
+project root (if I'm not in a "real" project).
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :bind
+    ("C-c v" . projectile-ag)
+
+    :config
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+    (setq projectile-completion-system 'ivy
+          projectile-switch-project-action 'projectile-dired
+          projectile-require-project-root nil))
+#+end_src
 ** =restclient=
 ** =undo-tree=
 
@@ -561,7 +592,7 @@ Install =go-mode= and related packages:
 Define my =$GOPATH= and tell Emacs where to find the Go binaries.
 
 #+begin_src emacs-lisp
-  (setenv "GOPATH" "~/go")
+  (setenv "GOPATH" "~/workspace/go")
   (hrs/append-to-path (concat (getenv "GOPATH") "/bin"))
 #+end_src
 
@@ -1213,10 +1244,13 @@ Refiling according to the document's hierarchy.
 Bind a few handy keys.
 
 #+begin_src emacs-lisp
-  (define-key global-map "\C-cl" 'org-store-link)
-  (define-key global-map "\C-ca" 'org-agenda)
-  (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-c l" 'org-store-link)
+  (define-key global-map "\C-c a" 'org-agenda)
+  (define-key global-map "\C-c c" 'org-capture)
 #+end_src
+
+#+RESULTS:
+: org-capture
 
 Hit =C-c i= to quickly open up my todo list.
 
@@ -1969,6 +2003,21 @@ Binding this to =M-SPC= is strictly better than the original binding of
           deft-use-filename-as-title t))
 #+end_src
 
+** Abbreviations
+
+Use abbreviations from my emacs directory, and save new abbreviations every time
+a file is saved.
+
+#+begin_src emacs-lisp
+  (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+  (setq save-abbrevs 'silent)
+
+  (dolist (hook prose-mode-hooks)
+      (add-hook hook 'abbrev-mode))
+#+end_src
+
+#+RESULTS:
+
 * File management with =dired=
 
 Hide dotfiles by default, but toggle their visibility with =.=.
@@ -2310,15 +2359,15 @@ Make commenting better with =M-;=
 * Set custom keybindings
 ** Set MacOS key bindings
 
+- Bind =alt= to =super=
+- Bind =command= to =meta=
+- Bind =fn= to =control=
+
 #+begin_src emacs-lisp
  (setq ns-alternate-modifier (quote super))
  (setq ns-command-modifier (quote meta))
  (setq ns-function-modifier (quote control))
 #+end_src
-
-- Bind =alt= to =super=
-- Bind =command= to =meta=
-- Bind =fn= to =control=
 
 * Finish
 A little message to let you know that loading is complete
