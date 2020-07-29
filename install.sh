@@ -1,22 +1,21 @@
 #!/bin/sh
 
-# Install all the necessary Debian packages, especially `stow`.
-./install_debian_packages.sh
-./configure_services.sh
+# Install the necessary MacOS tools, like Homebrew and Xcode tools
+./install_mac_packages.sh
 
-stow --dotfiles bash
+# Install all the necessary brew packages, especially `stow`.
+./install_brew_packages.sh
+
+
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+upgrade_oh_my_zsh
+
+stow --dotfiles zsh
 stow --dotfiles emacs
 stow --dotfiles email
 stow --dotfiles firefox
 stow --dotfiles git
-stow --dotfiles lisp
-stow --dotfiles music
-stow --dotfiles ruby
-stow --dotfiles x-windows
-
-# Link ~/.bash_profile -> ~/.bashrc
-rm -f ~/.bash_profile
-ln -s ~/.bashrc ~/.bash_profile
 
 # Many of the tools in this repo are written in Ruby, and some depend on
 # external libraries. This installs those.
