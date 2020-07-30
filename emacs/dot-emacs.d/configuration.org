@@ -40,7 +40,7 @@ Disable TLS 1.3; ELPA has higher standards. That'll be the default in Emacs
 Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for some basic settings.
 
 #+begin_src emacs-lisp
-  (load-file "~/tools/sensible-defaults.el/sensible-defaults.el")
+  (load-file "~/.opt/sensible-defaults.el/sensible-defaults.el")
   (sensible-defaults/use-all-settings)
   (sensible-defaults/use-all-keybindings)
   (sensible-defaults/backup-to-temp-directory)
@@ -1003,22 +1003,25 @@ Don't indent newly expanded blocks, even if they're under a heading.
 
 ** Task management and agenda views
 
-Store my org files in =~/documents/org=, maintain an inbox in Dropbox, define
+Store my org files in =~/Documents/org=, maintain an inbox in Dropbox, define
 the location of an index file (my main todo list), and archive finished tasks in
-=~/documents/org/archive.org=.
+=~/Documents/org/archive.org=.
 
 #+begin_src emacs-lisp
-  (setq org-directory "~/documents/org")
+  (setq org-directory "~/Documents/org")
 
   (defun org-file-path (filename)
     "Return the absolute address of an org file, given its relative name."
     (concat (file-name-as-directory org-directory) filename))
 
-  (setq org-inbox-file "~/sync/Dropbox/inbox.org")
-  (setq org-index-file (org-file-path "index.org"))
+  (setq org-inbox-file "~/Documents/inbox.org")
+  (setq org-index-file (org-file-path "thebigone.org"))
   (setq org-archive-location
         (concat (org-file-path "archive.org") "::* From %s"))
 #+end_src
+
+#+RESULTS:
+: ~/Documents/org/archive.org::* From %s
 
 I use [[http://agiletortoise.com/drafts/][Drafts]] to create new tasks, format them according to a template, and
 append them to an "inbox.org" file in my Dropbox. This function lets me import
@@ -1034,36 +1037,21 @@ them easily from that inbox file to my index.
         (delete-file org-inbox-file))))
 #+end_src
 
-I store most of my personal tasks in my index and maintain a separate file for
-work-related tasks, so I'd like to derive my agenda from those files. I've also
-got some annual OKRs in =goals.org=.
-
-I also keep a schedule in =events.org=. Plus some recurring events in,
-reasonably, a =recurring-events.org= file. Those are (mostly) structured as
-=org-habit= items so they can recur according to a schedule.
+Right now I store everything in a single file called =thebigone.org=. If I
+decide to store events and tasks in additional files in the future, I can easily
+do so by adding more =org-file-path= S-expressions to the list.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list org-index-file
-                               (org-file-path "events.org")
-                               (org-file-path "goals.org")
-                               (org-file-path "recurring-events.org")
-                               (org-file-path "work.org")))
+  (setq org-agenda-files (list org-index-file))
 #+end_src
+
+#+RESULTS:
+| ~/Documents/org/index.org | ~/Documents/org/events.org | ~/Documents/org/goals.org | ~/Documents/org/recurring-events.org | ~/Documents/org/work.org | ~/Documents/org/thebigone.org |
 
 Hitting =C-c C-x C-s= will mark a todo as done and move it to an appropriate
 place in the archive.
 
-#+begin_src emacs-lisp
-  (defun hrs/mark-done-and-archive ()
-    "Mark the state of an org-mode item as DONE and archive it."
-    (interactive)
-    (org-todo 'done)
-    (org-archive-subtree))
-
-  (define-key org-mode-map (kbd "C-c C-x C-s") 'hrs/mark-done-and-archive)
-#+end_src
-
-Record the time that a todo was archived.
+Record the time that a todo was completed.
 
 #+begin_src emacs-lisp
   (setq org-log-done 'time)
@@ -1092,23 +1080,6 @@ redundant.
                                    (todo . " %i ")
                                    (tags . " %i ")
                                    (search . " %i ")))
-#+end_src
-
-I use =org=habit= to schedule recurring events and reminders for myself.
-
-#+begin_src emacs-lisp
-  (require 'org-habit)
-#+end_src
-
-Don't show the =org-habit= consistency graph. I don't actually find it
-motivating, personally, and it kinda visually fills up my agenda. There's no
-provided way to disable the graph, as far as I can tell, so I've just redefined
-the function to do nothing.
-
-#+begin_src emacs-lisp
-  (defun org-habit-build-graph (habit starting current ending)
-    "                             ")
-  (setq org-habit-graph-column 60)
 #+end_src
 
 I've got some custom agenda views that I use to visualize what I'm working on.
@@ -1183,8 +1154,7 @@ displaying the index, so they'll be in the agenda view, too.
 
 Define a few common tasks as capture templates. Specifically, I frequently:
 
-- Record ideas for future blog posts in =~/documents/notes/blog-ideas.org=,
-- Maintain a todo list in =~/documents/org/index.org=.
+- Maintain a todo list in =~/Documents/org/thebigone.org=.
 - Convert emails into todos to maintain an empty inbox.
 
 #+begin_src emacs-lisp
@@ -1244,9 +1214,9 @@ Refiling according to the document's hierarchy.
 Bind a few handy keys.
 
 #+begin_src emacs-lisp
-  (define-key global-map "\C-c l" 'org-store-link)
-  (define-key global-map "\C-c a" 'org-agenda)
-  (define-key global-map "\C-c c" 'org-capture)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
 
 #+RESULTS:
@@ -1280,19 +1250,6 @@ Hit =M-n= to quickly open up a capture template for a new todo.
             (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 #+end_src
 
-Hit =C-c w= to quickly open up my work todo list.
-
-#+begin_src emacs-lisp
-  (defun hrs/open-work-file ()
-    "Open the work TODO list."
-    (interactive)
-    (find-file (org-file-path "work.org"))
-    (flycheck-mode -1)
-    (end-of-buffer))
-
-  (global-set-key (kbd "C-c w") 'hrs/open-work-file)
-#+end_src
-
 ** Exporting
 
 Allow export to markdown and beamer (for presentations).
@@ -1311,11 +1268,9 @@ Allow =babel= to evaluate Emacs lisp, Ruby, =ditaa=, Graphviz, or Gnuplot code.
 
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '((emacs-lisp . t)
-     (ruby . t)
-     (ditaa . t)
-     (dot . t)
-     (gnuplot . t)))
+     '((emacs-lisp . t)
+       (python . t)
+       (sh . t)))
 #+end_src
 
 Don't ask before evaluating code blocks.
@@ -1328,13 +1283,6 @@ Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 
 #+begin_src emacs-lisp
   (use-package htmlize)
-#+end_src
-
-Associate the "dot" language with the =graphviz-dot= major mode.
-
-#+begin_src emacs-lisp
-  (use-package graphviz-dot-mode)
-  (add-to-list 'org-src-lang-modes '("dot" . graphviz-dot))
 #+end_src
 
 Translate regular ol' straight quotes to typographically-correct curly quotes
@@ -1409,165 +1357,6 @@ Start a new line when line length exceeds 80 characters.
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 #+end_src
 
-* Blogging
-
-I maintain a blog written in Jekyll. There are plenty of command-line tools to
-automate creating a new post, but staying in my editor minimizes friction and
-encourages me to write.
-
-This defines a =hrs/new-blog-post= function, which prompts the user for a title
-and creates a new draft (with a slugged file name) in the blog's =_drafts/=
-directory. The new post includes appropriate YAML header information.
-
-This also defines =hrs/publish-post= and =hrs/unpublish-post=, which adjust the
-date in the YAML front matter and rename the file appropriately.
-
-#+begin_src emacs-lisp
-  (defvar hrs/jekyll-drafts-directory "/home/hrs/documents/blog/_drafts/")
-  (defvar hrs/jekyll-posts-directory "/home/hrs/documents/blog/_posts/")
-  (defvar hrs/jekyll-post-extension ".md")
-
-  (defun hrs/timestamp ()
-    (format-time-string "%Y-%m-%d"))
-
-  (defun hrs/replace-whitespace-with-hyphens (s)
-    (replace-regexp-in-string " " "-" s))
-
-  (defun hrs/replace-nonalphanumeric-with-whitespace (s)
-    (replace-regexp-in-string "[^A-Za-z0-9 ]" " " s))
-
-  (defun hrs/remove-quotes (s)
-    (replace-regexp-in-string "[\'\"]" "" s))
-
-  (defun hrs/replace-unusual-characters (title)
-    "Remove quotes, downcase everything, and replace characters
-  that aren't alphanumeric with hyphens."
-    (hrs/replace-whitespace-with-hyphens
-     (s-trim
-      (downcase
-       (hrs/replace-nonalphanumeric-with-whitespace
-        (hrs/remove-quotes title))))))
-
-  (defun hrs/slug-for (title)
-    "Given a blog post title, return a convenient URL slug.
-     Downcase letters and remove special characters."
-    (let ((slug (hrs/replace-unusual-characters title)))
-      (while (string-match "--" slug)
-        (setq slug (replace-regexp-in-string "--" "-" slug)))
-      slug))
-
-  (defun hrs/jekyll-yaml-template (title)
-    "Return the YAML header information appropriate for a blog
-     post. Include the title, the current date, the post layout,
-     and an empty list of tags."
-    (concat
-     "---\n"
-     "title: " title "\n"
-     "date:\n"
-     "layout: post\n"
-     "# pdf_file: " (hrs/slug-for title) ".pdf\n"
-     "tags: []\n"
-     "---\n\n"))
-
-  (defun hrs/new-blog-post (title)
-    "Create a new blog draft in Jekyll."
-    (interactive "sPost title: ")
-    (let ((post (concat hrs/jekyll-drafts-directory
-                        (hrs/slug-for title)
-                        hrs/jekyll-post-extension)))
-      (if (file-exists-p post)
-          (find-file post)
-        (find-file post)
-        (insert (hrs/jekyll-yaml-template title)))))
-
-  (defun hrs/jekyll-draft-p ()
-    "Return true if the current buffer is a draft."
-    (equal
-     (file-name-directory (buffer-file-name (current-buffer)))
-     hrs/jekyll-drafts-directory))
-
-  (defun hrs/jekyll-published-p ()
-    "Return true if the current buffer is a published post."
-    (equal
-     (file-name-directory (buffer-file-name (current-buffer)))
-     hrs/jekyll-posts-directory))
-
-  (defun hrs/publish-post ()
-    "Move a draft post to the posts directory, rename it to include
-  the date, reopen the new file, and insert the date in the YAML
-  front matter."
-    (interactive)
-    (cond ((not (hrs/jekyll-draft-p))
-           (message "This is not a draft post."))
-          ((buffer-modified-p)
-           (message "Can't publish post; buffer has modifications."))
-          (t
-           (let ((filename
-                  (concat hrs/jekyll-posts-directory
-                          (hrs/timestamp) "-"
-                          (file-name-nondirectory
-                           (buffer-file-name (current-buffer)))))
-                 (old-point (point)))
-             (rename-file (buffer-file-name (current-buffer))
-                          filename)
-             (kill-buffer nil)
-             (find-file filename)
-             (set-window-point (selected-window) old-point)
-             (save-excursion
-               (beginning-of-buffer)
-               (replace-regexp "^date:$" (concat "date: " (hrs/timestamp))))
-             (save-buffer)
-             (message "Published post!")))))
-
-  (defun hrs/unpublish-post ()
-    "Move a published post to the drafts directory, rename it to
-  exclude the date, reopen the new file, and remove the date in the
-  YAML front matter."
-    (interactive)
-    (cond ((not (hrs/jekyll-published-p))
-           (message "This is not a published post."))
-          ((buffer-modified-p)
-           (message "Can't publish post; buffer has modifications."))
-          (t
-           (let ((filename
-                  (concat hrs/jekyll-drafts-directory
-                          (substring
-                           (file-name-nondirectory
-                            (buffer-file-name (current-buffer)))
-                           11 nil)))
-                 (old-point (point)))
-             (rename-file (buffer-file-name (current-buffer))
-                          filename)
-             (kill-buffer nil)
-             (find-file filename)
-             (set-window-point (selected-window) old-point)
-             (save-excursion
-               (beginning-of-buffer)
-               (replace-regexp "^date: [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]$" "date:"))
-             (save-buffer)
-             (message "Returned post to drafts!")))))
-#+end_src
-
-This selects and inserts a tag:
-
-#+begin_src emacs-lisp
-  (defun hrs/existing-blog-tags ()
-    "Return a list of all the tags currently used in my blog."
-    (split-string (shell-command-to-string "cd ~/documents/blog && rake tags")))
-
-  (defun hrs/insert-blog-tag ()
-    "Prompt for one of the existing tags used in the blog and
-  insert it in the YAML front matter appropriately."
-    (interactive)
-    (save-excursion
-      (beginning-of-buffer)
-      (search-forward-regexp "^tags: \\[")
-      (insert
-       (ivy-completing-read "Insert tag: " (hrs/existing-blog-tags))
-       (if (looking-at "\\]") "" ", ")))
-    (message "Tagged!"))
-#+end_src
-
 * Email with =mu4e=
 
 Inconveniently, =mu4e= is distributed along with =mu= in my system's package
@@ -1611,7 +1400,7 @@ My full name is defined earlier in this configuration file.
 
 ** Fetching new mail
 
-I fetch my email with a [[file:~/.dotfiles/bash/.bin/get-new-mail][custom script]] (though, in practice, this is never
+I fetch my email with a [[file:~/.bin/get-new-mail][custom script]] (though, in practice, this is never
 called; I have a cron job regularly calling the script to fetch my mail
 asynchronously).
 
@@ -2006,7 +1795,7 @@ Binding this to =M-SPC= is strictly better than the original binding of
 ** Abbreviations
 
 Use abbreviations from my emacs directory, and save new abbreviations every time
-a file is saved.
+a file is saved. [[http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html][Documentation here]].
 
 #+begin_src emacs-lisp
   (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
