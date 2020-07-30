@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# This is for auto-selfcontrol: https://github.com/andreasgrill/auto-selfcontrol
+brew tap andreasgrill/utils
+
 brew install jpeg \
              autoconf \
              automake \
@@ -46,4 +49,8 @@ brew install jpeg \
              zsh-syntax-highlighting \
              zsh \
              ispell \
-             iterm
+             iterm \
+             offlineimap \
+             auto-selfcontrol
+
+brew cask install selfcontrol

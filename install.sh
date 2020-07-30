@@ -16,6 +16,7 @@ stow -t ~ --dotfiles emacs
 stow -t ~ --dotfiles email
 stow -t ~ --dotfiles firefox
 stow -t ~ --dotfiles git
+stow -t ~ --dotfiles open-source-tools
 
 # Many of the tools in this repo are written in Ruby, and some depend on
 # external libraries. This installs those.
@@ -24,5 +25,8 @@ stow -t ~ --dotfiles git
 # Similarly, we use a couple of Python packages.
 ./install_python_packages.sh
 
-# Finally, the Node packages. Dang, computers are complicated.
+# The Node packages. Dang, computers are complicated.
 ./install_node_packages.sh
+
+# Some useful repositories and downloads
+./install_open_source_tools.sh
