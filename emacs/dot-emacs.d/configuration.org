@@ -1824,6 +1824,18 @@ a file is saved. [[http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html][D
 
 #+RESULTS:
 
+** Palimpsest mode
+
+Remove text without permanently deleting it. Options to send it to the bottom of
+the file or a trash file.
+
+#+begin_src emacs-lisp
+  (use-package palimpsest
+    :config
+    (dolist (hook prose-mode-hooks)
+      (add-hook hook 'palimpsest-mode)))
+#+end_src
+
 * File management with =dired=
 
 Hide dotfiles by default, but toggle their visibility with =.=.
