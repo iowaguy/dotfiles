@@ -5,3 +5,5 @@ emacs/dot-emacs.d/*
 !emacs/dot-emacs.d/snippets
 
 ruby/dot-bundle/cache
+/open-source-tools/dot-opt/gdb-dashboard/
+/open-source-tools/dot-opt/sensible-defaults.el/

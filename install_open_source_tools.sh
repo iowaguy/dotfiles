@@ -11,6 +11,7 @@ ln -s .gdbinit ~/.gdbinit
 git clone https://github.com/hrs/sensible-defaults.el.git
 
 # Install my auto-selfcontrol configs
+rm -f /usr/local/etc/auto-selfcontrol/config.json
 ln -s auto-selfcontrol/config.json /usr/local/etc/auto-selfcontrol/
 
 # Turn on auto-selfcontrol

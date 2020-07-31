@@ -50,7 +50,9 @@ brew install jpeg \
              zsh \
              ispell \
              iterm \
-             offlineimap \
-             auto-selfcontrol
+             isync \
+             auto-selfcontrol \
+             msmtp \
+             sdcv
 
 brew cask install selfcontrol

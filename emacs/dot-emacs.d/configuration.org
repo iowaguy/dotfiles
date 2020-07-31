@@ -1014,7 +1014,7 @@ the location of an index file (my main todo list), and archive finished tasks in
     "Return the absolute address of an org file, given its relative name."
     (concat (file-name-as-directory org-directory) filename))
 
-  (setq org-inbox-file "~/Documents/inbox.org")
+  ;(setq org-inbox-file "~/Documents/inbox.org")
   (setq org-index-file (org-file-path "thebigone.org"))
   (setq org-archive-location
         (concat (org-file-path "archive.org") "::* From %s"))
@@ -1047,9 +1047,6 @@ do so by adding more =org-file-path= S-expressions to the list.
 
 #+RESULTS:
 | ~/Documents/org/index.org | ~/Documents/org/events.org | ~/Documents/org/goals.org | ~/Documents/org/recurring-events.org | ~/Documents/org/work.org | ~/Documents/org/thebigone.org |
-
-Hitting =C-c C-x C-s= will mark a todo as done and move it to an appropriate
-place in the archive.
 
 Record the time that a todo was completed.
 
@@ -1270,7 +1267,7 @@ Allow =babel= to evaluate Emacs lisp, Ruby, =ditaa=, Graphviz, or Gnuplot code.
    'org-babel-load-languages
      '((emacs-lisp . t)
        (python . t)
-       (sh . t)))
+       (shell . t)))
 #+end_src
 
 Don't ask before evaluating code blocks.
@@ -1364,8 +1361,9 @@ manager instead of as a package on MELPA. This loads up =mu4e= from the usual
 location:
 
 #+begin_src emacs-lisp
-        (add-to-list 'load-path "/usr/local/Cellar/mu/1.4.12/share/emacs/site-lisp/mu/mu4e")
+  (add-to-list 'load-path "/usr/local/Cellar/mu/1.4.12/share/emacs/site-lisp/mu/mu4e")
   (require 'mu4e)
+  (setq mu4e-mu-binary "/usr/local/bin/mu")
 #+end_src
 
 ** Where's my mail? Who am I?
@@ -1385,17 +1383,24 @@ I'd define it in here with an additional =make-mu4e-context= block.
 My full name is defined earlier in this configuration file.
 
 #+begin_src emacs-lisp
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "personal"
-            :match-func (lambda (msg)
-                          (when msg
-                            (string-prefix-p "/personal" (mu4e-message-field msg :maildir))))
-            :vars '((user-mail-address . "ben@weintraub.xyz")
-                    (mu4e-trash-folder . "/personal/archive")
-                    (mu4e-refile-folder . "/personal/archive")
-                    (mu4e-sent-folder . "/personal/sent")
-                    (mu4e-drafts-folder . "/personal/drafts")))))
+        (setq mu4e-contexts
+              `(,(make-mu4e-context
+                  :name "personal"
+                  :match-func (lambda (msg)
+                                (when msg
+                                  (string-prefix-p "/personal" (mu4e-message-field msg :maildir))))
+                  :vars '((user-mail-address . "benweintraub34@gmail.com")
+
+                          (mu4e-trash-folder . "/personal/.trash")
+                          (mu4e-refile-folder . "/personal/.archive")
+                          (mu4e-sent-folder . "/personal/sent")
+                          (mu4e-drafts-folder . "/personal/drafts")))))
+#+end_src
+
+Apply any pending changes when leaving the mail buffer.
+
+#+begin_src emacs-lisp
+  (setq mu4e-headers-leave-behavior 'apply)
 #+end_src
 
 ** Fetching new mail
@@ -1417,15 +1422,15 @@ this; I'm cargo-culting.
 
 ** Viewing mail
 
-I check my email pretty often! Probably more than I should. This binds =C-c m=
+I check my email pretty often! Probably more than I should. This binds =C-c M-m=
 to close any other windows and open my personal inbox.
 
 #+begin_src emacs-lisp
   (defun hrs/visit-inbox ()
     (interactive)
-    (mu4e~headers-jump-to-maildir "/personal/inbox"))
+    (mu4e~headers-jump-to-maildir "/personal/Inbox"))
 
-  (global-set-key (kbd "C-c C-m") 'hrs/visit-inbox)
+  (global-set-key (kbd "C-c M-m") 'hrs/visit-inbox)
 #+end_src
 
 I don't really need to see the =*mu4e-main*= buffer (or, really, more than one
@@ -1477,10 +1482,10 @@ Display the sender's email address along with their name.
   (setq mu4e-view-show-addresses t)
 #+end_src
 
-Save attachments in my =~/downloads= directory, not my home directory.
+Save attachments in my =~/Downloads= directory, not my home directory.
 
 #+begin_src emacs-lisp
-  (setq mu4e-attachment-dir "~/downloads")
+  (setq mu4e-attachment-dir "~/Downloads")
 #+end_src
 
 Hit =C-c C-o= to open a URL in the browser.
@@ -1523,9 +1528,9 @@ email to my "Archive" folder without applying that flag.
 
 #+begin_src emacs-lisp
   (setq mu4e-maildir-shortcuts
-      '(("/personal/archive" . ?A)))
+      '(("/personal/.archive" . ?A)))
 
-  (fset 'hrs/mu4e-move-to-archive "mA")
+  ;; (fset 'hrs/mu4e-move-to-archive "mA")
 #+end_src
 
 ** Encryption
@@ -1543,6 +1548,12 @@ If a message is encrypted, my reply should always be encrypted, too.
 #+end_src
 
 ** Sending mail over SMTP
+
+Don't save messages to Sent Messages, Gmail/IMAP takes care of this
+
+#+begin_src emacs-lisp
+  (setq mu4e-sent-messages-behavior 'delete)
+#+end_src
 
 I send my email through =msmtp=. These settings describe how to send a message:
 
@@ -1574,22 +1585,22 @@ instead of the search that resulted in that view.
   (setq org-mu4e-link-query-in-headers-mode nil)
 #+end_src
 
-** Configure =org-contacts= with =mu4e=
+# ** Configure =org-contacts= with =mu4e=
 
-Use an =org-contacts= file to manage my address book.
+# Use an =org-contacts= file to manage my address book.
 
- #+begin_src emacs-lisp
-   (use-package org-contacts
-     :ensure nil
-     :after org
-     :custom (org-contacts-files '("~/documents/contacts.org")))
+#  #+begin_src emacs-lisp
+#    (use-package org-contacts
+#      :ensure nil
+#      :after org
+#      :custom (org-contacts-files '("~/documents/contacts.org")))
 
-  (setq mu4e-org-contacts-file (car org-contacts-files))
-  (add-to-list 'mu4e-headers-actions
-    '("org-contact-add" . mu4e-action-add-org-contact) t)
-  (add-to-list 'mu4e-view-actions
-    '("org-contact-add" . mu4e-action-add-org-contact) t)
- #+end_src
+#   (setq mu4e-org-contacts-file (car org-contacts-files))
+#   (add-to-list 'mu4e-headers-actions
+#     '("org-contact-add" . mu4e-action-add-org-contact) t)
+#   (add-to-list 'mu4e-view-actions
+#     '("org-contact-add" . mu4e-action-add-org-contact) t)
+#  #+end_src
 
 * Writing prose
 
@@ -1704,9 +1715,15 @@ Use flycheck in the appropriate buffers:
 
 ** Look up definitions in Webster 1913
 
+
+#+begin_src emacs-lisp
+  (use-package osx-dictionary)
+
+#+end_src
 I look up definitions by hitting =C-x w=, which shells out to =sdcv=. I've
 loaded that with the (beautifully lyrical) 1913 edition of Webster's dictionary,
-so these definitions are a lot of fun.
+so these definitions are a lot of fun. Dictionaries can be downloaded from [[https://sites.google.com/site/gtonguedict/home/stardict-dictionaries][here]].
+By following [[https://linuxaria.com/article/sdcv-command-line-based-dictionary-for-linux][these instructions]].
 
 #+begin_src emacs-lisp
   (defun hrs/dictionary-prompt ()
@@ -1769,7 +1786,7 @@ Binding this to =M-SPC= is strictly better than the original binding of
 =just-one-space=.
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "M-SPC") 'cycle-spacing)
+  (global-set-key (kbd "C-M-SPC") 'cycle-spacing)
 #+end_src
 
 ** Enable region case modification
@@ -1787,7 +1804,7 @@ Binding this to =M-SPC= is strictly better than the original binding of
     :commands (deft)
     :config
 
-    (setq deft-directory "~/documents/notes"
+    (setq deft-directory "~/Documents/notes"
           deft-recursive t
           deft-use-filename-as-title t))
 #+end_src
@@ -1824,24 +1841,24 @@ Open media with the appropriate programs.
   (use-package dired-open
     :config
     (setq dired-open-extensions
-          '(("avi" . "mpv")
-            ("cbr" . "comix")
-            ("doc" . "abiword")
-            ("docx" . "abiword")
-            ("gif" . "ffplay")
-            ("gnumeric" . "gnumeric")
-            ("html" . "firefox")
-            ("jpeg" . "s")
-            ("jpg" . "s")
-            ("mkv" . "mpv")
-            ("mov" . "mpv")
-            ("mp3" . "mpv")
-            ("mp4" . "mpv")
-            ("pdf" . "zathura")
-            ("png" . "s")
-            ("webm" . "mpv")
-            ("xls" . "gnumeric")
-            ("xlsx" . "gnumeric"))))
+          '(("avi" . "open")
+            ("cbr" . "open")
+            ("doc" . "open")
+            ("docx" . "pen")
+            ("gif" . "open")
+            ("gnumeric" . "open")
+            ("html" . "open")
+            ("jpeg" . "open")
+            ("jpg" . "open")
+            ("mkv" . "open")
+            ("mov" . "open")
+            ("mp3" . "open")
+            ("mp4" . "open")
+            ("pdf" . "open")
+            ("png" . "open")
+            ("webm" . "open")
+            ("xls" . "open")
+            ("xlsx" . "open"))))
 #+end_src
 
 These are the switches that get passed to =ls= when =dired= gets a list of
@@ -1897,8 +1914,6 @@ This uses =emacs-async= to make =dired= perform actions asynchronously.
     :config
     (dired-async-mode 1))
 #+end_src
-
-Use "j" and "k" to move around in =dired=.
 
 I'm often browsing directories of photos and images, so this binds "v" to view a
 slideshow of the current directory with =s= (a custom =feh= wrapper defined
@@ -2103,39 +2118,42 @@ results and =C-c C-c= to stop, just like in =dired=.
 Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few useful engines.
 
 #+begin_src emacs-lisp
-  (use-package engine-mode)
-  (require 'engine-mode)
+    (use-package engine-mode)
+    (require 'engine-mode)
 
-  (defengine duckduckgo
-    "https://duckduckgo.com/?q=%s"
-    :keybinding "d")
+    (defengine duckduckgo
+      "https://duckduckgo.com/?q=%s"
+      :keybinding "d")
 
-  (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
-    :keybinding "g")
+    (defengine github
+      "https://github.com/search?ref=simplesearch&q=%s"
+      :keybinding "g")
 
-  (defengine google
-    "http://www.google.com/search?ie=utf-8&oe=utf-8&q=%s")
+    (defengine google-scholar
+      "https://scholar.google.com/scholar?hl=en&q=%s"
+      :keybinding "s")
 
-  (defengine rfcs
-    "http://pretty-rfc.herokuapp.com/search?q=%s")
+    (defengine rfcs
+      "http://pretty-rfc.herokuapp.com/search?q=%s")
 
-  (defengine stack-overflow
-    "https://stackoverflow.com/search?q=%s"
-    :keybinding "s")
+    (defengine stack-overflow
+      "https://stackoverflow.com/search?q=%s")
 
-  (defengine wikipedia
-    "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
-    :keybinding "w")
+    (defengine wikipedia
+      "http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search=%s"
+      :keybinding "w")
 
-  (defengine wiktionary
-    "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s")
+    (defengine wiktionary
+      "https://www.wikipedia.org/search-redirect.php?family=wiktionary&language=en&go=Go&search=%s")
 
-  (defengine youtube
-    "https://www.youtube.com/results?search_query=%s")
+    (defengine youtube
+      "https://www.youtube.com/results?search_query=%s")
 
-  (engine-mode t)
+    (engine-mode t)
 #+end_src
+
+#+RESULTS:
+: t
 
 ** Commenting
 Make commenting better with =M-;=
@@ -2156,10 +2174,4 @@ Make commenting better with =M-;=
  (setq ns-alternate-modifier (quote super))
  (setq ns-command-modifier (quote meta))
  (setq ns-function-modifier (quote control))
-#+end_src
-
-* Finish
-A little message to let you know that loading is complete
-#+begin_src
-(message "init.el load complete.")
 #+end_src
