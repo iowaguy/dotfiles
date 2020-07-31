@@ -3,16 +3,16 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Kill any running processes
-if pgrep --exact mbsync; then
-  pkill --exact mbsync
+# Kill any running processes, -x option searches for an exact match
+if pgrep -x mbsync; then
+  pkill -x mbsync
 fi
-if pgrep --exact mu; then
-  pkill --exact mu
+if pgrep -x mu; then
+  pkill -x mu
 fi
 
 # Fetch new mail
-mbsync personal
+/usr/local/bin/mbsync personal
 
 # Index new mail
-mu index --nocolor
+/usr/local/bin/mu index --nocolor

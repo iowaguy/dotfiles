@@ -17,6 +17,7 @@ stow -t ~ --dotfiles email
 stow -t ~ --dotfiles firefox
 stow -t ~ --dotfiles git
 stow -t ~ --dotfiles open-source-tools
+stow -t ~/Library/LaunchAgents crons
 
 # Many of the tools in this repo are written in Ruby, and some depend on
 # external libraries. This installs those.
@@ -30,3 +31,6 @@ stow -t ~ --dotfiles open-source-tools
 
 # Some useful repositories and downloads
 ./install_open_source_tools.sh
+
+# Register "cronjob"
+launchctl load ~/Library/LaunchAgents/xyz.weintraub.mail.refresh.plist
