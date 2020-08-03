@@ -3,7 +3,8 @@
 ** iowaguy's dotfiles
 Mostly borrowed from [[https://github.com/hrs][hrs]]
 
-I'm currently running MacOS on a 2015 MacBook Pro. I mostly use [[https://www.mozilla.org/en-US/firefox/][Firefox]] and [[https://www.gnu.org/software/emacs/][Emacs]].
+I'm currently running MacOS on a 2015 MacBook Pro. I mostly use [[https://www.mozilla.org/en-US/firefox/][Firefox]] and
+[[https://www.gnu.org/software/emacs/][Emacs]]. For Emacs, I use [[https://github.com/railwaycat/homebrew-emacsmacport][railwaycat's emacs-macport]].
 
 ** [[https://github.com/hrs][hrs]]'s comments
 

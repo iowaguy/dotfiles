@@ -374,6 +374,12 @@ I prefer =IBuffer=, and have it mapped to =C-x C-b=
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 #+end_src
 
+Make full screen on startup, because this is the first thing I'm going to do anyway.
+
+#+begin_src emacs-lisp
+  (set-frame-parameter nil 'fullscreen 'fullboth)
+#+end_src
+
 * Project management
 
 I use a few packages in virtually every programming or writing environment to
