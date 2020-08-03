@@ -1354,6 +1354,12 @@ Start a new line when line length exceeds 80 characters.
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 #+end_src
 
+Add TeX binaries to the path.
+
+#+begin_src emacs-lisp
+  (hrs/append-to-path "/Library/TeX/texbin/")
+#+end_src
+
 * Email with =mu4e=
 
 Inconveniently, =mu4e= is distributed along with =mu= in my system's package
