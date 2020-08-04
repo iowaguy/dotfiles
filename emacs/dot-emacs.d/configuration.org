@@ -377,7 +377,7 @@ I prefer =IBuffer=, and have it mapped to =C-x C-b=
 Make full screen on startup, because this is the first thing I'm going to do anyway.
 
 #+begin_src emacs-lisp
-  (set-frame-parameter nil 'fullscreen 'fullboth)
+  (set-frame-parameter nil 'fullscreen 'maximized)
 #+end_src
 
 * Project management
@@ -1304,6 +1304,12 @@ of every exported HTML document.
   (setq org-html-postamble nil)
 #+end_src
 
+Some of the style elements are off if these two aren't set to =css=.
+#+begin_src emacs-lisp
+  (setq org-html-htmlize-output-type 'css)
+  (setq org-twbs-htmlize-output-type 'css)
+#+end_src
+
 **** Exporting to PDF
 
 I want to produce PDFs with syntax highlighting in the code. The best way to do
@@ -1845,7 +1851,8 @@ the file or a trash file.
   (use-package palimpsest
     :config
     (dolist (hook prose-mode-hooks)
-      (add-hook hook 'palimpsest-mode)))
+      (add-hook hook 'palimpsest-mode))
+    (setq palimpsest-prefix "- "))
 #+end_src
 
 * File management with =dired=
