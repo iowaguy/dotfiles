@@ -1331,6 +1331,17 @@ Include the =minted= package in all of my LaTeX exports.
   (setq org-latex-listings 'minted)
 #+end_src
 
+**** Exporting presentations
+
+Use =org-reveal= to export =org= documents as =reveal.js= slide decks. This is integrated in the
+export menu. Documentation and details [[https://github.com/yjwen/org-reveal][here]].
+
+#+begin_src emacs-lisp
+  (use-package ox-reveal
+    :config
+    (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
+#+end_src
+
 ** TeX configuration
 
 I rarely write LaTeX directly any more, but I often export through it with
