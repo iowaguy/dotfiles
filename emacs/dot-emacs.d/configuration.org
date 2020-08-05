@@ -1388,6 +1388,12 @@ location:
   (setq mu4e-mu-binary "/usr/local/bin/mu")
 #+end_src
 
+I want =mu4e= to connect to the first context (I only have one) at startup.
+
+#+begin_src emacs-lisp
+  (setq mu4e-context-policy 'pick-first)
+#+end_src
+
 ** Where's my mail? Who am I?
 
 I keep my mail in =~/.mail=. The default maildir would be =~/Maildir=, but I'd
