@@ -1237,7 +1237,7 @@ Setup Google calendar syncing. To get credentials, following instructions [[http
 #+begin_src emacs-lisp
   (use-package org-gcal)
   (setq org-gcal-client-id "181983013000-81k9jtbk9th1up1qfue271jgo1ksp2gf.apps.googleusercontent.com"
-        org-gcal-file-alist '((list "benweintraub34@gmail.com" org-gcal-file)))
+        org-gcal-file-alist '(("benweintraub34@gmail.com" . "~/Documents/org/schedule.org")))
 #+end_src
 
 Don't ask me if canceled events should be removed. They should.
