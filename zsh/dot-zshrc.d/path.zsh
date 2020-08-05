@@ -18,5 +18,6 @@ pathmunge $HOME/.ghcup/bin
 pathmunge $HOME/.cargo/bin
 pathmunge $HOME/.bin.local after
 pathmunge /usr/local/sbin
+pathmunge /Users/ben/.local/bin after
 
 export PATH

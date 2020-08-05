@@ -53,6 +53,7 @@ brew install jpeg \
              isync \
              auto-selfcontrol \
              msmtp \
-             sdcv
+             sdcv \
+             pipx
 
 brew cask install selfcontrol
