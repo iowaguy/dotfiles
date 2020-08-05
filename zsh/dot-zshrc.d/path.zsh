@@ -17,5 +17,6 @@ pathmunge $HOME/.cabal/bin
 pathmunge $HOME/.ghcup/bin
 pathmunge $HOME/.cargo/bin
 pathmunge $HOME/.bin.local after
+pathmunge /usr/local/sbin
 
 export PATH
