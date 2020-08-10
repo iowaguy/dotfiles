@@ -7,3 +7,5 @@ pip3 install --user matplotlib
 pip3 install --user numpy
 pip3 install --user powerline-status
 pip3 install --user epc
+pip3 install --user jedi
+pip3 install --user pandas

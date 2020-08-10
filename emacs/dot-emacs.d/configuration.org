@@ -1114,7 +1114,7 @@ shamelessly stolen and re-prefixed.
                    (org-agenda-overriding-header "In progress:")))
             (todo "READ"
                   ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                   (org-agenda-overriding-header "Meetings:")))
+                   (org-agenda-overriding-header "Reading:")))
             (todo "BLOCKED"
                   ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
                    (org-agenda-overriding-header "Blocked:")))))))
@@ -1313,6 +1313,7 @@ this enables that.
 #+begin_src emacs-lisp
   (setq org-latex-pdf-process
         '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
           "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
           "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 #+end_src
@@ -1874,6 +1875,12 @@ the file or a trash file.
     (setq palimpsest-prefix "- "))
 #+end_src
 
+I never send palimpsests to the top, and this command shadows the =org=
+scheduling command I do use.
+
+#+begin_src emacs-lisp
+  (define-key palimpsest-keymap (kbd "C-c C-s") nil)
+#+end_src
 * File management with =dired=
 
 Hide dotfiles by default, but toggle their visibility with =.=.
