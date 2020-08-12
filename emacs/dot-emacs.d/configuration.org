@@ -447,7 +447,7 @@ I'd like to enable flycheck all kinds of places.
 
 I use =magit= to handle version control. It's lovely, but I tweak a few things:
 
-- I bring up the status menu with =C-x m=.
+- I bring up the status menu with =C-c m=.
 - The default behavior of =magit= is to ask before pushing. I haven't had any
   problems with accidentally pushing, so I'd rather not confirm that every time.
 - Per [[http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html][tpope's suggestions]], highlight commit text in the summary line that goes
@@ -1325,6 +1325,11 @@ Include the =minted= package in all of my LaTeX exports.
   (setq org-latex-listings 'minted)
 #+end_src
 
+Put LaTeX table captions below the table.
+
+#+begin_src emacs-lisp
+  (setq org-latex-caption-above nil)
+#+end_src
 **** Exporting presentations
 
 Use =org-reveal= to export =org= documents as =reveal.js= slide decks. This is integrated in the

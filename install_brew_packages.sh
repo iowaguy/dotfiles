@@ -2,6 +2,7 @@
 
 # This is for auto-selfcontrol: https://github.com/andreasgrill/auto-selfcontrol
 brew tap andreasgrill/utils
+brew tap railwaycat/emacsmacport
 
 brew install jpeg \
              autoconf \
@@ -54,6 +55,7 @@ brew install jpeg \
              auto-selfcontrol \
              msmtp \
              sdcv \
-             pipx
+             pipx \
+             emacs-mac
 
 brew cask install selfcontrol
