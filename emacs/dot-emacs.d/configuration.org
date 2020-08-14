@@ -927,10 +927,11 @@ Add some fun tools for viewing shell history and finding files.
 Emacs shells should inherit the PATH from the system shell.
 
 #+begin_src emacs-lisp
-  (use-package exec-path-from-shell
-    :config
-    (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 #+end_src
 * Publishing and task management with Org-mode
 
@@ -964,6 +965,13 @@ I'd like the initial scratch buffer to be in Org:
 
 #+begin_src emacs-lisp
   (setq initial-major-mode 'org-mode)
+#+end_src
+
+
+Images should be shown in-buffer by default.
+
+#+begin_src emacs-lisp
+  (setq org-startup-with-inline-images t)
 #+end_src
 
 ** Display preferences
@@ -1254,6 +1262,51 @@ Don't ask me if canceled events should be removed. They should.
   (setq org-gcal-remove-api-cancelled-events t)
 #+end_src
 
+** Executing code with =babel=
+
+Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code. Also,
+=jupyter-python= source blocks should be highlighted as if they are =python=.
+
+#+begin_src emacs-lisp
+  (use-package jupyter)
+  (add-to-list 'org-src-lang-modes '("jupyter" . python))
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t)
+     (jupyter . t)
+     (shell . t)))
+
+  ;; I don't think I need these
+  ;;(org-babel-jupyter-restore-src-block "python")
+  ;;(org-babel-jupyter-override-src-block "python")
+#+end_src
+
+=ob-async= allows editing to occur while a =babel= block is executing. Setting
+the variable =ob-async-no-async-languages-alist= fixes an incompatibility
+between the ob-async and ob-ipython packages.
+#+begin_src emacs-lisp
+  (use-package ob-async
+    :config
+    (setq ob-async-no-async-languages-alist '("jupyter-python")))
+#+end_src
+
+Don't ask before evaluating code blocks.
+
+#+begin_src emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package pyvenv)
+#+end_src
+
+Display/update images in the buffer after I evaluate.
+#+begin_src emacs-lisp
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+#+end_src
+
 ** Exporting
 
 Allow export to markdown and beamer (for presentations).
@@ -1263,24 +1316,6 @@ Allow export to markdown and beamer (for presentations).
   (require 'ox-beamer)
   (use-package ox-twbs)
   (require 'ox-twbs)
-#+end_src
-
-Allow =babel= to evaluate Emacs lisp, Ruby, =ditaa=, Graphviz, or Gnuplot code.
-
-#+begin_src emacs-lisp
-  (use-package gnuplot)
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-     '((emacs-lisp . t)
-       (python . t)
-       (shell . t)))
-#+end_src
-
-Don't ask before evaluating code blocks.
-
-#+begin_src emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
 #+end_src
 
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
