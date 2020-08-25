@@ -55,7 +55,9 @@ brew install jpeg \
              auto-selfcontrol \
              msmtp \
              sdcv \
-             pipx \
-             emacs-mac
+             pipx
+
+# This needs its own line, because it includes extra switches
+brew install emacs-mac --with-modules --with-xml2 --with-imagemagick
 
 brew cask install selfcontrol

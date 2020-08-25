@@ -1025,17 +1025,17 @@ Don't indent newly expanded blocks, even if they're under a heading.
 
 ** Task management and agenda views
 
-Store my org files in =~/Documents/org=, maintain an inbox in Dropbox, define
+Store my org files in =~/Dropbox/org=, maintain an inbox in Dropbox, define
 the location of an index file (my main todo list).
 
 #+begin_src emacs-lisp
-  (setq org-directory "~/Documents/org")
+  (setq org-directory "~/Dropbox/org")
 
   (defun org-file-path (filename)
     "Return the absolute address of an org file, given its relative name."
     (concat (file-name-as-directory org-directory) filename))
 
-  ;(setq org-inbox-file "~/Documents/inbox.org")
+  ;(setq org-inbox-file "~/Dropbox/inbox.org")
   (setq org-index-file (org-file-path "thebigone.org"))
   (setq org-gcal-file (org-file-path "schedule.org"))
 #+end_src
@@ -1152,7 +1152,7 @@ displaying the index, so they'll be in the agenda view, too.
 
 Define a few common tasks as capture templates. Specifically, I frequently:
 
-- Maintain a todo list in =~/Documents/org/thebigone.org=.
+- Maintain a todo list in =~/Dropbox/org/thebigone.org=.
 - Convert emails into todos to maintain an empty inbox.
 
 #+begin_src emacs-lisp
@@ -1253,7 +1253,7 @@ Setup Google calendar syncing. To get credentials, following instructions [[http
 #+begin_src emacs-lisp
   (use-package org-gcal)
   (setq org-gcal-client-id "181983013000-81k9jtbk9th1up1qfue271jgo1ksp2gf.apps.googleusercontent.com"
-        org-gcal-file-alist '(("benweintraub34@gmail.com" . "~/Documents/org/schedule.org")))
+        org-gcal-file-alist '(("benweintraub34@gmail.com" . "~/Dropbox/org/schedule.org")))
 #+end_src
 
 Don't ask me if canceled events should be removed. They should.
@@ -1890,7 +1890,7 @@ Binding this to =M-SPC= is strictly better than the original binding of
     :commands (deft)
     :config
 
-    (setq deft-directory "~/Documents/notes"
+    (setq deft-directory "~/Dropbox/notes"
           deft-recursive t
           deft-use-filename-as-title t))
 #+end_src
