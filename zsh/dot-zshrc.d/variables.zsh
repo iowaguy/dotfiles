@@ -83,6 +83,7 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export NAME="Ben Weintraub"
 export PROMPT_DIRTRIM=3
+export WORKON_HOME="$HOME/.venv"
 
 # TODO add my own sty files for tex
 # export TEXINPUTS=$HOME/.texmf:$TEXINPUTS
@@ -93,6 +94,12 @@ export SAM_CLI_TELEMETRY=0
 
 # Remove this once Rails fixes its deprecation warnings:
 export RUBYOPT='-W:no-deprecated -W:no-experimental'
+
+# Set the default python for virtualenvwrapper
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+
+# Setup virtualenvwrapper
+source /usr/local/bin/virtualenvwrapper.sh
 
 # These are useful utilities from: https://ohmyz.sh/
 source $ZSH/oh-my-zsh.sh

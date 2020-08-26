@@ -9,3 +9,5 @@ pip3 install --user powerline-status
 pip3 install --user epc
 pip3 install --user jedi
 pip3 install --user pandas
+pip3 install --user virtualenvwrapper
+pip3 install --user virtualenv

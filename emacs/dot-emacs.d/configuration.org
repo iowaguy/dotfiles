@@ -1010,11 +1010,13 @@ new one (which shows the same information).
   (setq org-src-window-setup 'current-window)
 #+end_src
 
-Quickly insert a block of elisp:
+Quickly insert a block of =elisp= or =jupyter-python=.
 
 #+begin_src emacs-lisp
   (add-to-list 'org-structure-template-alist
                '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist
+               '("jp" . "src jupyter-python :async yes :export code :results code"))
 #+end_src
 
 Don't indent newly expanded blocks, even if they're under a heading.
@@ -1268,19 +1270,24 @@ Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code. Also,
 =jupyter-python= source blocks should be highlighted as if they are =python=.
 
 #+begin_src emacs-lisp
-  (use-package jupyter)
-  (add-to-list 'org-src-lang-modes '("jupyter" . python))
+  (use-package jupyter
+    :init
+    (setq org-babel-default-header-args:jupyter-python '((:async . "yes")
+                                                         (:session . "py3")
+                                                         (:kernel . "python3")))
+    (add-to-list 'org-src-lang-modes '("jupyter-python" . python))
+    (setq jupyter-org-resource-directory "./figures/"))
+
 
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
      (python . t)
-     (jupyter . t)
-     (shell . t)))
+     (shell . t)
 
-  ;; I don't think I need these
-  ;;(org-babel-jupyter-restore-src-block "python")
-  ;;(org-babel-jupyter-override-src-block "python")
+     ;; jupyter must be last because it depends on the values of variables such as
+     ;; org-src-lang-modes and org-babel-tangle-lang-exts
+     (jupyter . t)))
 #+end_src
 
 =ob-async= allows editing to occur while a =babel= block is executing. Setting

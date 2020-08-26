@@ -34,3 +34,7 @@ stow -t ~/Library/LaunchAgents crons
 
 # Register "cronjob"
 launchctl load ~/Library/LaunchAgents/xyz.weintraub.mail.refresh.plist
+
+# Create the virtualenvwrapper directory
+source ~/.zshrc.d/variables.zsh
+mkdir -p $WORKON_HOME
