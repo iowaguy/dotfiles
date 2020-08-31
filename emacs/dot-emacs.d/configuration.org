@@ -927,12 +927,14 @@ Add some fun tools for viewing shell history and finding files.
 Emacs shells should inherit the PATH from the system shell.
 
 #+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
+  (use-package exec-path-from-shell
+    :if (memq window-system '(mac ns))
+    :ensure t
+    :config
+    (exec-path-from-shell-check-startup-files nil)
+    (exec-path-from-shell-initialize))
 #+end_src
+
 * Publishing and task management with Org-mode
 
 Including =org-tempo= restores the =<s=-style easy-templates that were
@@ -1125,7 +1127,8 @@ shamelessly stolen and re-prefixed.
            ((agenda "")
             (todo "TODO"
                   ((org-agenda-skip-function '(or (hrs/org-skip-subtree-if-priority ?A)
-                                                  (hrs/org-skip-subtree-if-habit)))
+                                                  (hrs/org-skip-subtree-if-habit)
+                                                  (org-agenda-skip-subtree-if 'scheduled)))
                    (org-agenda-overriding-header "Other tasks:")))
             (todo "INPROGRESS"
                   ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
