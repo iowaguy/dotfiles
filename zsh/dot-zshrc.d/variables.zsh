@@ -83,7 +83,7 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 export NAME="Ben Weintraub"
 export PROMPT_DIRTRIM=3
-export WORKON_HOME="$HOME/.venv"
+export WORKON_HOME="$HOME/.virtualenvs"
 
 # TODO add my own sty files for tex
 # export TEXINPUTS=$HOME/.texmf:$TEXINPUTS

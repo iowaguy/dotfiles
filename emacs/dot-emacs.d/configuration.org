@@ -173,6 +173,8 @@ Why not?
 
 I'm currently using the "solarized-dark" theme. I've got a scenic wallpaper, so
 just a hint of transparency looks lovely and isn't distracting or hard to read.
+I also use the interactive command =apply-light-theme= when the screen is hard
+to see (like out in the sun).
 
 #+begin_src emacs-lisp
   (use-package solarized-theme
@@ -196,10 +198,16 @@ just a hint of transparency looks lovely and isn't distracting or hard to read.
     (interactive "nTransparency Value 0 - 100 opaque:")
     (set-frame-parameter (selected-frame) 'alpha value))
 
-  (defun hrs/apply-theme ()
+  (defun hrs/apply-dark-theme ()
     "Apply the `solarized-' theme and make frames just slightly transparent."
     (interactive)
     (load-theme 'solarized-dark t)
+    (transparency 90))
+
+  (defun blw/apply-light-theme ()
+    "Apply the `solarized-' theme and make frames just slightly transparent."
+    (interactive)
+    (load-theme 'solarized-light t)
     (transparency 90))
 #+end_src
 
@@ -210,8 +218,8 @@ frame is themed appropriately.
   (if (daemonp)
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
-                  (with-selected-frame frame (hrs/apply-theme))))
-    (hrs/apply-theme))
+                  (with-selected-frame frame (hrs/apply-dark-theme))))
+    (hrs/apply-dark-theme))
 #+end_src
 
 ** Use =moody= for a beautiful modeline
@@ -931,7 +939,7 @@ Emacs shells should inherit the PATH from the system shell.
     :if (memq window-system '(mac ns))
     :ensure t
     :config
-    (exec-path-from-shell-check-startup-files nil)
+    ;;(exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize))
 #+end_src
 
@@ -1018,7 +1026,7 @@ Quickly insert a block of =elisp= or =jupyter-python=.
   (add-to-list 'org-structure-template-alist
                '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist
-               '("jp" . "src jupyter-python :async yes :export code :results code"))
+               '("jp" . "src jupyter-python :async yes :exports code :results code"))
 #+end_src
 
 Don't indent newly expanded blocks, even if they're under a heading.
@@ -1104,41 +1112,44 @@ A lot of this is based on [[https://blog.aaronbieber.com/2016/09/24/an-agenda-fo
 shamelessly stolen and re-prefixed.
 
 #+begin_src emacs-lisp
-  (defun hrs/org-skip-subtree-if-priority (priority)
-    "Skip an agenda subtree if it has a priority of PRIORITY.
+    (defun hrs/org-skip-subtree-if-priority (priority)
+      "Skip an agenda subtree if it has a priority of PRIORITY.
 
-  PRIORITY may be one of the characters ?A, ?B, or ?C."
-    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-          (pri-value (* 1000 (- org-lowest-priority priority)))
-          (pri-current (org-get-priority (thing-at-point 'line t))))
-      (if (= pri-value pri-current)
-          subtree-end
-        nil)))
+    PRIORITY may be one of the characters ?A, ?B, or ?C."
+      (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+            (pri-value (* 1000 (- org-lowest-priority priority)))
+            (pri-current (org-get-priority (thing-at-point 'line t))))
+        (if (= pri-value pri-current)
+            subtree-end
+          nil)))
 
-  (defun hrs/org-skip-subtree-if-habit ()
-    "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
-    (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-      (if (string= (org-entry-get nil "STYLE") "habit")
-          subtree-end
-        nil)))
+    (defun hrs/org-skip-subtree-if-habit ()
+      "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
+      (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+        (if (string= (org-entry-get nil "STYLE") "habit")
+            subtree-end
+          nil)))
 
-  (setq org-agenda-custom-commands
-        '(("p" "Personal agenda"
-           ((agenda "")
-            (todo "TODO"
-                  ((org-agenda-skip-function '(or (hrs/org-skip-subtree-if-priority ?A)
-                                                  (hrs/org-skip-subtree-if-habit)
-                                                  (org-agenda-skip-subtree-if 'scheduled)))
-                   (org-agenda-overriding-header "Other tasks:")))
-            (todo "INPROGRESS"
-                  ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                   (org-agenda-overriding-header "In progress:")))
-            (todo "READ"
-                  ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                   (org-agenda-overriding-header "Reading:")))
-            (todo "BLOCKED"
-                  ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                   (org-agenda-overriding-header "Blocked:")))))))
+    (setq org-agenda-custom-commands
+          '(("p" "Personal agenda"
+             ((agenda "")
+              (todo "TODO"
+                    ((org-agenda-skip-function '(or (hrs/org-skip-subtree-if-priority ?A)
+                                                    (hrs/org-skip-subtree-if-habit)
+                                                    (org-agenda-skip-subtree-if 'scheduled)))
+                     (org-agenda-overriding-header "Other tasks:")))
+              (todo "INPROGRESS"
+                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
+                     (org-agenda-overriding-header "In progress:")))
+              (todo "READ"
+                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
+                     (org-agenda-overriding-header "Reading:")))
+              (todo "BACKLOG"
+                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
+                     (org-agenda-overriding-header "Backlog:")))
+              (todo "BLOCKED"
+                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
+                     (org-agenda-overriding-header "Blocked:")))))))
 #+end_src
 
 I consult my agenda pretty often, so I bind =C-c d= to open it a it faster. This
