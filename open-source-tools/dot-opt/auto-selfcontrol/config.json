@@ -1,98 +1,92 @@
 {
-    "username": "ben",
-    "selfcontrol-path": "/Applications/SelfControl.app",
-    "host-blacklist": [
-        "twitter.com",
-        "reddit.com",
-        "facebook.com",
-        "news.ycombinator.com",
-        "youtube.com",
-        "netflix.com",
-        "hulu.com",
-        "buzzfeed.com",
-        "collegehumor.com",
-        "pinterest.com",
-        "stumbleupon.com",
-        "cnn.com",
-        "huffingtonpost.com",
-        "foxnews.com",
-        "bbc.com",
-        "bbc.co.uk",
-        "news.google.com",
-        "forbes.com",
-        "gothamist.com",
-        "jezebel.com",
-        "usatoday.com",
-        "theonion.com",
-        "news.yahoo.com",
-        "washingtonpost.com",
-        "wsj.com",
-        "theguardian.com",
-        "latimes.com",
-        "nydailynews.com",
-        "salon.com",
-        "msnbc.com",
-        "rt.com",
-        "bloomberg.com",
-        "aol.com",
-        "drudgereport.com",
-        "nypost.com",
-        "chicagotribune.com",
-        "msn.com",
-        "usnews.com",
-        "play.google.com",
-        "nytimes.com",
-        "bostonglobe.com"
-    ],
-    "block-schedules":[
-        {
-            "weekday": 1,
-            "start-hour": 7,
-            "start-minute": 0,
-            "end-hour": 23,
-            "end-minute": 59
-        },
-        {
-            "weekday": 2,
-            "start-hour": 7,
-            "start-minute": 0,
-            "end-hour": 23,
-            "end-minute": 59
-        },
-        {
-            "weekday": 3,
-            "start-hour": 7,
-            "start-minute": 0,
-            "end-hour": 23,
-            "end-minute": 59
-        },
-        {
-            "weekday": 4,
-            "start-hour": 7,
-            "start-minute": 0,
-            "end-hour": 23,
-            "end-minute": 59
-        },
-        {
-            "weekday": 5,
-            "start-hour": 7,
-            "start-minute": 0,
-            "end-hour": 19,
-            "end-minute": 0
-        },
-        {
-            "weekday": 6,
-            "start-hour": 9,
-            "start-minute": 0,
-            "end-hour": 23,
-            "end-minute": 59
-        },
-        {
-            "weekday": 7,
-            "start-hour": 9,
-            "start-minute": 0,
-            "end-hour": 19,
-            "end-minute": 0
-        }
-    ]
+  "username": "ben",
+  "selfcontrol-path": "/Applications/SelfControl.app",
+  "host-blacklist": [
+    "news.ycombinator.com",
+    "netflix.com",
+    "hulu.com",
+    "stumbleupon.com",
+    "cnn.com",
+    "huffingtonpost.com",
+    "foxnews.com",
+    "bbc.com",
+    "bbc.co.uk",
+    "forbes.com",
+    "gothamist.com",
+    "jezebel.com",
+    "usatoday.com",
+    "theonion.com",
+    "news.yahoo.com",
+    "washingtonpost.com",
+    "wsj.com",
+    "theguardian.com",
+    "latimes.com",
+    "nydailynews.com",
+    "salon.com",
+    "msnbc.com",
+    "rt.com",
+    "bloomberg.com",
+    "aol.com",
+    "drudgereport.com",
+    "nypost.com",
+    "chicagotribune.com",
+    "msn.com",
+    "usnews.com",
+    "nytimes.com",
+    "bostonglobe.com",
+    "tv.apple.com",
+    "youtube.com",
+    "fivethirtyeight.com"
+  ],
+  "block-schedules":[
+    {
+      "weekday": 1,
+      "start-hour": 7,
+      "start-minute": 0,
+      "end-hour": 23,
+      "end-minute": 59
+    },
+    {
+      "weekday": 2,
+      "start-hour": 7,
+      "start-minute": 0,
+      "end-hour": 23,
+      "end-minute": 59
+    },
+    {
+      "weekday": 3,
+      "start-hour": 7,
+      "start-minute": 0,
+      "end-hour": 23,
+      "end-minute": 59
+    },
+    {
+      "weekday": 4,
+      "start-hour": 7,
+      "start-minute": 0,
+      "end-hour": 23,
+      "end-minute": 59
+    },
+    {
+      "weekday": 5,
+      "start-hour": 7,
+      "start-minute": 0,
+      "end-hour": 19,
+      "end-minute": 0
+    },
+    {
+      "weekday": 6,
+      "start-hour": 9,
+      "start-minute": 0,
+      "end-hour": 23,
+      "end-minute": 59
+    },
+    {
+      "weekday": 7,
+      "start-hour": 9,
+      "start-minute": 0,
+      "end-hour": 19,
+      "end-minute": 0
+    }
+  ]
 }

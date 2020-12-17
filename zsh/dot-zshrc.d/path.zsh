@@ -18,6 +18,7 @@ pathmunge $HOME/.ghcup/bin
 pathmunge $HOME/.cargo/bin
 pathmunge $HOME/.bin.local after
 pathmunge /usr/local/sbin
-pathmunge /Users/ben/.local/bin after
+pathmunge $HOME/.local/bin after
+pathmunge $HOME/Library/Python/3.9/bin
 
 export PATH

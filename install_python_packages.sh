@@ -11,3 +11,5 @@ pip3 install --user jedi
 pip3 install --user pandas
 pip3 install --user virtualenvwrapper
 pip3 install --user virtualenv
+pip3 install --user pyzotero
+pipx install academic

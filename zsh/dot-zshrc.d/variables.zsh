@@ -84,6 +84,7 @@ export LC_CTYPE="en_US.UTF-8"
 export NAME="Ben Weintraub"
 export PROMPT_DIRTRIM=3
 export WORKON_HOME="$HOME/.virtualenvs"
+export WEBSITE_HOME="$HOME/workspace/starter-academic"
 
 # TODO add my own sty files for tex
 # export TEXINPUTS=$HOME/.texmf:$TEXINPUTS

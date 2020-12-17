@@ -198,7 +198,7 @@ to see (like out in the sun).
     (interactive "nTransparency Value 0 - 100 opaque:")
     (set-frame-parameter (selected-frame) 'alpha value))
 
-  (defun hrs/apply-dark-theme ()
+  (defun blw/apply-dark-theme ()
     "Apply the `solarized-' theme and make frames just slightly transparent."
     (interactive)
     (load-theme 'solarized-dark t)
@@ -218,8 +218,8 @@ frame is themed appropriately.
   (if (daemonp)
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
-                  (with-selected-frame frame (hrs/apply-dark-theme))))
-    (hrs/apply-dark-theme))
+                  (with-selected-frame frame (blw/apply-dark-theme))))
+    (blw/apply-dark-theme))
 #+end_src
 
 ** Use =moody= for a beautiful modeline
@@ -978,10 +978,19 @@ I'd like the initial scratch buffer to be in Org:
 #+end_src
 
 
-Images should be shown in-buffer by default.
+Images should be shown in-buffer by default, but not at full size.
 
 #+begin_src emacs-lisp
   (setq org-startup-with-inline-images t)
+  (setq org-image-actual-width nil)
+#+end_src
+
+This has a bunch of utilities for citing documents within =org-mode=. To cite
+something, type =C-c ]=.
+
+#+begin_src emacs-lisp
+  (use-package helm)
+  (use-package org-ref)
 #+end_src
 
 ** Display preferences
@@ -1164,6 +1173,45 @@ displaying the index, so they'll be in the agenda view, too.
   (global-set-key (kbd "C-c d") 'hrs/dashboard)
 #+end_src
 
+My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.com/][org-roam]].
+#+begin_src emacs-lisp
+      (defun blw/org-roam-graph-firefox (graph)
+        (shell-command (concat "open -a Firefox file://" graph)))
+
+      (use-package org-roam
+        :ensure t
+        :hook
+        (after-init . org-roam-mode)
+        :custom
+        (org-roam-directory "~/Dropbox/zettelkasten")
+        (org-roam-graph-executable "dot")
+        (org-roam-graph-shorten-titles 'wrap)
+        (org-roam-graph-max-title-length 50)
+        (org-roam-graph-viewer 'blw/org-roam-graph-firefox)
+        (org-roam-graph-extra-config '(("overlap" . "no")))
+        (org-roam-graph-executable "neato")
+        :bind (:map org-roam-mode-map
+                    (("C-c n l" . org-roam)
+                     ("C-c n f" . org-roam-find-file)
+                     ("C-c n g" . org-roam-graph))
+                    :map org-mode-map
+                    (("C-c n i" . org-roam-insert))
+                    (("C-c n I" . org-roam-insert-immediate))))
+#+end_src
+
+*** References
+#+begin_src emacs-lisp
+  (setq reftex-default-bibliography '("~/Dropbox/zettelkasten/references.bib"))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
+        org-ref-default-bibliography '("~/Dropbox/zettelkasten/references.bib")
+        org-ref-pdf-directory "~/Dropbox/zettelkasten/bibtex-pdfs/")
+
+  (setq bibtex-completion-bibliography "~/Dropbox/zettelkasten/references.bib"
+        bibtex-completion-library-path "~/Dropbox/zettelkasten/bibtex-pdfs"
+        bibtex-completion-notes-path "~/Dropbox/zettelkasten/helm-bibtex-notes")
+#+end_src
 *** Capturing tasks
 
 Define a few common tasks as capture templates. Specifically, I frequently:
@@ -1261,6 +1309,20 @@ Hit =M-n= to quickly open up a capture template for a new todo.
             (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
 #+end_src
 
+
+#+begin_src emacs-lisp
+  ;; (require 'emacs-zotero-bib-fetch)
+
+  (add-hook 'TeX-mode-hook 'ezbf-minor-mode)
+  (add-hook 'org-mode-hook 'ezbf-minor-mode)
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org-roam-bibtex
+    :after org-roam
+    :hook (org-roam-mode . org-roam-bibtex-mode))
+#+end_src
+
 ** Google Calendar
 Setup Google calendar syncing. To get credentials, following instructions [[https://github.com/kidd/org-gcal.el#Installation][here]].
 =org-gcal-client-secret= must also be set, I'm doing this in
@@ -1298,6 +1360,9 @@ Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code. Also,
    '((emacs-lisp . t)
      (python . t)
      (shell . t)
+
+     ;; needed for graphviz
+     (dot . t)
 
      ;; jupyter must be last because it depends on the values of variables such as
      ;; org-src-lang-modes and org-babel-tangle-lang-exts
@@ -1363,8 +1428,8 @@ of every exported HTML document.
 
 Some of the style elements are off if these two aren't set to =css=.
 #+begin_src emacs-lisp
-  (setq org-html-htmlize-output-type 'css)
-  (setq org-twbs-htmlize-output-type 'css)
+  (setq org-html-htmlize-output-type 'inline-css)
+  (setq org-twbs-htmlize-output-type 'inline-css)
 #+end_src
 
 **** Exporting to PDF
@@ -1903,17 +1968,18 @@ Binding this to =M-SPC= is strictly better than the original binding of
   (put 'upcase-region 'disabled nil)
 #+end_src
 
-** Quickly explore my "notes" directory with =deft=
+** Quickly explore my Zettelkasten directory with =deft=
 
 #+begin_src emacs-lisp
   (use-package deft
-    :bind ("C-c n" . deft)
+    ;; :bind ("C-c n" . deft)
+    :ensure t
     :commands (deft)
-    :config
-
-    (setq deft-directory "~/Dropbox/notes"
-          deft-recursive t
-          deft-use-filename-as-title t))
+    :custom
+    (deft-recursive t)
+    (deft-extensions '("org" "md" "txt"))
+    (deft-directory "~/Dropbox/zettelkasten")
+    (deft-use-filename-as-title t))
 #+end_src
 
 ** Abbreviations
