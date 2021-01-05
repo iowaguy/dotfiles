@@ -1066,7 +1066,9 @@ decide to store events or tasks in additional files in the future, I can easily
 do so by adding more =org-file-path= S-expressions to the list.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list org-index-file org-gcal-file))
+  (setq org-agenda-files (list org-index-file
+                               org-gcal-file
+                               "~/Dropbox/zettelkasten/daily"))
 #+end_src
 
 Record the time that a todo was completed.
@@ -1193,30 +1195,47 @@ A nice visualizer for my =org-roam= graph.
 
 My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.com/][org-roam]].
 #+begin_src emacs-lisp
-    (defun blw/org-roam-graph-firefox (graph)
-      (org-roam-server-mode t)
-      (shell-command "open -a Firefox http://localhost:8080"))
+  (defun blw/org-roam-graph-firefox (graph)
+    (org-roam-server-mode t)
+    (shell-command "open -a Firefox http://localhost:8080"))
 
-    (use-package org-roam
-      :ensure t
-      :hook
-      (after-init . org-roam-mode)
-      :custom
-      (org-roam-directory "~/Dropbox/zettelkasten")
-      (org-roam-graph-executable "dot")
-      (org-roam-graph-shorten-titles 'wrap)
-      (org-roam-graph-max-title-length 50)
-      (org-roam-graph-viewer 'blw/org-roam-graph-firefox)
-      (org-roam-graph-extra-config '(("overlap" . "no")))
-      (org-roam-graph-exclude-matcher "index")
-      (org-roam-graph-executable "neato")
-      :bind (:map org-roam-mode-map
-                  (("C-c n l" . org-roam)
-                   ("C-c n f" . org-roam-find-file)
-                   ("C-c n g" . org-roam-graph))
-                  :map org-mode-map
-                  (("C-c n i" . org-roam-insert))
-                  (("C-c n I" . org-roam-insert-immediate))))
+  (defun blw/get-string-from-file (filePath)
+    "Return filePath's file content."
+    (concat (with-temp-buffer
+              (insert-file-contents filePath)
+              (buffer-string))))
+
+  (use-package org-roam
+    :ensure t
+    :hook
+    (after-init . org-roam-mode)
+    :custom
+    (org-roam-directory "~/Dropbox/zettelkasten")
+    (org-roam-graph-executable "dot")
+    (org-roam-graph-shorten-titles 'wrap)
+    (org-roam-graph-max-title-length 50)
+    (org-roam-graph-viewer 'blw/org-roam-graph-firefox)
+    (org-roam-graph-extra-config '(("overlap" . "no")))
+    (org-roam-graph-exclude-matcher "index")
+    (org-roam-graph-executable "neato")
+    (org-roam-dailies-directory "daily/")
+    (org-roam-dailies-capture-templates
+     '(("x" "default" entry
+        #'org-roam-capture--get-point
+        "* %?"
+        :file-name "daily/%<%Y-%m-%d>"
+        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ BLOCKED BACKLOG | DONE\n\n* Class\n** Machine Learning                                        :machine_learning:\n* Research\n** Tor MIT project                                                   :torcdn:\n** NLP RFC                                                           :nlprfc:\n** pcn delft                                                     :pcncongest:\n** pcn exp cen                                                   :pcnexpcent:\n** Reading                                                          :reading:\n* Misc\n** NDS2                                                                :nds2:\n** Shallow                                                          :shallow:")))
+    :bind (:map org-roam-mode-map
+                (("C-c n l" . org-roam)
+                 ("C-c n f" . org-roam-find-file)
+                 ("C-c n g" . org-roam-graph)
+                 ("C-c n d" . org-roam-dailies-find-today)
+                 ("C-c n t" . org-roam-dailies-find-tomorrow)
+                 ("C-c n y" . org-roam-dailies-find-yesterday)
+                 ("C-c n a" . org-roam-dailies-find-date))
+                :map org-mode-map
+                (("C-c n i" . org-roam-insert-immediate))
+                (("C-c n I" . org-roam-insert))))
 
   (require 'org-roam-protocol)
 #+end_src
@@ -1233,6 +1252,8 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (setq bibtex-completion-bibliography "~/Dropbox/zettelkasten/references.bib"
         bibtex-completion-library-path "~/Dropbox/zettelkasten/bibtex-pdfs"
         bibtex-completion-notes-path "~/Dropbox/zettelkasten/helm-bibtex-notes")
+
+  (bibtex-set-dialect 'biblatex)
 #+end_src
 *** Capturing tasks
 

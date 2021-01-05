@@ -57,7 +57,9 @@ brew install jpeg \
              sdcv \
              pipx \
              pssh \
-             graphviz
+             graphviz \
+             ripgrep \
+             qemu
 
 # This needs its own line, because it includes extra switches
 brew install emacs-mac --with-modules --with-xml2 --with-imagemagick
