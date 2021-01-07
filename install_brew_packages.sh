@@ -58,8 +58,7 @@ brew install jpeg \
              pipx \
              pssh \
              graphviz \
-             ripgrep \
-             qemu
+             ripgrep
 
 # This needs its own line, because it includes extra switches
 brew install emacs-mac --with-modules --with-xml2 --with-imagemagick

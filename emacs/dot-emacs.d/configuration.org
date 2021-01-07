@@ -1240,6 +1240,19 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (require 'org-roam-protocol)
 #+end_src
 
+Use this to take screenshots and embed them in =org= files. Note that
+=screencapture= is the tool to use for MacOS. Though =org-download= supports
+other tools for other OSs.
+#+begin_src emacs-lisp
+  (use-package org-download
+    :after org
+    :custom
+    (org-download-screenshot-method "screencapture -i %s")
+    (org-download-image-dir "screenshots/")
+    (org-download-image-org-width 500)
+    (org-download-heading-lvl nil))
+#+end_src
+
 *** References
 #+begin_src emacs-lisp
   (setq reftex-default-bibliography '("~/Dropbox/zettelkasten/references.bib"))
