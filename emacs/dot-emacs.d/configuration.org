@@ -1102,6 +1102,13 @@ redundant.
                                    (search . " %i ")))
 #+end_src
 
+Restore the previous window setup after agenda is exited, and when the agenda is
+opened, it should split the pane and open in the new pane without disturbing the
+prior pane.
+#+begin_src emacs-lisp
+  (setq org-agenda-restore-windows-after-quit t)
+  (setq org-agenda-window-setup 'other-window)
+#+end_src
 I've got some custom agenda views that I use to visualize what I'm working on.
 
 The "Personal agenda" view is a bit complicated; it displays:
@@ -1224,7 +1231,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
         #'org-roam-capture--get-point
         "* %?"
         :file-name "daily/%<%Y-%m-%d>"
-        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ BLOCKED BACKLOG | DONE\n\n* Class\n** Machine Learning                                        :machine_learning:\n* Research\n** Tor MIT project                                                   :torcdn:\n** NLP RFC                                                           :nlprfc:\n** pcn delft                                                     :pcncongest:\n** pcn exp cen                                                   :pcnexpcent:\n** Reading                                                          :reading:\n* Misc\n** NDS2                                                                :nds2:\n** Shallow                                                          :shallow:")))
+        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ BLOCKED BACKLOG | DONE\n\n* Class\n** Machine Learning                                        :machine_learning:\n** Life of Focus                                              :life_of_focus:\n* Research\n** Tor MIT project                                                   :torcdn:\n** NLP RFC                                                           :nlprfc:\n** pcn delft                                                     :pcncongest:\n** pcn exp cen                                                   :pcnexpcent:\n** Reading                                                          :reading:\n* Misc\n** NDS2                                                                :nds2:\n** Shallow                                                          :shallow:")))
     :bind (:map org-roam-mode-map
                 (("C-c n l" . org-roam)
                  ("C-c n f" . org-roam-find-file)
@@ -1240,6 +1247,25 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (require 'org-roam-protocol)
 #+end_src
 
+This is for me to generate my weekly plans.
+#+begin_src emacs-lisp
+  (defun blw/weekly-plan--day-splits (n)
+    (split-window-vertically)
+    ;; (other-window 1)
+    (org-roam-dailies-find-tomorrow n)
+    (balance-windows))
+
+  (defun blw/weekly-plan ()
+    (interactive)
+    (delete-other-windows)
+    (hrs/dashboard)
+    (other-window 1)
+    (org-roam-dailies-find-today)
+    (blw/weekly-plan--day-splits 1)
+    (blw/weekly-plan--day-splits 2)
+    (blw/weekly-plan--day-splits 3)
+    (blw/weekly-plan--day-splits 4))
+#+end_src
 Use this to take screenshots and embed them in =org= files. Note that
 =screencapture= is the tool to use for MacOS. Though =org-download= supports
 other tools for other OSs.
