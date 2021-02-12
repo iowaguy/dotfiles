@@ -8,7 +8,9 @@ git clone https://github.com/cyrus-and/gdb-dashboard.git
 ln -s .gdbinit ~/.gdbinit
 
 # Download sensible defaults (for Emacs)
+cd emacs/
 git clone https://github.com/hrs/sensible-defaults.el.git
+cd ..
 
 # Install my auto-selfcontrol configs
 rm -f /usr/local/etc/auto-selfcontrol/config.json
