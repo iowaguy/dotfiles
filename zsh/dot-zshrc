@@ -19,3 +19,4 @@ eval "$(register-python-argcomplete pipx)"
 fpath=(/opt/vagrant/embedded/gems/2.2.10/gems/vagrant-2.2.10/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
+if [ -e /Users/ben/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/ben/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

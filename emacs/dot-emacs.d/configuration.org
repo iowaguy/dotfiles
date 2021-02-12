@@ -1223,7 +1223,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
         #'org-roam-capture--get-point
         "* %?"
         :file-name "daily/%<%Y-%m-%d>"
-        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ BLOCKED BACKLOG | DONE\n\n* Class\n** Machine Learning                                        :machine_learning:\n** Life of Focus                                              :life_of_focus:\n* Research\n** Tor MIT project                                                   :torcdn:\n** NLP RFC                                                           :nlprfc:\n** pcn delft                                                     :pcncongest:\n** pcn exp cen                                                   :pcnexpcent:\n** Reading                                                          :reading:\n* Misc\n** NDS2                                                                :nds2:\n** Shallow                                                          :shallow:")))
+        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ NOTES | DONE\n\n")))
     :bind (:map org-roam-mode-map
                 (("C-c n l" . org-roam)
                  ("C-c n f" . org-roam-find-file)
@@ -1233,8 +1233,8 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
                  ("C-c n y" . org-roam-dailies-find-yesterday)
                  ("C-c n a" . org-roam-dailies-find-date))
                 :map org-mode-map
-                (("C-c n i" . org-roam-insert-immediate))
-                (("C-c n I" . org-roam-insert))))
+                (("C-c n I" . org-roam-insert-immediate))
+                (("C-c n i" . org-roam-insert))))
 
   (require 'org-roam-protocol)
 #+end_src
