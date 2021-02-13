@@ -847,6 +847,14 @@ Use =web-mode= with embedded Ruby files, regular HTML, and PHP.
   (use-package yaml-mode)
 #+end_src
 
+** Nix stuff
+
+A major mode for editing Nix.
+#+begin_src emacs-lisp
+  (use-package nix-mode
+    :mode "\\.nix\\'")
+#+end_src
+
 * Terminal
 
 I use =multi-term= to manage my shell sessions. It's bound to =C-c t=.
