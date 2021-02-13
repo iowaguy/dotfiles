@@ -8,6 +8,7 @@ in {
   imports = [
     ./../emacs
     ./modules/make-links.nix
+    ./programs/alacritty/alacritty.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -35,12 +36,10 @@ in {
     libnotify
     pinentry-gtk2
     keybase
+    ispell
 
     # Fonts
     inconsolata
-
-    # Need for dropbox
-    gi
   ];
 
 
@@ -54,7 +53,10 @@ in {
   };
 
   programs.emacs = {
-    extraPackages = epkgs: [ epkgs.use-package ];
+    extraPackages = epkgs: [
+      epkgs.use-package
+      pkgs.ispell
+    ];
     enable = true;
   };
 
