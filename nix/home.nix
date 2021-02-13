@@ -11,7 +11,6 @@ in {
     ./programs/dropbox.nix
     ./programs/git.nix
     ./programs/redshift.nix
-    ./programs/zsh.nix
     ./programs/alacritty/alacritty.nix
   ];
 
