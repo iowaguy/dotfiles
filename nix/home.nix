@@ -9,6 +9,7 @@ in {
     ./modules/make-links.nix
     ./programs/emacs
     ./programs/dropbox.nix
+    ./programs/firefox.nix
     ./programs/git.nix
     ./programs/redshift.nix
     ./programs/alacritty/alacritty.nix
@@ -17,12 +18,22 @@ in {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = p: {
+      nur = import (import pinned/nur.nix) { inherit pkgs; };
+    };
+  };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "${username}";
-  home.homeDirectory = "/home/${username}";
+  home = {
+    username = "${username}";
+    homeDirectory = "/home/${username}";
+  };
 
-  nixpkgs.config.allowUnfree = true;
+  # notifications about home-manager news
+  news.display = "silent";
+
 
   xdg.enable = true;
 
@@ -40,11 +51,21 @@ in {
     libnotify
     pinentry-gtk2
     keybase
+    graphviz
 
     # Fonts
     inconsolata
   ];
 
+  programs = {
+    htop = {
+      enable = true;
+      sortDescending = true;
+      sortKey = "PERCENT_CPU";
+    };
+
+    ssh.enable = true;
+  };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -54,5 +75,4 @@ in {
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "21.03";
-
 }
