@@ -561,6 +561,11 @@ I use =eglot= as my LSP client.
   (use-package eglot)
 #+end_src
 
+Make thin vertical line at 80 characters.
+#+begin_src emacs-lisp
+  (use-package fill-column-indicator)
+#+end_src
+
 ** CSS, Sass, and Less
 
 Indent by 2 spaces.
@@ -747,6 +752,12 @@ correctly formatted.
 
 #+begin_src emacs-lisp
   (use-package python-mode)
+#+end_src
+
+Add a thin vertical line at 80 characters for python files. From
+=fill-column-indicator=.
+#+begin_src emacs-lisp
+  (add-hook 'python-mode-hook 'fci-mode)
 #+end_src
 
 Add =~/.local/bin= to load path. That's where =virtualenv= is installed, and
@@ -1159,15 +1170,9 @@ shamelessly stolen and re-prefixed.
               (todo "INPROGRESS"
                     ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
                      (org-agenda-overriding-header "In progress:")))
-              (todo "READ"
+              (todo "READ|NOTES"
                     ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                     (org-agenda-overriding-header "Reading:")))
-              (todo "BACKLOG"
-                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                     (org-agenda-overriding-header "Backlog:")))
-              (todo "BLOCKED"
-                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                     (org-agenda-overriding-header "Blocked:")))))))
+                     (org-agenda-overriding-header "Reading:")))))))
 #+end_src
 
 I consult my agenda pretty often, so I bind =C-c d= to open it a it faster. This
@@ -1303,43 +1308,10 @@ Define a few common tasks as capture templates. Specifically, I frequently:
 
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        '(("b" "Blog idea"
+        '(("r" "Reading material"
            entry
-           (file "~/documents/notes/blog-ideas.org")
-           "* %?\n")
-
-          ("c" "Contact"
-           entry
-           (file "~/documents/contacts.org")
-           "* %(org-contacts-template-name)
-  :PROPERTIES:
-  :ADDRESS: %^{123 Fake St., City, ST 12345}
-  :PHONE: %^{555-555-5555}
-  :EMAIL: %(org-contacts-template-email)
-  :NOTE: %^{note}
-  :END:")
-
-          ("d" "Delivery" entry
-           (file+headline "~/documents/org/events.org" "Deliveries")
-           "** %?\n   SCHEDULED: %t\n")
-
-          ("e" "Email" entry
-           (file+headline org-index-file "Inbox")
-           "* TODO %?\n\n%a\n\n")
-
-          ("f" "Finished book"
-           table-line (file "~/documents/notes/books-read.org")
-           "| %^{Title} | %^{Author} | %u |")
-
-          ("s" "Subscribe to an RSS feed"
-           plain
-           (file "~/documents/rss-feeds.org")
-           "*** [[%^{Feed URL}][%^{Feed name}]]")
-
-          ("t" "Todo"
-           entry
-           (file+headline org-index-file "Inbox")
-           "* TODO %?\n:PROPERTIES:\nCREATED: %u\n:END:\n")))
+           (file "~/Dropbox/org/reading.org")
+           "* %?\n")))
 #+end_src
 
 When I'm starting an Org capture template I'd like to begin in insert mode. I'm
