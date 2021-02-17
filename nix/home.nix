@@ -13,6 +13,7 @@ in {
     ./programs/git.nix
     ./programs/redshift.nix
     ./programs/alacritty/alacritty.nix
+    ./programs/skype/skype.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -52,6 +53,7 @@ in {
     pinentry-gtk2
     keybase
     graphviz
+    skype
 
     # Fonts
     inconsolata

@@ -3,13 +3,13 @@
 
     # Screen brightness to apply during the day and night, between 0.1 and 1.0.
     # Defaults: "1"
-    services.redshift.brightness.day = "0.9";
-    services.redshift.brightness.night = "0.6";
+    # services.redshift.brightness.day = "0.9";
+    # services.redshift.brightness.night = "0.6";
 
     # Additional command-line arguments (:: [string]) to pass to redshift.
     # Default: [ ]
     # Example: [ "-v" "-m randr" ]
-    services.redshift.extraOptions = [];
+    # services.redshift.extraOptions = [];
 
     # # Your current latitude, between -90.0 and 90.0. Must be provided along
     # with longitude. null or string. Default: null
