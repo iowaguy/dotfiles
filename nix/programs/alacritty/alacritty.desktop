@@ -1,8 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Type=Application
-Terminal=false
-Exec=/home/ben/.nix-profile/bin/alacritty
-Name=alacritty
-Icon=/home/ben/.nix-profile/share/icons/hicolor/scalable/apps/Alacritty.svg

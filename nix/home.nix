@@ -13,7 +13,10 @@ in {
     ./programs/git.nix
     ./programs/redshift.nix
     ./programs/alacritty/alacritty.nix
-    ./programs/skype/skype.nix
+    ./programs/signal.nix
+    ./programs/skype.nix
+    ./programs/slack.nix
+    ./programs/zoom.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -53,7 +56,10 @@ in {
     pinentry-gtk2
     keybase
     graphviz
+    signal-desktop
     skype
+    slack
+    zoom-us
 
     # Fonts
     inconsolata
