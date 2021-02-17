@@ -16,6 +16,7 @@ in {
     ./programs/signal.nix
     ./programs/skype.nix
     ./programs/slack.nix
+    ./programs/teams.nix
     ./programs/zoom.nix
   ];
 
@@ -59,6 +60,7 @@ in {
     signal-desktop
     skype
     slack
+    teams
     zoom-us
 
     # Fonts
