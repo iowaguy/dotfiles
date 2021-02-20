@@ -19,5 +19,7 @@
 (setq vc-follow-symlinks nil)
 
 ;; Load actual configurations
-(org-babel-load-file "~/.emacs.d/configuration-private.org")
+(let ((f "~/.emacs.d/configuration-private.org"))
+  (if (file-exists-p f)
+      (org-babel-load-file "~/.emacs.d/configuration-private.org")))
 (org-babel-load-file "~/.emacs.d/configuration.org")
