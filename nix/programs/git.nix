@@ -15,14 +15,14 @@
       "color \"grep\"" = {
         filename = "magenta";
         match = "bold red";
-        linenumber = "bold blue"
+        linenumber = "bold blue";
       };
       commit = {
-        gpgsign = true;
-        template = ${builtins.getEnv "HOME"}/.config/git/message;
+        gpgsign = false;
+        template = "${builtins.getEnv "HOME"}/.config/git/message";
       };
       core = {
-        excludesfiles = ${builtins.getEnv "HOME"}/.gitignore;
+        excludesfiles = "${builtins.getEnv "HOME"}/.gitignore";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
       };
       fetch.prune = true;
@@ -33,6 +33,8 @@
         followTags = true;
       };
       rebase.autosquash = true;
+      # gpg.program = "gpg2";
     };
   };
+
 }

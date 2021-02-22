@@ -90,7 +90,6 @@
       })
     ];
 
-    enableAdobeFlash = false;
     profiles.ben = {
      isDefault = true;
      settings = {
@@ -116,7 +115,7 @@
        "browser.tabs.closeWindowWithLastTab" = true;
        "browser.urlbar.speculativeConnect.enabled" = false;
        "dom.battery.enabled" = false;
-       "dom.event.clipboardevents.enabled" = false;
+       "dom.event.clipboardevents.enabled" = true;
        "experiments.activeExperiment" = false;
        "experiments.enabled" = false;
        "experiments.supported" = false;

@@ -12,14 +12,11 @@ in {
     ./programs/emacs
     ./programs/firefox.nix
     ./programs/git.nix
+    ./programs/mailcap.nix
     ./programs/redshift.nix
-    ./programs/signal.nix
-    ./programs/skype.nix
     ./programs/slack.nix
     ./programs/ssh.nix
     ./programs/teams.nix
-    ./programs/zoom.nix
-    ./programs/zotero.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -38,22 +35,21 @@ in {
     homeDirectory = "/home/${username}";
   };
 
-  # notifications about home-manager news
-  news.display = "silent";
-
-
   xdg.enable = true;
 
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
     alacritty
+    curl
+    dmenu
     dropbox-cli
     entr
     fd
     graphviz
     keybase
     libnotify
+    nixfmt
     pass
     pinentry-gtk2
     qnotero
@@ -64,6 +60,7 @@ in {
     sqlite
     teams
     tree
+    zathura
     zoom-us
     zotero
 
@@ -85,6 +82,16 @@ in {
       enableBashIntegration = true;
       enableNixDirenvIntegration = true;
     };
+
+    gpg.enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 86400; # 24 hrs.
+    maxCacheTtl = 86400; # 24 hrs.
+    pinentryFlavor = "gtk2";
+    # enableScDaemon = false;
   };
 
   # This value determines the Home Manager release that your
