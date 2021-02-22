@@ -33,7 +33,6 @@
         followTags = true;
       };
       rebase.autosquash = true;
-      # gpg.program = "gpg2";
     };
   };
 
