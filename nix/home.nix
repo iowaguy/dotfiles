@@ -46,6 +46,7 @@ in {
     dmenu
     direnv
     dropbox-cli
+    emacs26Packages.virtualenv
     entr
     fd
     graphviz
@@ -64,6 +65,7 @@ in {
     slack
     sqlite
     teams
+    texlive.combined.scheme-full
     tree
     zathura
     zoom-us

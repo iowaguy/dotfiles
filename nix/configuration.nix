@@ -88,12 +88,15 @@
     };
   };
 
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ben = {
     isNormalUser = true;
-    extraGroups = [ "wheel"              # Enable 'sudo' for the user.
-                    "networkmanager" ];  # Allow user to change network settings
+    extraGroups = [
+      "wheel"              # Enable 'sudo' for the user.
+      "networkmanager"     # Allow user to change network settings
+      "docker"
+      "libvirtd"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -110,6 +113,7 @@
     emacs
     bluez
     which
+    linuxPackages.facetimehd
   ];
 
   programs = {
@@ -174,6 +178,11 @@
   };
 
   location.provider = "geoclue2";
+
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
