@@ -17,6 +17,7 @@ in {
     ./programs/slack.nix
     ./programs/ssh.nix
     ./programs/teams.nix
+    ./programs/zsh.nix
   ];
 
   # Let Home Manager install and manage itself.
@@ -43,13 +44,17 @@ in {
     alacritty
     curl
     dmenu
+    direnv
     dropbox-cli
     entr
     fd
     graphviz
     keybase
     libnotify
+    lorri
+    niv
     nixfmt
+    nox
     pass
     pinentry-gtk2
     qnotero
@@ -84,6 +89,9 @@ in {
     };
   };
 
+  services = {
+    lorri.enable = true;
+  };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards

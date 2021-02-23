@@ -57,7 +57,7 @@
     xserver = {
       #libinput.enable = true;
       enable = true;
-      # displayManager.gdm.enable = true;
+      displayManager.gdm.enable = true;
       # displayManager.gdm.wayland = false;
       desktopManager.gnome3.enable = true;
 
@@ -137,7 +137,6 @@
         "cabal"
       ];
       theme = "agnoster";
-      custom = "${builtins.getEnv "HOME"}/workspace/dotfiles/nix/programs/zsh/";
     };
   };
 
