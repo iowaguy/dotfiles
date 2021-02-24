@@ -19,7 +19,6 @@
       };
       commit = {
         gpgsign = false;
-        template = "${builtins.getEnv "HOME"}/.config/git/message";
       };
       core = {
         excludesfiles = "${builtins.getEnv "HOME"}/.gitignore";
