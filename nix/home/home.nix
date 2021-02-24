@@ -63,13 +63,13 @@ in {
     ./programs/git.nix
     ./programs/mailcap.nix
     ./programs/redshift.nix
-    ./programs/rofi/default.nix
+    # ./programs/rofi/default.nix
     ./programs/slack.nix
     ./programs/ssh.nix
     ./programs/teams.nix
-    ./programs/xmonad/default.nix
+    # ./programs/xmonad/default.nix
     ./programs/zsh.nix
-    ./services/polybar/default.nix
+    # ./services/polybar/default.nix
   ];
 
   nixpkgs.config = {

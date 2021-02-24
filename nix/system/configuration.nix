@@ -10,22 +10,21 @@
       ./hardware-configuration.nix
 
       # Window manager
-      ./wm/xmonad.nix
-      # ./wm/gnome.nix
+      # ./wm/xmonad.nix
+      ./wm/gnome.nix
     ];
 
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi"; # ← use the same mount point here.
+      efiSysMountPoint = "/boot/EFI"; # ← use the same mount point here.
     };
     grub = {
       efiSupport = true;
       # Define on which hard drive you want to install Grub.
       device = "nodev";
     };
-
-#    systemd-boot.enable = true;
+    systemd-boot.enable = true;
   };
   boot.cleanTmpDir = true;
 

@@ -21,6 +21,7 @@
       libinput = {
         enable = true;
         disableWhileTyping = true;
+        naturalScrolling = true;
       };
 
       displayManager.defaultSession = "none+xmonad";
