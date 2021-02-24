@@ -1,6 +1,7 @@
 { pkgs, ... }:
 
 {
+  # Make a desktop icon so I can select it frome gnome search
   home.file.".local/share/applications/alacritty.desktop".text = ''
     [Desktop Entry]
     Encoding=UTF-8
@@ -12,11 +13,11 @@
     Icon="${builtins.getEnv "HOME"}/.nix-profile/share/icons/hicolor/scalable/apps/Alacritty.svg
   '';
 
-
   programs.alacritty = {
     enable = true;
     settings = {
       shell.program = /run/current-system/sw/bin/zsh;
+      background_opacity = 0.9;
     };
   };
 

@@ -8,6 +8,10 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+
+      # Window manager
+      ./wm/xmonad.nix
+      # ./wm/gnome.nix
     ];
 
   boot.loader = {
@@ -30,7 +34,6 @@
 
     # Some desktop environments use NetworkManager for configuring
     # networking.
-
     networkmanager.enable = true;
 
     # The global useDHCP flag is deprecated, therefore explicitly set to
@@ -50,25 +53,6 @@
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
-  };
-
-  # Enable the GNOME 3 Desktop Environment.
-  services = {
-    xserver = {
-      #libinput.enable = true;
-      enable = true;
-      displayManager.gdm.enable = true;
-      # displayManager.gdm.wayland = false;
-      desktopManager.gnome3.enable = true;
-
-      #windowManager.xmonad.enable = true;
-    };
-
-    blueman.enable = true;
-
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
-    redshift.enable = true;
   };
 
   # Enable sound.
