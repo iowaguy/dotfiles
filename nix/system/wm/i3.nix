@@ -1,11 +1,13 @@
 { config, lib, pkgs, ... }:
 
 {
+  systemd.services.upower.enable = true;
   services = {
     gnome3.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
     redshift.enable = true; # Save the eyes
     upower.enable = true;
+    blueman.enable = true;
 
     xserver = {
       enable = true;
@@ -33,6 +35,7 @@
           i3status # gives you the default i3 status bar
           i3lock #default i3 screen locker
           i3blocks #if you are planning on using i3blocks over i3status
+          acpi
         ];
       };
     };

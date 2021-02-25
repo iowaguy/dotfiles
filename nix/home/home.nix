@@ -98,7 +98,16 @@ in {
     stateVersion = "21.03";
   };
 
-  xdg.enable = true;
+  xdg = {
+    enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "application/pdf" = "zathura.desktop";
+        "x-scheme-handler/msteams" = "teams.desktop";
+      };
+    };
+  };
 
   fonts.fontconfig.enable = true;
 
