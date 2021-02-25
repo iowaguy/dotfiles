@@ -12,6 +12,7 @@
       # Window manager
       ./wm/xmonad.nix
       # ./wm/gnome.nix
+      # ./wm/i3.nix
     ];
 
   boot.loader = {
@@ -24,8 +25,7 @@
       # Define on which hard drive you want to install Grub.
       device = "nodev";
     };
-
-#    systemd-boot.enable = true;
+    systemd-boot.enable = true;
   };
   boot.cleanTmpDir = true;
 
