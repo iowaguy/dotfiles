@@ -10,9 +10,9 @@
       ./hardware-configuration.nix
 
       # Window manager
-      ./wm/xmonad.nix
+      # ./wm/xmonad.nix
       # ./wm/gnome.nix
-      # ./wm/i3.nix
+      ./wm/i3.nix
     ];
 
   boot.loader = {
