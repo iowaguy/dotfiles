@@ -26,6 +26,11 @@
 
       displayManager = {
         defaultSession = "none+i3";
+        sessionCommands = ''
+          xrandr --output eDP --primary
+          xrandr --output HDMI-0 --auto --right-of eDP
+          feh --bg-scale ~/.background_image
+        '';
       };
 
       windowManager.i3 = {
@@ -36,6 +41,7 @@
           i3lock #default i3 screen locker
           i3blocks #if you are planning on using i3blocks over i3status
           acpi
+          feh
         ];
       };
     };
