@@ -22,6 +22,7 @@ let
     pass
     pinentry-gtk2
     qnotero
+    qt5Full  # needed for matplotlib
     ripgrep
     signal-desktop
     skype
@@ -87,6 +88,8 @@ in {
 
     packages = defaultPkgs ++ polybarPkgs ++ xmonadPkgs;
 
+    file.".background_image".source = ./resources/background_image;
+
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
@@ -128,9 +131,19 @@ in {
       enableZshIntegration = true;
       enableNixDirenvIntegration = true;
     };
+
+    zsh = {
+      enable = true;
+      # historyIgnore = [ "ls" "cd" "exit" ".." "..." "gs" "ll" "lll" ];
+      sessionVariables = {
+        EDITOR="emacsclient";
+        BROWSER="firefox"; # toggle with lynx for headless servers
+      };
+    };
   };
 
   services = {
     lorri.enable = true;
   };
+
 }
