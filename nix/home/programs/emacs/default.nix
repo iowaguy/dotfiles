@@ -9,7 +9,11 @@
     enable = true;
   };
 
-  services.emacs.enable = true;
+  services.emacs = {
+    enable = true;
+    defaultEditor = true;
+  }
+
   home.links.".emacs.d" = "./workspace/dotfiles/emacs/dot-emacs.d";
 
   home.file.".bin/em" = {

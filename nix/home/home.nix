@@ -132,9 +132,7 @@ in {
 
     zsh = {
       enable = true;
-      # historyIgnore = [ "ls" "cd" "exit" ".." "..." "gs" "ll" "lll" ];
       sessionVariables = {
-        EDITOR="emacsclient";
         BROWSER="firefox"; # toggle with lynx for headless servers
         PATH = "$HOME/.bin:$PATH";
       };
