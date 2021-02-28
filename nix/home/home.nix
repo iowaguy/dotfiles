@@ -136,6 +136,7 @@ in {
       sessionVariables = {
         EDITOR="emacsclient";
         BROWSER="firefox"; # toggle with lynx for headless servers
+        PATH = "$HOME/.bin:$PATH";
       };
     };
   };
