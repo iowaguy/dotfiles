@@ -112,8 +112,6 @@ in {
     };
   };
 
-  fonts.fontconfig.enable = true;
-
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -145,5 +143,4 @@ in {
   services = {
     lorri.enable = true;
   };
-
 }

@@ -58,6 +58,9 @@
   # Enable sound.
   sound.enable = true;
   hardware = {
+    cpu.intel.updateMicrocode = true;
+
+    # Use the MBP camera
     facetimehd.enable = true;
 
     pulseaudio = {
@@ -105,26 +108,30 @@
     # https://github.com/rycee/home-manager/issues/1087
     ssh.startAgent = true;
 
-    zsh.enable = true;
-    zsh.ohMyZsh = {
+    zsh = {
       enable = true;
-      plugins = [
-        "git"
-        "python"
-        "man"
-        "z"
-        "colored-man-pages"
-        "common-aliases"
-        "git-auto-fetch"
-        "golang"
-        "httpie"
-        "mvn"
-        "pip"
-        "vagrant"
-        "web-search"
-        "cabal"
-      ];
-      theme = "agnoster";
+      ohMyZsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "python"
+          "man"
+          "z"
+          "colored-man-pages"
+          "common-aliases"
+          "git-auto-fetch"
+          "golang"
+          "httpie"
+          "mvn"
+          "pip"
+          "vagrant"
+          "web-search"
+          "cabal"
+        ];
+        theme = "agnoster";
+      };
+      # Completion for many CLI utils
+      enableBashCompletion = true;
     };
   };
 
@@ -171,6 +178,14 @@
   fonts.fonts = with pkgs; [
     powerline-fonts
   ];
+
+  # For battery life. Probably should do some testing
+  # to see how much this really helps.
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
+  services.tlp.enable = true; # for battery life
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
