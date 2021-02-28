@@ -106,7 +106,7 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = "zathura.desktop";
+        "application/pdf" = "org.pwmt.zathura.desktop";
         "x-scheme-handler/msteams" = "teams.desktop";
       };
     };
