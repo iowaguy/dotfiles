@@ -11,8 +11,7 @@
 
   services.emacs = {
     enable = true;
-    defaultEditor = true;
-  }
+  };
 
   home.links.".emacs.d" = "./workspace/dotfiles/emacs/dot-emacs.d";
 

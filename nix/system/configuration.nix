@@ -100,7 +100,7 @@
     emacs
     bluez
     which
-    linuxPackages.facetimehd
+    linuxPackages.facetimehd # TODO not sure if I still need this
   ];
 
   programs = {
@@ -186,6 +186,7 @@
     powertop.enable = true;
   };
   services.tlp.enable = true; # for battery life
+  services.emacs.defaultEditor = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
