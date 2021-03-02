@@ -3,8 +3,26 @@
 #+EMAIL: ben@weintraub.xyz
 #+OPTIONS: num:nil
 
-* Configure =use-package=
+* Set OS-specific variables
+#+begin_src emacs-lisp
+  (defun blw/set-macos-vars ()
+    (setq blw/open-firefox "open -a Firefox")
+    (setq blw/screenshot "screencapture -i %s"))
 
+  (defun blw/set-linux-vars ()
+    (setq blw/open-firefox "firefox --newtab --url")
+    (setq blw/screenshot "scrot --select %s"))
+
+  (defun blw/set-system-specific-vars ()
+    (cond
+     ((string-equal system-type "darwin") ;  macOS
+      (blw/set-macos-vars))
+     ((string-equal system-type "gnu/linux")
+      (blw/set-linux-vars))))
+
+  (blw/set-system-specific-vars)
+#+end_src
+* Configure =use-package=
 I use =use-package= to install and configure my packages. My =init.el= includes
 the initial setup for =package.el= and ensures that =use-package= is installed,
 since I wanna do that right away.
@@ -1217,7 +1235,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 #+begin_src emacs-lisp
   (defun blw/org-roam-graph-firefox (graph)
     (org-roam-server-mode t)
-    (shell-command "firefox --newtab --url http://localhost:8080"))
+    (shell-command (concat blw/open-firefox " http://localhost:8080")))
 
   (defun blw/get-string-from-file (filePath)
     "Return filePath's file content."
@@ -1286,7 +1304,7 @@ other tools for other OSs.
   (use-package org-download
     :after org
     :custom
-    (org-download-screenshot-method "screencapture -i %s")
+    (org-download-screenshot-method blw/screenshot)
     (org-download-image-dir "screenshots/")
     (org-download-image-org-width 500)
     (org-download-heading-lvl nil))

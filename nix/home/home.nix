@@ -24,6 +24,7 @@ let
     qnotero
     qt5Full  # needed for matplotlib
     ripgrep
+    scrot
     signal-desktop
     skype
     slack
@@ -31,6 +32,7 @@ let
     teams
     texlive.combined.scheme-full
     tree
+    xclip
     zathura
     zoom-us
     zotero
