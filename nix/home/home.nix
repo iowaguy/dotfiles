@@ -41,40 +41,14 @@ let
     inconsolata
   ];
 
-  polybarPkgs = with pkgs; [
-    font-awesome-ttf      # awesome fonts
-    material-design-icons # fonts with glyphs
-  ];
-
-  xmonadPkgs = with pkgs; [
+  i3Pkgs = with pkgs; [
     networkmanager_dmenu   # networkmanager on dmenu
     networkmanagerapplet   # networkmanager applet
-    nitrogen               # wallpaper manager
-    xcape                  # keymaps modifier
-    xorg.xkbcomp           # keymaps modifier
-    xorg.xmodmap           # keymaps modifier
-    xorg.xrandr            # display manager (X Resize and Rotate protocol)
+    xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
 in {
-  imports = [
-    ./modules/make-links.nix
-    ./programs/alacritty.nix
-    ./programs/dropbox.nix
-    ./programs/emacs
-    ./programs/firefox.nix
-    ./programs/git.nix
-    ./programs/mailcap.nix
-    ./programs/redshift.nix
-    # ./programs/rofi/default.nix
-    ./programs/slack.nix
-    ./programs/ssh.nix
-    ./programs/teams.nix
-    # ./programs/xmonad/default.nix
-    ./programs/zsh.nix
-    # ./services/polybar/default.nix
-    ./programs/i3/default.nix
-  ];
+  imports = (import ./programs) ++ (import ./modules);
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -88,7 +62,7 @@ in {
     username = "ben";
     homeDirectory = "/home/ben";
 
-    packages = defaultPkgs ++ polybarPkgs ++ xmonadPkgs;
+    packages = defaultPkgs ++ i3Pkgs;
 
     file.".background_image".source = ./resources/background_image;
 

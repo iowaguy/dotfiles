@@ -1,6 +1,17 @@
 [
-  # ./xmonad
-  # ./rofi
+  ./alacritty
+  ./dropbox
+  ./emacs
+  ./firefox
+  ./git
+  # ./gnome
   ./i3
-  ./pidgin
+  ./mailcap
+  ./redshift
+  # ./rofi
+  ./slack
+  ./ssh
+  ./teams
+  # ./xmonad
+  ./zsh
 ]
