@@ -18,6 +18,7 @@ let
     lorri
     niv
     nixfmt
+    notmuch
     nox
     pass
     pinentry-gtk2
@@ -39,35 +40,6 @@ let
 
     # Fonts
     inconsolata
-
-
-    (stdenv.mkDerivation {
-      name = "notmuch";
-      src = fetchgit {
-        url = "git://git.notmuchmail.org/git/notmuch";
-        rev = "0.31.4";
-        sha256 = "04q9zwy6mpck82zk70xnx2knh2jmqhf676703kjw0fbvdrzw9qik";
-      };
-      installPhase = ''
-        mkdir -p $out
-        # cp airpods $out/bin
-        # chmod u+x $out/bin/airpods
-      '';
-      buildInputs = [
-        cppcheck
-        emacs
-        glib
-        gmime3
-        gnupg
-        gpgme
-        perl
-        pkg-config
-        python38
-        talloc
-        xapian
-        zlib
-      ];
-    })
   ];
 
   i3Pkgs = with pkgs; [
