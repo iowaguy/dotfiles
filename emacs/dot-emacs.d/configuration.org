@@ -1049,6 +1049,7 @@ Use =notmuch= to read my email.
         mail-specify-envelope-from t
         mail-envelope-from 'header
         message-sendmail-envelope-from 'header)
+
   (setq notmuch-saved-searches
         '((:name "inbox" :query "tag:inbox" :key "i")
           (:name "unread" :query "tag:unread" :key "u")
@@ -1057,26 +1058,29 @@ Use =notmuch= to read my email.
           (:name "nu-unread" :query "to:weintraub.b@northeastern.edu+tag:unread", :key "nu")
           (:name "all" :query "*" :key "a")))
 
-  (define-key notmuch-show-mode-map "S"
-    (lambda ()
-      "mark message as spam"
-      (interactive)
-      (notmuch-show-tag (list "+spam" "-inbox"))))
-
-  (define-key notmuch-show-mode-map "U"
-    (lambda ()
-      "Unread"
-      (interactive)
-      (notmuch-show-tag (list "+unread"))))
-
-
   (define-key notmuch-search-mode-map "R"
     (lambda (&optional beg end)
       "mark read"
       (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "-inbox" "-unread") beg end)))
+      (notmuch-search-tag (list "-unread") beg end)))
 
+  (define-key notmuch-search-mode-map "d"
+    (lambda (&optional beg end)
+      "Delete me"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "-unread" "-inbox" "+delete") beg end)))
 
+  (define-key notmuch-search-mode-map "U"
+    (lambda (&optional beg end)
+      "Mark unread"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "+unread") beg end)))
+
+  (define-key notmuch-search-mode-map "S"
+    (lambda (&optional beg end)
+      "Mark unread"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "+spam" "-inbox") beg end)))
 #+end_src
 
 ** Display preferences
