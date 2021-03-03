@@ -22,6 +22,7 @@
 
   (blw/set-system-specific-vars)
 #+end_src
+
 * Configure =use-package=
 I use =use-package= to install and configure my packages. My =init.el= includes
 the initial setup for =package.el= and ensures that =use-package= is installed,
@@ -1028,6 +1029,12 @@ something, type =C-c ]=.
 #+begin_src emacs-lisp
   (use-package helm)
   (use-package org-ref)
+#+end_src
+
+** Email
+Use =notmuch= to read my email.
+#+begin_src emacs-lisp
+  (use-package notmuch)
 #+end_src
 
 ** Display preferences

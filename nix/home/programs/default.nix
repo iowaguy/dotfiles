@@ -2,6 +2,7 @@
   ./alacritty
   ./dropbox
   ./emacs
+  ./email
   ./firefox
   ./git
   # ./gnome
