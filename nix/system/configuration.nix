@@ -43,6 +43,14 @@
     # Per-interface useDHCP will be mandatory in the future, so this
     # generated config replicates the default behaviour.
     interfaces.wlp4s0.useDHCP = true;
+
+    # Block sites that distract me
+    extraHosts =
+    ''
+      127.0.0.1 netflix.com
+      127.0.0.1 nytimes.com
+      127.0.0.1 news.ycombinator.com
+    '';
   };
 
   # Set your time zone.
