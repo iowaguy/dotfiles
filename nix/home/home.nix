@@ -12,6 +12,7 @@ let
     dropbox-cli
     emacs26Packages.virtualenv
     entr
+    evince
     fd
     graphviz
     keybase
@@ -22,6 +23,7 @@ let
     notmuch # an email search engine
     nox
     pass
+    pandoc
     pinentry-gtk2
     qnotero
     qt5Full  # needed for matplotlib
@@ -35,7 +37,6 @@ let
     texlive.combined.scheme-full
     tree
     xclip
-    zathura
     zoom-us
     zotero
 
@@ -48,9 +49,6 @@ let
     networkmanagerapplet   # networkmanager applet
     xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
-
-    # i3blocks-airpods
-
 
 in {
   imports = (import ./programs) ++ (import ./modules) ++ (import ./services);
@@ -87,7 +85,7 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = "org.pwmt.zathura.desktop";
+        "application/pdf" = "evince.desktop";
         "x-scheme-handler/msteams" = "teams.desktop";
       };
     };
@@ -122,5 +120,6 @@ in {
 
   services = {
     lorri.enable = true;
+    udiskie.enable = true;
   };
 }
