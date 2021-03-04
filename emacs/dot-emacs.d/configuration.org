@@ -1051,27 +1051,30 @@ Use =notmuch= to read my email.
         message-sendmail-envelope-from 'header)
 
   (setq notmuch-saved-searches
-        '((:name "inbox" :query "tag:inbox" :key "i" :sort-order newest-first)
+        '((:name "slimbox"
+                 :query "tag:unread AND NOT tag:scholarly-reading AND NOT tag:calnewport AND NOT tag:newyorker AND NOT tag:lightning-dev AND NOT tag:nu-unread"
+                 :key "i"
+                 :sort-order newest-first)
+          (:name "inbox" :query "tag:inbox" :sort-order newest-first)
           (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first)
           (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first)
           (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first)
           (:name "lightning-dev" :query "tag:lists/lightning-dev AND tag:unread" :sort-order newest-first)
           (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first)
           (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first)
-          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first)
-          (:name "all" :query "*" :key "a" :sort-order newest-first)))
+          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first)))
 
   (define-key notmuch-search-mode-map "R"
     (lambda (&optional beg end)
       "mark read"
       (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "-unread") beg end)))
+      (notmuch-search-tag (list "-unread" "-new") beg end)))
 
   (define-key notmuch-search-mode-map "d"
     (lambda (&optional beg end)
       "Delete me"
       (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "-unread" "-inbox" "+delete") beg end)))
+      (notmuch-search-tag (list "-unread" "-inbox" "-new" "+delete") beg end)))
 
   (define-key notmuch-search-mode-map "U"
     (lambda (&optional beg end)
@@ -1083,7 +1086,7 @@ Use =notmuch= to read my email.
     (lambda (&optional beg end)
       "Mark unread"
       (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "+spam" "-inbox") beg end)))
+      (notmuch-search-tag (list "+spam" "-inbox" "-new") beg end)))
 
   (require 'ol-notmuch)
 
