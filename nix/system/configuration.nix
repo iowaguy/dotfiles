@@ -8,12 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-
-      # Window manager
-      # ./wm/xmonad.nix
-      # ./wm/gnome.nix
-      ./wm/i3.nix
-    ];
+    ] ++ (import ./services) ++ (import ./wm);
 
   boot.loader = {
     efi = {
@@ -105,10 +100,11 @@
     vim
     git
     firefox
-    emacs
     bluez
     which
     linuxPackages.facetimehd # TODO not sure if I still need this
+
+    (emacsWithPackages (epkgs: [ epkgs.orgPackages.org-plus-contrib ]))
   ];
 
   programs = {

@@ -1,3 +1,4 @@
 [
-  ./polybar
+  # ./polybar
+  # ./cron
 ]

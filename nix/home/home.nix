@@ -4,6 +4,7 @@ with lib;
 
 let
   defaultPkgs = with pkgs; [
+    afew # initial tagging for notmuch
     alacritty
     curl
     dmenu
@@ -18,7 +19,7 @@ let
     lorri
     niv
     nixfmt
-    notmuch
+    notmuch # an email search engine
     nox
     pass
     pinentry-gtk2
@@ -52,7 +53,7 @@ let
 
 
 in {
-  imports = (import ./programs) ++ (import ./modules);
+  imports = (import ./programs) ++ (import ./modules) ++ (import ./services);
 
   nixpkgs.config = {
     allowUnfree = true;

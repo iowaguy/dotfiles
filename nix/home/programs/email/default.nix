@@ -1,11 +1,22 @@
 { pkgs, ... }:
 {
+  home.file.".config/afew/config".source = ./afew-config.ini;
+  home.file.".notmuch-config".source = ./notmuch-config.ini;
+
   programs.mbsync.enable = true;
   programs.msmtp.enable = true;
   programs.notmuch = {
     enable = true;
     hooks = {
-      preNew = "mbsync --all";
+      preNew = "${pkgs.isync}/bin/mbsync --all";
+      postNew = ''
+        ${pkgs.afew}/bin/afew --tag --new
+        notmuch tag +newyorker -inbox -- "from:newyorker@newsletter.newyorker.com"
+        notmuch tag +scholarly-reading -inbox -- "from:scholaralerts-noreply@google.com"
+        notmuch tag +lightning-dev -inbox -- "from:lightning-dev-request@lists.linuxfoundation.org"
+        notmuch tag +calnewport -inbox -- "from:author@calnewport.com"
+        notmuch tag +economist -inbox -- "from:newsletters@e.economist.com"
+      '';
     };
   };
   accounts.email = {

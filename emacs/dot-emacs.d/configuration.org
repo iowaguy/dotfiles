@@ -1051,12 +1051,15 @@ Use =notmuch= to read my email.
         message-sendmail-envelope-from 'header)
 
   (setq notmuch-saved-searches
-        '((:name "inbox" :query "tag:inbox" :key "i")
-          (:name "unread" :query "tag:unread" :key "u")
-          (:name "archive" :query "tag:archive" :key "r")
-          (:name "nu" :query "to:weintraub.b@northeastern.edu", :key "nu")
-          (:name "nu-unread" :query "to:weintraub.b@northeastern.edu+tag:unread", :key "nu")
-          (:name "all" :query "*" :key "a")))
+        '((:name "inbox" :query "tag:inbox" :key "i" :sort-order newest-first)
+          (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first)
+          (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first)
+          (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first)
+          (:name "lightning-dev" :query "tag:lists/lightning-dev AND tag:unread" :sort-order newest-first)
+          (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first)
+          (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first)
+          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first)
+          (:name "all" :query "*" :key "a" :sort-order newest-first)))
 
   (define-key notmuch-search-mode-map "R"
     (lambda (&optional beg end)
@@ -1081,6 +1084,32 @@ Use =notmuch= to read my email.
       "Mark unread"
       (interactive (notmuch-interactive-region))
       (notmuch-search-tag (list "+spam" "-inbox") beg end)))
+
+  (require 'ol-notmuch)
+
+  (setq message-kill-buffer-on-exit t)
+
+  (defvar notmuch-hello-refresh-count 0)
+
+  (defun notmuch-hello-refresh-status-message ()
+    (unless no-display
+      (let* ((new-count
+              (string-to-number
+               (car (process-lines notmuch-command "count"))))
+             (diff-count (- new-count notmuch-hello-refresh-count)))
+        (cond
+         ((= notmuch-hello-refresh-count 0)
+          (message "You have %s messages."
+                   (notmuch-hello-nice-number new-count)))
+         ((> diff-count 0)
+          (message "You have %s more messages since last refresh."
+                   (notmuch-hello-nice-number diff-count)))
+         ((< diff-count 0)
+          (message "You have %s fewer messages since last refresh."
+                   (notmuch-hello-nice-number (- diff-count)))))
+        (setq notmuch-hello-refresh-count new-count))))
+
+  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-refresh-status-message)
 #+end_src
 
 ** Display preferences

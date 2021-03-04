@@ -13,6 +13,7 @@ sudo cp system/configuration.nix /etc/nixos/
 # sudo cp -r system/fonts/ /etc/nixos/
 # sudo cp -r system/machine/ /etc/nixos/
 sudo cp -r system/wm/ /etc/nixos/
+sudo cp -r system/services/ /etc/nixos/
 sudo nixos-rebuild switch
 
 ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
