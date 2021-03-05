@@ -105,6 +105,7 @@
     linuxPackages.facetimehd # TODO not sure if I still need this
 
     (emacsWithPackages (epkgs: [ epkgs.orgPackages.org-plus-contrib ]))
+    xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
   programs = {

@@ -34,6 +34,7 @@
           # xrandr --output HDMI-0 --mode "3840x2160_60.00"
 
           feh --bg-scale ~/.background_image
+          betterlockscreen --update ~/.background_image
         '';
       };
 
@@ -46,6 +47,13 @@
           i3blocks #if you are planning on using i3blocks over i3status
           acpi
           feh
+
+          # All needed for betterlockscreen
+          betterlockscreen
+          i3lock-color
+          imagemagick
+          xorg.xdpyinfo
+          bc
         ];
       };
     };

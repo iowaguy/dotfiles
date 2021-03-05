@@ -47,7 +47,6 @@ let
   i3Pkgs = with pkgs; [
     networkmanager_dmenu   # networkmanager on dmenu
     networkmanagerapplet   # networkmanager applet
-    xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
 in {
