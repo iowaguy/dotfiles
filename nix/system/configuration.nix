@@ -182,6 +182,7 @@
 
   fonts.fonts = with pkgs; [
     powerline-fonts
+    font-awesome
   ];
 
   # For battery life. Probably should do some testing
