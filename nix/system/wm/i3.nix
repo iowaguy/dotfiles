@@ -35,6 +35,8 @@
 
           feh --bg-scale ~/.background_image
           betterlockscreen --update ~/.background_image
+          blueman-applet &
+          nm-applet --sm-disable --indicator &
         '';
       };
 

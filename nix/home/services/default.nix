@@ -1,4 +1,4 @@
 [
   # ./polybar
-  # ./cron
+  ./picom
 ]
