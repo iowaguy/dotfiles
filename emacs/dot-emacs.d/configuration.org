@@ -1419,7 +1419,7 @@ Take fancy PDF notes in in =org=.
   :config
   (setq
    ;; The WM can handle splits
-   org-noter-notes-window-location nil
+   org-noter-notes-window-location 'horizontal-split
    ;; Please stop opening frames
    org-noter-always-create-frame nil
    ;; I want to see the whole file
