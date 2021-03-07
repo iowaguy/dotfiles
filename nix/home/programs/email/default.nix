@@ -32,17 +32,6 @@
         notmuch.enable = true;
         primary = true;
         realName = "Ben Weintraub";
-        signature = {
-          text = ''
-            --
-            Ben Weintraub
-            PhD Student
-            Khoury College of Computer Sciences
-            Northeastern University
-            https://ben-weintraub.com/
-          '';
-          showSignature = "append";
-        };
         passwordCommand = "cat $HOME/Dropbox/.secrets/mbsync-pass.txt";
         smtp = {
           host = "smtp.gmail.com";
