@@ -470,6 +470,12 @@ I'd like to enable flycheck all kinds of places.
     :hook ruby-mode)
 #+end_src
 
+Correct flycheck-identified mistakes.
+#+begin_src emacs-lisp
+  (use-package attrap
+    :ensure t)
+#+end_src
+
 ** =magit=
 
 I use =magit= to handle version control. It's lovely, but I tweak a few things:
@@ -677,6 +683,18 @@ use smart indentation.
   (hrs/append-to-path "~/.cabal/bin")
 #+end_src
 
+#+begin_src emacs-lisp
+(use-package dante
+  :ensure t
+  :after haskell-mode
+  :commands 'dante-mode
+  :init
+  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  ;; OR for flymake support:
+  (add-hook 'haskell-mode-hook 'flymake-mode)
+  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+  (add-hook 'haskell-mode-hook 'dante-mode))
+#+end_src
 ** JavaScript and CoffeeScript
 
 Install =coffee-mode= from editing CoffeeScript code.
@@ -1418,55 +1436,46 @@ Take fancy PDF notes in in =org=.
   :after (:any org pdf-view)
   :config
   (setq
-   ;; The WM can handle splits
    org-noter-notes-window-location 'horizontal-split
    ;; Please stop opening frames
-   org-noter-always-create-frame nil
-   ;; I want to see the whole file
-   org-noter-hide-other nil
-   ;; Everything is relative to the main notes file
+   ;; org-noter-always-create-frame nil
+   ;; I want to see just the parts relevant to my current page
+   org-noter-hide-other t
+   ;; disable arrow tooltip
+   org-noter-arrow-delay -1
    org-noter-notes-search-path (list "~/Dropbox/zettelkasten/")))
 #+end_src
 
 More meta-data for my annotated bibliography.
 #+begin_src emacs-lisp
-   (use-package org-roam-bibtex
-    :after (org-roam)
-    :hook (org-roam-mode . org-roam-bibtex-mode)
-    :config
-    (setq org-roam-bibtex-preformat-keywords
-     '("=key=" "title" "url" "file" "author-or-editor" "keywords"))
-    (setq orb-templates
-          '(("r" "ref" plain (function org-roam-capture--get-point)
-             ""
-             :file-name "${slug}"
-             :head "#+TITLE: ${=key=}: ${title}\n#+ROAM_KEY: ${ref}
-
-  - tags ::
-  - keywords :: ${keywords}
-
-  \n* ${title}\n  :PROPERTIES:\n  :Custom_ID: ${=key=}\n  :URL: ${url}\n  :AUTHOR: ${author-or-editor}\n  :NOTER_DOCUMENT: %(orb-process-file-field \"${=key=}\")\n  :NOTER_PAGE: \n  :END:\n\n"
-
-             :unnarrowed t))))
+  (use-package org-roam-bibtex
+    :after org-roam
+    :hook (org-roam-mode . org-roam-bibtex-mode))
 #+end_src
+
+Higher resolution on PDFs.
+#+begin_src emacs-lisp
+  (setq doc-view-resolution 192)
+#+end_src
+
 *** Capturing tasks
 
 Define a few common tasks as capture templates. Specifically, I frequently:
 
-- Maintain a todo list in =~/Dropbox/org/thebigone.org=.
-- Convert emails into todos to maintain an empty inbox.
+- Add things I might want to read to =reading.org=
+- Probably more in the future...
 
 #+begin_src emacs-lisp
   (setq org-capture-templates
         '(("r" "Reading material"
            entry
            (file "~/Dropbox/org/reading.org")
+           "* %?\n")
+          ("c" "CV/Website updates"
+           entry
+           (file "~/Dropbox/org/cv-website.org")
            "* %?\n")))
 #+end_src
-
-When I'm starting an Org capture template I'd like to begin in insert mode. I'm
-opening it up in order to start typing something, so this skips a step.
-
 
 Refiling according to the document's hierarchy.
 
@@ -1483,41 +1492,6 @@ Bind a few handy keys.
   (global-set-key (kbd "C-c l") 'org-store-link)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-#+end_src
-
-Hit =C-c i= to quickly open up my todo list.
-
-#+begin_src emacs-lisp
-  (defun hrs/open-index-file ()
-    "Open the master org TODO list."
-    (interactive)
-    (hrs/copy-tasks-from-inbox)
-    (find-file org-index-file)
-    (flycheck-mode -1)
-    (end-of-buffer))
-
-  (global-set-key (kbd "C-c i") 'hrs/open-index-file)
-#+end_src
-
-Hit =M-n= to quickly open up a capture template for a new todo.
-
-#+begin_src emacs-lisp
-  (defun org-capture-todo ()
-    (interactive)
-    (org-capture :keys "t"))
-
-  (global-set-key (kbd "M-n") 'org-capture-todo)
-  (add-hook 'gfm-mode-hook
-            (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
-  (add-hook 'haskell-mode-hook
-            (lambda () (local-set-key (kbd "M-n") 'org-capture-todo)))
-#+end_src
-
-
-#+begin_src emacs-lisp
-  (use-package org-roam-bibtex
-    :after org-roam
-    :hook (org-roam-mode . org-roam-bibtex-mode))
 #+end_src
 
 ** Google Calendar
