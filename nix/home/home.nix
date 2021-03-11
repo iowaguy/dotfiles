@@ -6,6 +6,7 @@ let
   defaultPkgs = with pkgs; [
     afew # initial tagging for notmuch
     alacritty
+    cabal-install
     curl
     dmenu
     direnv
@@ -14,6 +15,7 @@ let
     entr
     evince
     fd
+    ghc
     graphviz
     keybase
     libnotify
@@ -33,6 +35,7 @@ let
     skype
     slack
     sqlite
+    stack
     teams
     texlive.combined.scheme-full
     tree
