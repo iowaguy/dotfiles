@@ -1430,22 +1430,6 @@ other tools for other OSs.
   (bibtex-set-dialect 'biblatex)
 #+end_src
 
-Take fancy PDF notes in in =org=.
-#+begin_src emacs-lisp
-  (use-package org-noter
-  :after (:any org pdf-view)
-  :config
-  (setq
-   org-noter-notes-window-location 'horizontal-split
-   ;; Please stop opening frames
-   ;; org-noter-always-create-frame nil
-   ;; I want to see just the parts relevant to my current page
-   org-noter-hide-other t
-   ;; disable arrow tooltip
-   org-noter-arrow-delay -1
-   org-noter-notes-search-path (list "~/Dropbox/zettelkasten/")))
-#+end_src
-
 More meta-data for my annotated bibliography.
 #+begin_src emacs-lisp
   (use-package org-roam-bibtex
@@ -1463,6 +1447,8 @@ Higher resolution on PDFs.
 Define a few common tasks as capture templates. Specifically, I frequently:
 
 - Add things I might want to read to =reading.org=
+- Add website/CV updates
+- Add ideas for zettelkasten notes
 - Probably more in the future...
 
 #+begin_src emacs-lisp
@@ -1474,7 +1460,21 @@ Define a few common tasks as capture templates. Specifically, I frequently:
           ("c" "CV/Website updates"
            entry
            (file "~/Dropbox/org/cv-website.org")
+           "* %?\n")
+          ("z" "Zettel inbox"
+           entry
+           (file "~/Dropbox/org/zettel-inbox.org")
            "* %?\n")))
+#+end_src
+
+I want to be able to quickly open up my list of zettel topics.
+
+#+begin_src emacs-lisp
+  (defun blw/zettel-topics ()
+    (interactive)
+    (find-file "~/Dropbox/org/zettel-inbox.org"))
+
+  (global-set-key (kbd "C-c z") 'blw/zettel-topics)
 #+end_src
 
 Refiling according to the document's hierarchy.

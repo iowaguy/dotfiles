@@ -87,7 +87,7 @@ in {
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "application/pdf" = "emacsclient.desktop";
+        "application/pdf" = "evince.desktop";
         "x-scheme-handler/msteams" = "teams.desktop";
       };
     };
