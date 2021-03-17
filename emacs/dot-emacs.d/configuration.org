@@ -1185,6 +1185,11 @@ Don't indent newly expanded blocks, even if they're under a heading.
   (setq org-adapt-indentation nil)
 #+end_src
 
+Show Greek letters and =LaTeX= math symbols (in =org= buffer) using normal
+=LaTeX= syntax.
+#+begin_src emacs-lisp
+  (setq org-pretty-entities t)
+#+end_src
 ** Task management and agenda views
 
 Store my org files in =~/Dropbox/org=, maintain an inbox in Dropbox, define
