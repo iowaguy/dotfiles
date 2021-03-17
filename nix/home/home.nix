@@ -26,10 +26,10 @@ let
     nox
     pass
     pandoc
-    pinentry-gtk2
     qnotero
     qt5Full  # needed for matplotlib
     ripgrep
+    rubber # a nice tool for compiling latex
     scrot
     signal-desktop
     skype
@@ -118,6 +118,7 @@ in {
         PATH = "$HOME/.bin:$PATH";
       };
     };
+    gpg.enable = true;
   };
 
   services = {

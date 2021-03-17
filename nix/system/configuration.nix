@@ -138,6 +138,11 @@
       # Completion for many CLI utils
       enableBashCompletion = true;
     };
+
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "curses";
+    };
   };
 
   nixpkgs = {
