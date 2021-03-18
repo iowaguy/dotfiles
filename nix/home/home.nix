@@ -22,11 +22,14 @@ let
     pass
     pandoc
     pinentry-gtk2
+    pavucontrol                   # pulseaudio volume control
+    paprefs                       # pulseaudio preferences
+    pasystray                     # pulseaudio systray
     qnotero
-    qt5Full  # needed for matplotlib
+    qt5Full                       # needed for matplotlib
     ripgrep
-    rubber # a nice tool for compiling latex
-    scrot # screenshots
+    rubber                        # a nice tool for compiling latex
+    scrot                         # screenshots
     signal-desktop
     skype
     sqlite
@@ -98,6 +101,13 @@ in {
     };
 
     gpg.enable = true;
+
+    bat.enable = true;
+
+    broot = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 
   services = {
