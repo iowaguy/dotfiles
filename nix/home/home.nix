@@ -16,6 +16,7 @@ let
     evince
     fd
     ghc
+    gitAndTools.pass-git-helper # for letting get get passwords from pass
     graphviz
     keybase
     libnotify
@@ -26,6 +27,7 @@ let
     nox
     pass
     pandoc
+    pinentry-gtk2
     qnotero
     qt5Full  # needed for matplotlib
     ripgrep

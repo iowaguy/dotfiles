@@ -1,5 +1,8 @@
 { pkgs, ... }:
-{
+
+let passCmd = entry: "${pkgs.pass}/bin/pass ${entry} 2> /dev/null";
+in {
+
   home.file.".config/afew/config".source = ./afew-config.ini;
   home.file.".notmuch-config".source = ./notmuch-config.ini;
 
@@ -32,7 +35,7 @@
         notmuch.enable = true;
         primary = true;
         realName = "Ben Weintraub";
-        passwordCommand = "cat $HOME/Dropbox/.secrets/mbsync-pass.txt";
+        passwordCommand = passCmd "mbsync";
         smtp = {
           host = "smtp.gmail.com";
         };

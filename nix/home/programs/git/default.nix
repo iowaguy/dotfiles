@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  home.file.".config/pass-git-helper/git-pass-mapping.ini".text = ''
+    [achtung-gitlab.ccs.neu.edu*]
+    target=Login/achtung-gitlab
+  '';
   programs.git = {
     enable = true;
     ignores = [ "*~" "*.swp" ];
@@ -31,8 +35,13 @@
         default = "current";
         followTags = true;
       };
+      credential = {
+        "https://achtung-gitlab.ccs.neu.edu" = {
+          username = "iowaguy";
+          helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
+        };
+      };
       rebase.autosquash = true;
     };
   };
-
 }
