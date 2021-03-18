@@ -37,8 +37,8 @@
           betterlockscreen --update ~/.background_image
         '';
       };
-
       windowManager.i3 = {
+        package = pkgs.i3-gaps;
         enable = true;
         extraPackages = with pkgs; [
           dmenu #application launcher most people use
