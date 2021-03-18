@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    dropbox-cli
+  ];
+
   systemd.user.services.dropbox = {
     Unit = { Description = "Dropbox"; };
 

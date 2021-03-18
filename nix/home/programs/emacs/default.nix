@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+
+  home.packages = with pkgs; [
+    emacs26Packages.virtualenv
+  ];
+
+
   programs.emacs = {
     extraPackages = epkgs: [
       epkgs.use-package

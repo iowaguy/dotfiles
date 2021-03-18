@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    slack
+  ];
+
   home.file.".local/share/applications/slack.desktop".text = ''
     [Desktop Entry]
     Encoding=UTF-8

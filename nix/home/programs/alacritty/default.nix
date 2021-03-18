@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    alacritty
+    inconsolata  # font
+  ];
+
   # Make a desktop icon so I can select it frome gnome search
   home.file.".local/share/applications/alacritty.desktop".text = ''
     [Desktop Entry]

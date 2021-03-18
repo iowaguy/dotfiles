@@ -1,6 +1,11 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    gitAndTools.pass-git-helper # for letting get get passwords from pass
+    gitAndTools.diff-so-fancy # git diff with colors
+  ];
+
   xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''
     [achtung-gitlab.ccs.neu.edu*]
     target=Login/achtung-gitlab

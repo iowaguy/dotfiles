@@ -4,26 +4,20 @@ with lib;
 
 let
   defaultPkgs = with pkgs; [
-    afew # initial tagging for notmuch
-    alacritty
     cabal-install
     curl
     dmenu
     direnv
-    dropbox-cli
-    emacs26Packages.virtualenv
     entr
     evince
     fd
     ghc
-    gitAndTools.pass-git-helper # for letting get get passwords from pass
     graphviz
-    keybase
+    keybase-gui
     libnotify
     lorri
     niv
     nixfmt
-    notmuch # an email search engine
     nox
     pass
     pandoc
@@ -35,23 +29,13 @@ let
     scrot # screenshots
     signal-desktop
     skype
-    slack
     sqlite
     stack
-    teams
     texlive.combined.scheme-full
     tree
     xclip
     zoom-us
     zotero
-
-    # Fonts
-    inconsolata
-  ];
-
-  i3Pkgs = with pkgs; [
-    networkmanager_dmenu   # networkmanager on dmenu
-    networkmanagerapplet   # networkmanager applet
   ];
 
 in {
@@ -69,7 +53,7 @@ in {
     username = "ben";
     homeDirectory = "/home/ben";
 
-    packages = defaultPkgs ++ i3Pkgs;
+    packages = defaultPkgs;
 
     file.".background_image".source = ./resources/background_image;
 
@@ -113,18 +97,13 @@ in {
       enableNixDirenvIntegration = true;
     };
 
-    zsh = {
-      enable = true;
-      sessionVariables = {
-        BROWSER="firefox"; # toggle with lynx for headless servers
-        PATH = "$HOME/.bin:$PATH";
-      };
-    };
     gpg.enable = true;
   };
 
   services = {
     lorri.enable = true;
     udiskie.enable = true;
+    keybase.enable = true;
+    kbfs.enable = true;
   };
 }
