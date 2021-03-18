@@ -3,7 +3,7 @@
 let passCmd = entry: "${pkgs.pass}/bin/pass ${entry} 2> /dev/null";
 in {
 
-  home.file.".config/afew/config".source = ./afew-config.ini;
+  xdg.configFile."afew/config".source = ./afew-config.ini;
   home.file.".notmuch-config".source = ./notmuch-config.ini;
 
   programs.mbsync.enable = true;

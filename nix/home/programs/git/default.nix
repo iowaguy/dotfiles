@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.file.".config/pass-git-helper/git-pass-mapping.ini".text = ''
+  xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''
     [achtung-gitlab.ccs.neu.edu*]
     target=Login/achtung-gitlab
   '';
