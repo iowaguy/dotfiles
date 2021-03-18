@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#! /usr/bin/env bash -e
 
 # Shows the output of every command
 set +x

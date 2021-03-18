@@ -16,6 +16,13 @@
 
       desktopManager = {
         xterm.enable = false;
+        # default = "xfce";
+        xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+
       };
 
       libinput = {
@@ -25,7 +32,7 @@
       };
 
       displayManager = {
-        defaultSession = "none+i3";
+        defaultSession = "xfce+i3";
         sessionCommands = ''
           xrandr --output eDP --primary
           xrandr --output HDMI-0 --auto --right-of eDP
@@ -37,6 +44,7 @@
           betterlockscreen --update ~/.background_image
         '';
       };
+
       windowManager.i3 = {
         package = pkgs.i3-gaps;
         enable = true;
