@@ -32,7 +32,7 @@ let
     qt5Full  # needed for matplotlib
     ripgrep
     rubber # a nice tool for compiling latex
-    scrot
+    scrot # screenshots
     signal-desktop
     skype
     slack

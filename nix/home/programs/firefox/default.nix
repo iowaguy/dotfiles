@@ -1,8 +1,16 @@
 { config, pkgs, lib, ... }:
 {
+  home.packages = with pkgs; [
+    browserpass
+  ];
+
+  # access pass from firefox addon
+  programs.browserpass.enable = true;
+
   programs.firefox = {
     enable = true;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      browserpass
       decentraleyes
       duckduckgo-privacy-essentials
       facebook-container
