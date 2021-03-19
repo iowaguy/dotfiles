@@ -8,36 +8,13 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./machine/current.nix
     ] ++ (import ./services) ++ (import ./wm);
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot"; # ← use the same mount point here.
-    };
-    grub = {
-      efiSupport = true;
-      # Define on which hard drive you want to install Grub.
-      device = "nodev";
-    };
-    systemd-boot.enable = true;
-  };
-  boot.cleanTmpDir = true;
-
   networking = {
-    hostName = "boston"; # Define your hostname.
-
-    # Some desktop environments use NetworkManager for configuring
-    # networking.
-    networkmanager.enable = true;
-
     # The global useDHCP flag is deprecated, therefore explicitly set to
     # false here.
     useDHCP = false;
-
-    # Per-interface useDHCP will be mandatory in the future, so this
-    # generated config replicates the default behaviour.
-    interfaces.wlp4s0.useDHCP = true;
 
     # Block sites that distract me
     extraHosts =
@@ -56,26 +33,6 @@
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
-  };
-
-  # Enable sound.
-  sound.enable = true;
-  hardware = {
-    cpu.intel.updateMicrocode = true;
-
-    # Use the MBP camera
-    facetimehd.enable = true;
-
-    pulseaudio = {
-      enable = true;
-
-      # NixOS allows either a lightweight build (default) or full build of PulseAudio to be installed.
-      # Only the full build has Bluetooth support, so it must be selected here.
-      package = pkgs.pulseaudioFull;
-    };
-    bluetooth = {
-      enable = true;
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -100,9 +57,7 @@
     vim
     git
     firefox
-    bluez
     which
-    linuxPackages.facetimehd # TODO not sure if I still need this
 
     (emacsWithPackages (epkgs: [ epkgs.orgPackages.org-plus-contrib ]))
     xorg.xrandr # display manager (X Resize and Rotate protocol)
@@ -141,7 +96,7 @@
 
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "curses";
+      pinentryFlavor = "gtk2";
     };
   };
 
