@@ -1,0 +1,12 @@
+* Install Nix Stuff
+
+On a fresh NixOS installation, run the following commands:
+
+#+begin_src shell
+  mkdir DELETE_ME && cd DELETE_ME
+  nix-shell --run \
+            "wget -c https://github.com/iowaguy/dotfiles/archive/master.tar.gz && tar --strip-components=1 -xvf master.tar.gz" \
+            -p wget s-tar
+  cd nix/
+  chmod +x install.sh && ./install.sh
+#+end_src
