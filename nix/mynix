@@ -1,0 +1,89 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash -p dmidecode
+
+
+# Shows the output of every command
+set +x
+set +e
+
+HOME_MANAGER_VERSION=20.09
+machines["MacBookPro11,5"]=boston.nix
+
+system_config() {
+  # Nix configuration
+  sudo cp system/configuration.nix /etc/nixos/
+  sudo cp -r system/machine/ /etc/nixos/
+  sudo cp -r system/wm/ /etc/nixos/
+  sudo cp -r system/services/ /etc/nixos/
+
+  model=$(sudo dmidecode -s system-product-name)
+
+  sudo cp -r system/machine/ /etc/nixos/
+  sudo ln -s /etc/nixos/machine/${machines[${model}]} /etc/nixos/machine/current.nix
+}
+
+system_install() {
+  system_config
+  sudo nixos-rebuild switch --upgrade
+}
+
+system_refresh() {
+  system_config
+  sudo nixos-rebuild switch
+}
+
+hm_install() {
+  # Home manager
+  mkdir -p $HOME/.config/nixpkgs/
+  cp -r home/* $HOME/.config/nixpkgs/
+  nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
+  nix-channel --update
+  export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+  nix-shell '<home-manager>' -A install
+
+  hm_refresh
+}
+
+hm_refresh() {
+  ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
+  home-manager switch
+}
+
+install() {
+  system_install
+  hm_install
+
+  # Set screenlock wallpaper
+  betterlockscreen -u home/resources/background_image
+  exit $?
+}
+
+refresh() {
+  system_refresh
+  hm_refresh
+  exit $?
+}
+
+usage() {
+  echo "Usage: $0 [install|refresh]" 1>&2
+  exit 1
+}
+
+while :; do
+  PARAM=`echo $1 | awk -F= '{print $1}'`
+  VALUE=`echo $1 | awk -F= '{print $2}'`
+  case "$PARAM" in
+    install)
+      install
+      ;;
+    refresh)
+      refresh
+      ;;
+    *)
+      echo "ERROR: unknown parameter \"$PARAM\""
+      usage
+      ;;
+  esac
+  shift
+done
+shift $((OPTIND-1))
