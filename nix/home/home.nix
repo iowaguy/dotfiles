@@ -58,7 +58,7 @@ in {
 
     packages = defaultPkgs;
 
-    file.".background_image".source = ./resources/background_image;
+    file.".background-image".source = ./resources/background-image;
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

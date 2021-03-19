@@ -15,14 +15,13 @@
       layout = "us";
 
       desktopManager = {
+        wallpaper.mode = "scale";
         xterm.enable = false;
-        # default = "xfce";
         xfce = {
           enable = true;
           noDesktop = true;
           enableXfwm = false;
         };
-
       };
 
       libinput = {
@@ -31,7 +30,12 @@
         naturalScrolling = true;
       };
 
-      displayManager.defaultSession = "xfce+i3";
+      displayManager = {
+        defaultSession = "xfce+i3";
+        sessionCommands = ''
+          feh --bg-fill ~/.background-image
+        '';
+      };
 
       windowManager.i3 = {
         package = pkgs.i3-gaps;
@@ -43,6 +47,8 @@
           acpi
           feh
           python3
+          networkmanager_dmenu   # networkmanager on dmenu
+          networkmanagerapplet   # networkmanager applet
 
           # All needed for betterlockscreen
           betterlockscreen
