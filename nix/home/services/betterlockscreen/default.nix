@@ -18,13 +18,13 @@
     };
 
     Service = {
-      Type = "Type"
+      Type = "simple";
       Environment = [
                "DISPLAY=:0"
       ];
-      ExecStart = "${pkgs.betterlockscreen}/bin/dropbox --lock";
+      ExecStart = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock";
       TimeoutSec = "infinity";
-      ExecStartPost = "sleep 1"
+      ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
     };
   };
 }

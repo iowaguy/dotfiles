@@ -5,6 +5,7 @@ with lib;
 let
   defaultPkgs = with pkgs; [
     cabal-install
+    caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
     dmenu
     direnv
