@@ -1203,7 +1203,7 @@ the location of an index file (my main todo list).
     (concat (file-name-as-directory org-directory) filename))
 
   ;(setq org-inbox-file "~/Dropbox/inbox.org")
-  (setq org-index-file (org-file-path "thebigone.org"))
+  (setq org-index-file (org-file-path "todos.org"))
   (setq org-gcal-file (org-file-path "schedule.org"))
 #+end_src
 
@@ -1214,6 +1214,7 @@ do so by adding more =org-file-path= S-expressions to the list.
 #+begin_src emacs-lisp
   (setq org-agenda-files (list org-index-file
                                org-gcal-file
+                               (org-file-path "thebigone.org")
                                "~/Dropbox/zettelkasten/daily"))
 #+end_src
 
@@ -1469,6 +1470,14 @@ Define a few common tasks as capture templates. Specifically, I frequently:
           ("z" "Zettel inbox"
            entry
            (file "~/Dropbox/org/zettel-inbox.org")
+           "* %?\n")
+          ("t" "TODO inbox"
+           entry
+           (file "~/Dropbox/org/todos.org")
+           "* TODO %?\n")
+          ("f" "Fun projects"
+           entry
+           (file "~/Dropbox/org/fun-projects.org")
            "* %?\n")))
 #+end_src
 
@@ -1479,7 +1488,17 @@ I want to be able to quickly open up my list of zettel topics.
     (interactive)
     (find-file "~/Dropbox/org/zettel-inbox.org"))
 
+  (defun blw/todos ()
+    (interactive)
+    (find-file "~/Dropbox/org/todos.org"))
+
+  (defun blw/fun-projects ()
+    (interactive)
+    (find-file "~/Dropbox/org/fun-projects.org"))
+
   (global-set-key (kbd "C-c z") 'blw/zettel-topics)
+  (global-set-key (kbd "C-c t") 'blw/todos)
+  (global-set-key (kbd "C-c f") 'blw/fun-projects)
 #+end_src
 
 Refiling according to the document's hierarchy.
