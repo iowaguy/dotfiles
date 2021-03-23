@@ -1496,9 +1496,9 @@ I want to be able to quickly open up my list of zettel topics.
     (interactive)
     (find-file "~/Dropbox/org/fun-projects.org"))
 
-  (global-set-key (kbd "C-c z") 'blw/zettel-topics)
-  (global-set-key (kbd "C-c t") 'blw/todos)
-  (global-set-key (kbd "C-c f") 'blw/fun-projects)
+  (defun blw/reading-list ()
+    (interactive)
+    (find-file "~/Dropbox/org/reading.org"))
 #+end_src
 
 Refiling according to the document's hierarchy.
