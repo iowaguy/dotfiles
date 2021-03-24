@@ -16,6 +16,7 @@
     };
     cleanTmpDir = true;
   };
+
   networking = {
     hostName = "boston"; # Define your hostname.
 
@@ -31,6 +32,11 @@
   # Enable sound.
   sound.enable = true;
   hardware = {
+    opengl = {
+      # Apparently this is currently only supported by ati_unfree drivers, not ati
+      driSupport32Bit = false;
+      extraPackages = [ pkgs.vaapiIntel pkgs.vaapiVdpau ];
+    };
     cpu.intel.updateMicrocode = true;
 
     # Use the MBP camera
@@ -53,30 +59,46 @@
     linuxPackages.facetimehd # TODO not sure if I still need this
   ];
 
-  services.xserver = {
-    xrandrHeads = [
-      {
-        output = "eDP";
-        primary = true;
-        # monitorConfig = ''
-        #   Option "PreferredMode" "3840x2160"
-        #   Option "Position" "0 0"
-        # '';
-      }
-      {
-        output = "HDMI-0";
-        monitorConfig = ''
-          Option "PreferredMode" "3840x2160"
-        '';
-      }
+  services = {
+    # Whether to enable mbpfan, fan controller daemon for Apple Macs and MacBooks
+    mbpfan.enable = true;
+    xserver = {
+      videoDrivers = [ "ati" ];
 
-    ];
-    resolutions = [
-      { x = 2048; y = 1152; }
-      { x = 1920; y = 1080; }
-      { x = 2560; y = 1440; }
-      { x = 3072; y = 1728; }
-      { x = 3840; y = 2160; }
-    ];
+      # keyboard settings
+      xkbOptions = "ctrl:nocaps"; # make capslock = ctrl
+
+      xrandrHeads = [
+        {
+          output = "eDP";
+          primary = true;
+          # monitorConfig = ''
+          #   Option "PreferredMode" "3840x2160"
+          #   Option "Position" "0 0"
+          # '';
+        }
+        {
+          output = "HDMI-0";
+          monitorConfig = ''
+            Option "PreferredMode" "3840x2160"
+          '';
+        }
+      ];
+      resolutions = [
+        { x = 2048; y = 1152; }
+        { x = 1920; y = 1080; }
+        { x = 2560; y = 1440; }
+        { x = 3072; y = 1728; }
+        { x = 3840; y = 2160; }
+      ];
+    };
+
+    # Disable XHC1 wakeup signal to avoid resume getting triggered some time
+    # after suspend. Reboot required for this to take effect.
+    udev.extraRules = ''SUBSYSTEM=="pci", KERNEL=="0000:00:14.0", ATTR{power/wakeup}="disabled"'';
+
+    # power savings
+    upower.enable = true;
+    tlp.enable = true;
   };
 }

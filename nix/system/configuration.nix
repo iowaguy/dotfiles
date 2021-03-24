@@ -145,13 +145,6 @@
     font-awesome
   ];
 
-  # For battery life. Probably should do some testing
-  # to see how much this really helps.
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-  };
-  services.tlp.enable = true; # for battery life
   services.emacs.defaultEditor = true;
 
   # This value determines the NixOS release from which the default
