@@ -55,7 +55,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    bluez
+    # bluez
     linuxPackages.facetimehd # TODO not sure if I still need this
   ];
 

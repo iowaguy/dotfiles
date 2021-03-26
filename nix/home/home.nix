@@ -14,6 +14,7 @@ let
     fd
     ghc
     graphviz
+    jq
     keybase-gui
     libnotify
     lorri
