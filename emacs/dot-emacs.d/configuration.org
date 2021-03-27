@@ -1212,10 +1212,7 @@ decide to store events or tasks in additional files in the future, I can easily
 do so by adding more =org-file-path= S-expressions to the list.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list org-index-file
-                               org-gcal-file
-                               (org-file-path "thebigone.org")
-                               "~/Dropbox/zettelkasten/daily"))
+  (setq org-agenda-files (list org-index-file))
 #+end_src
 
 Record the time that a todo was completed.
