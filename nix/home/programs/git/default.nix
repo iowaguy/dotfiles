@@ -27,7 +27,7 @@
         linenumber = "bold blue";
       };
       commit = {
-        gpgsign = false;
+        gpgsign = true;
       };
       core = {
         excludesfiles = "${builtins.getEnv "HOME"}/.gitignore";

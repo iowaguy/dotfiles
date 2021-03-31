@@ -28,6 +28,38 @@ in {
   };
   accounts.email = {
     accounts = {
+      fastmail = {
+        realName = "Ben Weintraub";
+        userName = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
+        address = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
+        maildir.path = "fastmail";
+        passwordCommand = passCmd "fastmail-app-pass";
+        primary = true;
+        mbsync = {
+          enable = true;
+          create = "maildir";
+        };
+        msmtp.enable = true;
+        notmuch.enable = true;
+
+        folders = {
+          inbox = "INBOX";
+          drafts = "Drafts";
+          sent = "Sent";
+          trash = "Trash";
+        };
+        smtp = {
+          host = "smtp.fastmail.com";
+          port = 465;
+        };
+
+        imap = {
+          host = "imap.fastmail.com";
+          port = 993;
+          tls.enable = true;
+        };
+      };
+
       gmail = {
         address = builtins.concatStringsSep "@" [ "benweintraub34" "gmail.com" ];
         imap.host = "imap.gmail.com";
@@ -37,7 +69,6 @@ in {
         };
         msmtp.enable = true;
         notmuch.enable = true;
-        primary = true;
         realName = "Ben Weintraub";
         passwordCommand = passCmd "mbsync";
         smtp = {
@@ -54,28 +85,6 @@ in {
 
         imap.port = 993;
         maildir.path = "gmail";
-      };
-
-      fastmail = {
-        realName = "Ben Weintraub";
-        userName = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
-        address = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
-        maildir.path = "fastmail";
-        passwordCommand = passCmd "www.fastmail.com";
-        primary = true;
-
-        folders = {
-          inbox = "INBOX";
-          drafts = "Drafts";
-          sent = "Sent";
-          trash = "Trash";
-        };
-
-        imap = {
-          host = "imap.fastmail.com";
-          port = 993;
-          tls.enable = true;
-        };
       };
     };
   };

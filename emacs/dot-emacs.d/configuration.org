@@ -1369,7 +1369,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
         #'org-roam-capture--get-point
         "* %?"
         :file-name "daily/%<%Y-%m-%d>"
-        :head "#+title: %<%Y-%m-%d>\n#+todo: TODO INPROGRESS READ NOTES | DONE\n\n")))
+        :head "#+title: %<%Y-%m-%d>\n\n")))
     :bind (:map org-roam-mode-map
                 (("C-c n l" . org-roam)
                  ("C-c n f" . org-roam-find-file)

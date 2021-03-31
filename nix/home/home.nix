@@ -35,7 +35,7 @@ let
     signal-desktop
     skype
     sqlite
-    stack
+    stack                         # Haskell build tool
     texlive.combined.scheme-full
     tree
     xclip
