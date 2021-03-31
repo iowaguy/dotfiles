@@ -55,6 +55,28 @@ in {
         imap.port = 993;
         maildir.path = "gmail";
       };
+
+      fastmail = {
+        realName = "Ben Weintraub";
+        userName = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
+        address = builtins.concatStringsSep "@" [ "ben" "weintraub.xyz" ];
+        maildir.path = "fastmail";
+        passwordCommand = passCmd "www.fastmail.com";
+        primary = true;
+
+        folders = {
+          inbox = "INBOX";
+          drafts = "Drafts";
+          sent = "Sent";
+          trash = "Trash";
+        };
+
+        imap = {
+          host = "imap.fastmail.com";
+          port = 993;
+          tls.enable = true;
+        };
+      };
     };
   };
 }
