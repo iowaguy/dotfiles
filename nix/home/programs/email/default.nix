@@ -18,11 +18,11 @@ in {
       preNew = "${pkgs.isync}/bin/mbsync --all";
       postNew = ''
         ${pkgs.afew}/bin/afew --tag --new
-        notmuch tag +newyorker -inbox -- "from:newyorker@newsletter.newyorker.com"
-        notmuch tag +scholarly-reading -inbox -- "from:scholaralerts-noreply@google.com"
-        notmuch tag +lightning-dev -inbox -- "from:lightning-dev-request@lists.linuxfoundation.org"
-        notmuch tag +calnewport -inbox -- "from:author@calnewport.com"
-        notmuch tag +economist -inbox -- "from:newsletters@e.economist.com"
+        notmuch tag +newyorker -inbox -new -- "from:newyorker@newsletter.newyorker.com"
+        notmuch tag +scholarly-reading -inbox -new -- "from:scholaralerts-noreply@google.com"
+        notmuch tag +lightning-dev -inbox -new -- "to:lightning-dev@lists.linuxfoundation.org"
+        notmuch tag +calnewport -inbox -new -- "from:author@calnewport.com"
+        notmuch tag +economist -inbox -new -- "from:newsletters@e.economist.com"
       '';
     };
   };

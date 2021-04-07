@@ -826,16 +826,6 @@ Format code according to PEP8 on save:
   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
 #+end_src
 
-Configure Jedi along with the associated =company= mode:
-
-#+begin_src emacs-lisp
-  (use-package company-jedi)
-  (add-to-list 'company-backends 'company-jedi)
-
-  (add-hook 'python-mode-hook 'jedi:setup)
-  (setq jedi:complete-on-dot t)
-#+end_src
-
 Use =direnv= with emacs files. When I use a file, it will use the =direnv=
 environment of that file.
 #+begin_src emacs-lisp
@@ -1052,86 +1042,87 @@ something, type =C-c ]=.
 ** Email
 Use =notmuch= to read my email.
 #+begin_src emacs-lisp
-      (use-package notmuch)
-      ;; (eval-after-load 'notmuch-show
-      ;;   '(define-key notmuch-show-mode-map "`" 'notmuch-show-apply-tag-macro))
+  (use-package notmuch)
 
-    (setq mail-host-address "gmail.com")
-    (setq user-full-name "Ben Weintraub")
-    (setq user-mail-adress "benweintraub34@gmail.com")
-    (setq mail-user-agent 'message-user-agent)
-    (setq message-send-mail-function 'message-send-mail-with-sendmail)
-    (setq message-kill-buffer-on-exit t)
-    (setq mail-specify-envelope-from t)
-    (setq sendmail-program "msmtp"
-          mail-specify-envelope-from t
-          mail-envelope-from 'header
-          message-sendmail-envelope-from 'header)
+  (setq mail-host-address "gmail.com")
+  (setq user-full-name "Ben Weintraub")
+  (setq user-mail-adress "benweintraub34@gmail.com")
+  (setq mail-user-agent 'message-user-agent)
+  (setq message-send-mail-function 'message-send-mail-with-sendmail)
+  (setq message-kill-buffer-on-exit t)
+  (setq mail-specify-envelope-from t)
+  (setq sendmail-program "msmtp"
+        mail-specify-envelope-from t
+        mail-envelope-from 'header
+        message-sendmail-envelope-from 'header)
 
-    (setq notmuch-saved-searches
-          '((:name "slimbox"
-                   :query "tag:unread AND NOT tag:scholarly-reading AND NOT tag:calnewport AND NOT tag:newyorker AND NOT tag:lightning-dev AND NOT tag:nu-unread"
-                   :key "i"
-                   :sort-order newest-first
-                   :search-type 'tree)
-            (:name "inbox" :query "tag:inbox" :sort-order newest-first :search-type 'tree)
-            (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first :search-type 'tree)
-            (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first :search-type 'tree)
-            (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first :search-type 'tree)
-            (:name "lightning-dev" :query "tag:lists/lightning-dev AND tag:unread" :sort-order newest-first :key "l" :search-type 'tree)
-            (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first :key "ny" :search-type 'tree)
-            (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first :key "s" :search-type 'tree)
-            (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)))
+  (setq notmuch-saved-searches
+        '((:name "slimbox"
+                 :query "tag:unread AND NOT tag:scholarly-reading AND NOT tag:calnewport AND NOT tag:newyorker AND NOT tag:lightning-dev AND NOT tag:nu-unread"
+                 :key "i"
+                 :sort-order newest-first
+                 :search-type 'tree)
+          (:name "inbox" :query "tag:inbox" :sort-order newest-first :search-type 'tree)
+          (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first :search-type 'tree)
+          (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first :search-type 'tree)
+          (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first :search-type 'tree)
+          (:name "lightning-dev" :query "tag:lightning-dev AND tag:unread" :sort-order newest-first :key "l" :search-type 'tree)
+          (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first :key "ny" :search-type 'tree)
+          (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first :key "s" :search-type 'tree)
+          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)))
 
-    (define-key notmuch-search-mode-map "R"
-      (lambda (&optional beg end)
-        "mark read"
-        (interactive (notmuch-interactive-region))
-        (notmuch-search-tag (list "-unread" "-new") beg end)))
+  (define-key notmuch-search-mode-map "R"
+    (lambda (&optional beg end)
+      "mark read"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "-unread" "-new") beg end)))
 
-    (define-key notmuch-search-mode-map "d"
-      (lambda (&optional beg end)
-        "Delete me"
-        (interactive (notmuch-interactive-region))
-        (notmuch-search-tag (list "-unread" "-inbox" "-new" "+delete") beg end)))
+  (define-key notmuch-search-mode-map "d"
+    (lambda (&optional beg end)
+      "Delete me"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "-unread" "-inbox" "-new" "+delete") beg end)))
 
-    (define-key notmuch-search-mode-map "U"
-      (lambda (&optional beg end)
-        "Mark unread"
-        (interactive (notmuch-interactive-region))
-        (notmuch-search-tag (list "+unread") beg end)))
+  (define-key notmuch-search-mode-map "U"
+    (lambda (&optional beg end)
+      "Mark unread"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "+unread") beg end)))
 
-    (define-key notmuch-search-mode-map "S"
-      (lambda (&optional beg end)
-        "Mark unread"
-        (interactive (notmuch-interactive-region))
-        (notmuch-search-tag (list "+spam" "-inbox" "-new") beg end)))
+  (define-key notmuch-search-mode-map "S"
+    (lambda (&optional beg end)
+      "Mark unread"
+      (interactive (notmuch-interactive-region))
+      (notmuch-search-tag (list "+spam" "-inbox" "-new") beg end)))
 
-    (require 'ol-notmuch)
+  (require 'ol-notmuch)
 
-    (setq message-kill-buffer-on-exit t)
+  (setq message-kill-buffer-on-exit t)
 
-    (defvar notmuch-hello-refresh-count 0)
+  (defvar notmuch-hello-refresh-count 0)
 
-    (defun notmuch-hello-refresh-status-message ()
-      (unless no-display
-        (let* ((new-count
-                (string-to-number
-                 (car (process-lines notmuch-command "count"))))
-               (diff-count (- new-count notmuch-hello-refresh-count)))
-          (cond
-           ((= notmuch-hello-refresh-count 0)
-            (message "You have %s messages."
-                     (notmuch-hello-nice-number new-count)))
-           ((> diff-count 0)
-            (message "You have %s more messages since last refresh."
-                     (notmuch-hello-nice-number diff-count)))
-           ((< diff-count 0)
-            (message "You have %s fewer messages since last refresh."
-                     (notmuch-hello-nice-number (- diff-count)))))
-          (setq notmuch-hello-refresh-count new-count))))
+  (defun notmuch-hello-refresh-status-message ()
+    (unless no-display
+      (let* ((new-count
+              (string-to-number
+               (car (process-lines notmuch-command "count"))))
+             (diff-count (- new-count notmuch-hello-refresh-count)))
+        (cond
+         ((= notmuch-hello-refresh-count 0)
+          (message "You have %s messages."
+                   (notmuch-hello-nice-number new-count)))
+         ((> diff-count 0)
+          (message "You have %s more messages since last refresh."
+                   (notmuch-hello-nice-number diff-count)))
+         ((< diff-count 0)
+          (message "You have %s fewer messages since last refresh."
+                   (notmuch-hello-nice-number (- diff-count)))))
+        (setq notmuch-hello-refresh-count new-count))))
 
-    (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-refresh-status-message)
+  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-refresh-status-message)
+
+  ;; add Cc and Bcc headers to the message buffer
+  (setq message-default-mail-headers "Cc: \nBcc: \n")
 #+end_src
 
 ** Display preferences
@@ -1342,7 +1333,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 #+begin_src emacs-lisp
   (defun blw/org-roam-graph-firefox (graph)
     (org-roam-server-mode t)
-    (shell-command (concat blw/open-firefox " http://localhost:8080")))
+    (shell-command (concat blw/open-firefox " http://127.0.0.1:8080")))
 
   (defun blw/get-string-from-file (filePath)
     "Return filePath's file content."
@@ -1380,9 +1371,26 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
                  ("C-c n a" . org-roam-dailies-find-date))
                 :map org-mode-map
                 (("C-c n I" . org-roam-insert-immediate))
+                (("C-c u" . org-link-at-point-unlink))
                 (("C-c n i" . org-roam-insert))))
 
   (require 'org-roam-protocol)
+
+
+  (require 'subr-x) ;; for `when-let'
+
+  (defun org-link-at-point-unlink ()
+    "Replace link at point with description."
+    (interactive)
+    (when-let ((el (org-element-context))
+           (b (and (eq (org-element-type el) 'link)
+               (org-element-property :contents-begin el)))
+           (e (org-element-property :contents-end el))
+           (contents (buffer-substring-no-properties b e))
+           (b (org-element-property :begin el))
+           (e (org-element-property :end el)))
+      (delete-region b e)
+      (insert contents)))
 #+end_src
 
 This is for me to generate my weekly plans.

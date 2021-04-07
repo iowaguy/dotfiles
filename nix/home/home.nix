@@ -5,6 +5,7 @@ with lib;
 let
   defaultPkgs = with pkgs; [
     cabal-install
+    cachix                       # cache binaries so I don't have to rebuild
     caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
     dmenu
@@ -34,6 +35,7 @@ let
     scrot                         # screenshots
     signal-desktop
     skype
+    spotify                       # Musics
     sqlite
     stack                         # Haskell build tool
     texlive.combined.scheme-full
