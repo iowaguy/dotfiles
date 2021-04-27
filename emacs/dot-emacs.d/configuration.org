@@ -499,14 +499,6 @@ I use =magit= to handle version control. It's lovely, but I tweak a few things:
           git-commit-summary-max-length 50))
 #+end_src
 
-I've been playing around with the newly-released =forge= for managing GitHub PRs
-and issues. Seems slick so far.
-
-#+begin_src emacs-lisp
-  (use-package ghub)
-  (use-package forge)
-#+end_src
-
 I'm also partial to =git-timemachine=, which lets you quickly page through the
 history of a file.
 
@@ -1187,15 +1179,25 @@ Store my org files in =~/Dropbox/org=, maintain an inbox in Dropbox, define
 the location of an index file (my main todo list).
 
 #+begin_src emacs-lisp
-  (setq org-directory "~/Dropbox/org")
+  (defun blw/full-file-path (directory filename)
+    "Return the absolute path of a file, given its filename and the directory it's in."
+    (concat (file-name-as-directory directory) filename))
 
   (defun org-file-path (filename)
     "Return the absolute address of an org file, given its relative name."
-    (concat (file-name-as-directory org-directory) filename))
+    (blw/full-file-path org-directory filename))
 
-  ;(setq org-inbox-file "~/Dropbox/inbox.org")
+  (defun blw/persistent-file-path (filename)
+    "Return the absolute address of a file in whatever persistent storage I'm using, given its relative name."
+    (blw/full-file-path blw/org-persistent-directory filename))
+
+  (setq blw/org-persistent-directory "~/Dropbox/")
+  (setq org-directory (blw/persistent-file-path "org"))
   (setq org-index-file (org-file-path "todos.org"))
   (setq org-gcal-file (org-file-path "schedule.org"))
+  (setq blw/org-reading-file (org-file-path "reading.org"))
+  (setq blw/org-fun-projects-file (org-file-path "fun-projects.org"))
+  (setq blw/org-zettel-inbox-file (org-file-path "zettel-inbox.org"))
 #+end_src
 
 I store everything in a single file called =thebigone.org=. If I
@@ -1203,7 +1205,8 @@ decide to store events or tasks in additional files in the future, I can easily
 do so by adding more =org-file-path= S-expressions to the list.
 
 #+begin_src emacs-lisp
-  (setq org-agenda-files (list org-index-file))
+  (setq org-agenda-files (list org-index-file
+                               blw/org-reading-file))
 #+end_src
 
 Record the time that a todo was completed.
@@ -1265,38 +1268,37 @@ A lot of this is based on [[https://blog.aaronbieber.com/2016/09/24/an-agenda-fo
 shamelessly stolen and re-prefixed.
 
 #+begin_src emacs-lisp
-    (defun hrs/org-skip-subtree-if-priority (priority)
-      "Skip an agenda subtree if it has a priority of PRIORITY.
+  (defun hrs/org-skip-subtree-if-priority (priority)
+    "Skip an agenda subtree if it has a priority of PRIORITY.
 
-    PRIORITY may be one of the characters ?A, ?B, or ?C."
-      (let ((subtree-end (save-excursion (org-end-of-subtree t)))
-            (pri-value (* 1000 (- org-lowest-priority priority)))
-            (pri-current (org-get-priority (thing-at-point 'line t))))
-        (if (= pri-value pri-current)
-            subtree-end
-          nil)))
+  PRIORITY may be one of the characters ?A, ?B, or ?C."
+    (let ((subtree-end (save-excursion (org-end-of-subtree t)))
+          (pri-value (* 1000 (- org-lowest-priority priority)))
+          (pri-current (org-get-priority (thing-at-point 'line t))))
+      (if (= pri-value pri-current)
+          subtree-end
+        nil)))
 
-    (defun hrs/org-skip-subtree-if-habit ()
-      "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
-      (let ((subtree-end (save-excursion (org-end-of-subtree t))))
-        (if (string= (org-entry-get nil "STYLE") "habit")
-            subtree-end
-          nil)))
+  (defun hrs/org-skip-subtree-if-habit ()
+    "Skip an agenda entry if it has a STYLE property equal to \"habit\"."
+    (let ((subtree-end (save-excursion (org-end-of-subtree t))))
+      (if (string= (org-entry-get nil "STYLE") "habit")
+          subtree-end
+        nil)))
 
-    (setq org-agenda-custom-commands
-          '(("p" "Personal agenda"
-             ((agenda "")
-              (todo "TODO"
-                    ((org-agenda-skip-function '(or (hrs/org-skip-subtree-if-priority ?A)
-                                                    (hrs/org-skip-subtree-if-habit)
-                                                    (org-agenda-skip-subtree-if 'scheduled)))
-                     (org-agenda-overriding-header "Other tasks:")))
-              (todo "INPROGRESS"
-                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                     (org-agenda-overriding-header "In progress:")))
-              (todo "READ|NOTES"
-                    ((org-agenda-skip-function '(hrs/org-skip-subtree-if-priority ?A))
-                     (org-agenda-overriding-header "Reading:")))))))
+  (setq org-agenda-custom-commands
+        '(("p" "Personal agenda"
+           ((agenda "")
+            (todo "TODO"
+                  ((org-agenda-skip-function '(or (org-agenda-skip-subtree-if 'scheduled)
+                                                  (org-agenda-skip-subtree-if 'deadline)))
+                   (org-agenda-overriding-header "Other tasks:")))
+            (todo "INPROGRESS"
+                  ((org-agenda-overriding-header "In progress:")))
+            (todo "READ|SKIM|NOTES"
+                  ((org-agenda-overriding-header "Reading:")))
+            (todo "VET"
+                  ((org-agenda-overriding-header "Vetting:")))))))
 #+end_src
 
 I consult my agenda pretty often, so I bind =C-c d= to open it a it faster. This
@@ -1346,7 +1348,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
     :hook
     (after-init . org-roam-mode)
     :custom
-    (org-roam-directory "~/Dropbox/zettelkasten")
+    (org-roam-directory (blw/persistent-file-path "zettelkasten"))
     (org-roam-graph-executable "dot")
     (org-roam-graph-shorten-titles 'wrap)
     (org-roam-graph-max-title-length 50)
@@ -1427,7 +1429,7 @@ other tools for other OSs.
 
 *** References
 #+begin_src emacs-lisp
-  (setq reftex-default-bibliography '("~/Dropbox/zettelkasten/references.bib"))
+  (setq reftex-default-bibliography '((blw/persistent-file-path "zettelkasten/references.bib")))
 
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
@@ -1466,7 +1468,7 @@ Define a few common tasks as capture templates. Specifically, I frequently:
   (setq org-capture-templates
         '(("r" "Reading material"
            entry
-           (file "~/Dropbox/org/reading.org")
+           (file blw/org-reading-file)
            "* %?\n")
           ("c" "CV/Website updates"
            entry
@@ -1474,15 +1476,15 @@ Define a few common tasks as capture templates. Specifically, I frequently:
            "* %?\n")
           ("z" "Zettel inbox"
            entry
-           (file "~/Dropbox/org/zettel-inbox.org")
+           (file blw/org-zettel-inbox-file)
            "* %?\n")
           ("t" "TODO inbox"
            entry
-           (file "~/Dropbox/org/todos.org")
+           (file org-index-file)
            "* TODO %?\n")
           ("f" "Fun projects"
            entry
-           (file "~/Dropbox/org/fun-projects.org")
+           (file blw/org-fun-projects-file)
            "* %?\n")))
 #+end_src
 
@@ -1491,19 +1493,19 @@ I want to be able to quickly open up my list of zettel topics.
 #+begin_src emacs-lisp
   (defun blw/zettel-topics ()
     (interactive)
-    (find-file "~/Dropbox/org/zettel-inbox.org"))
+    (find-file blw/org-zettel-inbox-file))
 
   (defun blw/todos ()
     (interactive)
-    (find-file "~/Dropbox/org/todos.org"))
+    (find-file org-index-file))
 
   (defun blw/fun-projects ()
     (interactive)
-    (find-file "~/Dropbox/org/fun-projects.org"))
+    (find-file blw/org-fun-projects-file))
 
   (defun blw/reading-list ()
     (interactive)
-    (find-file "~/Dropbox/org/reading.org"))
+    (find-file blw/org-reading-file))
 #+end_src
 
 Refiling according to the document's hierarchy.
@@ -1542,19 +1544,9 @@ Don't ask me if canceled events should be removed. They should.
 
 ** Executing code with =babel=
 
-Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code. Also,
-=jupyter-python= source blocks should be highlighted as if they are =python=.
+Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code.
 
 #+begin_src emacs-lisp
-  (use-package jupyter
-    :init
-    (setq org-babel-default-header-args:jupyter-python '((:async . "yes")
-                                                         (:session . "py3")
-                                                         (:kernel . "python3")))
-    (add-to-list 'org-src-lang-modes '("jupyter-python" . python))
-    (setq jupyter-org-resource-directory "./figures/"))
-
-
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -1562,20 +1554,7 @@ Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code. Also,
      (shell . t)
 
      ;; needed for graphviz
-     (dot . t)
-
-     ;; jupyter must be last because it depends on the values of variables such as
-     ;; org-src-lang-modes and org-babel-tangle-lang-exts
-     (jupyter . t)))
-#+end_src
-
-=ob-async= allows editing to occur while a =babel= block is executing. Setting
-the variable =ob-async-no-async-languages-alist= fixes an incompatibility
-between the ob-async and ob-ipython packages.
-#+begin_src emacs-lisp
-  (use-package ob-async
-    :config
-    (setq ob-async-no-async-languages-alist '("jupyter-python")))
+     (dot . t)))
 #+end_src
 
 Don't ask before evaluating code blocks.
@@ -1705,12 +1684,6 @@ Start a new line when line length exceeds 80 characters.
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 #+end_src
 
-Add TeX binaries to the path.
-
-#+begin_src emacs-lisp
-  (hrs/append-to-path "/Library/TeX/texbin/")
-#+end_src
-
 * Writing prose
 
 I write prose in several modes: I might be editing an Org document, or a commit
@@ -1832,7 +1805,6 @@ Use flycheck in the appropriate buffers, which is all prose buffers except
 #+end_src
 
 ** Look up definitions in Webster 1913
-
 
 #+begin_src emacs-lisp
   (use-package osx-dictionary)

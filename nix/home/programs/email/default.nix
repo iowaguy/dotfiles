@@ -20,6 +20,7 @@ in {
         ${pkgs.afew}/bin/afew --tag --new
         notmuch tag +newyorker -inbox -new -- "from:newyorker@newsletter.newyorker.com"
         notmuch tag +scholarly-reading -inbox -new -- "from:scholaralerts-noreply@google.com"
+        notmuch tag +scholarly-reading -inbox -new -- "from:scholarcitations-noreply@google.com"
         notmuch tag +lightning-dev -inbox -new -- "to:lightning-dev@lists.linuxfoundation.org"
         notmuch tag +calnewport -inbox -new -- "from:author@calnewport.com"
         notmuch tag +economist -inbox -new -- "from:newsletters@e.economist.com"

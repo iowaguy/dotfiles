@@ -60,6 +60,9 @@
   ];
 
   services = {
+    # Enable handling of hotplug and sleep events by autorandr
+    autorandr.enable = true;
+
     # Whether to enable mbpfan, fan controller daemon for Apple Macs and MacBooks
     mbpfan.enable = true;
     xserver = {

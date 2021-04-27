@@ -1,5 +1,6 @@
 [
   ./alacritty
+  ./autorandr
   ./dropbox
   ./emacs
   ./email
