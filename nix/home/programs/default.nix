@@ -10,7 +10,7 @@
   ./i3
   ./mailcap
   ./redshift
-  # ./rofi
+  ./rofi
   ./slack
   ./ssh
   ./teams

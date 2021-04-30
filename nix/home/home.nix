@@ -8,7 +8,6 @@ let
     cachix                       # cache binaries so I don't have to rebuild
     caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
-    dmenu
     direnv
     entr
     evince
