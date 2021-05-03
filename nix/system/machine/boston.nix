@@ -103,5 +103,8 @@
     # power savings
     upower.enable = true;
     tlp.enable = true;
+    thermald.enable = true; # So it doesn't get too toasty
   };
+
+  powerManagement.powertop.enable = true;
 }
