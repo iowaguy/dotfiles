@@ -18,5 +18,10 @@
     ];
     shadow = true;
     shadowOpacity = "0.75";
+    experimentalBackends = true;
+    extraOptions = ''
+      transparent-clipping = true;
+      unredir-if-possible = true;
+    '';
   };
 }
