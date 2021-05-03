@@ -1,8 +1,12 @@
 #!/usr/bin/env nix-shell
 #! nix-shell -i bash -p dmidecode
 
+set -eu -o pipefail
+shopt -s failglob
+
 HOME_MANAGER_VERSION=20.09
-machines["MacBookPro11,5"]=boston.nix
+declare -A machines
+machines['MacBookPro11,5']=boston.nix
 
 system_config() {
   # Nix configuration
@@ -11,10 +15,13 @@ system_config() {
   sudo cp -r system/wm/ /etc/nixos/
   sudo cp -r system/services/ /etc/nixos/
 
-  model=$(sudo dmidecode -s system-product-name)
+  model="$(sudo dmidecode -s system-product-name)"
 
   sudo cp -r system/machine/ /etc/nixos/
-  sudo ln -s /etc/nixos/machine/${machines[${model}]} /etc/nixos/machine/current.nix
+  if [ ! -f /etc/nixos/machine/current.nix ]; then
+    echo "Linking current machine's configuration (${model})"
+    sudo ln -s "/etc/nixos/machine/${machines[${model}]}" /etc/nixos/machine/current.nix
+  fi
 }
 
 system_install() {
@@ -40,7 +47,10 @@ hm_install() {
 }
 
 hm_refresh() {
-  ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
+  if [ ! -f $HOME/.config/nixpkgs/home.nix ]; then
+    echo "Linking home.nix..."
+    ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
+  fi
   home-manager switch
 }
 
