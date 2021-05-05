@@ -8,3 +8,4 @@ ruby/dot-bundle/cache
 /open-source-tools/dot-opt/gdb-dashboard/
 /open-source-tools/dot-opt/sensible-defaults.el/
 /emacs/sensible-defaults.el/
+nix/home/programs/emacs/doom.d/config.el
