@@ -1,15 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
-
   home.packages = with pkgs; [
     emacs26Packages.virtualenv
   ];
 
-
   programs.emacs = {
     extraPackages = epkgs: [
-      epkgs.use-package
       pkgs.ispell
     ];
     enable = true;
@@ -19,7 +16,7 @@
     enable = true;
   };
 
-  home.links.".emacs.d" = "./workspace/dotfiles/emacs/dot-emacs.d";
+  home.links.".doom.d" = "./workspace/dotfiles/nix/home/programs/emacs/doom.d";
 
   home.file.".bin/em" = {
     text = ''
