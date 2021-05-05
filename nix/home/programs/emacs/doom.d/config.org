@@ -814,7 +814,7 @@ Images should be shown in-buffer by default, but not at full size.
 
 Use =notmuch= to read my email.
 #+begin_src emacs-lisp
-  (use-package notmuch)
+  (use-package! notmuch)
 
   (setq mail-host-address "gmail.com")
   (setq user-full-name "Ben Weintraub")
@@ -1020,8 +1020,13 @@ Restore the previous window setup after agenda is exited, and when the agenda is
 opened, it should split the pane and open in the new pane without disturbing the
 prior pane.
 #+begin_src emacs-lisp
-  (setq org-agenda-restore-windows-after-quit t)
-  (setq org-agenda-window-setup 'other-window)
+  (after! org
+          (setq org-agenda-restore-windows-after-quit t
+                org-agenda-window-setup 'other-window
+                org-agenda-skip-scheduled-if-deadline-is-shown t
+                org-agenda-skip-deadline-if-done t
+                org-agenda-span 'week
+                org-agenda-start-day nil))
 #+end_src
 I've got some custom agenda views that I use to visualize what I'm working on.
 
@@ -1236,27 +1241,29 @@ Define a few common tasks as capture templates. Specifically, I frequently:
 - Probably more in the future...
 
 #+begin_src emacs-lisp
-  (setq org-capture-templates
-        '(("r" "Reading material"
-           entry
-           (file blw/org-reading-file)
-           "* %?\n")
-          ("c" "CV/Website updates"
-           entry
-           (file "~/Dropbox/org/cv-website.org")
-           "* %?\n")
-          ("z" "Zettel inbox"
-           entry
-           (file blw/org-zettel-inbox-file)
-           "* %?\n")
-          ("t" "TODO inbox"
-           entry
-           (file org-index-file)
-           "* TODO %?\n")
-          ("f" "Fun projects"
-           entry
-           (file blw/org-fun-projects-file)
-           "* %?\n")))
+  (after! org
+          (setq org-capture-templates nil)
+          (setq org-capture-templates
+                '(("r" "Reading material"
+                   entry
+                   (file blw/org-reading-file)
+                   "* %?\n")
+                  ("c" "CV/Website updates"
+                   entry
+                   (file "~/Dropbox/org/cv-website.org")
+                   "* %?\n")
+                  ("z" "Zettel inbox"
+                   entry
+                   (file blw/org-zettel-inbox-file)
+                   "* %?\n")
+                  ("t" "TODO inbox"
+                   entry
+                   (file org-index-file)
+                   "* TODO %?\n")
+                  ("f" "Fun projects"
+                   entry
+                   (file blw/org-fun-projects-file)
+                   "* %?\n"))))
 #+end_src
 
 I want to be able to quickly open up my list of zettel topics.
@@ -1773,7 +1780,7 @@ Emacs configuration file.
 #+begin_src emacs-lisp
   (defun hrs/visit-emacs-config ()
     (interactive)
-    (find-file "~/.emacs.d/configuration.org"))
+    (find-file "~/.doom.d/config.org"))
 
   (global-set-key (kbd "C-c e") 'hrs/visit-emacs-config)
 #+end_src
