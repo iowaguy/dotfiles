@@ -48,6 +48,9 @@
       # NixOS allows either a lightweight (default) or full build of PulseAudio to be installed.
       # Only the full build has Bluetooth support, so it must be selected here.
       package = pkgs.pulseaudioFull;
+      extraConfig = ''
+        load-module module-switch-on-connect
+      '';
     };
     bluetooth = {
       enable = true;
@@ -107,4 +110,23 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  systemd.services.bluetooth = {
+    enable = true;
+    description = "Bluetooth service";
+    unitConfig = {
+      Description = "Bluetooth service";
+      ConditionPathIsDirectory = /sys/class/bluetooth;
+      ControllerMode = "dual";
+      Enable = "Source,Sink,Media,Socket";
+    };
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.bluez";
+      ExecStart = ["" "${pkgs.bluezFull}/bin/bluetoothd --noplugin=avrcp"];
+      NotifyAccess = "main";
+    };
+    wantedBy = [ "multi-user.target" ];
+
+  };
 }
