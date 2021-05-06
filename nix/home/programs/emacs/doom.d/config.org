@@ -213,45 +213,7 @@ to see (like out in the sun).
   (blw/apply-dark-theme)
 #+end_src
 
-If this code is being evaluated by =emacs --daemon=, ensure that each subsequent
-frame is themed appropriately.
-
-# #+begin_src emacs-lisp
-#   (if (daemonp)
-#       (add-hook 'after-make-frame-functions
-#                 (lambda (frame)
-#                   (with-selected-frame frame (blw/apply-dark-theme))))
-#     (blw/apply-dark-theme))
-# #+end_src
-
-
-This gives me a truly lovely ribbon-based modeline.
-
-# #+begin_src emacs-lisp
-#   (use-package moody
-#     :config
-#     (setq x-underline-at-descent-line t
-#           moody-mode-line-height 30)
-#     (moody-replace-mode-line-buffer-identification)
-#     (moody-replace-vc-mode))
-# #+end_src
-
-
-I never want to see a minor mode, and manually adding =:diminish= to every
-use-package declaration is a hassle. This uses =minions= to hide all the minor
-modes in the modeline. Nice!
-
-By default there's a =;-)= after the major mode; that's an adorable default, but
-I'd rather skip it.
-
-# #+begin_src emacs-lisp
-#    (use-package minions
-#      :config
-#      (setq minions-mode-line-lighter ""
-#            minions-mode-line-delimiters '("" . ""))
-#      (minions-mode 1))
-# #+end_src
-
+Show date and time in the modeline.
 #+begin_src emacs-lisp
   (setq display-time-day-and-date t)
   (display-time)
