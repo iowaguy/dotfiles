@@ -90,7 +90,7 @@
       })
       (buildFirefoxXpiAddon {
         pname = "one-tab";
-        version = "1.39";
+        version = "1.54";
         addonId = "extension@one-tab.com";
         url = "https://addons.mozilla.org/firefox/downloads/file/3648014/onetab-1.39-an+fx.xpi";
         sha256 = "0ian4ag52l0ysp7qf2nc2z7v76xddb9vx2f643nhd6j2gclm78b4";
