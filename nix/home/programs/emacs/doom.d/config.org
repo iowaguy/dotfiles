@@ -79,7 +79,7 @@ Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for so
         user-mail-address "ben@weintraub.xyz"
         calendar-latitude 42.35
         calendar-longitude -71.06
-        calenidar-location-name "Boston, MA")
+        calendar-location-name "Boston, MA")
 #+end_src
 
 # ** Access my netrc data
@@ -816,17 +816,20 @@ Use =notmuch= to read my email.
 #+begin_src emacs-lisp
   (use-package! notmuch)
 
-  (setq mail-host-address "gmail.com")
-  (setq user-full-name "Ben Weintraub")
-  (setq user-mail-adress "benweintraub34@gmail.com")
-  (setq mail-user-agent 'message-user-agent)
-  (setq message-send-mail-function 'message-send-mail-with-sendmail)
-  (setq message-kill-buffer-on-exit t)
-  (setq mail-specify-envelope-from t)
-  (setq sendmail-program "msmtp"
+  (after! notmuch
+    (set-popup-rule! "^\\*notmuch-hello" :size 40 :side 'left :ttl 0))
+
+  (setq mail-host-address "gmail.com"
+        mail-user-agent 'message-user-agent
+        message-send-mail-function 'message-send-mail-with-sendmail
+        message-kill-buffer-on-exit t
         mail-specify-envelope-from t
+        sendmail-program "msmtp"
         mail-envelope-from 'header
-        message-sendmail-envelope-from 'header)
+        message-sendmail-envelope-from 'header
+
+        ;; add Cc and Bcc headers to the message buffer
+        message-default-mail-headers "Cc: \nBcc: \n")
 
   (setq notmuch-saved-searches
         '((:name "slimbox"
@@ -892,9 +895,6 @@ Use =notmuch= to read my email.
         (setq notmuch-hello-refresh-count new-count))))
 
   (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-refresh-status-message)
-
-  ;; add Cc and Bcc headers to the message buffer
-  (setq message-default-mail-headers "Cc: \nBcc: \n")
 #+end_src
 
 
@@ -1129,9 +1129,10 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
           org-roam-graph-max-title-length 50
           org-roam-graph-viewer 'blw/org-roam-graph-firefox
           org-roam-graph-extra-config '(("overlap" . "no"))
-          org-roam-graph-exclude-matcher "index"
+          org-roam-graph-exclude-matcher '("index" "daily")
           org-roam-graph-executable "neato"
           org-roam-dailies-directory "daily/"
+          emacsql-sqlite3-executable (executable-find "sqlite3")
           org-roam-dailies-capture-templates
            '(("x" "default" entry
              #'org-roam-capture--get-point
