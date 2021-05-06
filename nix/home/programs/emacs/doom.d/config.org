@@ -36,44 +36,6 @@ I use =use-package= to install and configure my packages. My =init.el= includes
 the initial setup for =package.el= and ensures that =use-package= is installed,
 since I wanna do that right away.
 
-This makes sure that =use-package= will install the package if it's not already
-available. It also means that I should be able to open Emacs for the first time
-on a fresh Debian box and have my whole environment automatically installed. I'm
-not /totally/ sure about that, but we're gettin' close.
-
-# #+begin_src emacs-lisp
-#   (require 'use-package-ensure)         ;
-#   (setq use-package-always-ensure t)
-# #+end_src
-
-Always compile packages, and use the newest version available.
-
-# #+begin_src emacs-lisp
-#   (use-package! auto-compile
-#     :config (auto-compile-on-load-mode))
-
-#   (setq load-prefer-newer t)
-# #+end_src
-
-Disable TLS 1.3; ELPA has higher standards. That'll be the default in Emacs
-26.3, I think, but I'm not there yet.
-
-# #+begin_src emacs-lisp
-#   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-# #+end_src
-
-
-Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for some basic settings.
-
-# #+begin_src emacs-lisp
-#   (load-file "~/workspace/dotfiles/emacs/sensible-defaults.el/sensible-defaults.el")
-#   (sensible-defaults/use-all-settings)
-#   (sensible-defaults/use-all-keybindings)
-#   (sensible-defaults/backup-to-temp-directory)
-# #+end_src
-
-
-
 #+begin_src emacs-lisp
   (setq user-full-name "Ben Weintraub"
         user-mail-address "ben@weintraub.xyz"
@@ -81,32 +43,6 @@ Use [[https://github.com/hrs/sensible-defaults.el][sensible-defaults.el]] for so
         calendar-longitude -71.06
         calendar-location-name "Boston, MA")
 #+end_src
-
-# ** Access my netrc data
-
-# I store a few credentials in a =.netrc= file. Actually, I think the only creds I
-# have in there right now are for Instapaper, but this is still a convenient way
-# to store not-too-terribly-sensitive secrets.
-
-# #+begin_src emacs-lisp
-#   (require 'netrc)
-
-#   (setq netrc-file "~/.netrc")
-
-#   (defun netrc-username (machine)
-#     "Helper function to extract a username from my netrc."
-#     (car (netrc-credentials machine)))
-
-#   (defun netrc-password (machine)
-#     "Helper function to extract a password from my netrc."
-#     (cadr (netrc-credentials machine)))
-# #+end_src
-
-
-#+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/resources/")
-#+end_src
-
 
 Define a big ol' bunch of handy utility functions.
 
