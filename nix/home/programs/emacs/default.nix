@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     emacs26Packages.virtualenv
+    ispell
   ];
 
   programs.emacs = {
