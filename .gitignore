@@ -1,8 +1,8 @@
-emacs/dot-emacs.d/*
-!emacs/dot-emacs.d/configuration.org
-!emacs/dot-emacs.d/init.el
-!emacs/dot-emacs.d/resources
-!emacs/dot-emacs.d/snippets
+macos/emacs/dot-emacs.d/*
+macos/emacs/dot-emacs.d/configuration.org
+macos/emacs/dot-emacs.d/init.el
+macos/emacs/dot-emacs.d/resources
+macos/emacs/dot-emacs.d/snippets
 
 ruby/dot-bundle/cache
 /open-source-tools/dot-opt/gdb-dashboard/
