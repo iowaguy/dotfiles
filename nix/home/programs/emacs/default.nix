@@ -27,14 +27,6 @@
     executable = true;
   };
 
-  home.file.".signature".text = ''
-    Ben Weintraub
-    PhD Student
-    Khoury College of Computer Sciences
-    Northeastern University
-    https://ben-weintraub.com/
-  '';
-
   xdg.dataFile."applications/emacsclient.desktop".text = ''
     [Desktop Entry]
     Name=EmacsClient

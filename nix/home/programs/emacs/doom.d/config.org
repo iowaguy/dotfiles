@@ -32,10 +32,6 @@
   (blw/set-system-specific-vars)
 #+end_src
 
-I use =use-package= to install and configure my packages. My =init.el= includes
-the initial setup for =package.el= and ensures that =use-package= is installed,
-since I wanna do that right away.
-
 #+begin_src emacs-lisp
   (setq user-full-name "Ben Weintraub"
         user-mail-address "ben@weintraub.xyz"
@@ -77,36 +73,11 @@ Define a big ol' bunch of handy utility functions.
      (format "notify-send -t 2000 \"%s\" \"%s\"" title message)))
 #+end_src
 
-
-I don't usually use the menu or scroll bar, and they take up useful space.
-
-# #+begin_src emacs-lisp
-#   (tool-bar-mode 0)
-#   (menu-bar-mode 0)
-#   (scroll-bar-mode -1)
-# #+end_src
-
-There's a tiny scroll bar that appears in the minibuffer window. This disables
-that:
-
-# #+begin_src emacs-lisp
-#   (set-window-scroll-bars (minibuffer-window) nil nil)
-# #+end_src
-
-The default frame title isn't useful. This binds it to the name of the current
-project:
-
-#+begin_src emacs-lisp
-  (setq frame-title-format '((:eval (projectile-project-name))))
-#+end_src
-
-
 Why not?
 
 #+begin_src emacs-lisp
   (global-prettify-symbols-mode t)
 #+end_src
-
 
 I'm currently using the "solarized-dark" theme. I've got a scenic wallpaper, so
 just a hint of transparency looks lovely and isn't distracting or hard to read.
@@ -255,16 +226,16 @@ programming.
     (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
 #+end_src
 
-# ** Buffer swapping
-# Swap buffers with =C-S-<D-PAD DIRECTION>=
+Swap buffers with =C-S-<D-PAD DIRECTION>=
 
-# #+begin_src emacs-lisp
-#   (require 'buffer-move)
-#   (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-#   (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-#   (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-#   (global-set-key (kbd "<C-S-right>")  'buf-move-right)
-# #+end_src
+#+begin_src emacs-lisp
+  (after! org
+    (require 'buffer-move)
+    (global-set-key (kbd "<C-S-up>")     'buf-move-up)
+    (global-set-key (kbd "<C-S-down>")   'buf-move-down)
+    (global-set-key (kbd "<C-S-left>")   'buf-move-left)
+    (global-set-key (kbd "<C-S-right>")  'buf-move-right))
+#+end_src
 
 I prefer =IBuffer=, and have it mapped to =C-x C-b=
 
@@ -284,31 +255,6 @@ I use a few packages in virtually every programming or writing environment to
 manage the project, handle auto-completion, search for terms, and deal with
 version control. That's all in here.
 
-
-Install =ag= to provide search within projects (usually through
-=projectile-ag=).
-
-# #+begin_src emacs-lisp
-#   (use-package ag)
-# #+end_src
-
-
-Install =avy= to skip around the screen quickly.
-
-# #+begin_src emacs-lisp
-#   (use-package avy
-#     :bind*
-#     ("C-;" . evil-avy-goto-char-2))
-# #+end_src
-
-
-Use =company-mode= everywhere.
-
-# #+begin_src emacs-lisp
-#   (use-package company)
-#   (add-hook 'after-init-hook 'global-company-mode)
-# #+end_src
-
 Use =M-/= for completion.
 
 #+begin_src emacs-lisp
@@ -321,7 +267,7 @@ doesn't require any additional setup. I've bound its most useful command to
 =M-.=.
 
 #+begin_src emacs-lisp
-  (use-package! dumb-jump                ;
+  (use-package! dumb-jump
     :config
     (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
     (setq dumb-jump-selector 'ivy))
@@ -476,79 +422,6 @@ When I open a Go file,
 # #+end_src
 
 
-# #+begin_src emacs-lisp
-#   (use-package haskell-mode)            ;
-# #+end_src
-
-# Enable =haskell-doc-mode=, which displays the type signature of a function, and
-# use smart indentation.
-
-# #+begin_src emacs-lisp
-#   (add-hook 'haskell-mode-hook
-#             (lambda ()
-#               (haskell-doc-mode)
-#               (turn-on-haskell-indent)))
-# #+end_src
-
-# #+begin_src emacs-lisp
-#   (hrs/append-to-path "~/.cabal/bin")
-# #+end_src
-
-# #+begin_src emacs-lisp
-# 	(use-package dante
-# 		:ensure t
-# 		:after haskell-mode
-# 		:commands 'dante-mode
-# 		:init
-# 		;; (add-hook 'haskell-mode-hook 'flycheck-mode)
-# 		;; OR for flymake support:
-# 		;; (add-hook 'haskell-mode-hook 'flymake-mode)
-# 		;; (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
-# 		(add-hook 'haskell-mode-hook 'dante-mode)
-# 		;; (define-key dante-mode-map (kbd "C-c C-c") 'dante-eval-block)
-# 		)
-
-
-# #+end_src
-
-
-# Install =coffee-mode= from editing CoffeeScript code.
-
-# #+begin_src emacs-lisp
-#   (use-package coffee-mode)
-# #+end_src
-
-# Indent everything by 2 spaces.
-
-# #+begin_src emacs-lisp
-#   (setq js-indent-level 2)
-
-#   (add-hook 'coffee-mode-hook
-#             (lambda ()
-#               (yas-minor-mode 1)
-#               (setq coffee-tab-width 2)))
-# #+end_src
-
-
-
-# #+begin_src emacs-lisp
-#   (use-package racket-mode)
-# #+end_src
-
-# [[https://docs.racket-lang.org/pollen/][Pollen]] uses a lozenge ◊ to mark preprocessor commands (like defining and
-# dereferencing variables). That's awkward to type, so this lets me hit =M-^= to
-# insert one.
-
-# #+begin_src emacs-lisp
-#   (defun hrs/insert-lozenge ()
-#     (interactive)
-#     (insert "◊"))
-
-#   (define-key racket-mode-map (kbd "M-^") 'hrs/insert-lozenge)
-# #+end_src
-
-
-
 All the lisps have some shared features, so we want to do the same things for
 all of them. That includes using =paredit=, =rainbow-delimiters=, and
 highlighting the whole expression when point is on a parenthesis.
@@ -576,45 +449,11 @@ documentation.
     (add-hook! 'emacs-lisp-mode-hook 'eldoc-mode))
 #+end_src
 
-# #+begin_src emacs-lisp
-#   (use-package python-mode)
-# #+end_src
-
 # Add a thin vertical line at 80 characters for python files. From
 # =fill-column-indicator=.
 # #+begin_src emacs-lisp
 #   (add-hook 'python-mode-hook 'fci-mode)
 # #+end_src
-
-# Add =~/.local/bin= to load path. That's where =virtualenv= is installed, and
-# we'll need that for =jedi=.
-
-# #+begin_src emacs-lisp
-#   (hrs/append-to-path "~/.local/bin")
-# #+end_src
-
-# Enable =elpy=. This provides automatic indentation, auto-completion, syntax
-# checking, etc.
-
-# #+begin_src emacs-lisp
-#   (use-package elpy)
-#   (elpy-enable)
-# #+end_src
-
-# Use =flycheck= for syntax checking:
-
-# #+begin_src emacs-lisp
-#   (add-hook 'elpy-mode-hook 'flycheck-mode)
-# #+end_src
-
-# Format code according to PEP8 on save:
-
-# #+begin_src emacs-lisp
-#   (use-package py-autopep8)
-#   (require 'py-autopep8)
-#   (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-# #+end_src
-
 
 Indent with 2 spaces.
 
@@ -796,11 +635,6 @@ Use =notmuch= to read my email.
 #+end_src
 
 
-I like to see an outline of pretty bullets instead of a list of asterisks.
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook 'org-bullets-mode)
-#+end_src
-
 I like seeing a little downward-pointing arrow instead of the usual ellipsis
 (=...=) that org displays when there's stuff under a header.
 
@@ -825,6 +659,14 @@ new one (which shows the same information).
 
 #+begin_src emacs-lisp
   (setq org-src-window-setup 'current-window)
+#+end_src
+
+A workaround until https://github.com/hlissner/doom-emacs/issues/4832 is fixed.
+#+begin_src emacs-lisp
+  (use-package org
+    :defer t
+    :config
+    (defalias '+org--restart-mode-h #'ignore))
 #+end_src
 
 Quickly insert a block of =elisp= or =jupyter-python=.
@@ -1202,41 +1044,7 @@ Bind a few handy keys.
   (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
 
-# Setup Google calendar syncing. To get credentials, following instructions [[https://github.com/kidd/org-gcal.el#Installation][here]].
-# =org-gcal-client-secret= must also be set, I'm doing this in
-# =configuration-private.org=.
-
-# #+begin_src emacs-lisp
-#   (use-package org-gcal)
-#   (setq org-gcal-client-id "181983013000-81k9jtbk9th1up1qfue271jgo1ksp2gf.apps.googleusercontent.com"
-#         org-gcal-file-alist '(("benweintraub34@gmail.com" . "~/Dropbox/org/schedule.org")))
-# #+end_src
-
-Don't ask me if canceled events should be removed. They should.
-
-#+begin_src emacs-lisp
-  (setq org-gcal-remove-api-cancelled-events t)
-#+end_src
-
-
-Allow =babel= to evaluate Emacs lisp, Python, IPython, or Shell code.
-
-#+begin_src emacs-lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (python . t)
-     (shell . t)
-
-     ;; needed for graphviz
-     (dot . t)))
-#+end_src
-
 Don't ask before evaluating code blocks.
-
-#+begin_src emacs-lisp
-  (setq org-confirm-babel-evaluate nil)
-#+end_src
 
 #+begin_src emacs-lisp
   (use-package pyvenv)
@@ -1310,16 +1118,6 @@ Put LaTeX table captions below the table.
 #+begin_src emacs-lisp
   (setq org-latex-caption-above nil)
 #+end_src
-
-Use =org-reveal= to export =org= documents as =reveal.js= slide decks. This is integrated in the
-export menu. Documentation and details [[https://github.com/yjwen/org-reveal][here]].
-
-#+begin_src emacs-lisp
-  (use-package! ox-reveal
-    :config
-    (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"))
-#+end_src
-
 
 I rarely write LaTeX directly any more, but I often export through it with
 org-mode, so I'm keeping them together.

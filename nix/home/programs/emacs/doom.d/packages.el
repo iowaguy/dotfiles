@@ -82,9 +82,6 @@
 ;; something, type =C-c ]=.
 (package! org-ref)
 
-;; I like to see an outline of pretty bullets instead of a list of asterisks.
-(package! org-bullets)
-
 ;; A nice visualizer for my =org-roam= graph.
 (package! org-roam-server)
 
@@ -143,3 +140,5 @@
 
 ;; Better commenting
 (package! comment-dwim-2)
+
+(package! buffer-move :recipe (:host github :repo "lukhas/buffer-move"))
