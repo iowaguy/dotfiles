@@ -37,7 +37,9 @@
         user-mail-address "ben@weintraub.xyz"
         calendar-latitude 42.35
         calendar-longitude -71.06
-        calendar-location-name "Boston, MA")
+        calendar-location-name "Boston, MA"
+        blw/dark-theme 'doom-one
+        blw/light-theme 'doom-one-light)
 #+end_src
 
 Define a big ol' bunch of handy utility functions.
@@ -85,39 +87,24 @@ I also use the interactive command =apply-light-theme= when the screen is hard
 to see (like out in the sun).
 
 #+begin_src emacs-lisp
-  ;; (use-package solarized-theme
-  ;;   :config
-  ;;   (setq solarized-use-variable-pitch nil
-  ;;         solarized-height-plus-1 1.0
-  ;;         solarized-height-plus-2 1.0
-  ;;         solarized-height-plus-3 1.0
-  ;;         solarized-height-plus-4 1.0)
-
-  ;;   (let ((line (face-attribute 'mode-line :underline)))
-  ;;     (set-face-attribute 'mode-line          nil :overline   line)
-  ;;     (set-face-attribute 'mode-line-inactive nil :overline   line)
-  ;;     (set-face-attribute 'mode-line-inactive nil :underline  line)
-  ;;     (set-face-attribute 'mode-line          nil :box        nil)
-  ;;     (set-face-attribute 'mode-line-inactive nil :box        nil)
-  ;;     (set-face-attribute 'mode-line-inactive nil :background "#f9f2d9")))
   (defun transparency (value)
     "Sets the transparency of the frame window. 0=transparent/100=opaque."
     (interactive "nTransparency Value 0 - 100 opaque:")
     (set-frame-parameter (selected-frame) 'alpha value))
 
   (defun blw/apply-dark-theme ()
-    "Apply the `solarized-' theme and make frames just slightly transparent."
+    "Apply the dark theme."
     (interactive)
-    (setq doom-theme 'doom-one)
-    (transparency 90))
+    (load-theme blw/dark-theme t))
 
   (defun blw/apply-light-theme ()
-    "Apply the `solarized-' theme and make frames just slightly transparent."
+    "Apply the light theme."
     (interactive)
-    (setq doom-theme 'doom-one-light)
-    (transparency 90))
+    (load-theme blw/light-theme t))
 
-  (blw/apply-dark-theme)
+  (use-package doom-themes
+    :config
+    (blw/apply-dark-theme))
 #+end_src
 
 Show date and time in the modeline.

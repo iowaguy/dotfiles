@@ -15,6 +15,7 @@
       "100:name *= 'Teams'"
       "100:name *= 'Zotero'"
       "90:name *= 'Alacritty'"
+      "90:name *= 'Emacs'"
     ];
     shadow = true;
     shadowOpacity = "0.75";
