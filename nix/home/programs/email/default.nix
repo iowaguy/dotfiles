@@ -83,10 +83,41 @@ in {
           sent = "[Gmail]/SentMail";
           trash = "[Gmail]/Trash";
         };
-
+        # lieer.enable = true; # two-way sync labels, just for gmail
         imap.port = 993;
         maildir.path = "gmail";
       };
+      # northeastern = {
+      #   address = builtins.concatStringsSep "@" [ "weintraub.b" "northeastern.edu" ];
+      #   mbsync = {
+      #     enable = true;
+      #     create = "maildir";
+      #     extraConfig.account = {
+      #       AuthMechs = "Login";
+      #     };
+      #   };
+      #   msmtp.enable = true;
+      #   notmuch.enable = true;
+      #   realName = "Ben Weintraub";
+      #   passwordCommand = passCmd "Login/northeastern.edu/weintraub.b";
+      #   smtp = {
+      #     host = "smtp.office365.com";
+      #     # security = "starttls";
+      #   };
+      #   userName = builtins.concatStringsSep "@" [ "weintraub.b" "northeastern.edu" ];
+      #   folders = {
+      #     inbox = "Inbox";
+      #     drafts = "Drafts";
+      #     sent = "Sent";
+      #     trash = "Deleted";
+      #   };
+      #   imap = {
+      #     host = "outlook.office365.com";
+      #     port = 993;
+      #     # tls.enable = true;
+      #   };
+      #   maildir.path = "northeastern";
+      # };
     };
   };
 }
