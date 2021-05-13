@@ -50,6 +50,7 @@
       package = pkgs.pulseaudioFull;
       extraConfig = ''
         load-module module-switch-on-connect
+        load-module module-bluetooth-discover headset=ofono
       '';
     };
     bluetooth = {
@@ -107,6 +108,11 @@
     upower.enable = true;
     tlp.enable = true;
     thermald.enable = true; # So it doesn't get too toasty
+    ofono = {
+      enable = true;
+      plugins = [ pkgs.ofono-phonesim ];
+
+    };
   };
 
   powerManagement.powertop.enable = true;
