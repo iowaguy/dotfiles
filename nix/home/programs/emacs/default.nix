@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     emacs26Packages.virtualenv
     ispell
+    nodePackages.pyright
   ];
 
   programs.emacs = {

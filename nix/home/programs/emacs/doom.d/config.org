@@ -797,7 +797,7 @@ shamelessly stolen and re-prefixed.
   (setq org-agenda-custom-commands
         '(("p" "Personal agenda"
            ((agenda "")
-            (todo "TODO"
+            (todo "TODO|SHALLOW|DEEP"
                   ((org-agenda-skip-function '(or (org-agenda-skip-subtree-if 'scheduled)
                                                   (org-agenda-skip-subtree-if 'deadline)))
                    (org-agenda-overriding-header "Other tasks:")))
