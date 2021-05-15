@@ -109,8 +109,8 @@ to see (like out in the sun).
 
 Show date and time in the modeline.
 #+begin_src emacs-lisp
-  (setq display-time-day-and-date t)
-  (display-time)
+  ;; (setq display-time-day-and-date t)
+  ;; (display-time)
 #+end_src
 
 
@@ -261,17 +261,17 @@ doesn't require any additional setup. I've bound its most useful command to
 #+end_src
 
 
-I'd like to enable flycheck all kinds of places.
+# I'd like to enable flycheck all kinds of places.
 
 #+begin_src emacs-lisp
-  (use-package! let-alist)
-  (use-package! flycheck)
+  ;; (use-package! let-alist)
+  ;; (use-package! flycheck)
 #+end_src
 
-Correct flycheck-identified mistakes.
+# Correct flycheck-identified mistakes.
 #+begin_src emacs-lisp
-  (use-package! attrap
-    :ensure t)
+  ;; (use-package! attrap
+    ;; :ensure t)
 #+end_src
 
 
@@ -540,20 +540,18 @@ Use =notmuch= to read my email.
 #+begin_src emacs-lisp
   (use-package! notmuch)
 
-  (after! notmuch
-    (set-popup-rule! "^\\*notmuch-hello" :size 40 :side 'left :ttl 0))
+  (setq message-default-mail-headers "Cc: \nBcc: \n"
+        +notmuch-sync-backend 'mbsync
 
-  (setq mail-host-address "gmail.com"
-        mail-user-agent 'message-user-agent
-        message-send-mail-function 'message-send-mail-with-sendmail
-        message-kill-buffer-on-exit t
+        ;; The following three make sure that what email a message was addressed
+        ;; to will be used as the from address in my reply.
         mail-specify-envelope-from t
-        sendmail-program "msmtp"
-        mail-envelope-from 'header
         message-sendmail-envelope-from 'header
+        mail-envelope-from 'header
+        mail-user-agent 'message-user-agent
+        sendmail-program "msmtp")
 
-        ;; add Cc and Bcc headers to the message buffer
-        message-default-mail-headers "Cc: \nBcc: \n")
+  ;; (setq mail-host-address "gmail.com")
 
   (setq notmuch-saved-searches
         '((:name "slimbox"
@@ -568,7 +566,8 @@ Use =notmuch= to read my email.
           (:name "lightning-dev" :query "tag:lightning-dev AND tag:unread" :sort-order newest-first :key "l" :search-type 'tree)
           (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first :key "ny" :search-type 'tree)
           (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first :key "s" :search-type 'tree)
-          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)))
+          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)
+          (:name "recent" :query "date:1week..today" :sort-order newest-first :key "e" :search-type 'tree)))
 
   (define-key notmuch-search-mode-map "R"
     (lambda (&optional beg end)
@@ -576,30 +575,19 @@ Use =notmuch= to read my email.
       (interactive (notmuch-interactive-region))
       (notmuch-search-tag (list "-unread" "-new") beg end)))
 
-  (define-key notmuch-search-mode-map "d"
-    (lambda (&optional beg end)
-      "Delete me"
-      (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "-unread" "-inbox" "-new" "+delete") beg end)))
-
   (define-key notmuch-search-mode-map "U"
     (lambda (&optional beg end)
       "Mark unread"
       (interactive (notmuch-interactive-region))
       (notmuch-search-tag (list "+unread") beg end)))
 
-  (define-key notmuch-search-mode-map "S"
-    (lambda (&optional beg end)
-      "Mark unread"
-      (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "+spam" "-inbox" "-new") beg end)))
-
   (require 'ol-notmuch)
 
-  (setq message-kill-buffer-on-exit t)
-
   (defvar notmuch-hello-refresh-count 0)
+#+end_src
 
+Make a nice status message about how many new mails I got since the last refresh.
+#+begin_src emacs-lisp
   (defun notmuch-hello-refresh-status-message ()
     (unless no-display
       (let* ((new-count

@@ -5,6 +5,7 @@
     emacs26Packages.virtualenv
     ispell
     nodePackages.pyright
+    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
   ];
 
   programs.emacs = {
