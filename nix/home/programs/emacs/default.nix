@@ -2,15 +2,26 @@
 
 {
   home.packages = with pkgs; [
-    emacs26Packages.virtualenv
-    ispell
-    nodePackages.pyright
-    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
+      ispell
+
+      # Used by "lookup"
+      ripgrep
+      sqlite
+      wordnet
+
+      # Typechecking in python
+      nodePackages.pyright
+
+      # Dictionaries for spelling good
+      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
+
+      # Autoformatting nix code
+      nixfmt
   ];
 
   programs.emacs = {
-    extraPackages = epkgs: [
-      pkgs.ispell
+    extraPackages = epkgs: with pkgs; [
+      emacs26Packages.virtualenv
     ];
     enable = true;
   };
