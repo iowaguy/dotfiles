@@ -72,7 +72,7 @@
       videoDrivers = [ "ati" ];
 
       # keyboard settings
-      xkbOptions = "ctrl:nocaps"; # make capslock = ctrl
+      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
 
       xrandrHeads = [
         {
