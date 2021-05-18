@@ -640,6 +640,7 @@ A workaround until https://github.com/hlissner/doom-emacs/issues/4832 is fixed.
 Quickly insert a block of =elisp= or =jupyter-python=.
 
 #+begin_src emacs-lisp
+  (require 'org-tempo)
   (after! org
     (add-to-list 'org-structure-template-alist
                  '("el" . "src emacs-lisp"))
@@ -917,6 +918,8 @@ other tools for other OSs.
 
 #+begin_src emacs-lisp
   (setq reftex-default-bibliography '((blw/persistent-file-path "zettelkasten/references.bib")))
+
+  (use-package! org-ref)
 
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
