@@ -509,50 +509,36 @@ Use =notmuch= to read my email.
 #+begin_src emacs-lisp
   (use-package! notmuch)
 
-  (setq message-default-mail-headers "Cc: \nBcc: \n"
-        +notmuch-sync-backend 'mbsync
+  (after! notmuch
+    (setq message-default-mail-headers "Cc: \nBcc: \n"
+          +notmuch-sync-backend 'mbsync
+          notmuch-hello-sections `(notmuch-hello-insert-saved-searches
+                                   notmuch-hello-insert-alltags)
+          ;; The following three make sure that what email a message was addressed
+          ;; to will be used as the from address in my reply.
+          mail-specify-envelope-from t
+          message-sendmail-envelope-from 'header
+          mail-envelope-from 'header
+          mail-user-agent 'message-user-agent
+          sendmail-program "msmtp"
 
-        ;; The following three make sure that what email a message was addressed
-        ;; to will be used as the from address in my reply.
-        mail-specify-envelope-from t
-        message-sendmail-envelope-from 'header
-        mail-envelope-from 'header
-        mail-user-agent 'message-user-agent
-        sendmail-program "msmtp")
-
-  ;; (setq mail-host-address "gmail.com")
-
-  (setq notmuch-saved-searches
-        '((:name "slimbox"
-                 :query "tag:unread AND NOT tag:scholarly-reading AND NOT tag:calnewport AND NOT tag:newyorker AND NOT tag:lightning-dev AND NOT tag:nu-unread"
-                 :key "i"
-                 :sort-order newest-first
-                 :search-type 'tree)
-          (:name "inbox" :query "tag:inbox" :sort-order newest-first :search-type 'tree)
-          (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first :search-type 'tree)
-          (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first :search-type 'tree)
-          (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first :search-type 'tree)
-          (:name "lightning-dev" :query "tag:lightning-dev AND tag:unread" :sort-order newest-first :key "l" :search-type 'tree)
-          (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order newest-first :key "ny" :search-type 'tree)
-          (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first :key "s" :search-type 'tree)
-          (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)
-          (:name "recent" :query "date:1week..today" :sort-order newest-first :key "e" :search-type 'tree)))
-
-  (define-key notmuch-search-mode-map "R"
-    (lambda (&optional beg end)
-      "mark read"
-      (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "-unread" "-new") beg end)))
-
-  (define-key notmuch-search-mode-map "U"
-    (lambda (&optional beg end)
-      "Mark unread"
-      (interactive (notmuch-interactive-region))
-      (notmuch-search-tag (list "+unread") beg end)))
-
-  (require 'ol-notmuch)
-
-  (defvar notmuch-hello-refresh-count 0)
+          notmuch-saved-searches
+          '((:name "slimbox"
+             :query "tag:unread AND NOT tag:scholarly-reading AND NOT tag:calnewport AND NOT tag:newyorker AND NOT tag:lightning-dev AND NOT tag:nu-unread"
+             :key "i"
+             :sort-order newest-first
+             :search-type 'tree)
+            (:name "inbox" :query "tag:inbox" :sort-order newest-first :search-type 'tree)
+            (:name "unread" :query "tag:unread" :key "u" :sort-order newest-first :search-type 'tree)
+            (:name "nu-unread" :query "to:weintraub.b@northeastern.edu AND tag:unread", :key "nu" :sort-order newest-first :search-type 'tree)
+            (:name "calnewport" :query "tag:calnewport AND tag:unread" :key "cn" :sort-order newest-first :search-type 'tree)
+            (:name "lightning-dev" :query "tag:lightning-dev AND tag:unread" :sort-order newest-first :key "l" :search-type 'tree)
+            (:name "newyorker" :query "tag:newyorker AND tag:unread" :sort-order  newest-first :key "ny" :search-type 'tree)
+            (:name "scholarly-reading" :query "tag:scholarly-reading AND tag:unread" :sort-order newest-first :key "s" :search-type 'tree)
+            (:name "the-economist" :query "tag:economist AND tag:unread" :sort-order newest-first :key "e" :search-type 'tree)
+            (:name "recent" :query "date:1week..today" :sort-order newest-first :key "e" :search-type 'tree)
+            (:name "sent"    :query "tag:sent" :key "s")
+            (:name "drafts"  :query "tag:draft":key "d"))))
 #+end_src
 
 Make a nice status message about how many new mails I got since the last refresh.
@@ -616,7 +602,6 @@ A workaround until https://github.com/hlissner/doom-emacs/issues/4832 is fixed.
 Quickly insert a block of =elisp= or =jupyter-python=.
 
 #+begin_src emacs-lisp
-  (require 'org-tempo)
   (after! org
     (add-to-list 'org-structure-template-alist
                  '("el" . "src emacs-lisp"))
