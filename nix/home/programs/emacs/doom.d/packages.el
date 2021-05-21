@@ -142,3 +142,5 @@
 (package! comment-dwim-2)
 
 (package! buffer-move :recipe (:host github :repo "lukhas/buffer-move"))
+
+(package! vagrant-tramp)

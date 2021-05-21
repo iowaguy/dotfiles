@@ -482,37 +482,13 @@ Emacs shells should inherit the PATH from the system shell.
     (exec-path-from-shell-initialize))
 #+end_src
 
-
 Including =org-tempo= restores the =<s=-style easy-templates that were
 deprecated in Org 9.2.
 
-I'd like to open =file:= links in Org with the applications defined in my
-[[file:~/.dotfiles/email/.mailcap][mailcap]]. This clears the existing MIME mapping, parses my personal mailcap, and
-tells Org to open those links with the mailcap-defined applications.
-
-# #+begin_src emacs-lisp
-#   (after! org
-#     (require 'org-tempo))
-# #+end_src
-
-# #+begin_src emacs-lisp
-#   (use-package org
-#     :ensure org-plus-contrib
-#     :config
-#
-
-#     (add-hook 'org-mode-hook
-#               '(lambda ()
-#                  (setq mailcap-mime-data '())
-#                  (mailcap-parse-mailcap "~/.mailcap")
-#                  (setq org-file-apps
-#                        '((remote . emacs)
-#                          ("mobi" . "fbreader %s")
-#                          (system . mailcap)
-#                          ("md" . emacs)
-#                          ("org" . emacs)
-#                          (t . mailcap))))))
-# #+end_src
+#+begin_src emacs-lisp
+  (after! org
+    (require 'org-tempo))
+#+end_src
 
 I'd like the initial scratch buffer to be in Org:
 

@@ -2,21 +2,25 @@
 
 {
   home.packages = with pkgs; [
-      ispell
+    # Used for go tools (in emacs)
+    go
+    gcc
+    
+    ispell
 
-      # Used by "lookup"
-      ripgrep
-      sqlite
-      wordnet
+    # Used by "lookup"
+    ripgrep
+    sqlite
+    wordnet
 
-      # Typechecking in python
-      nodePackages.pyright
+    # Typechecking in python
+    nodePackages.pyright
 
-      # Dictionaries for spelling good
-      (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
+    # Dictionaries for spelling good
+    (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
 
-      # Autoformatting nix code
-      nixfmt
+    # Autoformatting nix code
+    nixfmt
   ];
 
   programs.emacs = {
