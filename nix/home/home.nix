@@ -78,9 +78,9 @@ in {
     enable = true;
     mimeApps = {
       enable = true;
-      defaultApplications = {
-        "application/pdf" = "evince.desktop";
-        "x-scheme-handler/msteams" = "teams.desktop";
+      associations.added = {
+        "application/pdf" = [ "evince.desktop" ];
+        "x-scheme-handler/msteams" = [ "teams.desktop" ];
       };
     };
   };
