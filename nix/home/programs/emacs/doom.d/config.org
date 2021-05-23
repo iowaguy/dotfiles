@@ -761,6 +761,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
           org-roam-dailies-directory "daily/"
           +org-roam-open-buffer-on-find-file nil
           emacsql-sqlite3-executable (executable-find "sqlite3")
+          org-roam-completion-everywhere nil
           org-roam-dailies-capture-templates
            '(("x" "default" entry
              #'org-roam-capture--get-point
