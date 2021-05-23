@@ -58,7 +58,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # bluez
     linuxPackages.facetimehd # TODO not sure if I still need this
   ];
 
@@ -111,22 +110,23 @@
 
   powerManagement.powertop.enable = true;
 
-  systemd.services.bluetooth = {
-    enable = true;
-    description = "Bluetooth service";
-    unitConfig = {
-      Description = "Bluetooth service";
-      ConditionPathIsDirectory = /sys/class/bluetooth;
-      ControllerMode = "dual";
-      Enable = "Source,Sink,Media,Socket";
+  systemd.services = {
+    bluetooth = {
+      enable = true;
+      description = "Bluetooth service";
+      unitConfig = {
+        Description = "Bluetooth service";
+        ConditionPathIsDirectory = /sys/class/bluetooth;
+        ControllerMode = "dual";
+        Enable = "Source,Sink,Media,Socket";
+      };
+      serviceConfig = {
+        Type = "dbus";
+        BusName = "org.bluez";
+        ExecStart = ["" "${pkgs.bluezFull}/bin/bluetoothd --noplugin=avrcp"];
+        NotifyAccess = "main";
+      };
+      wantedBy = [ "multi-user.target" ];
     };
-    serviceConfig = {
-      Type = "dbus";
-      BusName = "org.bluez";
-      ExecStart = ["" "${pkgs.bluezFull}/bin/bluetoothd --noplugin=avrcp"];
-      NotifyAccess = "main";
-    };
-    wantedBy = [ "multi-user.target" ];
-
   };
 }
