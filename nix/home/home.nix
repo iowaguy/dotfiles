@@ -116,7 +116,5 @@ in {
   services = {
     lorri.enable = true;
     udiskie.enable = true;
-    keybase.enable = true;
-    kbfs.enable = true;
   };
 }
