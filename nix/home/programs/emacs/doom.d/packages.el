@@ -144,3 +144,5 @@
 (package! buffer-move :recipe (:host github :repo "lukhas/buffer-move"))
 
 (package! vagrant-tramp)
+
+(package! rg)
