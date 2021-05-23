@@ -443,8 +443,8 @@ Including =org-tempo= restores the =<s=-style easy-templates that were
 deprecated in Org 9.2.
 
 #+begin_src emacs-lisp
-  (after! org
-    (require 'org-tempo))
+  (use-package! org-tempo
+    :after org)
 #+end_src
 
 I'd like the initial scratch buffer to be in Org:
