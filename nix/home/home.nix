@@ -116,5 +116,10 @@ in {
   services = {
     lorri.enable = true;
     udiskie.enable = true;
+    screen-locker = {
+      enable = true;
+      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock";
+      inactiveInterval = 20;
+    };
   };
 }
