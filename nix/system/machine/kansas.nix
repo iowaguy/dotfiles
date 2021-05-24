@@ -9,8 +9,9 @@
       grub.version = 2;
       # Define on which hard drive you want to install Grub.
       grub.device = "/dev/sda"; # or "nodev" for efi only
-    }
-  cleanTmpDir = true;
+    };
+    cleanTmpDir = true;
+  };
 
   networking = {
     hostName = "kansas"; # Define your hostname.
@@ -26,11 +27,11 @@
 
   sound.enable = true;
   hardware = {
-    # opengl = {
-    #   # Apparently this is currently only supported by ati_unfree drivers, not ati
-    #   driSupport32Bit = false;
-    #   extraPackages = [ pkgs.vaapiIntel pkgs.vaapiVdpau ];
-    # };
+    opengl = {
+      # Apparently this is currently only supported by ati_unfree drivers, not ati
+      driSupport32Bit = false;
+      extraPackages = [ pkgs.vaapiIntel pkgs.vaapiVdpau ];
+    };
     cpu.intel.updateMicrocode = true;
 
     pulseaudio = {
@@ -50,34 +51,34 @@
 
   services = {
     # Enable handling of hotplug and sleep events by autorandr
-    autorandr.enable = true;
+    #autorandr.enable = true;
 
-    xserver = {
-      videoDrivers = [ "ati" ];
+#    xserver = {
+#      videoDrivers = [ "ati" ];
 
       # keyboard settings
-      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
+#      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
 
-      xrandrHeads = [
-        {
-          output = "eDP";
-          primary = true;
-        }
-        {
-          output = "HDMI-0";
-          monitorConfig = ''
-            Option "PreferredMode" "3840x2160"
-          '';
-        }
-      ];
-      resolutions = [
-        { x = 2048; y = 1152; }
-        { x = 1920; y = 1080; }
-        { x = 2560; y = 1440; }
-        { x = 3072; y = 1728; }
-        { x = 3840; y = 2160; }
-      ];
-    };
+      # xrandrHeads = [
+      #   {
+      #     output = "eDP";
+      #     primary = true;
+      #   }
+      #   {
+      #     output = "HDMI-0";
+      #     monitorConfig = ''
+      #       Option "PreferredMode" "3840x2160"
+      #     '';
+      #   }
+      # ];
+      # resolutions = [
+      #   { x = 2048; y = 1152; }
+      #   { x = 1920; y = 1080; }
+      #   { x = 2560; y = 1440; }
+      #   { x = 3072; y = 1728; }
+      #   { x = 3840; y = 2160; }
+      # ];
+ #   };
 
     # power savings
     upower.enable = true;

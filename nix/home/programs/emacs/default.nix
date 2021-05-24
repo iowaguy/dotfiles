@@ -5,7 +5,8 @@
     # Used for go tools (in emacs)
     go
     gcc
-    
+
+    # Used for spellchecking
     ispell
 
     # Used by "lookup"
@@ -21,18 +22,17 @@
 
     # Autoformatting nix code
     nixfmt
+
+    # Doom wants this for faster indexing
+    fd
   ];
 
   programs.emacs = {
-    extraPackages = epkgs: with pkgs; [
-      emacs26Packages.virtualenv
-    ];
+    extraPackages = epkgs: with pkgs; [ emacs26Packages.virtualenv ];
     enable = true;
   };
 
-  services.emacs = {
-    enable = true;
-  };
+  services.emacs = { enable = true; };
 
   home.links.".doom.d" = "./workspace/dotfiles/nix/home/programs/emacs/doom.d";
 
