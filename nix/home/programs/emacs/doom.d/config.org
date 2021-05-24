@@ -355,6 +355,8 @@ output.
   (setq scss-compile-at-save nil)
 #+end_src
 
+Ripgrep is great for searching for text searches (much faster than grep). With
+this package, I can use it without leaving emacs.
 #+begin_src emacs-lisp
   (use-package! rg)
 #+end_src
