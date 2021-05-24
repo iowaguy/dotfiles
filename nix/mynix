@@ -7,6 +7,7 @@ shopt -s failglob
 HOME_MANAGER_VERSION=20.09
 declare -A machines
 machines['MacBookPro11,5']=boston.nix
+machines['20A8S1BJ00']=kansas.nix
 
 system_config() {
   # Nix configuration
