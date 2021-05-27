@@ -1,10 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.file.".zshrc".text = ''
-    eval "$(direnv hook zsh)"
-  '';
-
   home.packages = with pkgs; [
     alacritty
     inconsolata # font
