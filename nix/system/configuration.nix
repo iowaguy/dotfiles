@@ -73,20 +73,10 @@
       ohMyZsh = {
         enable = true;
         plugins = [
-          "git"
-          "python"
-          "man"
           "z"
           "colored-man-pages"
-          "common-aliases"
           "git-auto-fetch"
-          "golang"
-          "httpie"
-          "mvn"
-          "pip"
           "vagrant"
-          "web-search"
-          "cabal"
         ];
         theme = "agnoster";
       };
