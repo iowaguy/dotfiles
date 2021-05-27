@@ -500,30 +500,6 @@ Use =notmuch= to read my email.
             (:name "drafts"  :query "tag:draft":key "d"))))
 #+end_src
 
-Make a nice status message about how many new mails I got since the last refresh.
-#+begin_src emacs-lisp
-  (defun notmuch-hello-refresh-status-message ()
-    (unless no-display
-      (let* ((new-count
-              (string-to-number
-               (car (process-lines notmuch-command "count"))))
-             (diff-count (- new-count notmuch-hello-refresh-count)))
-        (cond
-         ((= notmuch-hello-refresh-count 0)
-          (message "You have %s messages."
-                   (notmuch-hello-nice-number new-count)))
-         ((> diff-count 0)
-          (message "You have %s more messages since last refresh."
-                   (notmuch-hello-nice-number diff-count)))
-         ((< diff-count 0)
-          (message "You have %s fewer messages since last refresh."
-                   (notmuch-hello-nice-number (- diff-count)))))
-        (setq notmuch-hello-refresh-count new-count))))
-
-  (add-hook 'notmuch-hello-refresh-hook 'notmuch-hello-refresh-status-message)
-#+end_src
-
-
 I like seeing a little downward-pointing arrow instead of the usual ellipsis
 (=...=) that org displays when there's stuff under a header.
 
