@@ -22,6 +22,7 @@
       octotree
       org-capture
       refined-github
+      tridactyl
       (buildFirefoxXpiAddon {
         pname = "zotero-connector";
         version = "5.0.60";
