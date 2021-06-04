@@ -5,11 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./machine/current.nix
-    ] ++ (import ./services) ++ (import ./wm);
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./machine/current.nix
+  ] ++ (import ./services) ++ (import ./wm);
 
   networking = {
     # The global useDHCP flag is deprecated, therefore explicitly set to
@@ -17,8 +16,7 @@
     useDHCP = false;
 
     # Block sites that distract me
-    extraHosts =
-    ''
+    extraHosts = ''
       127.0.0.1 netflix.com
       127.0.0.1 nytimes.com
       127.0.0.1 news.ycombinator.com
@@ -39,8 +37,8 @@
   users.users.ben = {
     isNormalUser = true;
     extraGroups = [
-      "wheel"              # Enable 'sudo' for the user.
-      "networkmanager"     # Allow user to change network settings
+      "wheel" # Enable 'sudo' for the user.
+      "networkmanager" # Allow user to change network settings
       "docker"
       "libvirtd"
     ];
@@ -94,9 +92,10 @@
     config = {
       allowUnfree = true;
       packageOverrides = pkgs: {
-        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-          inherit pkgs;
-        };
+        nur = import (builtins.fetchTarball
+          "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+            inherit pkgs;
+          };
       };
     };
   };
@@ -109,8 +108,8 @@
     # Automate garbage collection
     gc = {
       automatic = true;
-      dates     = "weekly";
-      options   = "--delete-older-than 7d";
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
 
     # Avoid unwanted garbage collection when using nix-direnv
@@ -130,10 +129,7 @@
     libvirtd.enable = true;
   };
 
-  fonts.fonts = with pkgs; [
-    powerline-fonts
-    font-awesome
-  ];
+  fonts.fonts = with pkgs; [ powerline-fonts font-awesome ];
 
   services.emacs.defaultEditor = true;
 

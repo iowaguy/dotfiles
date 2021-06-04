@@ -52,14 +52,13 @@
         load-module module-switch-on-connect
       '';
     };
-    bluetooth = {
-      enable = true;
-    };
+    bluetooth = { enable = true; };
   };
 
-  environment.systemPackages = with pkgs; [
-    linuxPackages.facetimehd # TODO not sure if I still need this
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      linuxPackages.facetimehd # TODO not sure if I still need this
+    ];
 
   services = {
     # Enable handling of hotplug and sleep events by autorandr
@@ -90,17 +89,33 @@
         }
       ];
       resolutions = [
-        { x = 2048; y = 1152; }
-        { x = 1920; y = 1080; }
-        { x = 2560; y = 1440; }
-        { x = 3072; y = 1728; }
-        { x = 3840; y = 2160; }
+        {
+          x = 2048;
+          y = 1152;
+        }
+        {
+          x = 1920;
+          y = 1080;
+        }
+        {
+          x = 2560;
+          y = 1440;
+        }
+        {
+          x = 3072;
+          y = 1728;
+        }
+        {
+          x = 3840;
+          y = 2160;
+        }
       ];
     };
 
     # Disable XHC1 wakeup signal to avoid resume getting triggered some time
     # after suspend. Reboot required for this to take effect.
-    udev.extraRules = ''SUBSYSTEM=="pci", KERNEL=="0000:00:14.0", ATTR{power/wakeup}="disabled"'';
+    udev.extraRules = ''
+      SUBSYSTEM=="pci", KERNEL=="0000:00:14.0", ATTR{power/wakeup}="disabled"'';
 
     # power savings
     upower.enable = true;
