@@ -201,6 +201,7 @@ programming.
 
 #+begin_src emacs-lisp
   (use-package! diff-hl
+    :defer t
     :config
     (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
     (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
@@ -248,6 +249,7 @@ doesn't require any additional setup. I've bound its most useful command to
 
 #+begin_src emacs-lisp
   (use-package! dumb-jump
+    :defer t
     :config
     (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
     (setq dumb-jump-selector 'ivy))
@@ -279,6 +281,7 @@ I use =magit= to handle version control. It's lovely, but I tweak a few things:
 
 #+begin_src emacs-lisp
   (use-package! magit
+    :defer t
     :bind
     ("C-c m" . magit-status)
 
@@ -309,6 +312,7 @@ project root (if I'm not in a "real" project).
 
 #+begin_src emacs-lisp
   (use-package! projectile
+    :defer t
     :bind
     ("C-c v" . projectile-ag)
 
@@ -319,13 +323,6 @@ project root (if I'm not in a "real" project).
           projectile-switch-project-action 'projectile-dired
           projectile-require-project-root nil))
 #+end_src
-
-I like tree-based undo management. I only rarely need it, but when I do, oh boy.
-
-#+begin_src emacs-lisp
-  (use-package undo-tree)
-#+end_src
-
 
 I like shallow indentation, but tabs are displayed as 8 characters by default.
 This reduces that.
@@ -339,6 +336,7 @@ easier for me, so I like to use =subword-mode= everywhere.
 
 #+begin_src emacs-lisp
   (use-package! subword
+    :defer t
     :config (global-subword-mode 1))
 #+end_src
 
@@ -358,7 +356,9 @@ output.
 Ripgrep is great for searching for text searches (much faster than grep). With
 this package, I can use it without leaving emacs.
 #+begin_src emacs-lisp
-  (use-package! rg)
+  (use-package!
+    :defer t
+    rg)
 #+end_src
 
 All the lisps have some shared features, so we want to do the same things for
@@ -384,6 +384,7 @@ documentation.
 
 #+begin_src emacs-lisp
   (use-package! eldoc
+    :defer t
     :config
     (add-hook! 'emacs-lisp-mode-hook 'eldoc-mode))
 #+end_src
@@ -434,10 +435,9 @@ Emacs shells should inherit the PATH from the system shell.
 
 #+begin_src emacs-lisp
   (use-package! exec-path-from-shell
+    :defer t
     :if (memq window-system '(mac ns))
-    :ensure t
     :config
-    ;;(exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize))
 #+end_src
 
@@ -466,7 +466,9 @@ Images should be shown in-buffer by default, but not at full size.
 
 Use =notmuch= to read my email.
 #+begin_src emacs-lisp
-  (use-package! notmuch)
+  (use-package!
+    :defer t
+    notmuch)
 
   (after! notmuch
     (setq message-default-mail-headers "Cc: \nBcc: \n"
@@ -816,7 +818,9 @@ other tools for other OSs.
 #+begin_src emacs-lisp
   (setq reftex-default-bibliography '((blw/persistent-file-path "zettelkasten/references.bib")))
 
-  (use-package! org-ref)
+  (use-package!
+    :defer t
+    org-ref)
 
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
@@ -833,6 +837,7 @@ other tools for other OSs.
 More meta-data for my annotated bibliography.
 #+begin_src emacs-lisp
   (use-package! org-roam-bibtex
+    :defer t
     :after org-roam
     :hook (org-roam-mode . org-roam-bibtex-mode))
 #+end_src
@@ -927,7 +932,9 @@ Display/update images in the buffer after I evaluate.
 Allow export to markdown and beamer (for presentations).
 
 #+begin_src emacs-lisp
-  (use-package! ox-twbs)
+  (use-package!
+    :defer t
+    ox-twbs)
   (require 'ox-md)
   (require 'ox-beamer)
   (require 'ox-twbs)
@@ -936,7 +943,9 @@ Allow export to markdown and beamer (for presentations).
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 
 #+begin_src emacs-lisp
-  (use-package! htmlize)
+  (use-package!
+      :defer t
+      htmlize)
 #+end_src
 
 Translate regular ol' straight quotes to typographically-correct curly quotes
@@ -1055,17 +1064,6 @@ prose-related mode, so I store those in a list:
 #+end_src
 
 
-I want to make sure that I've enabled spell-checking if I'm editing text,
-composing an email, or authoring a Git commit.
-
-#+begin_src emacs-lisp
-  (use-package! flyspell
-    :config
-    (dolist (hook prose-mode-hooks)
-      (add-hook hook 'flyspell-mode)))
-#+end_src
-
-
 =AutoFillMode= automatically wraps paragraphs, kinda like hitting =M-q=. I wrap
 a lot of paragraphs, so this automatically wraps 'em when I'm writing text,
 Markdown, or Org.
@@ -1088,6 +1086,7 @@ Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for 
 
 #+begin_src emacs-lisp
   (use-package! orgalist
+    :defer t
     :config
     (add-hook 'git-commit-mode-hook 'orgalist-mode)
     (add-hook 'markdown-mode-hook 'orgalist-mode)
@@ -1160,15 +1159,6 @@ By following [[https://linuxaria.com/article/sdcv-command-line-based-dictionary-
 #+end_src
 
 
-Hitting =C-x s= searches for synonyms for the word at point.
-
-#+begin_src emacs-lisp
-  (use-package! powerthesaurus
-    :bind
-    ("C-c s" . powerthesaurus-lookup-word-dwim))
-#+end_src
-
-
 # Because I can't always use =org=.
 
 # - Associate =.md= files with GitHub-flavored Markdown.
@@ -1228,6 +1218,7 @@ the file or a trash file.
 
 #+begin_src emacs-lisp
   (use-package! palimpsest
+    :defer t
     :config
     (dolist (hook prose-mode-hooks)
       (add-hook hook 'palimpsest-mode))
@@ -1243,35 +1234,10 @@ Hide dotfiles by default, but toggle their visibility with =.=.
 
 #+begin_src emacs-lisp
   (use-package! dired-hide-dotfiles
+    :defer t
     :config
     (dired-hide-dotfiles-mode)
     (define-key dired-mode-map "." 'dired-hide-dotfiles-mode))
-#+end_src
-
-Open media with the appropriate programs.
-
-#+begin_src emacs-lisp
-  (use-package! dired-open
-    :config
-    (setq dired-open-extensions
-          '(("avi" . "open")
-            ("cbr" . "open")
-            ("doc" . "open")
-            ("docx" . "pen")
-            ("gif" . "open")
-            ("gnumeric" . "open")
-            ("html" . "open")
-            ("jpeg" . "open")
-            ("jpg" . "open")
-            ("mkv" . "open")
-            ("mov" . "open")
-            ("mp3" . "open")
-            ("mp4" . "open")
-            ("pdf" . "open")
-            ("png" . "open")
-            ("webm" . "open")
-            ("xls" . "open")
-            ("xlsx" . "open"))))
 #+end_src
 
 These are the switches that get passed to =ls= when =dired= gets a list of
@@ -1324,6 +1290,7 @@ This uses =emacs-async= to make =dired= perform actions asynchronously.
 
 #+begin_src emacs-lisp
   (use-package! async
+    :defer t
     :config
     (dired-async-mode 1))
 #+end_src
@@ -1400,6 +1367,7 @@ Do this /only/ for lines that I edit.
 
 #+begin_src emacs-lisp
   (use-package! ws-butler
+    :defer t
     :config
     (ws-butler-global-mode t))
 #+end_src
@@ -1410,30 +1378,9 @@ really helpful for some modes (like =projectile=, for example).
 
 #+begin_src emacs-lisp
   (use-package which-key
+    :defer t
     :config (which-key-mode))
 #+end_src
-
-
-#+begin_src emacs-lisp
-  (use-package yasnippet)
-#+end_src
-
-I keep my snippets in =~/.emacs/snippets/text-mode=, and I always want =yasnippet=
-enabled.
-
-#+begin_src emacs-lisp
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets/text-mode"))
-  (yas-global-mode 1)
-#+end_src
-
-I /don’t/ want =yas= to automatically indent the snippets it inserts. Sometimes
-this looks pretty bad (when indenting org-mode, for example, or trying to guess
-at the correct indentation for Python).
-
-#+begin_src emacs-lisp
-  (setq yas-indent-line 'auto)
-#+end_src
-
 
 I use =ivy= and =counsel= as my completion framework.
 
@@ -1448,6 +1395,7 @@ This configuration:
 
 #+begin_src emacs-lisp
   (use-package! counsel
+    :defer t
     :bind
     ("M-x" . 'counsel-M-x)
     ("C-s" . 'swiper)
@@ -1496,7 +1444,9 @@ makes that automatic.
 Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few useful engines.
 
 #+begin_src emacs-lisp
-    (use-package! engine-mode)
+    (use-package!
+        :defer t
+        engine-mode)
     (require 'engine-mode)
 
     (defengine duckduckgo
@@ -1521,6 +1471,19 @@ Make commenting better with =M-;=
 
 #+begin_src emacs-lisp
   (use-package! comment-dwim-2
+    :defer t
     :config
     (global-set-key (kbd "M-;") 'comment-dwim-2))
+#+end_src
+
+A useful little time within emacs.
+#+begin_src emacs-lisp
+  (use-package! chronos
+    :defer t)
+#+end_src
+
+In =evil-mode=, I just want to mash "jk" and have it escape, regardless of the
+actual order those keys register.
+#+begin_src emacs-lisp
+  (setq evil-escape-unordered-key-sequence t)
 #+end_src
