@@ -1,5 +1,5 @@
 builtins.fetchTarball {
-  name   = "NUR-nixpkgs-2021-02-13";
-  url    = "https://github.com/nix-community/NUR/archive/3e7a1ad.tar.gz";
-  sha256 = "15dmjpyaplndn6iaq84z6cbzaskz2l244g9s9vcr0ghbf03p9jsw";
+  name   = "NUR-nixpkgs-2021-06-03";
+  url    = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+  sha256 = "1v2v1c2plzq8h95m1mwp0w53v431ap0kinj3c2d2z46kz877l7hb";
 }
