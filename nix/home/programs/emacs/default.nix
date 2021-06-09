@@ -25,6 +25,15 @@
 
     # Doom wants this for faster indexing
     fd
+
+    # Needed for formatting xml
+    html-tidy
+
+    # Doom wants these for Go
+    gopls
+    gocode
+    goimports
+    gotests
   ];
 
   programs.emacs = {
