@@ -16,11 +16,8 @@
       facebook-container
       https-everywhere
       i-dont-care-about-cookies
-      ipfs-companion
       link-cleaner
-      linkhints
       octotree
-      org-capture
       refined-github
       tridactyl
       (buildFirefoxXpiAddon {
@@ -32,37 +29,11 @@
         meta = {};
       })
       (buildFirefoxXpiAddon {
-        pname = "1password-x-password-manager";
-        version = "1.23.1";
-        addonId = "{d634138d-c276-4fc8-924b-40a0ea21d284}";
-        url = "https://addons.mozilla.org/firefox/downloads/file/3726657/1password_password_manager-1.23.1-fx.xpi";
-        sha256 = "47e9e98f1072d93d595002dc8c221e5cca17e091b3431563a8e3e2be575c5cc1";
-        meta = with lib; {
-          homepage = "https://1password.com";
-          description = "The best way to experience 1Password in your browser. Easily sign in to sites, generate passwords, and store secure information, including logins, credit cards, notes, and more.";
-          license = {
-            shortName = "1pwd";
-            fullName = "Service Agreement for 1Password users and customers";
-            url = "https://1password.com/legal/terms-of-service/";
-            free = false;
-          };
-          platforms = platforms.all;
-        };
-      })
-      (buildFirefoxXpiAddon {
         pname = "unhook-youtube";
         version = "1.4.2";
         addonId = "myallychou@gmail.com";
         url = "https://addons.mozilla.org/firefox/downloads/file/3727210/unhook_remove_youtube_recommended_videos_comments-1.4.2-an+fx.xpi";
         sha256 = "1j3v054hh6lplaryn60fq9s6gwm0zxlbcsxzqh17mkb4p1v4281j";
-        meta = {};
-      })
-      (buildFirefoxXpiAddon {
-        pname = "bib-it-now";
-        version = "0.899";
-        addonId = "bibitnow018@aqpl.mc2.chalmers.se";
-        url = "https://addons.mozilla.org/firefox/downloads/file/3674294/bibitnow-0.899-fx.xpi";
-        sha256 = "0jvy8bjdqp29w73ksqq180ljx7pfsfyi9rqml7006r7a0amhlbkq";
         meta = {};
       })
       (buildFirefoxXpiAddon {
