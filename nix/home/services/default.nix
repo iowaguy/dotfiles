@@ -3,4 +3,5 @@
   ./picom
   ./gpg-agent
   ./betterlockscreen
+  ./dunst
 ]

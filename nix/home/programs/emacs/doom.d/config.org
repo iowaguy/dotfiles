@@ -1479,7 +1479,9 @@ Make commenting better with =M-;=
 A useful little time within emacs.
 #+begin_src emacs-lisp
   (use-package! chronos
-    :defer t)
+    :defer t
+    :config
+    (setq chronos-expiry-functions '(chronos-dunstify)))
 #+end_src
 
 In =evil-mode=, I just want to mash "jk" and have it escape, regardless of the

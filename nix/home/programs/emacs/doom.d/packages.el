@@ -146,3 +146,5 @@
 (package! vagrant-tramp)
 
 (package! rg)
+
+(package! chronos)
