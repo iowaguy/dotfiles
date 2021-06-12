@@ -114,7 +114,7 @@
 
     # Disable XHC1 wakeup signal to avoid resume getting triggered some time
     # after suspend. Reboot required for this to take effect.
-    udev.extraRules = ''
+    udev.initrdRules = ''
       SUBSYSTEM=="pci", KERNEL=="0000:00:14.0", ATTR{power/wakeup}="disabled"'';
 
     # power savings
