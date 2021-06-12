@@ -56,6 +56,7 @@
     git
     firefox
     which
+    busybox
 
     (emacsWithPackages (epkgs: [ epkgs.orgPackages.org-plus-contrib ]))
     xorg.xrandr # display manager (X Resize and Rotate protocol)
