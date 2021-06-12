@@ -89,11 +89,7 @@ in {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
-    htop = {
-      enable = true;
-      sortDescending = true;
-      sortKey = "PERCENT_CPU";
-    };
+    htop.enable = true;
 
     # When I switch to a directory, I want it to assume a certain
     # environment.

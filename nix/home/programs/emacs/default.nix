@@ -36,10 +36,7 @@
     gotests
   ];
 
-  programs.emacs = {
-    extraPackages = epkgs: with pkgs; [ emacs26Packages.virtualenv ];
-    enable = true;
-  };
+  programs.emacs.enable = true;
 
   services.emacs = { enable = true; };
 

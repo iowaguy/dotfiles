@@ -3,14 +3,12 @@
 {
   systemd.services.upower.enable = true;
   services = {
-    gnome3.gnome-keyring.enable = true;
+    gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
     redshift.enable = true; # Save the eyes
-    blueman.enable = true;
 
     xserver = {
       enable = true;
-      startDbusSession = true;
       layout = "us";
 
       desktopManager = {
@@ -25,8 +23,10 @@
 
       libinput = {
         enable = true;
-        disableWhileTyping = true;
-        naturalScrolling = true;
+        touchpad = {
+          disableWhileTyping = true;
+          naturalScrolling = true;
+        };
       };
 
       displayManager = {

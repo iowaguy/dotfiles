@@ -21,7 +21,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell.program = /run/current-system/sw/bin/zsh;
+      shell.program = "/run/current-system/sw/bin/zsh";
       background_opacity = 0.9;
     };
   };
