@@ -356,9 +356,8 @@ output.
 Ripgrep is great for searching for text searches (much faster than grep). With
 this package, I can use it without leaving emacs.
 #+begin_src emacs-lisp
-  (use-package!
-    :defer t
-    rg)
+  (use-package! rg
+    :defer t)
 #+end_src
 
 All the lisps have some shared features, so we want to do the same things for
@@ -466,9 +465,8 @@ Images should be shown in-buffer by default, but not at full size.
 
 Use =notmuch= to read my email.
 #+begin_src emacs-lisp
-  (use-package!
-    :defer t
-    notmuch)
+  (use-package! notmuch
+    :defer t)
 
   (after! notmuch
     (setq message-default-mail-headers "Cc: \nBcc: \n"
@@ -817,9 +815,8 @@ other tools for other OSs.
 #+begin_src emacs-lisp
   (setq reftex-default-bibliography '((blw/persistent-file-path "zettelkasten/references.bib")))
 
-  (use-package!
-    :defer t
-    org-ref)
+  (use-package! org-ref
+    :defer t)
 
   ;; see org-ref for use of these variables
   (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
@@ -931,9 +928,9 @@ Display/update images in the buffer after I evaluate.
 Allow export to markdown and beamer (for presentations).
 
 #+begin_src emacs-lisp
-  (use-package!
-    :defer t
-    ox-twbs)
+  (use-package! ox-twbs
+    :defer t)
+
   (require 'ox-md)
   (require 'ox-beamer)
   (require 'ox-twbs)
@@ -942,9 +939,8 @@ Allow export to markdown and beamer (for presentations).
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 
 #+begin_src emacs-lisp
-  (use-package!
-      :defer t
-      htmlize)
+  (use-package! htmlize
+      :defer t)
 #+end_src
 
 Translate regular ol' straight quotes to typographically-correct curly quotes
@@ -1443,9 +1439,8 @@ makes that automatic.
 Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few useful engines.
 
 #+begin_src emacs-lisp
-    (use-package!
-        :defer t
-        engine-mode)
+    (use-package! engine-mode
+        :defer t)
     (require 'engine-mode)
 
     (defengine duckduckgo
