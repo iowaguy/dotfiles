@@ -131,7 +131,10 @@
 
   fonts.fonts = with pkgs; [ powerline-fonts font-awesome ];
 
-  services.emacs.defaultEditor = true;
+  services = {
+    blueman.enable = true;
+    emacs.defaultEditor = true;
+  };
 
   krb5 = {
     enable = true;
