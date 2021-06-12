@@ -530,8 +530,7 @@ new one (which shows the same information).
 
 A workaround until https://github.com/hlissner/doom-emacs/issues/4832 is fixed.
 #+begin_src emacs-lisp
-  (use-package org
-    :defer t
+  (use-package! org
     :config
     (defalias '+org--restart-mode-h #'ignore))
 #+end_src
@@ -1377,7 +1376,7 @@ Do this /only/ for lines that I edit.
 really helpful for some modes (like =projectile=, for example).
 
 #+begin_src emacs-lisp
-  (use-package which-key
+  (use-package! which-key
     :defer t
     :config (which-key-mode))
 #+end_src
