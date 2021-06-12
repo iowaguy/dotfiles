@@ -32,6 +32,7 @@
       displayManager = {
         defaultSession = "xfce+i3";
         sessionCommands = ''
+          # This command sets the background image for the session
           feh --bg-fill ~/.background-image
         '';
       };
