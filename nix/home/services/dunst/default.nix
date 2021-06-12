@@ -15,7 +15,7 @@
         transparency = 0;
         frame_color = "#ff0000";
         frame_width = 5;
-        font = "Droid Sans 30";
+        font = "Droid Sans 15";
       };
 
       urgency_critical = {
