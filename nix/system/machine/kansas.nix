@@ -53,8 +53,16 @@
     # Enable handling of hotplug and sleep events by autorandr
     #autorandr.enable = true;
 
-#    xserver = {
+    xserver = {
 #      videoDrivers = [ "ati" ];
+      displayManager = {
+        defaultSession = "xfce+i3";
+        sessionCommands = ''
+          # Suspends and locks session on lid close
+          xfconf-query -c xfce4-session -p /general/LockCommand -s "systemctl suspend";
+        '';
+      };
+
 
       # keyboard settings
 #      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
@@ -78,7 +86,7 @@
       #   { x = 3072; y = 1728; }
       #   { x = 3840; y = 2160; }
       # ];
- #   };
+    };
 
     # power savings
     upower.enable = true;
