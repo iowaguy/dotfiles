@@ -928,13 +928,14 @@ Display/update images in the buffer after I evaluate.
 Allow export to markdown and beamer (for presentations).
 
 #+begin_src emacs-lisp
-  (use-package! ox-twbs
-    :defer t)
+  (after! org
+    (use-package! ox-twbs
+      :defer t)
 
-  (require 'ox-md)
-  (require 'ox-beamer)
-  (require 'ox-twbs)
-#+end_src
+    (require 'ox-md)
+    (require 'ox-beamer)
+    (require 'ox-twbs))
+  #+end_src
 
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 
