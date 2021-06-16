@@ -1471,7 +1471,7 @@ Make commenting better with =M-;=
     (global-set-key (kbd "M-;") 'comment-dwim-2))
 #+end_src
 
-A useful little time within emacs.
+A useful little timer within emacs.
 #+begin_src emacs-lisp
   (use-package! chronos
     :defer t
