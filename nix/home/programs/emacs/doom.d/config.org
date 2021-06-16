@@ -572,6 +572,10 @@ the location of an index file (my main todo list).
     "Return the absolute address of a file in whatever persistent storage I'm using, given its relative name."
     (blw/full-file-path blw/org-persistent-directory filename))
 
+  (defun blw/zettelkasten-path (filename)
+    "Return the absolute path of a file in my zettelkasten."
+    (concat (blw/persistent-file-path "zettelkasten/") filename))
+
   (setq blw/org-persistent-directory "~/Dropbox/")
   (setq org-directory (blw/persistent-file-path "org"))
   (setq org-index-file (org-file-path "todos.org"))
@@ -579,6 +583,7 @@ the location of an index file (my main todo list).
   (setq blw/org-reading-file (org-file-path "reading.org"))
   (setq blw/org-fun-projects-file (org-file-path "fun-projects.org"))
   (setq blw/org-zettel-inbox-file (org-file-path "zettel-inbox.org"))
+  (setq blw/zettelkasten (blw/zettelkasten-path ""))
 #+end_src
 
 I store everything in a single file called =thebigone.org=. If I
@@ -727,7 +732,9 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
               (buffer-string))))
 
   (after! org-roam
-    (setq org-roam-directory (blw/persistent-file-path "zettelkasten")
+    ;; This must be a string because the variable gets used before the
+    ;; convenience functions in this file get called.
+    (setq org-roam-directory "~/Dropbox/zettelkasten"
           org-roam-db-update-method 'immediate
           org-roam-graph-executable "dot"
           org-roam-graph-shorten-titles 'wrap
@@ -813,22 +820,17 @@ other tools for other OSs.
   (setq org-download-heading-lvl nil)
 #+end_src
 
+For adding citations in org.
 #+begin_src emacs-lisp
-  (setq reftex-default-bibliography '((blw/persistent-file-path "zettelkasten/references.bib")))
-
   (use-package! org-ref
-    :defer t)
-
-  ;; see org-ref for use of these variables
-  (setq org-ref-bibliography-notes "~/Dropbox/zettelkasten/notes.org"
-        org-ref-default-bibliography '("~/Dropbox/zettelkasten/references.bib")
-        org-ref-pdf-directory "~/Dropbox/zettelkasten/bibtex-pdfs/")
-
-  (setq bibtex-completion-bibliography "~/Dropbox/zettelkasten/references.bib"
-        bibtex-completion-library-path "~/Dropbox/zettelkasten/bibtex-pdfs"
-        bibtex-completion-notes-path "~/Dropbox/zettelkasten/helm-bibtex-notes")
-
-;;  (bibtex-set-dialect 'biblatex)
+    :defer t
+    :config
+    ;; see org-ref for use of these variables
+    (setq org-ref-default-bibliography '(((blw/zettelkasten-path "references.bib")))
+          reftex-default-bibliography '((blw/zettelkasten-path "references.bib"))
+          bibtex-completion-bibliography (blw/zettelkasten-path "references.bib")
+          bibtex-completion-library-path (blw/zettelkasten-path "bibtex.pdfs")
+          bibtex-completion-notes-path (blw/zettelkasten-path "helm-bibtex-notes")))
 #+end_src
 
 More meta-data for my annotated bibliography.
