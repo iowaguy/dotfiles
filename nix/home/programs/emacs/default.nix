@@ -34,6 +34,9 @@
     gocode
     goimports
     gotests
+
+    # Needed for C/C++ LSP
+    ccls
   ];
 
   programs.emacs.enable = true;
