@@ -27,6 +27,10 @@
           disableWhileTyping = true;
           naturalScrolling = true;
         };
+        mouse = {
+          disableWhileTyping = true;
+          naturalScrolling = true;
+        };
       };
 
       displayManager = {
