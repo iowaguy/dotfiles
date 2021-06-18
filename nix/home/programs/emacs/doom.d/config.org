@@ -210,19 +210,18 @@ programming.
 Swap buffers with =C-S-<D-PAD DIRECTION>=
 
 #+begin_src emacs-lisp
-  (after! org
-    (require 'buffer-move)
-    (global-set-key (kbd "<C-S-up>")     'buf-move-up)
-    (global-set-key (kbd "<C-S-down>")   'buf-move-down)
-    (global-set-key (kbd "<C-S-left>")   'buf-move-left)
-    (global-set-key (kbd "<C-S-right>")  'buf-move-right))
+  (use-package! buffer-move
+    :defer t)
+
+  (global-set-key (kbd "<C-S-up>")     #'buf-move-up)
+  (global-set-key (kbd "<C-S-down>")   #'buf-move-down)
+  (global-set-key (kbd "<C-S-left>")   #'buf-move-left)
+  (global-set-key (kbd "<C-S-right>")  #'buf-move-right)
 #+end_src
 
 I prefer =IBuffer=, and have it mapped to =C-x C-b=
-
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-(autoload 'ibuffer "ibuffer" "List buffers." t)
+ (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
 Make full screen on startup, because this is the first thing I'm going to do anyway.
