@@ -558,13 +558,12 @@ Show Greek letters and =LaTeX= math symbols (in =org= buffer) using normal
 
 Store my org files in =~/Dropbox/org=, maintain an inbox in Dropbox, define
 the location of an index file (my main todo list).
-
 #+begin_src emacs-lisp
   (defun blw/full-file-path (directory filename)
     "Return the absolute path of a file, given its filename and the directory it's in."
     (concat (file-name-as-directory directory) filename))
 
-  (defun org-file-path (filename)
+  (defun blw/org-file-path (filename)
     "Return the absolute address of an org file, given its relative name."
     (blw/full-file-path org-directory filename))
 
@@ -576,43 +575,22 @@ the location of an index file (my main todo list).
     "Return the absolute path of a file in my zettelkasten."
     (concat (blw/persistent-file-path "zettelkasten/") filename))
 
-  (setq blw/org-persistent-directory "~/Dropbox/")
-  (setq org-directory (blw/persistent-file-path "org"))
-  (setq org-index-file (org-file-path "todos.org"))
-  (setq org-gcal-file (org-file-path "schedule.org"))
-  (setq blw/org-reading-file (org-file-path "reading.org"))
-  (setq blw/org-fun-projects-file (org-file-path "fun-projects.org"))
-  (setq blw/org-zettel-inbox-file (org-file-path "zettel-inbox.org"))
-  (setq blw/zettelkasten (blw/zettelkasten-path ""))
+  (setq! blw/org-persistent-directory "~/Dropbox/"
+         org-directory (blw/persistent-file-path "org")
+         org-index-file (blw/org-file-path "todos.org")
+         org-gcal-file (blw/org-file-path "schedule.org")
+         blw/org-reading-file (blw/org-file-path "reading.org")
+         blw/org-fun-projects-file (blw/org-file-path "fun-projects.org")
+         blw/org-zettel-inbox-file (blw/org-file-path "zettel-inbox.org")
+         blw/zettelkasten (blw/zettelkasten-path ""))
 #+end_src
 
-I store everything in a single file called =thebigone.org=. If I
-decide to store events or tasks in additional files in the future, I can easily
-do so by adding more =org-file-path= S-expressions to the list.
-
-#+begin_src emacs-lisp
-  (setq org-agenda-files (list org-index-file
-                               blw/org-reading-file))
-#+end_src
-
-Record the time that a todo was completed.
-
-#+begin_src emacs-lisp
-  (setq org-log-done 'time)
-#+end_src
+Add more S-expressions =org-file-path= to the list to have them parsed for my org-agenda.
 
 Ensure that a task can't be marked as done if it contains unfinished subtasks or
 checklist items. This is handy for organizing "blocking" tasks hierarchically.
-
 #+begin_src emacs-lisp
-  (setq org-enforce-todo-dependencies t)
   (setq org-enforce-todo-checkbox-dependencies t)
-#+end_src
-
-Begin weeks /today/, not on the last Monday.
-
-#+begin_src emacs-lisp
-  (setq org-agenda-start-on-weekday nil)
 #+end_src
 
 Hide the category prefix from tasks. In practice, I've usually only got one or
@@ -706,17 +684,18 @@ displaying the index, so they'll be in the agenda view, too.
 
 A nice visualizer for my =org-roam= graph.
 #+begin_src emacs-lisp
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8080
-        org-roam-server-authenticate nil
-        org-roam-server-export-inline-images t
-        org-roam-server-serve-files nil
-        org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20)
+  (after! org-roam-server
+    (setq org-roam-server-host "127.0.0.1"
+          org-roam-server-port 8080
+          org-roam-server-authenticate nil
+          org-roam-server-export-inline-images t
+          org-roam-server-serve-files nil
+          org-roam-server-served-file-extensions '("pdf" "mp4" "ogv")
+          org-roam-server-network-poll t
+          org-roam-server-network-arrows nil
+          org-roam-server-network-label-truncate t
+          org-roam-server-network-label-truncate-length 60
+          org-roam-server-network-label-wrap-length 20))
 #+end_src
 
 My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.com/][org-roam]].
@@ -823,11 +802,11 @@ other tools for other OSs.
 For adding citations in org.
 #+begin_src emacs-lisp
   (use-package! org-ref
-    :defer t
+    :after org
     :config
     ;; see org-ref for use of these variables
-    (setq org-ref-default-bibliography '(((blw/zettelkasten-path "references.bib")))
-          reftex-default-bibliography '((blw/zettelkasten-path "references.bib"))
+    (setq org-ref-default-bibliography (blw/zettelkasten-path "references.bib")
+          reftex-default-bibliography (blw/zettelkasten-path "references.bib")
           bibtex-completion-bibliography (blw/zettelkasten-path "references.bib")
           bibtex-completion-library-path (blw/zettelkasten-path "bibtex.pdfs")
           bibtex-completion-notes-path (blw/zettelkasten-path "helm-bibtex-notes")))
@@ -836,9 +815,10 @@ For adding citations in org.
 More meta-data for my annotated bibliography.
 #+begin_src emacs-lisp
   (use-package! org-roam-bibtex
-    :defer t
     :after org-roam
-    :hook (org-roam-mode . org-roam-bibtex-mode))
+    :hook (org-roam-mode . org-roam-bibtex-mode)
+    :config
+    (require 'org-ref))
 #+end_src
 
 Higher resolution on PDFs.
