@@ -184,4 +184,4 @@
 
        :config
        literate
-       (default +smartparens))
+       (default +bindings +smartparens))
