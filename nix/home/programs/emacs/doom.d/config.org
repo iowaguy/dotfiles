@@ -882,23 +882,6 @@ Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for 
     (add-hook 'message-mode-hook 'orgalist-mode))
 #+end_src
 
-Remove text without permanently deleting it. Options to send it to the bottom of
-the file or a trash file.
-
-#+begin_src emacs-lisp
-  (use-package! palimpsest
-    :defer t
-    :config
-    (dolist (hook prose-mode-hooks)
-      (add-hook hook 'palimpsest-mode))
-    (setq palimpsest-prefix "- ")
-    ;; I never send palimpsests to the top, and this command shadows the =org=
-    ;; scheduling command I do use.
-
-    (define-key palimpsest-keymap (kbd "C-c C-s") nil))
-#+end_src
-
-
 Hide dotfiles by default, but toggle their visibility with =.=.
 
 #+begin_src emacs-lisp
