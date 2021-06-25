@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     # Used for go tools (in emacs)
     go
-    gcc
 
     # Used for spellchecking
     ispell
@@ -34,9 +33,11 @@
     gocode
     goimports
     gotests
+    godef
 
     # Needed for C/C++ LSP
     ccls
+    clang-tools
   ];
 
   programs.emacs.enable = true;
