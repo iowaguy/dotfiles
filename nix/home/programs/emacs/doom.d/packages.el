@@ -143,3 +143,7 @@
 (package! rg)
 
 (package! chronos)
+
+;; Helpful is an alternative to the built-in Emacs help that provides much more
+;; contextual information.
+(package! helpful)
