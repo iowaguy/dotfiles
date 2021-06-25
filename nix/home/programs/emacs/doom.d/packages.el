@@ -85,11 +85,6 @@
 ;; A nice visualizer for my =org-roam= graph.
 (package! org-roam-server)
 
-;; Use this to take screenshots and embed them in =org= files. Note that
-;; =screencapture= is the tool to use for MacOS. Though =org-download= supports
-;; other tools for other OSs.
-(package! org-download)
-
 ;; Export to bootstrap html
 (package! ox-twbs)
 

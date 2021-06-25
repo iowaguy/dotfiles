@@ -792,10 +792,8 @@ Use this to take screenshots and embed them in =org= files. Note that
 =screencapture= is the tool to use for MacOS. Though =org-download= supports
 other tools for other OSs.
 #+begin_src emacs-lisp
-  (setq org-download-screenshot-method blw/screenshot)
   (setq org-download-image-dir "screenshots/")
   (setq org-download-image-org-width 500)
-  (setq org-download-heading-lvl nil)
 #+end_src
 
 For adding citations in org.
