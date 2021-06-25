@@ -75,23 +75,12 @@ Define a big ol' bunch of handy utility functions.
      (format "notify-send -t 2000 \"%s\" \"%s\"" title message)))
 #+end_src
 
-Why not?
-
-#+begin_src emacs-lisp
-  (global-prettify-symbols-mode t)
-#+end_src
-
 I'm currently using the "solarized-dark" theme. I've got a scenic wallpaper, so
 just a hint of transparency looks lovely and isn't distracting or hard to read.
 I also use the interactive command =apply-light-theme= when the screen is hard
 to see (like out in the sun).
 
 #+begin_src emacs-lisp
-  (defun transparency (value)
-    "Sets the transparency of the frame window. 0=transparent/100=opaque."
-    (interactive "nTransparency Value 0 - 100 opaque:")
-    (set-frame-parameter (selected-frame) 'alpha value))
-
   (defun blw/apply-dark-theme ()
     "Apply the dark theme."
     (interactive)
@@ -186,16 +175,6 @@ Note that this overrides the default font-related keybindings from
   (hrs/reset-font-size)
 #+end_src
 
-
-=global-hl-line-mode= softly highlights the background color of the line
-containing point. It makes it a bit easier to find point, and it's useful when
-pairing or presenting code.
-
-#+begin_src emacs-lisp
-  (global-hl-line-mode)
-#+end_src
-
-
 Use the =diff-hl= package to highlight changed-and-uncommitted lines when
 programming.
 
@@ -229,45 +208,6 @@ Make full screen on startup, because this is the first thing I'm going to do any
 #+begin_src emacs-lisp
   (set-frame-parameter nil 'fullscreen 'maximized)
 #+end_src
-
-
-I use a few packages in virtually every programming or writing environment to
-manage the project, handle auto-completion, search for terms, and deal with
-version control. That's all in here.
-
-Use =M-/= for completion.
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "M-/") 'company-complete-common)
-#+end_src
-
-
-The =dumb-jump= package works well enough in a [[https://github.com/jacktasia/dumb-jump#supported-languages][ton of environments]], and it
-doesn't require any additional setup. I've bound its most useful command to
-=M-.=.
-
-#+begin_src emacs-lisp
-  (use-package! dumb-jump
-    :defer t
-    :config
-    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-    (setq dumb-jump-selector 'ivy))
-#+end_src
-
-
-# I'd like to enable flycheck all kinds of places.
-
-#+begin_src emacs-lisp
-  ;; (use-package! let-alist)
-  ;; (use-package! flycheck)
-#+end_src
-
-# Correct flycheck-identified mistakes.
-#+begin_src emacs-lisp
-  ;; (use-package! attrap
-    ;; :ensure t)
-#+end_src
-
 
 I use =magit= to handle version control. It's lovely, but I tweak a few things:
 
@@ -348,33 +288,11 @@ output.
   (setq compilation-scroll-output t)
 #+end_src
 
-#+begin_src emacs-lisp
-  (setq scss-compile-at-save nil)
-#+end_src
-
 Ripgrep is great for searching for text searches (much faster than grep). With
 this package, I can use it without leaving emacs.
 #+begin_src emacs-lisp
   (use-package! rg
     :defer t)
-#+end_src
-
-All the lisps have some shared features, so we want to do the same things for
-all of them. That includes using =paredit=, =rainbow-delimiters=, and
-highlighting the whole expression when point is on a parenthesis.
-
-#+begin_src emacs-lisp
-  (setq lispy-mode-hooks
-        '(clojure-mode-hook
-          emacs-lisp-mode-hook
-          lisp-mode-hook
-          scheme-mode-hook))
-
-  (dolist (hook lispy-mode-hooks)
-    (add-hook hook (lambda ()
-                     (setq show-paren-style 'expression)
-                     (paredit-mode)
-                     (rainbow-delimiters-mode))))
 #+end_src
 
 If I'm writing in Emacs lisp I'd like to use =eldoc-mode= to display
@@ -387,24 +305,10 @@ documentation.
     (add-hook! 'emacs-lisp-mode-hook 'eldoc-mode))
 #+end_src
 
-# Add a thin vertical line at 80 characters for python files. From
-# =fill-column-indicator=.
-# #+begin_src emacs-lisp
-#   (add-hook 'python-mode-hook 'fci-mode)
-# #+end_src
-
-Indent with 2 spaces.
-
-#+begin_src emacs-lisp
-  (add-hook! 'sh-mode-hook
-            (lambda ()
-              (setq sh-basic-offset 2
-                    sh-indentation 2)))
-#+end_src
-
 #+begin_src emacs-lisp
   (eshell-git-prompt-use-theme 'robbyrussell)
 #+end_src
+
 Automagically do an =ls= when entering a new directory.
 
 #+begin_src emacs-lisp
@@ -415,18 +319,6 @@ Open new eshell prompt with =F1= key.
 
 #+begin_src emacs-lisp
   (global-set-key [f1] 'eshell)
-#+end_src
-
-Add some fun tools for viewing shell history and finding files.
-
-#+begin_src emacs-lisp
-  (add-hook! 'eshell-mode-hook
-    (lambda ()
-      (define-key eshell-mode-map (kbd "C-c C-i") 'helm-eshell-history)))
-
-  (add-hook! 'eshell-mode-hook
-    (lambda ()
-      (define-key eshell-mode-map (kbd "C-c C-f") 'helm-find-files)))
 #+end_src
 
 Emacs shells should inherit the PATH from the system shell.
@@ -512,19 +404,6 @@ Use syntax highlighting in source blocks while editing.
   (setq org-src-fontify-natively t)
 #+end_src
 
-Make TAB act as if it were issued in a buffer of the language's major mode.
-
-#+begin_src emacs-lisp
-  (setq org-src-tab-acts-natively t)
-#+end_src
-
-When editing a code snippet, use the current window rather than popping open a
-new one (which shows the same information).
-
-#+begin_src emacs-lisp
-  (setq org-src-window-setup 'current-window)
-#+end_src
-
 A workaround until https://github.com/hlissner/doom-emacs/issues/4832 is fixed.
 #+begin_src emacs-lisp
   (use-package! org
@@ -541,12 +420,6 @@ Quickly insert a block of =elisp= or =jupyter-python=.
                  '("el" . "src emacs-lisp"))
     (add-to-list 'org-structure-template-alist
                  '("jp" . "src jupyter-python :async yes :exports code :results code")))
-#+end_src
-
-Don't indent newly expanded blocks, even if they're under a heading.
-
-#+begin_src emacs-lisp
-  (setq org-adapt-indentation nil)
 #+end_src
 
 Show Greek letters and =LaTeX= math symbols (in =org= buffer) using normal
@@ -750,9 +623,6 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 
   (add-hook! org-roam-mode (org-roam-bibtex-mode))
 
-;;  (require 'org-roam-protocol)
-
-
   (require 'subr-x) ;; for `when-let'
 
   (defun org-link-at-point-unlink ()
@@ -769,25 +639,6 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
       (insert contents)))
 #+end_src
 
-This is for me to generate my weekly plans.
-#+begin_src emacs-lisp
-  (defun blw/weekly-plan--day-splits (n)
-    (split-window-vertically)
-    ;; (other-window 1)
-    (org-roam-dailies-find-tomorrow n)
-    (balance-windows))
-
-  (defun blw/weekly-plan ()
-    (interactive)
-    (delete-other-windows)
-    (hrs/dashboard)
-    (other-window 1)
-    (org-roam-dailies-find-today)
-    (blw/weekly-plan--day-splits 1)
-    (blw/weekly-plan--day-splits 2)
-    (blw/weekly-plan--day-splits 3)
-    (blw/weekly-plan--day-splits 4))
-#+end_src
 Use this to take screenshots and embed them in =org= files. Note that
 =screencapture= is the tool to use for MacOS. Though =org-download= supports
 other tools for other OSs.
@@ -877,14 +728,6 @@ I want to be able to quickly open up my list of zettel topics.
     (find-file blw/org-reading-file))
 #+end_src
 
-Refiling according to the document's hierarchy.
-
-#+begin_src emacs-lisp
-  (setq org-refile-use-outline-path t)
-  (setq org-outline-path-complete-in-steps nil)
-#+end_src
-
-
 Bind a few handy keys.
 
 #+begin_src emacs-lisp
@@ -892,18 +735,6 @@ Bind a few handy keys.
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
-
-Don't ask before evaluating code blocks.
-
-#+begin_src emacs-lisp
-  (use-package pyvenv)
-#+end_src
-
-Display/update images in the buffer after I evaluate.
-#+begin_src emacs-lisp
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-#+end_src
-
 
 Allow export to markdown and beamer (for presentations).
 
@@ -924,17 +755,8 @@ Use =htmlize= to ensure that exported code blocks use syntax highlighting.
       :defer t)
 #+end_src
 
-Translate regular ol' straight quotes to typographically-correct curly quotes
-when exporting.
-
-#+begin_src emacs-lisp
-  (setq org-export-with-smart-quotes t)
-#+end_src
-
-
 Don't include a footer with my contact and publishing information at the bottom
 of every exported HTML document.
-
 #+begin_src emacs-lisp
   (setq org-html-postamble nil)
 #+end_src
@@ -968,18 +790,8 @@ Include the =minted= package in all of my LaTeX exports.
 #+end_src
 
 Put LaTeX table captions below the table.
-
 #+begin_src emacs-lisp
   (setq org-latex-caption-above nil)
-#+end_src
-
-I rarely write LaTeX directly any more, but I often export through it with
-org-mode, so I'm keeping them together.
-
-Automatically parse the file after loading it.
-
-#+begin_src emacs-lisp
-  (setq TeX-parse-self t)
 #+end_src
 
 Always use =pdflatex= when compiling LaTeX documents. I don't really have any
@@ -1070,112 +882,6 @@ Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for 
     (add-hook 'message-mode-hook 'orgalist-mode))
 #+end_src
 
-
-I use [[http://proselint.com/][proselint]] to check my prose for common errors. This creates a flycheck
-checker that runs proselint in texty buffers and displays my errors.
-
-#+begin_src emacs-lisp
-  (require 'flycheck)
-
-  (flycheck-def-executable-var proselint "proselint")
-  (flycheck-define-command-checker 'proselint
-    "A linter for prose."
-    :command '("proselint" source-inplace)
-    :error-patterns
-    '((warning line-start (file-name) ":" line ":" column ": "
-               (id (one-or-more (not (any " "))))
-               (message (one-or-more not-newline)
-                        (zero-or-more "\n" (any " ") (one-or-more not-newline)))
-               line-end))
-    :modes prose-modes
-    :next-checkers 'nil
-    :standard-input 'nil
-    :working-directory 'nil)
-
-  (add-to-list 'flycheck-checkers 'proselint)
-#+end_src
-
-Use flycheck in the appropriate buffers, which is all prose buffers except
-=thebigone.org= because that is big and flycheck is slow and unnecessary there.
-
-#+begin_src emacs-lisp
-  (dolist (hook prose-mode-hooks)
-    (add-hook hook 'flycheck-mode))
-
-  (defvar no-flycheck-list (list 'org-index-file))
-
-  (defun blw/turn-off-flycheck-if-match ()
-    (if (member (file-name-nondirectory (buffer-file-name)) no-flycheck-list)
-        (flycheck-mode -1)))
-
-  (add-hook 'find-file-hook #'blw/turn-off-flycheck-if-match)
-#+end_src
-
-
-I look up definitions by hitting =C-x w=, which shells out to =sdcv=. I've
-loaded that with the (beautifully lyrical) 1913 edition of Webster's dictionary,
-so these definitions are a lot of fun. Dictionaries can be downloaded from [[https://sites.google.com/site/gtonguedict/home/stardict-dictionaries][here]].
-By following [[https://linuxaria.com/article/sdcv-command-line-based-dictionary-for-linux][these instructions]].
-
-#+begin_src emacs-lisp
-  (defun hrs/dictionary-prompt ()
-    (read-string
-     (format "Word (%s): " (or (hrs/region-or-word) ""))
-     nil
-     nil
-     (hrs/region-or-word)))
-
-  (defun hrs/dictionary-define-word ()
-    (interactive)
-    (let* ((word (hrs/dictionary-prompt))
-           (buffer-name (concat "Definition: " word)))
-      (with-output-to-temp-buffer buffer-name
-        (shell-command (format "sdcv -n %s" word) buffer-name))))
-
-  (define-key global-map (kbd "C-c w") 'hrs/dictionary-define-word)
-#+end_src
-
-
-# Because I can't always use =org=.
-
-# - Associate =.md= files with GitHub-flavored Markdown.
-# - Use =pandoc= to render the results.
-# - Leave the code block font unchanged.
-
-# #+begin_src emacs-lisp
-#   (use-package markdown-mode
-#     :commands gfm-mode
-
-#     :mode (("\\.md$" . gfm-mode))
-
-#     :config
-#     (setq markdown-command "pandoc --standalone --mathjax --from=markdown")
-#     (custom-set-faces
-#      '(markdown-code-face ((t nil)))))
-# #+end_src
-
-
-Successive calls to =cycle-spacing= rotate between changing the whitespace
-around point to:
-
-- A single space,
-- No spaces, or
-- The original spacing.
-
-Binding this to =M-SPC= is strictly better than the original binding of
-=just-one-space=.
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-M-SPC") 'cycle-spacing)
-#+end_src
-
-
-#+begin_src emacs-lisp
-  (put 'downcase-region 'disabled nil)
-  (put 'upcase-region 'disabled nil)
-#+end_src
-
-
 Use abbreviations from my emacs directory, and save new abbreviations every time
 a file is saved. [[http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html][Documentation here]].
 
@@ -1186,9 +892,6 @@ a file is saved. [[http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html][D
   (dolist (hook prose-mode-hooks)
       (add-hook hook 'abbrev-mode))
 #+end_src
-
-#+RESULTS:
-
 
 Remove text without permanently deleting it. Options to send it to the bottom of
 the file or a trash file.
@@ -1233,14 +936,6 @@ That said, I'd usually like to hide those extra details.
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 #+end_src
 
-Set up DWIM ("do what I mean") for =dired=. When I've got two =dired= windows
-side-by-side, and I move or copy files in one window, this sets the default
-location to the other window.
-
-#+begin_src emacs-lisp
-  (setq dired-dwim-target t)
-#+end_src
-
 Kill buffers of files/directories that are deleted in =dired=.
 
 #+begin_src emacs-lisp
@@ -1271,18 +966,6 @@ This uses =emacs-async= to make =dired= perform actions asynchronously.
     :config
     (dired-async-mode 1))
 #+end_src
-
-I'm often browsing directories of photos and images, so this binds "v" to view a
-slideshow of the current directory with =s= (a custom =feh= wrapper defined
-elsewhere in this repo).
-
-#+begin_src emacs-lisp
-  (defun hrs/dired-slideshow ()
-    (interactive)
-    (start-process "dired-slideshow" nil "s" (dired-current-directory)))
-#+end_src
-
-
 
 I futz around with my dotfiles a lot. This binds =C-c e= to quickly open my
 Emacs configuration file.
@@ -1339,16 +1022,6 @@ Never use tabs. Tabs are the devil’s whitespace.
 #+begin_src emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+end_src
-
-Do this /only/ for lines that I edit.
-
-#+begin_src emacs-lisp
-  (use-package! ws-butler
-    :defer t
-    :config
-    (ws-butler-global-mode t))
-#+end_src
-
 
 =which-key= displays the possible completions for a long keybinding. That's
 really helpful for some modes (like =projectile=, for example).
@@ -1412,11 +1085,6 @@ makes that automatic.
   (global-set-key (kbd "C-x 2") 'hrs/split-window-below-and-switch)
   (global-set-key (kbd "C-x 3") 'hrs/split-window-right-and-switch)
 #+end_src
-
-#+begin_src emacs-lisp
-  (projectile-global-mode)
-#+end_src
-
 
 Enable [[https://github.com/hrs/engine-mode][engine-mode]] and define a few useful engines.
 
