@@ -225,7 +225,7 @@ I use =magit= to handle version control. It's lovely, but I tweak a few things:
     ("C-c m" . magit-status)
 
     :config
-    (use-package with-editor)
+    (use-package! with-editor)
 
     (setq magit-push-always-verify nil
           git-commit-summary-max-length 50))
@@ -357,9 +357,8 @@ Images should be shown in-buffer by default, but not at full size.
 Use =notmuch= to read my email.
 #+begin_src emacs-lisp
   (use-package! notmuch
-    :defer t)
-
-  (after! notmuch
+    :defer t
+    :config
     (setq message-default-mail-headers "Cc: \nBcc: \n"
           +notmuch-sync-backend 'mbsync
           notmuch-hello-sections `(notmuch-hello-insert-saved-searches
@@ -739,14 +738,13 @@ Bind a few handy keys.
 Allow export to markdown and beamer (for presentations).
 
 #+begin_src emacs-lisp
-  (after! org
     (use-package! ox-twbs
-      :defer t)
-
-    (require 'ox-md)
-    (require 'ox-beamer)
-    (require 'ox-twbs))
-  #+end_src
+      :after org
+      :config
+      (require 'ox-md)
+      (require 'ox-beamer)
+      (require 'ox-twbs))
+#+end_src
 
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 
@@ -782,7 +780,6 @@ this enables that.
 #+end_src
 
 Include the =minted= package in all of my LaTeX exports.
-
 #+begin_src emacs-lisp
   (after! org-tempo
     (add-to-list 'org-latex-packages-alist '("" "minted"))
@@ -806,16 +803,15 @@ and always treat the current file as the "main" file. That's intentional, since
 I'm usually actually in an org document.
 
 #+begin_src emacs-lisp
-  (add-hook 'LaTeX-mode-hook
+  (add-hook! 'LaTeX-mode-hook
             (lambda ()
-              (LaTeX-math-mode)
-              (setq TeX-master t)))
+              (LaTeX-math-mode)))
 #+end_src
 
 Start a new line when line length exceeds 80 characters.
 
-#+begin_src
-(add-hook 'LaTeX-mode-hook 'auto-fill-mode)
+#+begin_src emacs-lisp
+  (add-hook! 'LaTeX-mode-hook 'auto-fill-mode)
 #+end_src
 
 
@@ -967,7 +963,7 @@ The =helpful= package provides, among other things, more context in Help
 buffers.
 
 #+begin_src emacs-lisp
-  (use-package helpful)
+  (use-package! helpful)
 
   (global-set-key (kbd "C-h f") #'helpful-callable)
   (global-set-key (kbd "C-h v") #'helpful-variable)
