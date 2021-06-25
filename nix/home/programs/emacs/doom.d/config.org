@@ -882,17 +882,6 @@ Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for 
     (add-hook 'message-mode-hook 'orgalist-mode))
 #+end_src
 
-Use abbreviations from my emacs directory, and save new abbreviations every time
-a file is saved. [[http://ergoemacs.org/emacs/emacs_abbrev_mode_tutorial.html][Documentation here]].
-
-#+begin_src emacs-lisp
-  (setq abbrev-file-name "~/.emacs.d/abbrev_defs")
-  (setq save-abbrevs 'silent)
-
-  (dolist (hook prose-mode-hooks)
-      (add-hook hook 'abbrev-mode))
-#+end_src
-
 Remove text without permanently deleting it. Options to send it to the bottom of
 the file or a trash file.
 
