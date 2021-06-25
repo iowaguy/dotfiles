@@ -481,11 +481,21 @@ prior pane.
 #+begin_src emacs-lisp
   (after! org
           (setq org-agenda-restore-windows-after-quit t
+
+                ;; Open org-agenda in other side of split, making the split if
+                ;; necessary.
                 org-agenda-window-setup 'other-window
                 org-agenda-skip-scheduled-if-deadline-is-shown t
                 org-agenda-skip-deadline-if-done t
                 org-agenda-span 'week
-                org-agenda-start-day nil))
+                org-agenda-start-day nil
+
+                ;; Add more S-expressions =org-file-path= to the list to have
+                ;; them parsed for my org-agenda.
+                org-agenda-files (list org-index-file
+                                       blw/org-reading-file)
+                ;; Record the time that a todo was completed.
+                org-log-done 'time))
 #+end_src
 I've got some custom agenda views that I use to visualize what I'm working on.
 
