@@ -44,15 +44,17 @@ let
     zotero
   ];
 
+  sources = import ../nix/sources.nix;
 in {
   imports = (import ./programs) ++ (import ./modules) ++ (import ./services);
 
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = p: {
-      nur = import (import pinned/nur.nix) { inherit pkgs; };
+      nur = import sources.nur { inherit pkgs; };
     };
   };
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {

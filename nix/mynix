@@ -15,6 +15,7 @@ system_config() {
   sudo cp -r system/machine/ /etc/nixos/
   sudo cp -r system/wm/ /etc/nixos/
   sudo cp -r system/services/ /etc/nixos/
+  sudo cp -r nix/ /etc/nixos/
 
   model="$(sudo dmidecode -s system-product-name)"
 
