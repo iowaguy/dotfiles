@@ -55,11 +55,6 @@
     bluetooth = { enable = true; };
   };
 
-  environment.systemPackages = with pkgs;
-    [
-      linuxPackages.facetimehd # TODO not sure if I still need this
-    ];
-
   services = {
     # Enable handling of hotplug and sleep events by autorandr
     autorandr.enable = true;
