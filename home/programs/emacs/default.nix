@@ -44,7 +44,7 @@
 
   services.emacs = { enable = true; };
 
-  home.links.".doom.d" = "./workspace/dotfiles/nix/home/programs/emacs/doom.d";
+  home.links.".doom.d" = "workspace/dotfiles/home/programs/emacs/doom.d";
 
   home.file.".bin/em" = {
     text = ''
