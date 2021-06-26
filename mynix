@@ -51,7 +51,7 @@ hm_install() {
 hm_refresh() {
   if [ ! -f $HOME/.config/nixpkgs/home.nix ]; then
     echo "Linking home.nix..."
-    ln -s $HOME/workspace/dotfiles/nix/home/home.nix $HOME/.config/nixpkgs/home.nix
+    ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
   fi
   home-manager switch
 }
