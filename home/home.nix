@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs ? import (import ./nix/sources.nix).home-manager {}, ... }:
 
 with lib;
 
