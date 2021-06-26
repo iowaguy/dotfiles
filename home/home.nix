@@ -19,7 +19,6 @@ let
     libnotify
     lorri
     niv
-    nixfmt
     nox
     pass
     pandoc
