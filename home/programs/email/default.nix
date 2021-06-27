@@ -39,6 +39,7 @@ in {
         mbsync = {
           enable = true;
           create = "maildir";
+          remove = "both";
         };
         msmtp.enable = true;
         notmuch.enable = true;
@@ -63,20 +64,17 @@ in {
 
       gmail = {
         address = builtins.concatStringsSep "@" [ "benweintraub34" "gmail.com" ];
-        imap.host = "imap.gmail.com";
         mbsync = {
           enable = true;
           create = "maildir";
+          remove = "both";
         };
         msmtp.enable = true;
         notmuch.enable = true;
         realName = "Ben Weintraub";
         passwordCommand = passCmd "mbsync";
-        smtp = {
-          host = "smtp.gmail.com";
-        };
         userName = builtins.concatStringsSep "@" [ "benweintraub34" "gmail.com" ];
-        flavor = "gmail.com";
+        flavor = "gmail.com"; # This sets the IMAP and SMTP servers automatically
         folders = {
           inbox = "Inbox";
           drafts = "[Gmail]/Drafts";
@@ -84,7 +82,6 @@ in {
           trash = "[Gmail]/Trash";
         };
 
-        imap.port = 993;
         maildir.path = "gmail";
       };
     };
