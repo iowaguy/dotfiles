@@ -390,6 +390,19 @@ Use =notmuch= to read my email.
             (:name "drafts"  :query "tag:draft":key "d"))))
 #+end_src
 
+When I write emails with org, I want it to be rendered as HTML, but without
+section numbers and some other annoyances.
+#+begin_src emacs-lisp
+  (after! org-mime
+    (setq org-mime-export-options '(:section-numbers nil
+                                    :with-author nil
+                                    :with-toc nil)))
+  (map! :after notmuch
+        :map message-mode-map
+        :localleader
+        :desc "Edit in Org" "o" #'org-mime-edit-mail-in-org-mode)
+#+end_src
+
 I like seeing a little downward-pointing arrow instead of the usual ellipsis
 (=...=) that org displays when there's stuff under a header.
 
