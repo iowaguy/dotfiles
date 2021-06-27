@@ -1134,3 +1134,11 @@ actual order those keys register.
                                   "--header-insertion-decorators=0"))
   (after! lsp-clangd (set-lsp-priority! 'clangd 2))
 #+end_src
+
+Don't automatically tangle literate config on save. This is not useful for me,
+because I like to save a lot while coding and it's annoying that it blocks
+anything from happening concurrently. Also, even after tangling, I still need to
+do a =doom/reload= or =doom sync=, which will do the tangling anyway.
+#+begin_src emacs-lisp
+  (remove-hook 'org-mode-hook #'+literate-enable-recompile-h)
+#+end_src
