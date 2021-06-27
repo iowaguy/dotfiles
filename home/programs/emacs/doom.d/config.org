@@ -1125,6 +1125,7 @@ actual order those keys register.
   (setq evil-escape-unordered-key-sequence t)
 #+end_src
 
+This is for the C/C++ LSP which uses =clangd=.
 #+begin_src emacs-lisp
   (setq lsp-clients-clangd-args '("-j=3"
                                   "--background-index"
