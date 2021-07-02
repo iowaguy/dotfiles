@@ -12,9 +12,10 @@ let
   bottom = ''
     [bar/bottom]
     bottom = true
-
+    background = #1f1f1f
+    foreground = #eee
     tray-position = center
-    modules-right = left-end-bottom cpu memory filesystem wired-network wireless-network pulseaudio
+    modules-right = left-end-bottom cpu memory filesystem temperature wireless-network pulseaudio battery date
     modules-left = i3
     enable-ipc = true
     height = 50
