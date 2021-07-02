@@ -9,13 +9,22 @@ let
     i3Support = true;
     pulseSupport = true;
   };
+  top = ''
+    [bar/top]
+    background = #1f1f1f
+    foreground = #eee
+    modules-right = left-end-top cpu memory filesystem temperature wireless-network pulseaudio battery date
+    height = 50
+    dpi = 192
+    font-0 = "Droid Sans Mono for Powerline:style=Regular";
+  '';
+
   bottom = ''
     [bar/bottom]
     bottom = true
     background = #1f1f1f
     foreground = #eee
-    tray-position = center
-    modules-right = left-end-bottom cpu memory filesystem temperature wireless-network pulseaudio battery date
+    tray-position = right
     modules-left = i3
     enable-ipc = true
     height = 50
@@ -33,8 +42,9 @@ in
     package = mypolybar;
     script = ''
       polybar bottom &
+      polybar top &
     '';
-    extraConfig = bottom + modules;
+    extraConfig = top + bottom + modules;
   };
 }
     # script = ''
