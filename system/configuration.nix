@@ -41,6 +41,7 @@
       "networkmanager" # Allow user to change network settings
       "docker"
       "libvirtd"
+      "power"
     ];
     shell = pkgs.zsh;
   };
