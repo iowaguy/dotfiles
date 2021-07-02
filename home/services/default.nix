@@ -1,5 +1,5 @@
 [
-  # ./polybar
+  ./polybar
   ./picom
   ./gpg-agent
   ./betterlockscreen
