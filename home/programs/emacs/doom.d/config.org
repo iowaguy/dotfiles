@@ -463,7 +463,8 @@ the location of an index file (my main todo list).
          org-directory (blw/persistent-file-path "org")
          org-index-file (blw/org-file-path "todos.org")
          org-gcal-file (blw/org-file-path "schedule.org")
-         blw/org-reading-file (blw/org-file-path "reading.org")
+         blw/org-cs-reading-file (blw/org-file-path "reading.org")
+         blw/org-writing-reading-file (blw/org-file-path "reading_writing.org")
          blw/org-fun-projects-file (blw/org-file-path "fun-projects.org")
          blw/org-zettel-inbox-file (blw/org-file-path "zettel-inbox.org")
          blw/zettelkasten (blw/zettelkasten-path ""))
@@ -506,7 +507,8 @@ prior pane.
                 ;; Add more S-expressions =org-file-path= to the list to have
                 ;; them parsed for my org-agenda.
                 org-agenda-files (list org-index-file
-                                       blw/org-reading-file)
+                                       blw/org-cs-reading-file
+                                       blw/org-writing-reading-file)
                 ;; Record the time that a todo was completed.
                 org-log-done 'time))
 #+end_src
@@ -559,9 +561,13 @@ shamelessly stolen and re-prefixed.
             (todo "INPROGRESS"
                   ((org-agenda-overriding-header "In progress:")))
             (todo "READ|SKIM|NOTES"
-                  ((org-agenda-overriding-header "Reading:")))
+                  ((org-agenda-overriding-header "CS Reading:")))
+            (todo "READ_W|SKIM_W|NOTES_W"
+                  ((org-agenda-overriding-header "Writing Reading:")))
             (todo "VET"
-                  ((org-agenda-overriding-header "Vetting:")))))))
+                  ((org-agenda-overriding-header "CS Vetting:")))
+            (todo "VET_W"
+                  ((org-agenda-overriding-header "Writing Vetting:")))))))
 #+end_src
 
 I consult my agenda pretty often, so I bind =C-c d= to open it a it faster. This
@@ -708,9 +714,13 @@ Define a few common tasks as capture templates. Specifically, I frequently:
   (after! org
           (setq org-capture-templates nil)
           (setq org-capture-templates
-                '(("r" "Reading material"
+                '(("r" "CS Reading material"
                    entry
-                   (file blw/org-reading-file)
+                   (file blw/org-cs-reading-file)
+                   "* %?\n")
+                  ("w" "Writing Reading material"
+                   entry
+                   (file blw/org-writing-reading-file)
                    "* %?\n")
                   ("c" "CV/Website updates"
                    entry
@@ -745,9 +755,13 @@ I want to be able to quickly open up my list of zettel topics.
     (interactive)
     (find-file blw/org-fun-projects-file))
 
-  (defun blw/reading-list ()
+  (defun blw/cs-reading-list ()
     (interactive)
-    (find-file blw/org-reading-file))
+    (find-file blw/org-cs-reading-file))
+
+  (defun blw/writing-reading-list ()
+    (interactive)
+    (find-file blw/org-writing-reading-file))
 #+end_src
 
 Bind a few handy keys.
