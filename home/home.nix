@@ -10,7 +10,6 @@ let
     curl
     direnv
     entr
-    evince
     fd
     ghc
     graphviz
