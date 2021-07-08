@@ -64,9 +64,6 @@
   ];
 
   programs = {
-    # A decent PDF viewer
-    evince.enable = true;
-
     # TODO: move to home.nix when rycee/home-manager#1087 resolved
     # https://github.com/rycee/home-manager/issues/1087
     ssh.startAgent = true;

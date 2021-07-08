@@ -86,6 +86,9 @@ in {
   };
 
   programs = {
+    # A pdf viewer
+    zathura.enable = true;
+
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
