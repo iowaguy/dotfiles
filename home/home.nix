@@ -86,12 +86,19 @@ in {
   };
 
   programs = {
+    # The z command for jumping around --- a better cd
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     # A pdf viewer
     zathura.enable = true;
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
+    # A nice tool for viewing processes and system stats
     htop.enable = true;
 
     # When I switch to a directory, I want it to assume a certain
