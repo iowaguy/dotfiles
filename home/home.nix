@@ -74,15 +74,12 @@ in {
     stateVersion = "21.03";
   };
 
+  # Store user configurations in .config directory
   xdg = {
     enable = true;
-    mimeApps = {
-      enable = true;
-      associations.added = {
-        "application/pdf" = [ "evince.desktop" ];
-        "x-scheme-handler/msteams" = [ "teams.desktop" ];
-      };
-    };
+
+    # Let me define what programs should open what files
+    mimeApps.enable = true;
   };
 
   programs = {
@@ -91,9 +88,6 @@ in {
       enable = true;
       enableZshIntegration = true;
     };
-
-    # A pdf viewer
-    zathura.enable = true;
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;

@@ -16,4 +16,4 @@
   ./teams
   # ./xmonad
   ./zsh
-]
+] ++ (import ./pdfs)
