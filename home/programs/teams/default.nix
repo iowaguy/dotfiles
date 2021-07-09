@@ -14,4 +14,8 @@
     Exec=${builtins.getEnv "HOME"}/.nix-profile/bin/teams
     Name=teams
   '';
+
+  xdg.mimeApps.associations.added = {
+    "x-scheme-handler/msteams" = [ "teams.desktop" ];
+  };
 }
