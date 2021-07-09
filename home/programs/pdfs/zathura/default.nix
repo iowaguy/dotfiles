@@ -16,5 +16,6 @@
 
   xdg.mimeApps.associations.added = {
     "application/pdf" = [ "zathura.desktop" ];
+    "image/pdf" = [ "zathura.desktop" ];
   };
 }

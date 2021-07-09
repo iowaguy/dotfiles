@@ -8,7 +8,6 @@
   ./git
   # ./gnome
   ./i3
-  ./mailcap
   ./redshift
   ./rofi
   ./slack
