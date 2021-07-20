@@ -125,6 +125,9 @@
   services = {
     blueman.enable = true;
     emacs.defaultEditor = true;
+
+    # Used by redshift. Gets my current location.
+    geoclue2.enable = true;
   };
 
   krb5 = {
