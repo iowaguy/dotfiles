@@ -14,5 +14,11 @@
         AUTOTYPE_field='autotype'
       '';
     };
+
+    # TODO I should be able to configure rofi-calc this way after the next HM
+    # release. Also enable in i3-config.ini (search for calc)
+    # plugins = [
+    #   pkgs.rofi-calc
+    # ];
   };
 }
