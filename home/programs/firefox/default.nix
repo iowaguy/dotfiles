@@ -11,10 +11,7 @@
     enable = true;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
       browserpass
-      decentraleyes
-      duckduckgo-privacy-essentials
       facebook-container
-      https-everywhere
       i-dont-care-about-cookies
       link-cleaner
       octotree
@@ -34,14 +31,6 @@
         addonId = "myallychou@gmail.com";
         url = "https://addons.mozilla.org/firefox/downloads/file/3727210/unhook_remove_youtube_recommended_videos_comments-1.4.2-an+fx.xpi";
         sha256 = "1j3v054hh6lplaryn60fq9s6gwm0zxlbcsxzqh17mkb4p1v4281j";
-        meta = {};
-      })
-      (buildFirefoxXpiAddon {
-        pname = "adblocker-ultimate";
-        version = "3.7.10";
-        addonId = "adblockultimate@adblockultimate.net";
-        url = "https://addons.mozilla.org/firefox/downloads/file/3687310/adblocker_ultimate-3.7.10-an+fx.xpi";
-        sha256 = "0xyr8ihdrr40f9sk75h5cknm6xy6wpdphdbzfzqg0vxh7fr7q6kf";
         meta = {};
       })
       (buildFirefoxXpiAddon {
