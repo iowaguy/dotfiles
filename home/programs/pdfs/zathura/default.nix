@@ -2,7 +2,12 @@
 
 {
   # A pdf viewer
-  programs.zathura.enable = true;
+  programs.zathura = {
+    enable = true;
+    options = {
+      selection-clipboard = "clipboard";
+    };
+  };
 
   home.file.".local/share/applications/zathura.desktop".text = ''
     [Desktop Entry]
