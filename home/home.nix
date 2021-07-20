@@ -83,6 +83,12 @@ in {
   };
 
   programs = {
+    # Interactive fuzzy searching from the command line
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     # The z command for jumping around --- a better cd
     zoxide = {
       enable = true;
