@@ -73,7 +73,6 @@
       ohMyZsh = {
         enable = true;
         plugins = [
-          "z"
           "colored-man-pages"
           "git-auto-fetch"
           "vagrant"
