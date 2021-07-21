@@ -28,6 +28,7 @@ in {
     };
   };
   accounts.email = {
+    maildirBasePath = "${builtins.getEnv "HOME"}/.Maildir";
     accounts = {
       fastmail = {
         realName = "Ben Weintraub";
