@@ -2,8 +2,8 @@
     services.redshift = {
       enable = true;
       provider = "geoclue2";
-      temperature.day = 5500;
-      temperature.night = 3700;
+      temperature.day = 6500;
+      temperature.night = 3000;
       tray = true;
     };
 }
