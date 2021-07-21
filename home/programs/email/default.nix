@@ -41,6 +41,7 @@ in {
           enable = true;
           create = "maildir";
           remove = "both";
+          expunge = "both";
         };
         msmtp.enable = true;
         notmuch.enable = true;
