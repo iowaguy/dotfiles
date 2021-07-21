@@ -11,7 +11,7 @@
       stores = ["${builtins.getEnv "HOME"}/.password-store"];
       extraConfig = ''
         URL_field='url'
-        USERNAME_field='user'
+        USERNAME_field='login'
         AUTOTYPE_field='autotype'
       '';
     };
