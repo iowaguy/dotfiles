@@ -5,6 +5,7 @@
     enable = true;
     theme = "fancy";
     terminal = "${pkgs.alacritty}/bin/alacritty";
+    package = with pkgs; rofi.override { plugins = [ rofi-calc ]; };
     pass = {
       enable = true;
       stores = ["${builtins.getEnv "HOME"}/.password-store"];
@@ -16,7 +17,7 @@
     };
 
     # TODO I should be able to configure rofi-calc this way after the next HM
-    # release. Also enable in i3-config.ini (search for calc)
+    # release.
     # plugins = [
     #   pkgs.rofi-calc
     # ];
