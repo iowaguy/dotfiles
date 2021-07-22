@@ -8,7 +8,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./machine/current.nix
-  ] ++ (import ./services) ++ (import ./wm);
+  ] ++ (import ./wm);
 
   networking = {
     # The global useDHCP flag is deprecated, therefore explicitly set to

@@ -65,4 +65,35 @@ in {
       };
     };
   };
+
+  # Check for new mail every five minutes
+  systemd.user = {
+    services = {
+      notmuch = {
+        Unit = {
+          Description = "Get new mail";
+        };
+        Service = {
+          ExecStart = ''
+            ${pkgs.notmuch}/bin/notmuch --config ${builtins.getEnv "HOME"}/.config/notmuch/notmuchrc new
+            '';
+          Type = "oneshot";
+        };
+      };
+    };
+    timers = {
+      notmuch = {
+        Unit = {
+          Description = "Get new mail";
+        };
+        Timer = {
+          OnCalendar = "5minutes";
+          Persistent = true;
+        };
+        Install = {
+          WantedBy = [ "timers.target" ];
+        };
+      };
+    };
+  };
 }
