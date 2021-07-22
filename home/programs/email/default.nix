@@ -63,29 +63,6 @@ in {
           tls.enable = true;
         };
       };
-
-      gmail = {
-        address = builtins.concatStringsSep "@" [ "benweintraub34" "gmail.com" ];
-        mbsync = {
-          enable = true;
-          create = "maildir";
-          remove = "both";
-        };
-        msmtp.enable = true;
-        notmuch.enable = true;
-        realName = "Ben Weintraub";
-        passwordCommand = passCmd "mbsync";
-        userName = builtins.concatStringsSep "@" [ "benweintraub34" "gmail.com" ];
-        flavor = "gmail.com"; # This sets the IMAP and SMTP servers automatically
-        folders = {
-          inbox = "Inbox";
-          drafts = "[Gmail]/Drafts";
-          sent = "[Gmail]/SentMail";
-          trash = "[Gmail]/Trash";
-        };
-
-        maildir.path = "gmail";
-      };
     };
   };
 }
