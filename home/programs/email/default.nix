@@ -87,8 +87,11 @@ in {
           Description = "Get new mail";
         };
         Timer = {
-          OnCalendar = "5minutes";
-          Persistent = true;
+          # run one minute after boot
+          OnBootSec = "1min";
+
+          # Rerun every five minutes the unit is active
+          OnCalendar = "*:0/5";
         };
         Install = {
           WantedBy = [ "timers.target" ];
