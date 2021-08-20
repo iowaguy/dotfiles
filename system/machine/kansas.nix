@@ -67,6 +67,11 @@
       # keyboard settings
       xkbOptions = "altwin:swap_lalt_lwin"; # Swap left alt with left win
 
+      libinput = {
+        # one, two, three fingered clicks (on touchpad) map to left, right, middle clicks
+        touchpad.clickMethod = "clickfinger";
+      };
+
       # xrandrHeads = [
       #   {
       #     output = "eDP";
