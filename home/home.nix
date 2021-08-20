@@ -9,6 +9,7 @@ let
     caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
     direnv
+    drawio                       # good for drawing finite state machines
     entr
     fd
     ghc
