@@ -71,26 +71,6 @@
         # one, two, three fingered clicks (on touchpad) map to left, right, middle clicks
         touchpad.clickMethod = "clickfinger";
       };
-
-      # xrandrHeads = [
-      #   {
-      #     output = "eDP";
-      #     primary = true;
-      #   }
-      #   {
-      #     output = "HDMI-0";
-      #     monitorConfig = ''
-      #       Option "PreferredMode" "3840x2160"
-      #     '';
-      #   }
-      # ];
-      # resolutions = [
-      #   { x = 2048; y = 1152; }
-      #   { x = 1920; y = 1080; }
-      #   { x = 2560; y = 1440; }
-      #   { x = 3072; y = 1728; }
-      #   { x = 3840; y = 2160; }
-      # ];
     };
 
     # power savings
@@ -100,23 +80,4 @@
   };
 
   powerManagement.powertop.enable = true;
-
-  # systemd.services.bluetooth = {
-  #   enable = true;
-  #   description = "Bluetooth service";
-  #   unitConfig = {
-  #     Description = "Bluetooth service";
-  #     ConditionPathIsDirectory = /sys/class/bluetooth;
-  #     ControllerMode = "dual";
-  #     Enable = "Source,Sink,Media,Socket";
-  #   };
-  #   serviceConfig = {
-  #     Type = "dbus";
-  #     BusName = "org.bluez";
-  #     ExecStart = ["" "${pkgs.bluezFull}/bin/bluetoothd --noplugin=avrcp"];
-  #     NotifyAccess = "main";
-  #   };
-  #   wantedBy = [ "multi-user.target" ];
-
-  # };
 }
