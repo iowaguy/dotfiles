@@ -38,6 +38,9 @@
     # Needed for C/C++ LSP
     ccls
     clang-tools
+
+    # Needed for installing emacsql-sqlite for org-roam
+    gcc
   ];
 
   programs.emacs.enable = true;
