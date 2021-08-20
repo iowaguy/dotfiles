@@ -128,6 +128,9 @@
 
     # Used by redshift. Gets my current location.
     geoclue2.enable = true;
+
+    # make capslock := ctrl
+    xserver.xkbOptions = "ctrl:nocaps";
   };
 
   krb5 = {

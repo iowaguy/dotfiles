@@ -72,9 +72,6 @@
         '';
       };
 
-      # keyboard settings
-      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
-
       xrandrHeads = [
         {
           output = "eDP";

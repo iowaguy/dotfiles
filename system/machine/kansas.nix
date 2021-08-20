@@ -65,7 +65,7 @@
 
 
       # keyboard settings
-#      xkbOptions = "ctrl:nocaps"; # make capslock := ctrl
+      xkbOptions = "altwin:swap_lalt_lwin"; # Swap left alt with left win
 
       # xrandrHeads = [
       #   {
