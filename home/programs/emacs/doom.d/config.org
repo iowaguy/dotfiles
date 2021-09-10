@@ -637,6 +637,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
           (:prefix ("C-c n" . "org-roam")
           :desc "Today"                 "d" #'org-journal-new-entry
           :desc "Anyday"                "a" #'org-journal-new-scheduled-entry
+          :desc "Insert"                "i" #'org-roam-node-insert
           :desc "Unlink"                "u" #'org-link-at-point-unlink)))
 
   (add-hook! org-roam-mode (org-roam-bibtex-mode))
