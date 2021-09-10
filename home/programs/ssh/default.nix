@@ -19,6 +19,20 @@ in {
           "ForwardAgent" = "yes";
         };
       };
+      "khoury-login" = {
+        extraOptions = {
+          "Hostname" = "login.khoury.northeastern.edu";
+          "User" = "benweintraub";
+        };
+      };
+      "khoury" = dag.entryAfter [ "khoury-login" ] {
+        extraOptions = {
+          "Hostname" = "vdi-linux-030.ccs.neu.edu";
+          "ProxyJump" = "khoury-login";
+          "User" = "benweintraub";
+          "ForwardAgent" = "yes";
+        };
+      };
       "jump.csail.mit.edu" = {
         extraOptions = {
           "GSSAPIAuthentication" = "yes";
