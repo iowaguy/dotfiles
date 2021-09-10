@@ -41,6 +41,9 @@
 
     # Needed for installing emacsql-sqlite for org-roam
     gcc
+
+    # Needed for =minted= to export with syntax highlighting
+    python38Packages.pygments
   ];
 
   programs.emacs.enable = true;
