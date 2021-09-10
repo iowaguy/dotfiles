@@ -657,6 +657,11 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
       (insert contents)))
 #+end_src
 
+Want the journal to display weekly, not daily files.
+#+begin_src emacs-lisp
+(setq org-journal-file-type 'weekly)
+#+end_src
+
 Use this to take screenshots and embed them in =org= files. Note that
 =screencapture= is the tool to use for MacOS. Though =org-download= supports
 other tools for other OSs.
