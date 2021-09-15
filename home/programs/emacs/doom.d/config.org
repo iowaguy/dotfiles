@@ -635,10 +635,12 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 
     (map! :map org-mode-map
           (:prefix ("C-c n" . "org-roam")
-          :desc "Today"                 "d" #'org-journal-new-entry
-          :desc "Anyday"                "a" #'org-journal-new-scheduled-entry
           :desc "Insert"                "i" #'org-roam-node-insert
           :desc "Unlink"                "u" #'org-link-at-point-unlink)))
+
+    (map! (:prefix ("C-c n" . "org-roam")
+          :desc "Today"                 "d" #'org-journal-new-entry
+          :desc "Anyday"                "a" #'org-journal-new-scheduled-entry))
 
   (add-hook! org-roam-mode (org-roam-bibtex-mode))
 
