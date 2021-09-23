@@ -6,6 +6,7 @@
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "7d9ba15214004c979d2c8733f8be12ce6502cf8a",
+        "sha256": "18kmvzinsi9xgm81dk5kyd03m3y5nn125kmbkxf66xasrg13yqdv",
         "type": "tarball",
         "url": "https://github.com/nix-community/home-manager/archive/7d9ba15214004c979d2c8733f8be12ce6502cf8a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
@@ -16,10 +17,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "e0ca65c81a2d7a4d82a189f1e23a48d59ad42070",
-        "sha256": "1pq9nh1d8nn3xvbdny8fafzw87mj7gsmp6pxkdl65w2g18rmcmzx",
+        "rev": "65a61b147f307d24bfd0a5cd56ce7d7b7cc61d2e",
+        "sha256": "17mirpsx5wyw262fpsd6n6m47jcgw8k2bwcp1iwdnrlzy4dhcgqh",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/e0ca65c81a2d7a4d82a189f1e23a48d59ad42070.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/65a61b147f307d24bfd0a5cd56ce7d7b7cc61d2e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
@@ -28,10 +29,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6b940846e99cedd10eafbc301e467972ade1afec",
+        "rev": "83413f47809790e4ca012e314e7782adeae36cf2",
         "sha256": "0nyk9x6hmdgdqgs4m5zdb7c4nhfc282yy1l4a3f9xln4mgchrw4h",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/6b940846e99cedd10eafbc301e467972ade1afec.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/83413f47809790e4ca012e314e7782adeae36cf2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -40,10 +41,10 @@
         "homepage": "https://nur.nix-community.org/",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "47a761ce8c8565b68035438ddb0d31ead64d733e",
+        "rev": "b09a23c42e25b187ef80dc22dd7fd9d96003db68",
         "sha256": "12483a2k4mzxsni1n8pyvcq4x9jjw03nzqxpymjsynlrdr3fj7jf",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/47a761ce8c8565b68035438ddb0d31ead64d733e.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/b09a23c42e25b187ef80dc22dd7fd9d96003db68.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
