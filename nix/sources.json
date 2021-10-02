@@ -42,7 +42,7 @@
         "owner": "nix-community",
         "repo": "NUR",
         "rev": "b09a23c42e25b187ef80dc22dd7fd9d96003db68",
-        "sha256": "12483a2k4mzxsni1n8pyvcq4x9jjw03nzqxpymjsynlrdr3fj7jf",
+        "sha256": "0g5qp1wdgwhr7zlcn9dpi6bhhfwlgq8c07a3a3230y4qqp0pa2l2",
         "type": "tarball",
         "url": "https://github.com/nix-community/NUR/archive/b09a23c42e25b187ef80dc22dd7fd9d96003db68.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
