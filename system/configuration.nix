@@ -17,7 +17,6 @@
 
     # Block sites that distract me
     extraHosts = ''
-      127.0.0.1 netflix.com
       127.0.0.1 nytimes.com
       127.0.0.1 news.ycombinator.com
     '';
