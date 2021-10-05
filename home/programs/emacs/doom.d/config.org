@@ -638,9 +638,8 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
           :desc "Insert"                "i" #'org-roam-node-insert
           :desc "Unlink"                "u" #'org-link-at-point-unlink)))
 
-    (map! (:prefix ("C-c n" . "org-roam")
-          :desc "Today"                 "d" #'org-journal-new-entry
-          :desc "Anyday"                "a" #'org-journal-new-scheduled-entry))
+  (map! "C-c n d" :desc "Today" #'org-journal-new-entry)
+  (map! "C-c n a" :desc "Any day" #'org-journal-new-scheduled-entry)
 
   (add-hook! org-roam-mode (org-roam-bibtex-mode))
 
@@ -662,7 +661,18 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 
 Want the journal to display weekly, not daily files.
 #+begin_src emacs-lisp
-(setq org-journal-file-type 'weekly)
+(setq! org-journal-file-type 'weekly
+       org-journal-file-header 'blw/org-journal-file-header-func
+       org-journal-time-format "plan")
+
+(defun blw/org-journal-file-header-func ()
+  "Custom function to create journal header."
+  (concat
+    (pcase org-journal-file-type
+      (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
+      (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: showeverything")
+      (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
+      (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
 #+end_src
 
 Use this to take screenshots and embed them in =org= files. Note that
