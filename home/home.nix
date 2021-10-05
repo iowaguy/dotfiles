@@ -38,6 +38,7 @@ let
     stack                         # Haskell build tool
     texlive.combined.scheme-full
     tree
+    wireshark
     xclip
     zoom-us
     zotero
