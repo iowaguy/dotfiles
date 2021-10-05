@@ -56,6 +56,11 @@
     text = ''
       #!/bin/sh
       emacsclient -nc $@
+      while [[ "$?" -ne "0" ]]; do
+            echo "Waiting for Emacs server to start..."
+            sleep 5
+            emacsclient -nc $@
+      done
     '';
     executable = true;
   };
