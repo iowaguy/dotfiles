@@ -5,10 +5,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7d9ba15214004c979d2c8733f8be12ce6502cf8a",
-        "sha256": "18kmvzinsi9xgm81dk5kyd03m3y5nn125kmbkxf66xasrg13yqdv",
+        "rev": "382505714d10c6791a96712e0554587c75c5bf8b",
+        "sha256": "0p06wz9yfaf27c7978hcizjb3a6zb3dx1bpzky8wvyi3dh436593",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/7d9ba15214004c979d2c8733f8be12ce6502cf8a.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/382505714d10c6791a96712e0554587c75c5bf8b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "83413f47809790e4ca012e314e7782adeae36cf2",
-        "sha256": "0nyk9x6hmdgdqgs4m5zdb7c4nhfc282yy1l4a3f9xln4mgchrw4h",
+        "rev": "7daf35532d2d8bf5e6f7f962e6cd13a66d01a71d",
+        "sha256": "0ycyns4vhcd4alnrq5kc813vhxvd1ykwbmd59i1zfmr6j1ksyll0",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/83413f47809790e4ca012e314e7782adeae36cf2.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/7daf35532d2d8bf5e6f7f962e6cd13a66d01a71d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -41,10 +41,10 @@
         "homepage": "https://nur.nix-community.org/",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "b09a23c42e25b187ef80dc22dd7fd9d96003db68",
-        "sha256": "0g5qp1wdgwhr7zlcn9dpi6bhhfwlgq8c07a3a3230y4qqp0pa2l2",
+        "rev": "47a0bead3eefe33f5541f58b7e34f380ed694e74",
+        "sha256": "0ks3xzikqk6f4hbjbkhrabzkj05r9nsz894m39wkjygslcz8hk7i",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/b09a23c42e25b187ef80dc22dd7fd9d96003db68.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/47a0bead3eefe33f5541f58b7e34f380ed694e74.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
