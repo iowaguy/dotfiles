@@ -8,8 +8,25 @@ in {
     matchBlocks = {
       "achtung" = {
         extraOptions = {
+          "ForwardAgent" = "yes";
           "Hostname" = "achtung.ccs.neu.edu";
           "User" = "bweintraub";
+        };
+      };
+      "dome" = dag.entryAfter [ "achtung" ] {
+        extraOptions = {
+          "Hostname" = "192.168.2.55";
+          "ProxyJump" = "achtung";
+          "User" = "bweintraub";
+          "ForwardAgent" = "yes";
+        };
+      };
+      "hood" = dag.entryAfter [ "achtung" ] {
+        extraOptions = {
+          "Hostname" = "192.168.2.56";
+          "ProxyJump" = "achtung";
+          "User" = "bweintraub";
+          "ForwardAgent" = "yes";
         };
       };
       "zion*" = dag.entryAfter [ "achtung" ] {
