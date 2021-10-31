@@ -693,7 +693,7 @@ For adding citations in org.
           reftex-default-bibliography (blw/zettelkasten-path "references.bib")
           bibtex-completion-bibliography (blw/zettelkasten-path "references.bib")
           bibtex-completion-library-path (blw/zettelkasten-path "bibtex.pdfs")
-          bibtex-completion-notes-path (blw/zettelkasten-path "helm-bibtex-notes")))
+          bibtex-completion-notes-path blw/zettelkasten))
 #+end_src
 
 More meta-data for my annotated bibliography.
