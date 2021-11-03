@@ -1,6 +1,7 @@
 [
   ./alacritty
   ./autorandr
+  ./direnv
   ./dropbox
   ./emacs
   ./email

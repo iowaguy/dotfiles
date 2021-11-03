@@ -8,7 +8,6 @@ let
     cachix                       # cache binaries so I don't have to rebuild
     caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
-    direnv
     drawio                       # good for drawing finite state machines
     entr
     fd
@@ -103,14 +102,6 @@ in {
     # A nice tool for viewing processes and system stats
     htop.enable = true;
 
-    # When I switch to a directory, I want it to assume a certain
-    # environment.
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
-    };
-
     gpg.enable = true;
 
     bat.enable = true;
@@ -122,7 +113,6 @@ in {
   };
 
   services = {
-    lorri.enable = true;
     udiskie.enable = true;
     screen-locker = {
       enable = true;
