@@ -4,5 +4,8 @@
 pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     hello
+
+    # keep this line if you use bash
+    bashInteractive
   ];
 }
