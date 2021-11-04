@@ -129,7 +129,8 @@
     geoclue2.enable = true;
 
     # make capslock := ctrl
-    xserver.xkbOptions = "ctrl:nocaps";
+    # make ctrl+alt+backspace kill the X server
+    xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";
   };
 
   krb5 = {
