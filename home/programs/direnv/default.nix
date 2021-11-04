@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
-    # When I switch to a directory, I want it to assume a certain
-    # environment.
+  # When I switch to a directory, I want it to assume a certain
+  # environment.
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -13,31 +13,32 @@
     };
   };
 
-  home.file.".bin/use_nix" = {
-    text = ''
-      #!/bin/sh
-      cp ${builtins.getEnv "HOME"}/.bin/shell.nix.template ./shell.nix
-      echo "use nix" >> .envrc
-    '';
-    executable = true;
-  };
+  programs.zsh.initExtra = ''
+    #!/bin/sh
 
-  home.file.".bin/shell.nix.template" = {
-    source = ./shell.nix.template;
-  };
+    nixify() {
+      if [ ! -e ./.envrc ]; then
+        echo "use nix" > .envrc
+        direnv allow
+      fi
+      if [[ ! -e shell.nix ]] && [[ ! -e default.nix ]]; then
+        cp $HOME/.bin/shell-template.nix shell.nix
+        ''${EDITOR:-vim} shell.nix
+      fi
+    }
 
-  xdg.dataFile."applications/emacsclient.desktop".text = ''
-    [Desktop Entry]
-    Name=EmacsClient
-    GenericName=Text Editor
-    Comment=Edit text
-    MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
-    Exec=.bin/em %F
-    Icon=emacs
-    Type=Application
-    Terminal=false
-    Categories=Development;TextEditor;
-    StartupWMClass=Emacs
-    Keywords=Text;Editor;
+    flakify() {
+      if [ ! -e flake.nix ]; then
+        nix flake new -t github:nix-community/nix-direnv .
+      elif [ ! -e .envrc ]; then
+        echo "use flake" > .envrc
+        direnv allow
+      fi
+      ''${EDITOR:-vim} flake.nix
+    }
   '';
+
+  home.file.".bin/shell-template.nix" = {
+    source = ./shell-template.nix;
+  };
 }
