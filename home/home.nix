@@ -18,7 +18,9 @@ let
     libnotify
     lorri
     niv
+    networkmanager-openvpn
     nox
+    openvpn
     pass
     pandoc
     pinentry-gtk2
@@ -37,6 +39,7 @@ let
     stack                         # Haskell build tool
     texlive.combined.scheme-full
     tree
+    vlc
     wireshark
     xclip
     zoom-us
