@@ -18,7 +18,7 @@
 
     nixify() {
       if [ ! -e ./.envrc ]; then
-        echo "use nix" > .envrc
+        echo "use nix\nunset PS1" > .envrc
         direnv allow
       fi
       if [[ ! -e shell.nix ]] && [[ ! -e default.nix ]]; then
