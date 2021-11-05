@@ -17,7 +17,6 @@ let
     jq
     keybase-gui
     libnotify
-    lorri
     niv
     networkmanager-openvpn
     nox
