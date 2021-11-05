@@ -18,10 +18,10 @@ let
     keybase-gui
     libnotify
     niv
-    networkmanager-openvpn
+    networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     nox
-    openvpn
-    pass
+    openvpn                       # a VPN client
+    pass                          # the quintessential linux password manager
     pandoc
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
