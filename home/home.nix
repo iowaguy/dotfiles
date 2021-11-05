@@ -11,6 +11,7 @@ let
     drawio                       # good for drawing finite state machines
     entr
     fd
+    file                         # classic tool for viewing file attributes
     ghc
     graphviz
     jq
