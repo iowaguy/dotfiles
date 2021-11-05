@@ -55,11 +55,11 @@
   home.file.".bin/em" = {
     text = ''
       #!/bin/sh
-      emacsclient -nc $@
+      emacsclient -nc $@ &> /dev/null
       while [[ "$?" -ne "0" ]]; do
-            echo "Waiting for Emacs server to start..."
+            echo "Sleeping until Emacs server has started..."
             sleep 5
-            emacsclient -nc $@
+            emacsclient -nc "$@" &> /dev/null
       done
     '';
     executable = true;
