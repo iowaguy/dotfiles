@@ -1,19 +1,28 @@
 with import <nixpkgs> {};
 let
-  pythonPackages = python38Packages;
+  pythonPackages = ps:
+    with ps; [
+      # This execute some shell code to initialize a venv in $venvDir before
+      # dropping into the shell
+      venvShellHook
+
+      # Linting
+      black
+      mypy
+      pylint
+    ];
 in mkShell rec {
   venvDir = "./.venv";
   buildInputs = [
-    # Python
-    pythonPackages.python
+    python
 
-    # This execute some shell code to initialize a venv in $venvDir before
-    # dropping into the shell
-    pythonPackages.venvShellHook
     # Linting + development
     nodePackages.pyright
     hello
     bashInteractive
+
+    # Python development
+    (python38.withPackages pythonPackages)
   ];
 
   # Run this command, only after creating the virtual environment
