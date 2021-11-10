@@ -23,6 +23,7 @@
       fi
       if [[ ! -e shell.nix ]] && [[ ! -e default.nix ]]; then
         cp $HOME/.bin/shell-template.nix shell.nix
+        chmod u+w shell.nix
         ''${EDITOR:-vim} shell.nix
       fi
     }
