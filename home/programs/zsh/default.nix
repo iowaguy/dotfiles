@@ -23,6 +23,7 @@
       ls = "exa";
       cat = "bat";
       grep = "rg";
+      xclip = "xclip -selection clipboard";
     };
   };
 }
