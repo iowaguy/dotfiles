@@ -31,7 +31,6 @@ let
     qt5Full                       # needed for matplotlib
     ripgrep
     rubber                        # a nice tool for compiling latex
-    scrot                         # screenshots
     signal-desktop
     skype
     spotify                       # Musics
@@ -117,10 +116,23 @@ in {
 
   services = {
     udiskie.enable = true;
+
+    # For screenshots
+    flameshot.enable = true;
     screen-locker = {
       enable = true;
       lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock";
       inactiveInterval = 20;
     };
   };
+
+  # Needed for flameshot to work. Remove once this bug is resolved:
+  # https://github.com/nix-community/home-manager/issues/2064
+  systemd.user.targets.tray = {
+    Unit = {
+      Description = "Home Manager System Tray";
+      Requires = [ "graphical-session-pre.target" ];
+    };
+  };
+
 }
