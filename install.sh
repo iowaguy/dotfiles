@@ -9,8 +9,7 @@ fi
 
 read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
 ls $DISK*
-read -p "What prefix should we use for partitions of $DISK? " PART_PREFIX
-read -p "What hostname (usually a brief description of the device)? " HOSTNAME
+#read -p "What hostname (usually a brief description of the device)? " HOSTNAME
 
 INST_UUID=$(dd if=/dev/urandom bs=1 count=100 2>/dev/null | tr -dc 'a-z0-9' | cut -c-6)
 INST_ID=nixos
@@ -80,7 +79,7 @@ zpool create \
     bpool_$INST_UUID \
      $INST_VDEV_BPOOL \
     $(for i in ${DISK}; do
-       printf "$i-part2 ";
+       printf "${i}2 ";
       done)
 
 # creat root pool
@@ -99,7 +98,7 @@ zpool create \
     rpool_$INST_UUID \
     $INST_VDEV \
    $(for i in ${DISK}; do
-      printf "$i-part3 ";
+      printf "${i}3 ";
      done)
 
 # create encrypted root container
@@ -147,9 +146,9 @@ zfs snapshot rpool_$INST_UUID/$INST_ID/ROOT/empty@start
 
 # Format and mount ESP
 for i in ${DISK}; do
-  mkfs.vfat -n EFI ${i}-part1
-  mkdir -p /mnt/boot/efis/${i##*/}-part1
-  mount -t vfat ${i}-part1 /mnt/boot/efis/${i##*/}-part1
+  mkfs.vfat -n EFI ${i}1
+  mkdir -p /mnt/boot/efis/${i##*/}1
+  mount -t vfat ${i}1 /mnt/boot/efis/${i##*/}1
 done
 
 nixos-generate-config --root /mnt
@@ -193,7 +192,7 @@ if [ "${INST_PARTSIZE_SWAP}" != "" ]; then
     EOF
   for i in $DISK; do
     tee -a /mnt/etc/nixos/${INST_CONFIG_FILE} <<EOF
-      { device = "$i-part4"; randomEncryption.enable = true; }
+      { device = "${i}4"; randomEncryption.enable = true; }
     EOF
   done
   tee -a /mnt/etc/nixos/${INST_CONFIG_FILE} <<EOF
@@ -212,7 +211,7 @@ tee -a /mnt/etc/nixos/${INST_CONFIG_FILE} <<EOF
     efi.canTouchEfiVariables = false;
     ##if UEFI firmware can detect entries
     #efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/efis/${INST_PRIMARY_DISK##*/}-part1";
+    efi.efiSysMountPoint = "/boot/efis/${INST_PRIMARY_DISK##*/}1";
     grub.enable = true;
     grub.version = 2;
     grub.copyKernels = true;
@@ -233,7 +232,7 @@ tee -a /mnt/etc/nixos/${INST_CONFIG_FILE} <<EOF
     grub.mirroredBoots = [
 EOF
 for i in $DISK; do
-  printf "      { devices = [ \"$i\" ] ; efiSysMountPoint = \"/boot/efis/${i##*/}-part1\"; path = \"/boot\"; }\n" \
+  printf "      { devices = [ \"$i\" ] ; efiSysMountPoint = \"/boot/efis/${i##*/}1\"; path = \"/boot\"; }\n" \
   >>/mnt/etc/nixos/${INST_CONFIG_FILE}
 done
 tee -a /mnt/etc/nixos/${INST_CONFIG_FILE} <<EOF
