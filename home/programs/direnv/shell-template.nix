@@ -1,6 +1,19 @@
 with import <nixpkgs> {};
 let
-  ## NOTE This is how to add package that isn't ported to nix yet
+  ## NOTE This is how to add package from pypi that isn't ported to nix yet
+  # eth-hash = python38.pkgs.buildPythonPackage rec {
+  #   pname = "eth-hash";
+  #   version = "0.3.2";
+
+  #   src = pkgs.python38.pkgs.fetchPypi {
+  #     inherit pname version;
+  #     sha256 = "3f40cecd5ead88184aa9550afc19d057f103728108c5102f592f8415949b5a76";
+  #   };
+
+  #   doCheck = false;
+  # };
+
+  ## NOTE This is how to add a package from a tarball that isn't ported to nix yet
   # web3 = python38.pkgs.buildPythonPackage rec {
   #   pname = "web3";
   #   version = "5.24.0";
