@@ -103,8 +103,14 @@
       options = "--delete-older-than 7d";
     };
 
-    # Avoid unwanted garbage collection when using nix-direnv
+    # TODO remove when flakes are included by default
+    package = pkgs.nixFlakes;
+
     extraOptions = ''
+      # TODO remove when flakes are included by default
+      experimental-features = nix-command flakes
+
+      # Avoid unwanted garbage collection when using nix-direnv
       keep-outputs     = true
       keep-derivations = true
     '';
