@@ -1165,3 +1165,17 @@ do a =doom/reload= or =doom sync=, which will do the tangling anyway.
 #+begin_src emacs-lisp
   (remove-hook 'org-mode-hook #'+literate-enable-recompile-h)
 #+end_src
+
+Enable some basic stuff for writing Promela.
+#+begin_src emacs-lisp
+  (use-package! promela-mode)
+  (autoload 'promela-mode "promela-mode" "PROMELA mode" nil t)
+  (setq auto-mode-alist
+        (append
+          (list (cons "\\.promela$"  'promela-mode)
+          (cons "\\.spin$"     'promela-mode)
+          (cons "\\.pml$"      'promela-mode)
+          ;; (cons "\\.other-extensions$"     'promela-mode)
+                )
+          auto-mode-alist))
+#+end_src

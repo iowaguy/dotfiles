@@ -147,3 +147,7 @@
 ;; Helpful is an alternative to the built-in Emacs help that provides much more
 ;; contextual information.
 (package! helpful)
+
+(package! promela-mode :recipe (:host github
+                                :repo "rudi/promela-mode"
+                                :files (:defaults "promela-mode.el")))
