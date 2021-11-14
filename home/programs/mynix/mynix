@@ -5,20 +5,21 @@ set -eu -o pipefail
 shopt -s failglob
 
 HOME_MANAGER_VERSION=21.05
+NIX_CONFIG_BASE_DIR=${HOME}/workspace/dotfiles
 declare -A machines
 machines['MacBookPro11,5']=boston.nix
 machines['20A8S1BJ00']=kansas.nix
 
 system_config() {
   # Nix configuration
-  sudo cp system/configuration.nix /etc/nixos/
-  sudo cp -r system/machine/ /etc/nixos/
-  sudo cp -r system/wm/ /etc/nixos/
-  sudo cp -r nix/ /etc/nixos/
+  sudo cp ${NIX_CONFIG_BASE_DIR}/system/configuration.nix /etc/nixos/
+  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/machine/ /etc/nixos/
+  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/wm/ /etc/nixos/
+  sudo cp -r ${NIX_CONFIG_BASE_DIR}/nix/ /etc/nixos/
 
   model="$(sudo dmidecode -s system-product-name)"
 
-  sudo cp -r system/machine/ /etc/nixos/
+  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/machine/ /etc/nixos/
   if [ ! -f /etc/nixos/machine/current.nix ]; then
     echo "Linking current machine's configuration (${model})"
     sudo ln -s "/etc/nixos/machine/${machines[${model}]}" /etc/nixos/machine/current.nix

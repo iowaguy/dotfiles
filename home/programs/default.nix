@@ -9,6 +9,7 @@
   ./git
   # ./gnome
   ./i3
+  ./mynix
   ./redshift
   ./rofi
   ./slack
