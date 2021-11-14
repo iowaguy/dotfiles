@@ -1,11 +1,12 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash -p dmidecode
+#! nix-shell -i bash -p dmidecode python3
 
 set -eu -o pipefail
 shopt -s failglob
 
 HOME_MANAGER_VERSION=21.05
 NIX_CONFIG_BASE_DIR=${HOME}/workspace/dotfiles
+PYTHON=$(which python3)
 declare -A machines
 machines['MacBookPro11,5']=boston.nix
 machines['20A8S1BJ00']=kansas.nix
@@ -73,8 +74,18 @@ refresh() {
   exit $?
 }
 
+update() {
+  pushd ${NIX_CONFIG_BASE_DIR}
+  $PYTHON ${NIX_CONFIG_BASE_DIR}/nix/update.py
+  popd
+  if [ $? == 0 ]; then
+    refresh
+  fi
+  exit $?
+}
+
 usage() {
-  echo "Usage: $0 [install|refresh]" 1>&2
+  echo "Usage: $0 [install|refresh|update]" 1>&2
   exit 1
 }
 
@@ -87,6 +98,9 @@ while :; do
       ;;
     refresh)
       refresh
+      ;;
+    update)
+      update
       ;;
     *)
       echo "ERROR: unknown parameter \"$PARAM\""

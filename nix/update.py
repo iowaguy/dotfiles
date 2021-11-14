@@ -3,8 +3,9 @@
 
 import json
 import subprocess
+import os
 
-sources_path = "nix/sources.json"
+sources_path = f"{os.getenv('HOME')}/workspace/dotfiles/nix/sources.json"
 
 if __name__ == "__main__":
     with open(sources_path, 'r') as f:
