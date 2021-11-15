@@ -6,6 +6,11 @@
     enable = true;
     options = {
       selection-clipboard = "clipboard";
+      recolor = true;
+      recolor-reverse-video = true;
+      recolor-keephue = true;
+      recolor-darkcolor = "#ABB2BF";
+      recolor-lightcolor = "#282C35";
     };
   };
 
