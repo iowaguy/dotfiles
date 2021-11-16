@@ -641,7 +641,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (map! "C-c n d" :desc "Today" #'org-journal-new-entry)
   (map! "C-c n a" :desc "Any day" #'org-journal-new-scheduled-entry)
 
-  (add-hook! org-roam-mode (org-roam-bibtex-mode))
+  (org-roam-bibtex-mode)
 
   (require 'subr-x) ;; for `when-let'
 
@@ -700,7 +700,6 @@ More meta-data for my annotated bibliography.
 #+begin_src emacs-lisp
   (use-package! org-roam-bibtex
     :after org-roam
-    :hook (org-roam-mode . org-roam-bibtex-mode)
     :config
     (require 'org-ref))
 #+end_src
