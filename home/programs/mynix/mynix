@@ -10,6 +10,7 @@ PYTHON=$(which python3)
 declare -A machines
 machines['MacBookPro11,5']=boston.nix
 machines['20A8S1BJ00']=kansas.nix
+machines['Precision Tower 3620']=isec-desktop.nix
 
 system_config() {
   # Nix configuration
