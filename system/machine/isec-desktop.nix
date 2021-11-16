@@ -49,6 +49,9 @@
   networking = {
     hostName = "isec-desktop"; # Define your hostname.
 
+    # NOTE this must be unique among machines (and has to be 32-bit)
+    hostId = "00000002";
+
     # Some desktop environments use NetworkManager for configuring
     # networking.
     networkmanager.enable = true;
