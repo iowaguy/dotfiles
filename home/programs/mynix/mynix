@@ -6,7 +6,11 @@ shopt -s failglob
 
 HOME_MANAGER_VERSION=21.05
 NIX_CONFIG_BASE_DIR=${HOME}/workspace/dotfiles
+GIT_HOME="https://github.com/iowaguy/dotfiles"
+
 PYTHON=$(which python3)
+GIT=$(which git)
+
 declare -A machines
 machines['MacBookPro11,5']=boston.nix
 machines['20A8S1BJ00']=kansas.nix
@@ -153,10 +157,9 @@ fresh_install() {
     disk_num=$(( $disk_num + 1 ))
   done
 
+  INST_VDEV_BPOOL=
   if [ $disk_num -gt 1 ]; then
     INST_VDEV_BPOOL="mirror"
-  else
-    INST_VDEV_BPOOL="disk"
   fi
 
 
@@ -265,6 +268,10 @@ fresh_install() {
   touch /mnt/state/etc/zfs/zpool.cache
   chmod a-w /mnt/state/etc/zfs/zpool.cache
   chattr +i /mnt/state/etc/zfs/zpool.cache
+
+  mkdir -p workspace
+  cd workspace
+  $GIT clone $GIT_HOME
 }
 
 while :; do
