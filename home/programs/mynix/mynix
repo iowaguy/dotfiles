@@ -110,7 +110,6 @@ fresh_install() {
 
   read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
   ls $DISK*
-  #read -p "What hostname (usually a brief description of the device)? " HOSTNAME
 
   INST_UUID=$(dd if=/dev/urandom bs=1 count=100 2>/dev/null | tr -dc 'a-z0-9' | cut -c-6)
   INST_ID=nixos
@@ -156,6 +155,8 @@ fresh_install() {
 
   if [ $disk_num -gt 1 ]; then
     INST_VDEV_BPOOL="mirror"
+  else
+    INST_VDEV_BPOOL="disk"
   fi
 
 
