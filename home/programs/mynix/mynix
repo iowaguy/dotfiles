@@ -5,7 +5,8 @@ set -eu -o pipefail
 shopt -s failglob
 
 HOME_MANAGER_VERSION=21.05
-NIX_CONFIG_BASE_DIR=${HOME}/workspace/dotfiles
+DOTFILES_BASE=workspace/dotfiles
+NIX_CONFIG_BASE_DIR=${HOME}/${DOTFILES_BASE}
 GIT_HOME="https://github.com/iowaguy/dotfiles"
 
 PYTHON=$(which python3)
@@ -269,9 +270,8 @@ fresh_install() {
   chmod a-w /mnt/state/etc/zfs/zpool.cache
   chattr +i /mnt/state/etc/zfs/zpool.cache
 
-  mkdir -p workspace
-  cd workspace
-  $GIT clone $GIT_HOME
+  sudo mkdir -p workspace
+  sudo $GIT clone $GIT_HOME $DOTFILES_BASE
 }
 
 while :; do

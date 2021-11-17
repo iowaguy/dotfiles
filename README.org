@@ -16,6 +16,6 @@ On a new machine, do the following:
 
 4. Run my installer script
    #+begin_src shell
-     cd dotfiles/home/programs/mynix
+     cd home/programs/mynix
      ./mynix fresh
    #+end_src
