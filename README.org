@@ -17,5 +17,5 @@ On a new machine, do the following:
 4. Run my installer script
    #+begin_src shell
      cd home/programs/mynix
-     ./mynix fresh
+     sudo ./mynix fresh
    #+end_src

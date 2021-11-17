@@ -27,19 +27,29 @@ system_config() {
   sudo cp -r ${NIX_CONFIG_BASE_DIR}/nix/ ${POSSIBLE_MNT}/etc/nixos/
 
   machine_id=$(head -c4 /dev/urandom | od -A none -t x4)
-  sudo sed -i "s/REPLACE_ME/${machine_id}/g" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
   model="$(sudo dmidecode -s system-product-name)"
 
   if [ ! -f ${POSSIBLE_MNT}/etc/nixos/machine/current.nix ]; then
     echo "Linking current machine's configuration (${model})"
     sudo ln -s "${POSSIBLE_MNT}/etc/nixos/machine/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
   fi
+  sudo sed -i "s/REPLACE_ME/${machine_id}/g" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
 }
 
 system_fresh_install() {
+  if [ ! "$USER" = "root" ]; then
+    echo "Must be run as root!"
+    exit 1
+  fi
+
   fresh_install
   system_config "/mnt"
-  nixos-install
+  nixos-install -v --show-trace --root /mnt
+  zfs snapshot -r rpool_$INST_UUID/$INST_ID@install
+  zfs snapshot -r bpool_$INST_UUID/$INST_ID@install
+  umount /mnt/boot/efis/*
+  zpool export bpool_$INST_UUID
+  zpool export rpool_$INST_UUID
 }
 
 system_install() {
@@ -107,11 +117,6 @@ usage() {
 fresh_install() {
   set -x
   set -e
-
-  if [ ! "$USER" = "root" ]; then
-    echo "Must be run as root!"
-    exit 1
-  fi
 
   read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
   ls $DISK*
@@ -270,8 +275,11 @@ fresh_install() {
   chmod a-w /mnt/state/etc/zfs/zpool.cache
   chattr +i /mnt/state/etc/zfs/zpool.cache
 
-  sudo mkdir -p workspace
-  sudo $GIT clone $GIT_HOME $DOTFILES_BASE
+  nixos-generate-config --root /mnt
+
+  sudo mkdir -p /root/workspace
+  sudo $GIT clone $GIT_HOME /root/$DOTFILES_BASE
+
 }
 
 while :; do
