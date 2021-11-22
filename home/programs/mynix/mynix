@@ -45,11 +45,11 @@ system_fresh_install() {
   fresh_install
   system_config "/mnt"
   nixos-install -v --show-trace --root /mnt
-  zfs snapshot -r rpool_$INST_UUID/$INST_ID@install
-  zfs snapshot -r bpool_$INST_UUID/$INST_ID@install
+  zfs snapshot -r rpool/$INST_ID@install
+  zfs snapshot -r bpool/$INST_ID@install
   umount /mnt/boot/efis/*
-  zpool export bpool_$INST_UUID
-  zpool export rpool_$INST_UUID
+  zpool export bpool
+  zpool export rpool
 }
 
 system_install() {
@@ -121,7 +121,6 @@ fresh_install() {
   read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
   ls $DISK*
 
-  INST_UUID=$(dd if=/dev/urandom bs=1 count=100 2>/dev/null | tr -dc 'a-z0-9' | cut -c-6)
   INST_ID=nixos
 
   INST_PRIMARY_DISK=$(echo $DISK | cut -f1 -d\ )
@@ -143,17 +142,25 @@ fresh_install() {
 
   for i in ${DISK}; do
     sgdisk --zap-all $i
+
+    # ESP partition
     sgdisk -n1:1M:+${INST_PARTSIZE_ESP}G -t1:EF00 $i
+
+    # boot partition
     sgdisk -n2:0:+${INST_PARTSIZE_BPOOL}G -t2:BE00 $i
+
+    # swap partition
     if [ "${INST_PARTSIZE_SWAP}" != "" ]; then
       sgdisk -n4:0:+${INST_PARTSIZE_SWAP}G -t4:8200 $i
     fi
+
+    # root parition
     if [ "${INST_PARTSIZE_RPOOL}" = "" ]; then
       sgdisk -n3:0:0   -t3:BF00 $i
     else
       sgdisk -n3:0:+${INST_PARTSIZE_RPOOL}G -t3:BF00 $i
     fi
-    sgdisk -a1 -n5:24K:+1000K -t5:EF02 $i
+    sgdisk -n5:24K:+1000K -t5:EF02 $i
   done
 
 
@@ -168,6 +175,33 @@ fresh_install() {
     INST_VDEV_BPOOL="mirror"
   fi
 
+  # Create root pool. Must happen before boot pool
+  zpool create \
+      -o ashift=12 \
+      -o autotrim=on \
+      -R /mnt \
+      -O acltype=posixacl \
+      -O canmount=off \
+      -O compression=zstd \
+      -O dnodesize=auto \
+      -O normalization=formD \
+      -O relatime=on \
+      -O xattr=sa \
+      -O mountpoint=/ \
+      rpool \
+      $INST_VDEV \
+    $(for i in ${DISK}; do
+        printf "${i}3 ";
+      done)
+
+  # create encrypted root container
+  zfs create \
+  -o canmount=off \
+  -o mountpoint=none \
+  -o encryption=aes-256-gcm \
+  -o keylocation=prompt \
+  -o keyformat=passphrase \
+  rpool/$INST_ID
 
   zpool create \
   -d -o feature@async_destroy=enabled \
@@ -192,73 +226,46 @@ fresh_install() {
       -O xattr=sa \
       -O mountpoint=/boot \
       -R /mnt \
-      bpool_$INST_UUID \
+      bpool \
       $INST_VDEV_BPOOL \
       $(for i in ${DISK}; do
         printf "${i}2 ";
         done)
 
-  # creat root pool
-  zpool create \
-      -o ashift=12 \
-      -o autotrim=on \
-      -R /mnt \
-      -O acltype=posixacl \
-      -O canmount=off \
-      -O compression=zstd \
-      -O dnodesize=auto \
-      -O normalization=formD \
-      -O relatime=on \
-      -O xattr=sa \
-      -O mountpoint=/ \
-      rpool_$INST_UUID \
-      $INST_VDEV \
-    $(for i in ${DISK}; do
-        printf "${i}3 ";
-      done)
-
-  # create encrypted root container
-  zfs create \
-  -o canmount=off \
-  -o mountpoint=none \
-  -o encryption=aes-256-gcm \
-  -o keylocation=prompt \
-  -o keyformat=passphrase \
-  rpool_$INST_UUID/$INST_ID
 
   # Create other system datasets
-  zfs create -o canmount=off -o mountpoint=none bpool_$INST_UUID/$INST_ID
-  zfs create -o canmount=off -o mountpoint=none bpool_$INST_UUID/$INST_ID/BOOT
-  zfs create -o canmount=off -o mountpoint=none rpool_$INST_UUID/$INST_ID/ROOT
-  zfs create -o canmount=off -o mountpoint=none rpool_$INST_UUID/$INST_ID/DATA
-  zfs create -o mountpoint=/boot -o canmount=noauto bpool_$INST_UUID/$INST_ID/BOOT/default
-  zfs create -o mountpoint=/ -o canmount=off    rpool_$INST_UUID/$INST_ID/DATA/default
-  zfs create -o mountpoint=/ -o canmount=off    rpool_$INST_UUID/$INST_ID/DATA/local
-  zfs create -o mountpoint=/ -o canmount=noauto rpool_$INST_UUID/$INST_ID/ROOT/default
-  zfs mount rpool_$INST_UUID/$INST_ID/ROOT/default
-  zfs mount bpool_$INST_UUID/$INST_ID/BOOT/default
+  zfs create -o canmount=off -o mountpoint=none bpool/$INST_ID
+  zfs create -o canmount=off -o mountpoint=none bpool/$INST_ID/BOOT
+  zfs create -o canmount=off -o mountpoint=none rpool/$INST_ID/ROOT
+  zfs create -o canmount=off -o mountpoint=none rpool/$INST_ID/DATA
+  zfs create -o mountpoint=/boot -o canmount=noauto bpool/$INST_ID/BOOT/default
+  zfs create -o mountpoint=/ -o canmount=off    rpool/$INST_ID/DATA/default
+  zfs create -o mountpoint=/ -o canmount=off    rpool/$INST_ID/DATA/local
+  zfs create -o mountpoint=/ -o canmount=noauto rpool/$INST_ID/ROOT/default
+  zfs mount rpool/$INST_ID/ROOT/default
+  zfs mount bpool/$INST_ID/BOOT/default
   for i in {usr,var,var/lib};
   do
-      zfs create -o canmount=off rpool_$INST_UUID/$INST_ID/DATA/default/$i
+      zfs create -o canmount=off rpool/$INST_ID/DATA/default/$i
   done
   for i in {home,root,srv,usr/local,var/log,var/spool};
   do
-      zfs create -o canmount=on rpool_$INST_UUID/$INST_ID/DATA/default/$i
+      zfs create -o canmount=on rpool/$INST_ID/DATA/default/$i
   done
   chmod 750 /mnt/root
   for i in {nix,}; do
-      zfs create -o canmount=on -o mountpoint=/$i rpool_$INST_UUID/$INST_ID/DATA/local/$i
+      zfs create -o canmount=on -o mountpoint=/$i rpool/$INST_ID/DATA/local/$i
   done
 
 
   # Datasets for immutable root filesystem
-  zfs create -o canmount=on rpool_$INST_UUID/$INST_ID/DATA/default/state
+  zfs create -o canmount=on rpool/$INST_ID/DATA/default/state
   for i in {/etc/nixos,/etc/cryptkey.d}; do
     mkdir -p /mnt/state/$i /mnt/$i
     mount -o bind /mnt/state/$i /mnt/$i
   done
-  zfs create -o mountpoint=/ -o canmount=noauto rpool_$INST_UUID/$INST_ID/ROOT/empty
-  zfs snapshot rpool_$INST_UUID/$INST_ID/ROOT/empty@start
+  zfs create -o mountpoint=/ -o canmount=noauto rpool/$INST_ID/ROOT/empty
+  zfs snapshot rpool/$INST_ID/ROOT/empty@start
 
   # Format and mount ESP
   for i in ${DISK}; do
@@ -279,7 +286,6 @@ fresh_install() {
 
   sudo mkdir -p /root/workspace
   sudo $GIT clone $GIT_HOME /root/$DOTFILES_BASE
-
 }
 
 while :; do
@@ -305,4 +311,3 @@ while :; do
   esac
   shift
 done
-shift $((OPTIND-1))
