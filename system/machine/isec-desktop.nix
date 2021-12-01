@@ -4,6 +4,7 @@
   boot = {
     supportedFilesystems = [ "zfs" ];
     loader = {
+      systemd-boot.enable = true;
       grub = {
         enable = true;
         version = 2;
