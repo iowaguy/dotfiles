@@ -1,4 +1,11 @@
 {
+    "bibitnow": {
+        "sha256": "17y6j2gabxpjbhhmsfcg5nrrvdlzhx01vyvdn7bdw1qfhw15qr6m",
+        "type": "file",
+        "url": "https://addons.mozilla.org/firefox/downloads/file/3769373/bibitnow-0.902-fx.xpi",
+        "url_template": "https://addons.mozilla.org/firefox/downloads/file/3769373/bibitnow-<version>-fx.xpi",
+        "version": "0.902"
+    },
     "home-manager": {
         "branch": "release-21.05",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
