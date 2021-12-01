@@ -1,46 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  swapDevices = [
-    {
-      device = "/dev/sda4";
-      randomEncryption.enable = true;
-    }
-  ];
   boot = {
     supportedFilesystems = [ "zfs" ];
-    zfs.devNodes = "/dev";
     loader = {
-      generationsDir.copyKernels = true;
-      grub = {
-        enable = true;
-        # Use the GRUB 2 boot loader.
-        version = 2;
-
-        copyKernels = true;
-        efiSupport = true;
-        zfsSupport = true;
-        # for systemd-autofs
-        extraPrepareConfig = ''
-          mkdir -p /boot/efis
-          for i in /boot/efis*; do mount $i ; done
-        '';
-        ## For problematic UEFI hardware
-        # efiInstallAsRemovable = true;
-        # Define on which hard drive you want to install Grub.
-        devices = [ "/dev/sda" ]; # or "nodev" for efi only
-        mirroredBoots = [
-          {
-            devices = [ "/dev/sda" ];
-            efiSysMountPoint = "/boot/efis/sda1";
-            path = "/boot";
-          }
-        ];
-      };
       efi = {
         ## if UEFI firmware can detect entries, set to true
-        canTouchEfiVariables = false;
-        efiSysMountPoint = "/boot/efis/sda1";
+        canTouchEfiVariables = true;
+        # efiSysMountPoint = "/boot/efi";
       };
     };
     cleanTmpDir = true;
