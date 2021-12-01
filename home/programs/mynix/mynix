@@ -114,10 +114,11 @@ fresh_install() {
   set -x
   set -e
 
-  ls /dev/disk/by-id/ata-*
-  read -p "What disk to partition (e.g. /dev/disk/by-id/ata-VENDOR-ID-OF-THE-DRIVE)? " DISK
-  # read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
-  ls $DISK* # this is just to check that it exists
+  # ls /dev/disk/by-id/ata-*
+  read -p "What disk to format (e.g. /dev/sda, /dev/nvme0n1)? " DISK
+  # read -p "What disk to partition (e.g. /dev/disk/by-id/ata-VENDOR-ID-OF-THE-DRIVE)? " DISK
+  read -p "What prefix should we use for partitions of $DISK (usually nothing or \"-part\")? " PART_PREFIX
+  ls $DISK # this is just to check that it exists
 
   INST_ID=nixos
 
@@ -138,7 +139,7 @@ fresh_install() {
   # root partition
   sgdisk -n2:0:0 -t2:BF01 $INST_PRIMARY_DISK
 
-  mkfs.vfat ${INST_PRIMARY_DISK}-part1
+  mkfs.vfat ${INST_PRIMARY_DISK}${PART_PREFIX}1
 
   # Create root pool. Must happen before boot pool
   zpool create \
@@ -146,7 +147,7 @@ fresh_install() {
     -O acltype=posix \
     -O mountpoint=none \
     rpool \
-    $DISK-part2
+    ${DISK}${PART_PREFIX}2
 
   # create encrypted root container
   zfs create \
@@ -165,7 +166,7 @@ fresh_install() {
   mount -t zfs rpool/$INST_ID/root/nixos /mnt
   mkdir /mnt/{boot,home}
   mount -t zfs rpool/$INST_ID/home /mnt/home
-  mount ${DISK}-part1 /mnt/boot
+  mount ${DISK}${PART_PREFIX}1 /mnt/boot
 
   nixos-generate-config --root /mnt
 
