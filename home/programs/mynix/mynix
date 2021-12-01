@@ -124,8 +124,6 @@ fresh_install() {
 
   INST_PRIMARY_DISK=$(echo $DISK | cut -f1 -d\ )
 
-  INST_PARTSIZE_ESP=2 # in GB
-
   # wipe solid-state drives with the generic tool blkdiscard, to clean previous partition tables and improve performance
   blkdiscard -f $DISK &
   wait
@@ -133,13 +131,11 @@ fresh_install() {
   # remove all partitions on disk
   sgdisk --zap-all $DISK
 
-  # boot partition
-  sgdisk -n1:1M:+${INST_PARTSIZE_ESP}G -t1:EF00 $INST_PRIMARY_DISK
-
-  # root partition
-  sgdisk -n2:0:0 -t2:BF01 $INST_PRIMARY_DISK
-
-  mkfs.vfat ${INST_PRIMARY_DISK}${PART_PREFIX}1
+  parted $DISK -- mklabel GPT
+  parted $DISK -- mkpart primary 512MiB 100%
+  parted $DISK -- mkpart ESP fat32 1MiB 512MiB
+  parted $DISK -- set 2 esp on
+  mkfs.fat -F 32 -n boot ${DISK}${PART_PREFIX}2
 
   # Create root pool. Must happen before boot pool
   zpool create \
@@ -147,7 +143,7 @@ fresh_install() {
     -O acltype=posix \
     -O mountpoint=none \
     rpool \
-    ${DISK}${PART_PREFIX}2
+    ${DISK}${PART_PREFIX}1
 
   # create encrypted root container
   zfs create \
@@ -166,7 +162,7 @@ fresh_install() {
   mount -t zfs rpool/$INST_ID/root/nixos /mnt
   mkdir /mnt/{boot,home}
   mount -t zfs rpool/$INST_ID/home /mnt/home
-  mount ${DISK}${PART_PREFIX}1 /mnt/boot
+  mount ${DISK}${PART_PREFIX}2 /mnt/boot
 
   nixos-generate-config --root /mnt
 
