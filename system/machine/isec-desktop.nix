@@ -4,10 +4,14 @@
   boot = {
     supportedFilesystems = [ "zfs" ];
     loader = {
+      grub = {
+        enable = true;
+        version = 2;
+        device = "nodev";
+      };
       efi = {
         ## if UEFI firmware can detect entries, set to true
         canTouchEfiVariables = true;
-        # efiSysMountPoint = "/boot/efi";
       };
     };
     cleanTmpDir = true;
