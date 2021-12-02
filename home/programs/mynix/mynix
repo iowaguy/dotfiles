@@ -4,7 +4,7 @@
 set -eu -o pipefail
 shopt -s failglob
 
-HOME_MANAGER_VERSION=21.05
+HOME_MANAGER_VERSION=21.11
 DOTFILES_BASE=workspace/dotfiles
 NIX_CONFIG_BASE_DIR=${HOME}/${DOTFILES_BASE}
 GIT_HOME="https://github.com/iowaguy/dotfiles"
@@ -59,7 +59,7 @@ system_refresh() {
 hm_install() {
   # Home manager
   mkdir -p $HOME/.config/nixpkgs/
-  cp -r home/* $HOME/.config/nixpkgs/
+  cp -r ${NIX_CONFIG_BASE_DIR}/home/* $HOME/.config/nixpkgs/
   nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
   nix-channel --update
   export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
@@ -71,7 +71,7 @@ hm_install() {
 hm_refresh() {
   if [ ! -f $HOME/.config/nixpkgs/home.nix ]; then
     echo "Linking home.nix..."
-    ln -s $HOME/workspace/dotfiles/home/home.nix $HOME/.config/nixpkgs/home.nix
+    ln -s ${NIX_CONFIG_BASE_DIR}/home/home.nix $HOME/.config/nixpkgs/home.nix
   fi
   home-manager switch
 }
@@ -81,7 +81,7 @@ install() {
   hm_install
 
   # Set screenlock wallpaper
-  betterlockscreen -u home/resources/background_image
+  betterlockscreen -u ${NIX_CONFIG_BASE_DIR}/home/resources/background_image
   exit $?
 }
 
