@@ -3,7 +3,7 @@
 On a new machine, do the following:
 1. Install NixOS on a flashdrive. Replace "sdX" with correct device name
    #+begin_src shell
-     dd if=path-to-image of=/dev/sdX
+     dd if=path-to-image of=/dev/sdX status=progress
    #+end_src
 
 2. Boot the new machine onto the flashdrive. Booting onto a flashdrive is
@@ -19,3 +19,16 @@ On a new machine, do the following:
      cd home/programs/mynix
      sudo ./mynix fresh
    #+end_src
+
+** Debugging install
+If you get an error when creating the zpool that looks like =/dev/sda2 is part
+of the exported pool 'bpool_xxxx'=, run the following, and then try again.
+#+begin_src shell
+  sudo zpool labelclear -f bpool_xxxx
+#+end_src
+
+If there is already a pool with the same name, it may be necessary to zero the
+disk, like so:
+#+begin_src shell
+  sudo dd if=/dev/zero of=<DEVICE> bs=16M status=progress
+#+end_src
