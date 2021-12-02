@@ -6,15 +6,17 @@ On a new machine, do the following:
      dd if=path-to-image of=/dev/sdX status=progress
    #+end_src
 
-2. Boot the new machine onto the flashdrive. Booting onto a flashdrive is
+2. Create the machine-specific configuration, see =machine/= for examples.
+
+3. Boot the new machine onto the flashdrive. Booting onto a flashdrive is
    machine specific. Search it.
 
-3. Get my scripts
+4. Get my scripts
    #+begin_src shell
      git clone https://github.com/iowaguy/dotfiles
    #+end_src
 
-4. Run my installer script
+5. Run my installer script
    #+begin_src shell
      cd home/programs/mynix
      sudo ./mynix fresh
