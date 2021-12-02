@@ -10,8 +10,9 @@
         version = 2;
         efiSupport = true;
         zfsSupport = true;
+        device = "nodev";
+        efiInstallAsRemovable = true;
       };
-      efi.canTouchEfiVariables = true;
     };
     cleanTmpDir = true;
   };
