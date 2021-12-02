@@ -22,6 +22,28 @@ On a new machine, do the following:
      sudo ./mynix fresh
    #+end_src
 
+6. Reboot
+
+7. Log into root, set password for my user
+   #+begin_src shell
+     passwd ben
+   #+end_src
+
+   To logout in =i3=, hit =Alt+Mod+e=.
+
+8. Update machine config symlink
+   #+begin_src shell
+     rm /etc/nixos/machine/current.nix
+   #+end_src
+
+9. Clone this repo into =~/workspace=.
+
+10. Run post-install script
+   #+begin_src shell
+     cd ~/workspace/dotfiles/home/programs/mynix
+     ./mynix install
+   #+end_src
+
 ** Debugging install
 If you get an error when creating the zpool that looks like =/dev/sda2 is part
 of the exported pool 'bpool_xxxx'=, run the following, and then try again.
