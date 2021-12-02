@@ -48,6 +48,14 @@ system_fresh_install() {
 
 system_install() {
   system_config ""
+  sudo nixos-rebuild switch
+
+  $GIT clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
+  $HOME/.emacs.d/bin/doom install
+}
+
+system_upgrade() {
+  system_config ""
   sudo nixos-rebuild switch --upgrade
 }
 
@@ -80,6 +88,15 @@ hm_refresh() {
 
 install() {
   system_install
+  hm_install
+
+  # Set screenlock wallpaper
+  betterlockscreen -u ${NIX_CONFIG_BASE_DIR}/home/resources/background-image
+  exit $?
+}
+
+upgrade() {
+  system_upgrade
   hm_install
 
   # Set screenlock wallpaper
@@ -188,6 +205,9 @@ while :; do
       ;;
     update)
       update
+      ;;
+    upgrade)
+      upgrade
       ;;
     fresh)
       system_fresh_install
