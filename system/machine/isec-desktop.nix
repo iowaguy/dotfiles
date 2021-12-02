@@ -8,12 +8,10 @@
       grub = {
         enable = true;
         version = 2;
-        device = "nodev";
+        efiSupport = true;
+        zfsSupport = true;
       };
-      efi = {
-        ## if UEFI firmware can detect entries, set to true
-        canTouchEfiVariables = true;
-      };
+      efi.canTouchEfiVariables = true;
     };
     cleanTmpDir = true;
   };
@@ -77,9 +75,9 @@
 
     };
 
-    # power savings
-    upower.enable = true;
-    tlp.enable = true;
-    thermald.enable = true; # So it doesn't get too toasty
+    # # power savings
+    # upower.enable = true;
+    # tlp.enable = true;
+    # thermald.enable = true; # So it doesn't get too toasty
   };
 }

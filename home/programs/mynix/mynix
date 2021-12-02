@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash -p dmidecode python3
+#! nix-shell -i bash -p dmidecode python3 git
 
 set -eu -o pipefail
 shopt -s failglob
@@ -118,11 +118,7 @@ fresh_install() {
   read -p "What prefix should we use for partitions of $DISK (usually nothing or \"-part\")? " PART_PREFIX
   ls $DISK # this is just to check that it exists
 
-  INST_ID=nixos
-
   INST_PRIMARY_DISK=$(echo $DISK | cut -f1 -d\ )
-
-  INST_PARTSIZE_ESP=2 # in GB
 
   # wipe solid-state drives with the generic tool blkdiscard, to clean previous partition tables and improve performance
   blkdiscard -f $DISK &
@@ -131,21 +127,26 @@ fresh_install() {
   # remove all partitions on disk
   sgdisk --zap-all $DISK
 
-  # boot partition
-  sgdisk -n1:1M:+${INST_PARTSIZE_ESP}G -t1:EF00 $INST_PRIMARY_DISK
+  parted $DISK -- mklabel gpt
 
-  # root partition
-  sgdisk -n2:0:0 -t2:BF01 $INST_PRIMARY_DISK
+  # primary disk starts at 512MiB and ends 8GiB before the end of disk
+  parted $DISK -- mkpart primary 512MiB 100%
 
-  mkfs.vfat ${INST_PRIMARY_DISK}${PART_PREFIX}1
+  parted $DISK -- mkpart ESP fat32 1MiB 512MiB
+  parted $DISK -- set 2 esp on
 
-  # Create root pool. Must happen before boot pool
-  zpool create \
-    -o autotrim=on \
-    -O acltype=posix \
-    -O mountpoint=none \
-    rpool \
-    ${DISK}${PART_PREFIX}2
+  mkfs.fat -F 32 -n boot ${DISK}${PART_PREFIX}2        # (for UEFI systems only)
+
+  zpool create -f rpool ${DISK}${PART_PREFIX}1
+  zfs set com.sun:auto-snapshot=true rpool
+  zfs set compression=lz4 rpool
+  # # Create root pool
+  # zpool create \
+  #   -o autotrim=on \
+  #   -O acltype=posix \
+  #   -O mountpoint=none \
+  #   rpool \
+  #   ${DISK}${PART_PREFIX}1
 
   # create encrypted root container
   zfs create \
@@ -153,18 +154,19 @@ fresh_install() {
   -o encryption=aes-256-gcm \
   -o keylocation=prompt \
   -o keyformat=passphrase \
-  rpool/$INST_ID
+  rpool
+
+  # Setup auto-snapshots
+  zfs set com.sun:auto-snapshot=true rpool
 
   # Create other system datasets
-  zfs create -p -o mountpoint=legacy rpool/$INST_ID/root
-  zfs create -p -o mountpoint=legacy rpool/$INST_ID/root/nixos
-  zfs create -p -o mountpoint=legacy rpool/$INST_ID/home
+  zfs create -p -o mountpoint=legacy rpool/root
 
   # mount things
-  mount -t zfs rpool/$INST_ID/root/nixos /mnt
-  mkdir /mnt/{boot,home}
-  mount -t zfs rpool/$INST_ID/home /mnt/home
-  mount ${DISK}${PART_PREFIX}1 /mnt/boot
+  mount -t zfs rpool/root /mnt
+  mkdir -p /mnt/boot
+  mount ${DISK}${PART_PREFIX}2 /mnt/boot
+
 
   nixos-generate-config --root /mnt
 
@@ -195,3 +197,4 @@ while :; do
   esac
   shift
 done
+shift $((OPTIND-1))
