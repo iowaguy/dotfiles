@@ -42,8 +42,8 @@ system_fresh_install() {
 
   fresh_install
   system_config "/mnt"
-  nixos-install -v --show-trace --root /mnt
-  zfs snapshot -r rpool/nixos@install
+  nixos-install -v --show-trace #--root /mnt
+  zfs snapshot -r rpool/root@install
 }
 
 system_install() {
@@ -52,7 +52,7 @@ system_install() {
 }
 
 system_refresh() {
-  system_config
+  system_config ""
   sudo nixos-rebuild switch
 }
 
@@ -148,13 +148,13 @@ fresh_install() {
   #   rpool \
   #   ${DISK}${PART_PREFIX}1
 
-  # create encrypted root container
-  zfs create \
-  -o mountpoint=legacy \
-  -o encryption=aes-256-gcm \
-  -o keylocation=prompt \
-  -o keyformat=passphrase \
-  rpool
+  # # create encrypted root container
+  # zfs create \
+  # -o mountpoint=legacy \
+  # -o encryption=aes-256-gcm \
+  # -o keylocation=prompt \
+  # -o keyformat=passphrase \
+  # rpool/root
 
   # Setup auto-snapshots
   zfs set com.sun:auto-snapshot=true rpool
