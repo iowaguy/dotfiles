@@ -83,7 +83,7 @@ install() {
   hm_install
 
   # Set screenlock wallpaper
-  betterlockscreen -u ${NIX_CONFIG_BASE_DIR}/home/resources/background_image
+  betterlockscreen -u ${NIX_CONFIG_BASE_DIR}/home/resources/background-image
   exit $?
 }
 
