@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }:
+let
+  niv = import ../../../nix/sources.nix;
+in
 {
   home.packages = with pkgs; [
     browserpass
@@ -17,6 +20,14 @@
       octotree
       refined-github
       tridactyl
+      (buildFirefoxXpiAddon {
+        pname = "BitItNow";
+        version = "0.902";
+        addonId = "schuleje@ok.de";
+        url = niv.bibitnow.url;
+        sha256 = niv.bibitnow.sha256;
+        meta = {};
+      })
       (buildFirefoxXpiAddon {
         pname = "zotero-connector";
         version = "5.0.60";
