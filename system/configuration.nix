@@ -163,7 +163,6 @@
               "ben-isec"
               "kansas"
             ];
-            rescanInterval = 300;
           };
           "/home/ben/.gnupg" = {
             id = "gpg";
