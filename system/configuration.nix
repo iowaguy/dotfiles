@@ -20,6 +20,9 @@
       127.0.0.1 nytimes.com
       127.0.0.1 news.ycombinator.com
     '';
+    firewall.allowedTCPPorts = [
+      22067
+    ];
   };
 
   # Set your time zone.
@@ -44,6 +47,7 @@
       "docker"
       "libvirtd"
       "power"
+      "syncthing"
     ];
     shell = pkgs.zsh;
   };
@@ -143,6 +147,21 @@
     # make capslock := ctrl
     # make ctrl+alt+backspace kill the X server
     xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";
+
+    syncthing = {
+      enable = true;
+      user = "ben";
+      declarative = {
+        folders = {
+          "/home/ben/workspace".id = "workspace";
+        };
+        devices = {
+          kansas = {
+            id = "MDCFDOP-O7O42LB-2NKDRRR-FLQ2SD7-GUZZ2HU-KIVUCZR-M2KVH2T-BQ4XRAW";
+          };
+        };
+      };
+    };
   };
 
   krb5 = {
