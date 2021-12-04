@@ -21,7 +21,11 @@
       127.0.0.1 news.ycombinator.com
     '';
     firewall.allowedTCPPorts = [
-      22067
+      22067 # syncthing
+      36885 # syncthing
+    ];
+    firewall.allowedUDPPorts = [
+      36885 # syncthing
     ];
   };
 
