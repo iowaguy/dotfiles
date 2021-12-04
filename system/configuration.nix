@@ -157,7 +157,13 @@
       user = "ben";
       declarative = {
         folders = {
-          "/home/ben/workspace".id = "workspace";
+          "/home/ben/workspace" = {
+            id = "workspace";
+            devices = [
+              "ben-isec"
+              "kansas"
+            ];
+          };
         };
         devices = {
           kansas = {
