@@ -44,6 +44,16 @@ On a new machine, do the following:
      ./mynix install
    #+end_src
 
+11. Add new machine's =syncthing= ID to the devices in the [[file:system/configuration.nix::syncthing = {][configuration.nix]],
+    and add the device names to the list of devices to sync for each dir.
+
+12. Setup =pass=. The =GPG-ID= is the last 12 characters of the fingerprint from
+    =gpg -k=.
+   #+begin_src shell
+     git clone git@github.com:iowaguy/passwords.git ~/.password-store
+     pass init <GPG-ID>
+   #+end_src
+
 ** Debugging install
 If you get an error when creating the zpool that looks like =/dev/sda2 is part
 of the exported pool 'bpool_xxxx'=, run the following, and then try again.
