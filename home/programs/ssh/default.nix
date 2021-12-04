@@ -42,6 +42,14 @@ in {
           "User" = "benweintraub";
         };
       };
+      "ben-isec" = dag.entryAfter [ "khoury-login" ] {
+        extraOptions = {
+          "Hostname" = "ben-isec.khoury.northeastern.edu";
+          "ProxyJump" = "khoury-login";
+          "User" = "ben";
+          "ForwardAgent" = "yes";
+        };
+      };
       "khoury" = dag.entryAfter [ "khoury-login" ] {
         extraOptions = {
           "Hostname" = "vdi-linux-030.ccs.neu.edu";
