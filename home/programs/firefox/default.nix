@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
-let
-  niv = import ../../../nix/sources.nix;
-in
+
+with import "${builtins.getEnv "HOME"}/workspace/dotfiles/nix/sources.nix" {};
 {
   home.packages = with pkgs; [
     browserpass
@@ -22,10 +21,10 @@ in
       tridactyl
       (buildFirefoxXpiAddon {
         pname = "BitItNow";
-        version = "0.902";
+        version = bibitnow.version;
         addonId = "schuleje@ok.de";
-        url = niv.bibitnow.url;
-        sha256 = niv.bibitnow.sha256;
+        url = bibitnow.url;
+        sha256 = bibitnow.sha256;
         meta = {};
       })
       (buildFirefoxXpiAddon {
