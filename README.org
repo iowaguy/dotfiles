@@ -54,6 +54,12 @@ On a new machine, do the following:
      pass init <GPG-ID>
    #+end_src
 
+13. Install =doom-emacs=
+  #+begin_src shell
+    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+    ~/.emacs.d/bin/doom install
+  #+end_src
+
 ** Debugging install
 If you get an error when creating the zpool that looks like =/dev/sda2 is part
 of the exported pool 'bpool_xxxx'=, run the following, and then try again.
