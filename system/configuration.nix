@@ -163,6 +163,7 @@
               "ben-isec"
               "kansas"
             ];
+            rescanInterval = 300;
           };
         };
         devices = {
