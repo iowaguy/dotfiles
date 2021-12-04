@@ -165,6 +165,13 @@
             ];
             rescanInterval = 300;
           };
+          "/home/ben/.gnupg" = {
+            id = "gpg";
+            devices = [
+              "ben-isec"
+              "kansas"
+            ];
+          };
         };
         devices = {
           kansas = {
