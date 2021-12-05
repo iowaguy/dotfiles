@@ -2,7 +2,6 @@
   ./autorandr
   ./betterlockscreen
   ./direnv
-  ./dropbox
   ./emacs
   ./email
   ./firefox
