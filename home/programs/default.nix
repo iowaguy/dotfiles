@@ -6,7 +6,6 @@
   ./email
   ./firefox
   ./git
-  # ./gnome
   ./i3
   ./mynix
   ./password-management
@@ -17,5 +16,4 @@
   ./slack
   ./ssh
   ./teams
-  # ./xmonad
 ] ++ (import ./pdfs)
