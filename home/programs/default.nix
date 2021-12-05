@@ -9,6 +9,7 @@
   ./i3
   ./mynix
   ./password-management
+  ./pdfs
   ./redshift
   ./rofi
   ./shell
@@ -16,4 +17,4 @@
   ./slack
   ./ssh
   ./teams
-] ++ (import ./pdfs)
+]
