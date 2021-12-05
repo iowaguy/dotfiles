@@ -6,6 +6,18 @@
         "url_template": "https://addons.mozilla.org/firefox/downloads/file/3769373/bibitnow-<version>-fx.xpi",
         "version": "0.902"
     },
+    "colored_man_pages": {
+        "branch": "main",
+        "description": "Fish shell plugin to colorize man pages",
+        "homepage": "",
+        "owner": "patrickf1",
+        "repo": "colored_man_pages.fish",
+        "rev": "8c4965b9be9433d12ba50c28452cab8c71c59a50",
+        "sha256": "0pxm10wlngcxf8lzlfx2w1b2z6qh2jdpm7m224q6bznl0kvw46wf",
+        "type": "tarball",
+        "url": "https://github.com/patrickf1/colored_man_pages.fish/archive/8c4965b9be9433d12ba50c28452cab8c71c59a50.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "release-21.05",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
