@@ -4,7 +4,7 @@
   programs.rofi = {
     enable = true;
     theme = "fancy";
-    terminal = "${pkgs.alacritty}/bin/alacritty";
+    terminal = "${pkgs.kitty}/bin/kitty";
     package = with pkgs; rofi.override { plugins = [ rofi-calc ]; };
     pass = {
       enable = true;

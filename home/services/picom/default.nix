@@ -14,7 +14,6 @@
       "100:name *= 'Slack'"
       "100:name *= 'Teams'"
       "100:name *= 'Zotero'"
-      "90:name *= 'Alacritty'"
       "90:name *= 'Emacs'"
     ];
     shadow = true;

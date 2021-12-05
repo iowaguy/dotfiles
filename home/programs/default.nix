@@ -1,5 +1,4 @@
 [
-  ./alacritty
   ./autorandr
   ./direnv
   ./dropbox
@@ -12,6 +11,7 @@
   ./mynix
   ./redshift
   ./rofi
+  ./terminal
   ./slack
   ./ssh
   ./teams
