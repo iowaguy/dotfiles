@@ -7,6 +7,7 @@
 
   programs.kitty = {
     enable = true;
+    # View all settings here: https://sw.kovidgoyal.net/kitty/conf/
     settings = {
       enable_audio_bell = false;
       scrollback_lines = 10000;
