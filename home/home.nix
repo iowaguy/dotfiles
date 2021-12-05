@@ -21,7 +21,6 @@ let
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     nox
     openvpn                       # a VPN client
-    pass                          # the quintessential linux password manager
     pandoc
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
@@ -86,6 +85,9 @@ in {
   };
 
   programs = {
+
+    password-store.enable = true;   # the quintessential linux password manager
+
     # Interactive fuzzy searching from the command line
     fzf = {
       enable = true;
@@ -116,6 +118,11 @@ in {
 
   services = {
     udiskie.enable = true;
+
+    password-store-sync = {
+      enable = true;
+      frequency = "*:0/60"; # sync every hour
+    };
 
     # For screenshots
     flameshot.enable = true;
