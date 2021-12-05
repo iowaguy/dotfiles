@@ -85,9 +85,6 @@ in {
   };
 
   programs = {
-
-    password-store.enable = true;   # the quintessential linux password manager
-
     # A better ls
     exa.enable = true;
 
@@ -121,11 +118,6 @@ in {
 
   services = {
     udiskie.enable = true;
-
-    password-store-sync = {
-      enable = true;
-      frequency = "*:0/60"; # sync every hour
-    };
 
     # For screenshots
     flameshot.enable = true;

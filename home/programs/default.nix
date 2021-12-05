@@ -9,6 +9,7 @@
   # ./gnome
   ./i3
   ./mynix
+  ./password-management
   ./redshift
   ./rofi
   ./shell
