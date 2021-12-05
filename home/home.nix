@@ -88,6 +88,9 @@ in {
 
     password-store.enable = true;   # the quintessential linux password manager
 
+    # A better ls
+    exa.enable = true;
+
     # Interactive fuzzy searching from the command line
     fzf = {
       enable = true;
