@@ -11,10 +11,10 @@
   ./mynix
   ./redshift
   ./rofi
+  ./shell
   ./terminal
   ./slack
   ./ssh
   ./teams
   # ./xmonad
-  ./zsh
 ] ++ (import ./pdfs)

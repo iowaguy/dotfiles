@@ -53,7 +53,7 @@
       "power"
       "syncthing"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   # Members of wheel don't need a password for sudo
@@ -81,20 +81,7 @@
     # https://github.com/rycee/home-manager/issues/1087
     ssh.startAgent = true;
 
-    zsh = {
-      enable = true;
-      ohMyZsh = {
-        enable = true;
-        plugins = [
-          "colored-man-pages"
-          "git-auto-fetch"
-          "vagrant"
-        ];
-        theme = "agnoster";
-      };
-      # Completion for many CLI utils
-      enableBashCompletion = true;
-    };
+    fish.enable = true;
 
     gnupg.agent = {
       enable = true;
