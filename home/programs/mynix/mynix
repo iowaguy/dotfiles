@@ -67,6 +67,7 @@ system_refresh() {
 hm_install() {
   # Home manager
   mkdir -p $HOME/.config/nixpkgs/
+  ln -s ${NIX_CONFIG_BASE_DIR}/home/home.nix $HOME/.config/nixpkgs/home.nix
   cp -r ${NIX_CONFIG_BASE_DIR}/home/* $HOME/.config/nixpkgs/
   cp -r ${NIX_CONFIG_BASE_DIR}/nix $HOME/.config/
 
