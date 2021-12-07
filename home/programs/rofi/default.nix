@@ -5,7 +5,6 @@
     enable = true;
     theme = "fancy";
     terminal = "${pkgs.kitty}/bin/kitty";
-    package = with pkgs; rofi.override { plugins = [ rofi-calc ]; };
     pass = {
       enable = true;
       stores = ["${builtins.getEnv "HOME"}/.password-store"];
@@ -16,10 +15,9 @@
       '';
     };
 
-    # TODO I should be able to configure rofi-calc this way after the next HM
-    # release.
-    # plugins = [
-    #   pkgs.rofi-calc
-    # ];
+    plugins = with pkgs; [
+      rofi-calc
+      rofi-file-browser
+    ];
   };
 }
