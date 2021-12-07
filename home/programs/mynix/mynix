@@ -55,8 +55,15 @@ system_install() {
 }
 
 system_upgrade() {
-  system_config ""
+  sudo nix-channel --add https://nixos.org/channels/nixos-${HOME_MANAGER_VERSION} nixos
   sudo nixos-rebuild switch --upgrade
+}
+
+hm_upgrade() {
+  nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
+  nix-channel --update
+
+  home-manager switch
 }
 
 system_refresh() {
@@ -67,8 +74,8 @@ system_refresh() {
 hm_install() {
   # Home manager
   mkdir -p $HOME/.config/nixpkgs/
-  ln -s ${NIX_CONFIG_BASE_DIR}/home/home.nix $HOME/.config/nixpkgs/home.nix
-  cp -r ${NIX_CONFIG_BASE_DIR}/home/* $HOME/.config/nixpkgs/
+  ln -f -s ${NIX_CONFIG_BASE_DIR}/home/home.nix $HOME/.config/nixpkgs/home.nix
+  cp -r ${NIX_CONFIG_BASE_DIR}/home/{modules,programs,resources} $HOME/.config/nixpkgs/
   cp -r ${NIX_CONFIG_BASE_DIR}/nix $HOME/.config/
 
   nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
@@ -98,10 +105,7 @@ install() {
 
 upgrade() {
   system_upgrade
-  hm_install
-
-  # Set screenlock wallpaper
-  betterlockscreen -u ${NIX_CONFIG_BASE_DIR}/home/resources/background-image
+  hm_upgrade
   exit $?
 }
 
