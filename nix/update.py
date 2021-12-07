@@ -12,4 +12,5 @@ if __name__ == "__main__":
         sources_dict = json.load(f)
 
     for key, val in sources_dict.items():
-        subprocess.run(["niv", "update", key, "-b", val['branch']])
+        if 'branch' in val:
+            subprocess.run(["niv", "update", key, "-b", val['branch']])
