@@ -5,7 +5,7 @@
   # environment.
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     nix-direnv = {
       enable = true;
       # optional for nix flakes support
@@ -13,30 +13,28 @@
     };
   };
 
-  programs.zsh.initExtra = ''
-    #!/bin/sh
-
-    nixify() {
-      if [ ! -e ./.envrc ]; then
-        echo "use nix\nunset PS1" > .envrc
+  programs.fish.shellInit = ''
+    function nixify
+      if ! test -e ./.envrc
+        echo "use nix"\n"unset PS1" > .envrc
         direnv allow
-      fi
-      if [[ ! -e shell.nix ]] && [[ ! -e default.nix ]]; then
+      end
+      if ! test -e shell.nix && ! test -e default.nix
         cp $HOME/.bin/shell-template.nix shell.nix
         chmod u+w shell.nix
-        ''${EDITOR:-vim} shell.nix
-      fi
-    }
+        $EDITOR shell.nix
+      end
+    end
 
-    flakify() {
-      if [ ! -e flake.nix ]; then
+    function flakify
+      if ! test -e flake.nix
         nix flake new -t github:nix-community/nix-direnv .
-      elif [ ! -e .envrc ]; then
+      elif ! test -e .envrc
         echo "use flake" > .envrc
         direnv allow
-      fi
-      ''${EDITOR:-vim} flake.nix
-    }
+      end
+      $EDITOR flake.nix
+    end
   '';
 
   home.file.".bin/shell-template.nix" = {
