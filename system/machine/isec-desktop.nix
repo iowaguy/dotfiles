@@ -64,10 +64,6 @@
 #      videoDrivers = [ "ati" ];
       displayManager = {
         defaultSession = "xfce+i3";
-        sessionCommands = ''
-          # Suspends and locks session on lid close
-          xfconf-query -c xfce4-session -p /general/LockCommand -s "systemctl suspend";
-        '';
       };
 
 
