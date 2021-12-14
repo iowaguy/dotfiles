@@ -3,6 +3,7 @@
 let
   homedir = builtins.getEnv "HOME";
   mypolybar = pkgs.polybar.override {
+    i3GapsSupport = true;
     alsaSupport = true;
     #githubSupport = true;
     #mpdSupport = true;
