@@ -48,9 +48,6 @@ system_fresh_install() {
 system_install() {
   system_config ""
   sudo nixos-rebuild switch
-
-  $GIT clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
-  $HOME/.emacs.d/bin/doom install
 }
 
 system_upgrade() {
@@ -83,6 +80,10 @@ hm_install() {
   nix-shell '<home-manager>' -A install
 
   hm_refresh
+
+  # Setup doom-emacs
+  $GIT clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
+  $HOME/.emacs.d/bin/doom install
 }
 
 hm_refresh() {
