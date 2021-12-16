@@ -142,6 +142,7 @@
     syncthing = {
       enable = true;
       user = "ben";
+      dataDir = "/home/ben";
       folders = {
         "/home/ben/workspace" = {
           id = "workspace";
