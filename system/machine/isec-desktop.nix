@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../persist/system.nix
+    ../persist/home.nix
+  ];
+
   boot = {
     supportedFilesystems = [ "zfs" ];
     loader = {

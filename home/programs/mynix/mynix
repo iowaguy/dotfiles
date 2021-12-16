@@ -204,6 +204,10 @@ fresh_install() {
   mkdir -p /mnt/persist
   mount -t zfs rpool/safe/persist /mnt/persist
 
+  # Needed for persisting data after reboot: https://grahamc.com/blog/erase-your-darlings
+  mkdir -p /persist/etc/NetworkManager/system-connections
+  mkdir -p /persist/var/lib/bluetooth
+  mkdir -p /persist/etc/ssh
   nixos-generate-config --root /mnt
 
   mkdir -p /root/workspace
