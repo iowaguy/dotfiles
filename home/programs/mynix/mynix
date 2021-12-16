@@ -43,7 +43,6 @@ system_fresh_install() {
   fresh_install
   system_config "/mnt"
   nixos-install -v --show-trace #--root /mnt
-  zfs snapshot -r rpool/root@install
 }
 
 system_install() {
