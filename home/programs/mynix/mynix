@@ -162,35 +162,46 @@ fresh_install() {
   mkfs.fat -F 32 -n boot ${DISK}${PART_PREFIX}2        # (for UEFI systems only)
 
   zpool create -f rpool ${DISK}${PART_PREFIX}1
-  zfs set com.sun:auto-snapshot=true rpool
-  zfs set compression=lz4 rpool
-  # # Create root pool
-  # zpool create \
-  #   -o autotrim=on \
-  #   -O acltype=posix \
-  #   -O mountpoint=none \
-  #   rpool \
-  #   ${DISK}${PART_PREFIX}1
 
-  # # create encrypted root container
-  # zfs create \
-  # -o mountpoint=legacy \
-  # -o encryption=aes-256-gcm \
-  # -o keylocation=prompt \
-  # -o keyformat=passphrase \
-  # rpool/root
+  zfs set com.sun:auto-snapshot=true rpool
+
+  # When set to "on," zfs will choose the best algorithm available.
+  zfs set compression=on rpool
+
+  # These are needed so users can access their own journals
+  zfs set acltype=posix rpool
+  zfs set xattr=sa rpool
 
   # Setup auto-snapshots
   zfs set com.sun:auto-snapshot=true rpool
 
   # Create other system datasets
-  zfs create -p -o mountpoint=legacy rpool/root
+  zfs create -p -o mountpoint=legacy rpool/local/root
+  zfs create -p -o mountpoint=legacy rpool/local/nix
+  zfs create -p -o mountpoint=legacy rpool/safe/home
+  zfs create -p -o mountpoint=legacy rpool/safe/persist
 
-  # mount things
-  mount -t zfs rpool/root /mnt
+  # Snapshot root partition before it has any data
+  zfs snapshot rpool/local/root@blank
+
+  # Mount root dataset
+  mount -t zfs rpool/local/root /mnt
+
+  # Mount boot partition
   mkdir -p /mnt/boot
   mount ${DISK}${PART_PREFIX}2 /mnt/boot
 
+  # Mount /nix
+  mkdir -p /mnt/nix
+  mount -t zfs rpool/local/nix /mnt/nix
+
+  # Mount /home
+  mkdir -p /mnt/home
+  mount -t zfs rpool/safe/home /mnt/home
+
+  # This is the data I want to persist between reboots
+  mkdir -p /mnt/persist
+  mount -t zfs rpool/safe/persist /mnt/persist
 
   nixos-generate-config --root /mnt
 
