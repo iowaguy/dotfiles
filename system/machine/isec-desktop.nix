@@ -41,19 +41,7 @@
     };
     cpu.intel.updateMicrocode = true;
 
-    pulseaudio = {
-      enable = true;
-
-      # NixOS allows either a lightweight (default) or full build of PulseAudio to be installed.
-      # Only the full build has Bluetooth support, so it must be selected here.
-      package = pkgs.pulseaudioFull;
-      extraConfig = ''
-        load-module module-switch-on-connect
-      '';
-    };
-    bluetooth = {
-      enable = true;
-    };
+    pulseaudio.enable = true;
   };
 
   services = {
@@ -66,15 +54,8 @@
         defaultSession = "xfce+i3";
       };
 
-
       # keyboard settings
       xkbOptions = "altwin:swap_lalt_lwin"; # Swap left alt with left win
-
     };
-
-    # # power savings
-    # upower.enable = true;
-    # tlp.enable = true;
-    # thermald.enable = true; # So it doesn't get too toasty
   };
 }
