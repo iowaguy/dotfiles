@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  sources = import ./nix/sources.nix {};
+  sources = import ../nix/sources.nix {};
 in {
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   zfs rollback -r rpool/local/root@blank
