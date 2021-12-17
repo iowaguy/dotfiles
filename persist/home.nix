@@ -1,7 +1,8 @@
-{ config, pkgs, impermanence ? import (import ../nix/sources.nix).impermanence {}, ... }:
-
-{
-  imports = [ "${impermanence}/home-manager.nix" ];
+{ config, pkgs, ... }:
+let
+  sources = import /home/ben/workspace/dotfiles/nix/sources.nix {};
+in {
+  imports = [ "${sources.impermanence}/home-manager.nix" ];
 
   # Things that should get real backups.
   # Heuristic: are the source of truth and important.

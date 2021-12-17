@@ -1,11 +1,13 @@
-{ config, pkgs, lib, impermanence ? import (import ../nix/sources.nix).impermanence {}, ... }:
+{ config, pkgs, lib, ... }:
 
-{
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/local/root@blank
-  '';
+let
+  sources = import ./nix/sources.nix {};
+in {
+  # boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #   zfs rollback -r rpool/local/root@blank
+  # '';
 
-  imports = [ "${impermanence}/nixos.nix" ];
+  imports = [ "${sources.impermanence}/nixos.nix" ];
 
   # The following sections are for persisting data after reboots: https://grahamc.com/blog/erase-your-darlings
   etc."NetworkManager/system-connections" = {
