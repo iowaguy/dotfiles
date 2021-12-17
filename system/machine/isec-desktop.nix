@@ -3,7 +3,6 @@
 {
   imports = [
     ../persist/system.nix
-    ../persist/home.nix
   ];
 
   boot = {

@@ -46,7 +46,9 @@ let
 
   sources = import ../nix/sources.nix;
 in {
-  imports = (import ./programs) ++ (import ./modules);
+  imports = [
+    ./machine/current.nix
+  ] ++ (import ./programs) ++ (import ./modules);
 
   nixpkgs.config = {
     allowUnfree = true;
