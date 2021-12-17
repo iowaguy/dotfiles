@@ -10,9 +10,9 @@ in {
   imports = [ "${sources.impermanence}/nixos.nix" ];
 
   # The following sections are for persisting data after reboots: https://grahamc.com/blog/erase-your-darlings
-  etc."NetworkManager/system-connections" = {
-    source = "/persist/etc/NetworkManager/system-connections/";
-  };
+  systemd.tmpfiles.rules = [
+    "L /etc/NetworkManager/system-connections - - - - /persist/etc/NetworkManager/system-connections/"
+  ];
   ## Don't need this b/c this desktop doesn't support bluetooth.
   # systemd.tmpfiles.rules = [
   #   "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
