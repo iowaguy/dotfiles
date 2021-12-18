@@ -21,21 +21,22 @@ machines['Precision Tower 3620']=isec-desktop.nix
 
 system_config() {
   POSSIBLE_MNT=$1
+  local mnt_config_dir=${POSSIBLE_MNT}/${NIX_CONFIG_BASE_DIR}
 
   # Nix configuration
-  sudo cp ${NIX_CONFIG_BASE_DIR}/system/configuration.nix ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/machine/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/hardware/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${NIX_CONFIG_BASE_DIR}/system/wm/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${NIX_CONFIG_BASE_DIR}/nix/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${NIX_CONFIG_BASE_DIR}/persist/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp ${mnt_config_dir}/system/configuration.nix ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/system/machine/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/system/hardware/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/system/wm/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/nix/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/persist/ ${POSSIBLE_MNT}/etc/nixos/
 
   model="$(sudo dmidecode -s system-product-name)"
 
   echo "Linking current machine's configuration (${model})"
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/machine/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/hardware/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/hardware-configuration.nix
-  sudo ln -f -s "${POSSIBLE_MNT}/${NIX_CONFIG_BASE_DIR}/home/machine/${machines[${model}]}" ${NIX_CONFIG_BASE_DIR}/home/machine/current.nix
+  sudo ln -f -s "${mnt_config_dir}/home/machine/${machines[${model}]}" ${mnt_config_dir}/home/machine/current.nix
 }
 
 system_fresh_install() {
