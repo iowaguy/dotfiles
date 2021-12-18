@@ -58,8 +58,8 @@ system_upgrade() {
 }
 
 hm_upgrade() {
-  nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
-  nix-channel --update
+  sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
+  sudo nix-channel --update
 
   home-manager switch
 }
