@@ -35,7 +35,7 @@ system_config() {
   echo "Linking current machine's configuration (${model})"
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/machine/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/hardware/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/hardware-configuration.nix
-  sudo ln -f -s "${NIX_CONFIG_BASE_DIR}/home/machine/${machines[${model}]}" ${NIX_CONFIG_BASE_DIR}/home/machine/current.nix
+  sudo ln -f -s "${POSSIBLE_MNT}/${NIX_CONFIG_BASE_DIR}/home/machine/${machines[${model}]}" ${NIX_CONFIG_BASE_DIR}/home/machine/current.nix
 }
 
 system_fresh_install() {
