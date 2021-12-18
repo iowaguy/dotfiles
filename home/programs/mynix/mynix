@@ -7,7 +7,7 @@ shopt -s failglob
 HOME_MANAGER_VERSION=21.11
 DOTFILES_BASE=workspace/dotfiles
 PERSIST=/persist
-PERSIST_HOME=$PERSIST/ben
+PERSIST_HOME=$PERSIST/home/ben
 NIX_CONFIG_BASE_DIR=${PERSIST_HOME}/${DOTFILES_BASE}
 GIT_HOME="https://github.com/iowaguy/dotfiles"
 REPO=/mnt/${PERSIST_HOME}/$DOTFILES_BASE
