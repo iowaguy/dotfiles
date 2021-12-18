@@ -47,8 +47,9 @@ system_fresh_install() {
 
   fresh_install
   system_config "/mnt"
-  nixos-install -v --show-trace #--root /mnt
-  chown -R ben $PERSIST_HOME
+  nixos-install -v --show-trace
+  nixos-enter --root /mnt -c "passwd ben"
+  nixos-enter --root /mnt -c "chown -R ben $PERSIST_HOME"
 }
 
 system_install() {
