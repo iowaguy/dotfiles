@@ -6,9 +6,11 @@ shopt -s failglob
 
 HOME_MANAGER_VERSION=21.11
 DOTFILES_BASE=workspace/dotfiles
-NIX_CONFIG_BASE_DIR=${HOME}/${DOTFILES_BASE}
+PERSIST=/persist
+PERSIST_HOME=$PERSIST/ben
+NIX_CONFIG_BASE_DIR=${PERSIST_HOME}/${DOTFILES_BASE}
 GIT_HOME="https://github.com/iowaguy/dotfiles"
-
+REPO=/mnt/${PERSIST_HOME}/$DOTFILES_BASE
 PYTHON=$(which python3)
 GIT=$(which git)
 
@@ -33,7 +35,7 @@ system_config() {
   echo "Linking current machine's configuration (${model})"
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/machine/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/machine/current.nix
   sudo ln -f -s "${POSSIBLE_MNT}/etc/nixos/hardware/${machines[${model}]}" ${POSSIBLE_MNT}/etc/nixos/hardware-configuration.nix
-  sudo ln -f -s ${NIX_CONFIG_BASE_DIR}/home/machine/${machines[${model}]} ${NIX_CONFIG_BASE_DIR}/home/machine/current.nix
+  sudo ln -f -s "${NIX_CONFIG_BASE_DIR}/home/machine/${machines[${model}]}" ${NIX_CONFIG_BASE_DIR}/home/machine/current.nix
 }
 
 system_fresh_install() {
@@ -211,8 +213,10 @@ fresh_install() {
   mkdir -p /persist/etc/ssh
   nixos-generate-config --root /mnt
 
-  mkdir -p /root/workspace
-  $GIT clone $GIT_HOME /root/$DOTFILES_BASE
+  # mkdir -p /root/workspace
+  # $GIT clone $GIT_HOME /root/$DOTFILES_BASE
+  $GIT clone $GIT_HOME $REPO
+  chown -R ben $PERSIST_HOME
 }
 
 while :; do
