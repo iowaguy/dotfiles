@@ -47,6 +47,7 @@ system_fresh_install() {
   fresh_install
   system_config "/mnt"
   nixos-install -v --show-trace #--root /mnt
+  chown -R ben $PERSIST_HOME
 }
 
 system_install() {
@@ -216,7 +217,6 @@ fresh_install() {
   # mkdir -p /root/workspace
   # $GIT clone $GIT_HOME /root/$DOTFILES_BASE
   $GIT clone $GIT_HOME $REPO
-  chown -R ben $PERSIST_HOME
 }
 
 while :; do
