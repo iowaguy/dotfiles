@@ -2,6 +2,6 @@
 
 {
   imports = [
-    ../persist/home.nix
+    ../../persist/home.nix
   ];
 }
