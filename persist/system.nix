@@ -10,26 +10,26 @@ in {
   imports = [ "${sources.impermanence}/nixos.nix" ];
 
   # The following sections are for persisting data after reboots: https://grahamc.com/blog/erase-your-darlings
-  systemd.tmpfiles.rules = [
-    "L /etc/NetworkManager/system-connections - - - - /persist/etc/NetworkManager/system-connections/"
-    "L /home/ben/workspace - - - - /persist/home/ben/workspace"
-    "L /home/ben/.gnupg - - - - /persist/home/ben/.gnupg"
-    "L /home/ben/.ssh - - - - /persist/home/ben/.ssh"
-    "L /home/ben/.config/Signal - - - - /persist/home/ben/.config/Signal"
-    "L /home/ben/.config/syncthing - - - - /persist/home/ben/.config/syncthing"
-    "L /home/ben/.emacs.d - - - - /persist/home/ben/.emacs.d"
-    "L /home/ben/.mozilla - - - - /persist/home/ben/.mozilla"
-    "L /home/ben/.local/share/direnv - - - - /persist/home/ben/.local/share/direnv"
-    "L /home/ben/.local/share/keyrings - - - - /persist/home/ben/.local/share/keyrings"
-    "L /home/ben/.local/share/tridactyl - - - - /persist/home/ben/.local/share/tridactyl"
-    "L /home/ben/.config/skypeforlinux - - - - /persist/home/ben/.config/skypeforlinux"
-    "L /home/ben/.config/Slack - - - - /persist/home/ben/.config/Slack"
-    "L /home/ben/.vagrant.d - - - - /persist/home/ben/.vagrant.d"
-    "L /home/ben/.terraform.d - - - - /persist/home/ben/.terraform.d"
-    "L /home/ben/.packer.d - - - - /persist/home/ben/.packer.d"
-    "L /home/ben/.password-store - - - - /persist/home/ben/.password-store"
-    "L /home/ben/Zotero - - - - /persist/home/ben/Zotero"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "L /etc/NetworkManager/system-connections - - - - /persist/etc/NetworkManager/system-connections/"
+  #   "L /home/ben/workspace - - - - /persist/home/ben/workspace"
+  #   "L /home/ben/.gnupg - - - - /persist/home/ben/.gnupg"
+  #   "L /home/ben/.ssh - - - - /persist/home/ben/.ssh"
+  #   "L /home/ben/.config/Signal - - - - /persist/home/ben/.config/Signal"
+  #   "L /home/ben/.config/syncthing - - - - /persist/home/ben/.config/syncthing"
+  #   "L /home/ben/.emacs.d - - - - /persist/home/ben/.emacs.d"
+  #   "L /home/ben/.mozilla - - - - /persist/home/ben/.mozilla"
+  #   "L /home/ben/.local/share/direnv - - - - /persist/home/ben/.local/share/direnv"
+  #   "L /home/ben/.local/share/keyrings - - - - /persist/home/ben/.local/share/keyrings"
+  #   "L /home/ben/.local/share/tridactyl - - - - /persist/home/ben/.local/share/tridactyl"
+  #   "L /home/ben/.config/skypeforlinux - - - - /persist/home/ben/.config/skypeforlinux"
+  #   "L /home/ben/.config/Slack - - - - /persist/home/ben/.config/Slack"
+  #   "L /home/ben/.vagrant.d - - - - /persist/home/ben/.vagrant.d"
+  #   "L /home/ben/.terraform.d - - - - /persist/home/ben/.terraform.d"
+  #   "L /home/ben/.packer.d - - - - /persist/home/ben/.packer.d"
+  #   "L /home/ben/.password-store - - - - /persist/home/ben/.password-store"
+  #   "L /home/ben/Zotero - - - - /persist/home/ben/Zotero"
+  # ];
   ## Don't need this b/c this desktop doesn't support bluetooth.
   # systemd.tmpfiles.rules = [
   #   "L /var/lib/bluetooth - - - - /persist/var/lib/bluetooth"
