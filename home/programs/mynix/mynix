@@ -76,8 +76,8 @@ hm_install() {
   cp -r ${NIX_CONFIG_BASE_DIR}/home/{modules,programs,resources} $HOME/.config/nixpkgs/
   cp -r ${NIX_CONFIG_BASE_DIR}/nix $HOME/.config/
 
-  nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
-  nix-channel --update
+  sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-${HOME_MANAGER_VERSION}.tar.gz home-manager
+  sudo nix-channel --update
   export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
   nix-shell '<home-manager>' -A install
 
