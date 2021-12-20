@@ -48,7 +48,7 @@ let
 in {
   imports = [
     ./machine/current.nix
-  ] ++ (import ./programs) ++ (import ./modules);
+  ] ++ (import ./modules) ++ (import ./code);
 
   nixpkgs.config = {
     allowUnfree = true;
