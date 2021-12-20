@@ -15,7 +15,7 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
     # enableAutosuggestions = true;
     shellInit = ''
       export BROWSER="firefox";
-      export PATH="$HOME/.bin:$PATH";
+      export PATH="$HOME/.bin:$HOME/.emacs.d/bin:$PATH";
       export EDITOR="emacsclient";
     '';
 
