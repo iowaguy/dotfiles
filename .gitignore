@@ -4,3 +4,4 @@ macos/emacs/dot-emacs.d/init.el
 macos/emacs/dot-emacs.d/resources
 macos/emacs/dot-emacs.d/snippets
 /home/programs/emacs/doom.d/config.el
+home/machine/current.nix
