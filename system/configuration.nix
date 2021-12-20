@@ -10,25 +10,6 @@
     ./machine/current.nix
   ] ++ (import ./modules);
 
-  networking = {
-    # The global useDHCP flag is deprecated, therefore explicitly set to
-    # false here.
-    useDHCP = false;
-
-    # Block sites that distract me
-    extraHosts = ''
-      127.0.0.1 nytimes.com
-      127.0.0.1 news.ycombinator.com
-    '';
-    firewall.allowedTCPPorts = [
-      22067 # syncthing
-      36885 # syncthing
-    ];
-    firewall.allowedUDPPorts = [
-      36885 # syncthing
-    ];
-  };
-
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -37,23 +18,6 @@
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.ben = {
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHA2+s16j8CHT54sw3eenPv48zg1gHzSabsRhkEt87Ss ben@weintraub.xyz"
-    ];
-    isNormalUser = true;
-    extraGroups = [
-      "wheel" # Enable 'sudo' for the user.
-      "networkmanager" # Allow user to change network settings
-      "docker"
-      "libvirtd"
-      "power"
-      "syncthing"
-    ];
-    shell = pkgs.fish;
   };
 
   # Members of wheel don't need a password for sudo
@@ -138,43 +102,6 @@
     # make capslock := ctrl
     # make ctrl+alt+backspace kill the X server
     xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";
-
-    syncthing = {
-      enable = true;
-      user = "ben";
-      dataDir = "/home/ben";
-      folders = {
-        "/home/ben/workspace" = {
-          id = "workspace";
-          devices = [
-            "ben-isec"
-            "kansas"
-          ];
-        };
-        "/home/ben/.gnupg" = {
-          id = "gpg";
-          devices = [
-            "ben-isec"
-            "kansas"
-          ];
-        };
-      };
-      devices = {
-        kansas = {
-          id = "MDCFDOP-O7O42LB-2NKDRRR-FLQ2SD7-GUZZ2HU-KIVUCZR-M2KVH2T-BQ4XRAW";
-        };
-        ben-isec = {
-          id = "NTT2XIC-TXWJEYH-IIP75QY-WEOYMAH-JSMRTVD-WAXWPEO-TVIIF6X-VY2OVAA";
-        };
-      };
-    };
-  };
-
-  krb5 = {
-    enable = true;
-    # forwardable tickets necessary to do things like access AFS without
-    # re-`kinit`-ing (you want this)
-    libdefaults = { forwardable = true; };
   };
 
   # This value determines the NixOS release from which the default
