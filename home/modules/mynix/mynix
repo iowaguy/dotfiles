@@ -27,7 +27,7 @@ system_config() {
   sudo cp ${mnt_config_dir}/system/configuration.nix ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/machine/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/hardware/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${mnt_config_dir}/system/wm/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/system/modules/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/nix/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/persist/ ${POSSIBLE_MNT}/etc/nixos/
 
