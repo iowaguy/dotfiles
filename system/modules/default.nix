@@ -1,4 +1,5 @@
 [
+  ./geth
   ./kerberos
   ./networking
   ./syncthing

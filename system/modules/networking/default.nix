@@ -12,9 +12,15 @@
     firewall.allowedTCPPorts = [
       22067 # syncthing
       36885 # syncthing
+      30303 # geth
+      8545 # geth
+      8546 # geth
     ];
     firewall.allowedUDPPorts = [
       36885 # syncthing
+      30303 # geth
+      8545 # geth
+      8546 # geth
     ];
   };
 }
