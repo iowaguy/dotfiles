@@ -3,6 +3,7 @@
 let
   sources = import ../nix/sources.nix {};
 in {
+  programs.fuse.userAllowOther = true;
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   zfs rollback -r rpool/local/root@blank
   # '';
