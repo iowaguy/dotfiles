@@ -91,8 +91,8 @@ hm_install() {
   hm_refresh
 
   # Setup doom-emacs
-  $GIT clone https://github.com/hlissner/doom-emacs $HOME/.emacs.d
-  $HOME/.emacs.d/bin/doom install
+  $GIT clone https://github.com/hlissner/doom-emacs $PERSIST_HOME/.emacs.d
+  $PERSIST_HOME/.emacs.d/bin/doom install
 }
 
 hm_refresh() {
