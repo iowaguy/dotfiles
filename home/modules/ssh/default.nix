@@ -50,30 +50,6 @@ in {
           "ForwardAgent" = "yes";
         };
       };
-      "class-build" = dag.entryAfter [ "khoury-login" ] {
-        extraOptions = {
-          "Hostname" = "cs5700cdnproject.ccs.neu.edu";
-          "ProxyJump" = "khoury-login";
-          "User" = "benweintraub";
-          "ForwardAgent" = "yes";
-        };
-      };
-      "class-dns" = dag.entryAfter [ "khoury-login" ] {
-        extraOptions = {
-          "Hostname" = "173.255.237.185";
-          "ProxyJump" = "khoury-login";
-          "User" = "li_weintraub";
-          "ForwardAgent" = "yes";
-        };
-      };
-      "class-http" = dag.entryAfter [ "khoury-login" ] {
-        extraOptions = {
-          "Hostname" = "45.33.99.146";
-          "ProxyJump" = "khoury-login";
-          "User" = "li_weintraub";
-          "ForwardAgent" = "yes";
-        };
-      };
       "khoury" = dag.entryAfter [ "khoury-login" ] {
         extraOptions = {
           "Hostname" = "vdi-linux-030.ccs.neu.edu";
