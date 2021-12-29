@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   boot = {
     loader = {
       # Use the GRUB 2 boot loader.
@@ -80,4 +79,7 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  # Needed for impermanence lib
+  programs.fuse.userAllowOther = true;
 }
