@@ -82,17 +82,22 @@
 ;; something, type =C-c ]=.
 (package! org-ref)
 
-;; A nice visualizer for my =org-roam= graph.
-(package! org-roam-server)
-
 ;; Export to bootstrap html
 (package! ox-twbs)
 
 ;; Export to a cool slideshow thing
 (package! ox-reveal)
 
+
+;;;;;;;;;;;;;;; Org-roam stuff ;;;;;;;;;;;;;;;
 ;; More meta-data for my annotated bibliography.
 (package! org-roam-bibtex)
+
+;; A nice visualizer for my =org-roam= graph. Needs latest version
+;; of org-roam, so I need to unpin.
+(unpin! org-roam)
+(package! org-roam-ui)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for more convenient list manipulation.
 (package! orgalist)
