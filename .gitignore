@@ -1,7 +1,2 @@
-macos/emacs/dot-emacs.d/*
-macos/emacs/dot-emacs.d/configuration.org
-macos/emacs/dot-emacs.d/init.el
-macos/emacs/dot-emacs.d/resources
-macos/emacs/dot-emacs.d/snippets
-/home/programs/emacs/doom.d/config.el
-home/machine/current.nix
+/home/modules/emacs/doom.d/config.el
+/home/machine/current.nix
