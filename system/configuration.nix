@@ -93,6 +93,7 @@
   fonts.fonts = with pkgs; [ powerline-fonts font-awesome ];
 
   services = {
+    netdata.enable = true;
     blueman.enable = true;
     emacs.defaultEditor = true;
 
