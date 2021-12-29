@@ -20,6 +20,14 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
       refined-github
       tridactyl
       (buildFirefoxXpiAddon {
+        pname = "simple-tab-groups";
+        version = "4.7.2.1";
+        addonId = "simple-tab-groups@drive4ik";
+        url = "https://addons.mozilla.org/firefox/downloads/file/3873608/simple_tab_groups-4.7.2.1-fx.xpi";
+        sha256 = "75077589098ca62c00b86cf9554c6120bf8dc04c5f916fe26f84915f5147b2a4";
+        meta = {};
+      })
+      (buildFirefoxXpiAddon {
         pname = "BitItNow";
         version = bibitnow.version;
         addonId = "schuleje@ok.de";
