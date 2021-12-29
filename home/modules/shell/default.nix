@@ -24,6 +24,8 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
       cat = "bat";
       grep = "rg";
       xclip = "xclip -selection clipboard";
+      hms = "home-manager switch";
+      myr = "mynix refresh";
     };
 
     plugins = [
