@@ -13,7 +13,7 @@
     pass-secret-service.enable = true;
     password-store-sync = {
       enable = true;
-      frequency = "*:0/60"; # sync every hour
+      frequency = "*:0"; # sync every hour
     };
   };
 }
