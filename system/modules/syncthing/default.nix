@@ -1,5 +1,7 @@
 {
   services.syncthing = {
+    ## Uncomment this for remote debugging
+    #guiAddress = "0.0.0.0:8384";
     enable = true;
     user = "ben";
     dataDir = "/home/ben";
