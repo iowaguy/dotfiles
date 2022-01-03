@@ -5,8 +5,6 @@ let
   mypolybar = pkgs.polybar.override {
     i3GapsSupport = true;
     alsaSupport = true;
-    #githubSupport = true;
-    #mpdSupport = true;
     i3Support = true;
     pulseSupport = true;
   };
@@ -48,13 +46,6 @@ in
     extraConfig = top + bottom + modules;
   };
 }
-    # script = ''
-    #   polybar laptop & disown
-    #   # polybar tb1 &
-    #   # polybar tb2 &
-    #   # polybar hdmi &
-    # '';
-
     # config = let
     #     barconf = monitor: {
     #       monitor = "\${env:MONITOR:${monitor}}";
@@ -245,18 +236,6 @@ in
     #     ramp-free-6 = "▇";
     #     ramp-free-7 = "█";
     #   };
-    #   "module/workspaces-xmonad" = {
-    #     type = "custom/script";
-    #     exec = "${pkgs.coreutils}/bin/tail -F /tmp/.xmonad-workspace-log";
-    #     exec-if = "[ -p /tmp/.xmonad-workspace-log ]";
-    #     tail = true;
-    #   };
-    #   "module/title-xmonad" = {
-    #     type = "custom/script";
-    #     exec = "${pkgs.coreutils}/bin/tail -F /tmp/.xmonad-title-log";
-    #     exec-if = "[ -p /tmp/.xmonad-title-log ]";
-    #     tail = true;
-    #   };
       # "module/pulseaudio" = {
       #   type = "internal/pulseaudio";
       #   # Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
@@ -295,34 +274,6 @@ in
       #   # Right and Middle click (unreleased)
       #   # click-right = "${pkgs.pavucontrol}/bin/pavucontrol &";
       #  };
-      # "module/backlight" ={
-      #   type = "internal/backlight";
-      #   # Use the following command to list available cards:
-      #   # $ ls -1 /sys/class/backlight/
-      #   card = "intel_backlight";
-      #   # Available tags:
-      #   #   <label> (default)
-      #   #   <ramp>
-      #   #   <bar>
-      #   format = "<ramp>";
-
-      #   # Available tokens:
-      #   #   %percentage% (default)
-      #   label = "%percentage%%";
-
-      #   # Only applies if <ramp> is used
-      #   ramp-0 = "🌕";
-      #   ramp-1 = "🌔";
-      #   ramp-2 = "🌓";
-      #   ramp-3 = "🌒";
-      #   ramp-4 = "🌑";
-
-      #   # Only applies if <bar> is used
-      #   bar-width = "10";
-      #   bar-indicator = "|";
-      #   bar-fill = "─";
-      #   bar-empty = "─";
-      # };
 #     };
 #   };
 # }
