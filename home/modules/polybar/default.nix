@@ -17,8 +17,8 @@ in {
       polybar top &
     '';
     config = {
-      "common" = import ./common.nix;
       "color" = import ./color.nix;
+      "common" = import ./common.nix;
       "bar/top" = import ./top.nix;
       "bar/bottom" = import ./bottom.nix;
       "module/i3" = import ./modules/i3.nix;

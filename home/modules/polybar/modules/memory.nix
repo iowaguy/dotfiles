@@ -18,7 +18,7 @@
   format = "<label>";
   format-prefix = "";
   format-background = "\${color.mb}";
-  format-padding = "\${layout.module-padding}";
+  format-padding = "\${common.module-padding}";
 
   # Available tokens:
   #   %percentage_used% (default)

@@ -32,7 +32,7 @@
   #   <animation-charging>
   format-charging = "<animation-charging> <label-charging>";
   format-charging-background = "\${color.mb}";
-  format-charging-padding = "\${layout.module-padding}";
+  format-charging-padding = "\${common.module-padding}";
   ##format-charging-prefix = 
   # Available tags:
   #   <label-discharging> (default)
@@ -41,7 +41,7 @@
   #   <animation-discharging>
   format-discharging = "<ramp-capacity> <label-discharging>";
   format-discharging-background = "\${color.mb}";
-  format-discharging-padding = "\${layout.module-padding}";
+  format-discharging-padding = "\${common.module-padding}";
 
   # Available tags:
   #   <label-full> (default)
@@ -66,7 +66,7 @@
   #   %percentage% (default)
   label-full = "Fully Charged";
   label-full-background = "\${color.mb}";
-  label-full-padding = "\${layout.module-padding}";
+  label-full-padding = "\${common.module-padding}";
 
   # Only applies if <ramp-capacity> is used
   ramp-capacity-0 = "";

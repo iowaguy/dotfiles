@@ -33,14 +33,14 @@
   #   <ramp>
   format = "\<ramp> <label>";
   format-background = "\${color.mb}";
-  format-padding = "\${layout.module-padding}";
+  format-padding = "\${common.module-padding}";
 
   # Available tags:
   #   <label-warn> (default)
   #   <ramp>
   format-warn = "<ramp> <label-warn>";
   format-warn-background = "\${color.mb}";
-  format-warn-padding = "\${layout.module-padding}";
+  format-warn-padding = "\${common.module-padding}";
 
   # Available tokens:
   #   %temperature% (deprecated)

@@ -5,8 +5,8 @@
 
   format-volume = "<label-volume> <bar-volume>";
   label-volume = "VOL %percentage%%";
-  label-volume-foreground = "\${colors.mb}";
-  # label-volume-background = "\${colors.mb}";
+  # label-volume-foreground = "\${color.mb}";
+  # label-volume-background = "\${color.mb}";
 
   label-muted = "🔇 muted";
   label-muted-foreground = "#666";

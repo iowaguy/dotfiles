@@ -19,7 +19,7 @@
   #   <label> (default)
   format = "<label>";
   format-background = "\${color.mb}";
-  format-padding = "\${layout.module-padding}";
+  format-padding = "\${common.module-padding}";
   # Available tokens:
   #   %date%
   #   %time%
