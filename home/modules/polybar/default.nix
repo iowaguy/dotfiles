@@ -31,6 +31,7 @@ in
       "module/date" = import ./modules/date.nix;
       "module/memory" = import ./modules/memory.nix;
       "module/temperature" = import ./modules/temperature.nix;
+      "module/pulseaudio" = import ./modules/pulseaudio.nix;
     };
   };
 }
