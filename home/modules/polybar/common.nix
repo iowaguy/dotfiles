@@ -1,4 +1,5 @@
 {
-  background = "\${colors.mb}";
-  foreground = "\${colors.ac}";
+  background = "\${color.mb}";
+  foreground = "\${color.fg}";
+  module-padding = 0;
 }

@@ -1,7 +1,7 @@
 {
   bottom = true;
-  # background = "\${common.background}";
-  # foreground = "\${common.foreground}";
+  background = "\${common.background}";
+  foreground = "\${common.foreground}";
   tray-position = "right";
   modules-left = "i3";
   enable-ipc = true;
