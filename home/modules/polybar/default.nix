@@ -30,6 +30,7 @@ in
       "module/cpu" = import ./modules/cpu.nix;
       "module/date" = import ./modules/date.nix;
       "module/memory" = import ./modules/memory.nix;
+      "module/temperature" = import ./modules/temperature.nix;
     };
   };
 }
