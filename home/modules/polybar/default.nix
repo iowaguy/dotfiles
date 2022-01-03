@@ -29,6 +29,7 @@ in
       "module/battery" = import ./modules/battery.nix;
       "module/cpu" = import ./modules/cpu.nix;
       "module/date" = import ./modules/date.nix;
+      "module/memory" = import ./modules/memory.nix;
     };
   };
 }
