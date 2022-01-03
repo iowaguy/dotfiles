@@ -64,7 +64,7 @@
 
   # Available tokens:
   #   %percentage% (default)
-  label-full = "Fully Charged";
+  label-full = "Charged";
   label-full-background = "\${color.mb}";
   label-full-padding = "\${common.module-padding}";
 
