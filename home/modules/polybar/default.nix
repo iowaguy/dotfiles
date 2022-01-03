@@ -27,6 +27,7 @@ in
       "bar/bottom" = import ./bottom.nix;
       "module/i3" = import ./modules/i3.nix;
       "module/battery" = import ./modules/battery.nix;
+      "module/cpu" = import ./modules/cpu.nix;
     };
   };
 }
