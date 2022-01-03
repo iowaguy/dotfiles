@@ -28,6 +28,7 @@ in
       "module/i3" = import ./modules/i3.nix;
       "module/battery" = import ./modules/battery.nix;
       "module/cpu" = import ./modules/cpu.nix;
+      "module/date" = import ./modules/date.nix;
     };
   };
 }
