@@ -5,5 +5,6 @@
   height = 50;
   dpi = 192;
   font-0 = "Droid Sans Mono for Powerline:style=Regular";
-  enable-scroll = false;
+  font-1 = "Iosevka Nerd Font:size=18;3";
+  font-2 = "NotoEmoji Nerd Font:style=Book";
 }

@@ -90,7 +90,11 @@
     libvirtd.enable = true;
   };
 
-  fonts.fonts = with pkgs; [ powerline-fonts font-awesome ];
+  fonts.fonts = with pkgs; [
+    powerline-fonts
+    font-awesome
+    nerdfonts
+  ];
 
   services = {
     netdata.enable = true;
