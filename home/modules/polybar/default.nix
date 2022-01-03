@@ -8,10 +8,7 @@ let
     i3Support = true;
     pulseSupport = true;
   };
-
-  modules = builtins.readFile ./modules.ini;
-in
-{
+in {
   services.polybar = {
     enable = true;
     package = mypolybar;
@@ -19,7 +16,6 @@ in
       polybar bottom &
       polybar top &
     '';
-    extraConfig = modules;
     config = {
       "common" = import ./common.nix;
       "color" = import ./color.nix;
