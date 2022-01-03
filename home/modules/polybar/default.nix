@@ -8,31 +8,7 @@ let
     i3Support = true;
     pulseSupport = true;
   };
-  top = ''
-    [bar/top]
-    background = #1f1f1f
-    foreground = #eee
-    modules-right = left-end-top cpu memory filesystem temperature wireless-network pulseaudio battery date
-    height = 50
-    dpi = 192
-    font-0 = "Droid Sans Mono for Powerline:style=Regular";
-  '';
 
-  bottom = ''
-    [bar/bottom]
-    bottom = true
-    background = #1f1f1f
-    foreground = #eee
-    tray-position = right
-    modules-left = i3
-    enable-ipc = true
-    height = 50
-    dpi = 192
-    font-0 = "Droid Sans Mono for Powerline:style=Regular";
-    wm-restack = i3
-    ;scroll-up = i3wm-wsnext
-    ;scroll-down = i3wm-wsprev
-  '';
   modules = builtins.readFile ./modules.ini;
 in
 {
@@ -43,7 +19,15 @@ in
       polybar bottom &
       polybar top &
     '';
-    extraConfig = top + bottom + modules;
+    extraConfig = modules;
+    config = {
+      "common" = import ./common.nix;
+      "color" = import ./color.nix;
+      "bar/top" = import ./top.nix;
+      "bar/bottom" = import ./bottom.nix;
+      "module/i3" = import ./modules/i3.nix;
+      "module/battery" = import ./modules/battery.nix;
+    };
   };
 }
     # config = let
