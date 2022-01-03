@@ -53,7 +53,7 @@ in {
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = p: {
-      nur = import sources.nur { inherit pkgs; };
+      nur = import (builtins.fetchTarball sources.nur.url) { inherit pkgs; };
     };
   };
 
