@@ -52,7 +52,7 @@
   # Available tokens:
   #   %percentage% (default) - is set to 100 if full-at is reached
   #   %percentage_raw%
-  label-full = "Fully charged";
+  label-full = " Fully charged";
 
   # Only applies if <ramp-capacity> is used
   animation-charging-0 = "";
