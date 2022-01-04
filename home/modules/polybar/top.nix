@@ -1,7 +1,8 @@
 {
   background = "\${common.background}";
   foreground = "\${common.foreground}";
-  modules-right = "cpu memory temperature pulseaudio battery date";
+  modules-center = "cpu memory temperature pulseaudio battery";
+  modules-right = "date";
   height = 50;
   dpi = 192;
   font-0 = "file\-icons:style=Regular";
