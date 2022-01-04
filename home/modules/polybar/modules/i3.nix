@@ -10,8 +10,8 @@
   # Default: false
   #fuzzy-match = true
   label-separator = "|";
-  label-separator-padding = 1;
-  label-separator-foreground = "#ffb52a";
+  label-separator-padding = 0;
+  label-separator-foreground = "\${color.amber}";
   label-dimmed-underline = "\${common.background}";
 
   # Available tags:
@@ -24,7 +24,7 @@
   # Default: %mode%
   label-mode = "%mode%";
   label-mode-padding = 0;
-  label-mode-background = "#e60053";
+  label-mode-background = "\${color.pishade5}";
 
   # Available tokens:
   #   %name%
@@ -32,10 +32,10 @@
   #   %index%
   #   %output%
   # Default: %icon%  %name%
-  #label-focused =  %index%
-  label-focused-foreground = "#ffffff";
-  label-focused-background = "#3f3f3f";
-  label-focused-underline = "#fba922";
+  label-focused = " %name% ";
+  label-focused-foreground = "\${color.white}";
+  label-focused-background = "\${color.greshade2}";
+  label-focused-underline = "\${color.amber}";
   label-focused-padding = 0;
 
   # Available tokens:
@@ -44,7 +44,7 @@
   #   %index%
   #   %output%
   # Default: %icon%  %name%
-  #label-unfocused = %index%
+  label-unfocused = " %name% ";
   label-unfocused-padding = 0;
 
   # Available tokens:
@@ -53,8 +53,8 @@
   #   %index%
   #   %output%
   # Default: %icon%  %name%
-  #label-visible = %index%
-  label-visible-underline = "#555555";
+  label-visible = " %name% ";
+  label-visible-underline = "\${color.greshade3}";
   label-visible-padding = 0;
 
   # Available tokens:
@@ -63,8 +63,8 @@
   #   %index%
   #   %output%
   # Default: %icon%  %name%
-  #label-urgent = %index%
-  label-urgent-foreground = "#000000";
-  label-urgent-background = "#bd2c40";
+  label-urgent = " %name% ";
+  label-urgent-foreground = "\${color.black}";
+  label-urgent-background = "\${color.reshade1}";
   label-urgent-padding = 0;
 }
