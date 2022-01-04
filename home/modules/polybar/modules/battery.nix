@@ -32,7 +32,8 @@
   #   <label-full> (default)
   #   <bar-capacity>
   #   <ramp-capacity>
-  format-full = "<ramp-capacity> <label-full>";
+  format-full = "<label-full>";
+  format-full-prefix = "";
 
   # Available tokens:
   #   %percentage% (default) - is set to 100 if full-at is reached
@@ -54,30 +55,46 @@
   label-full = "Fully charged";
 
   # Only applies if <ramp-capacity> is used
-  ramp-capacity-0 = "  ";
-  ramp-capacity-1 = "  ";
-  ramp-capacity-2 = "  ";
-  ramp-capacity-3 = "  ";
-  ramp-capacity-4 = "  ";
+  animation-charging-0 = "";
+  animation-charging-1 = "";
+  animation-charging-2 = "";
+  animation-charging-3 = "";
+  animation-charging-4 = "";
+  animation-charging-5 = "";
+  animation-charging-6 = "";
+  animation-charging-7 = "";
+  animation-charging-8 = "";
+  animation-charging-9 = "";
 
-  # Only applies if <bar-capacity> is used
-  bar-capacity-width = 10;
+  # Only applies if <ramp-capacity> is used
+  ramp-capacity-0 = "";
+  ramp-capacity-1 = "";
+  ramp-capacity-2 = "";
+  ramp-capacity-3 = "";
+  ramp-capacity-4 = "";
+  ramp-capacity-5 = "";
+  ramp-capacity-6 = "";
+  ramp-capacity-7 = "";
+  ramp-capacity-8 = "";
+  ramp-capacity-9 = "";
+  ramp-capacity-10 = "";
+  # ramp-capacity-11 = "";
 
-  # Only applies if <animation-charging> is used
-  animation-charging-0 = "  ";
-  animation-charging-1 = "  ";
-  animation-charging-2 = "  ";
-  animation-charging-3 = "  ";
-  animation-charging-4 = "  ";
   # Framerate in milliseconds
-  animation-charging-framerate = 750;
+  ramp-capacity-framerate = 750;
 
-  # Only applies if <animation-discharging> is used
-  animation-discharging-0 = "  ";
-  animation-discharging-1 = "  ";
-  animation-discharging-2 = "  ";
-  animation-discharging-3 = "  ";
-  animation-discharging-4 = "  ";
-  # Framerate in milliseconds
-  animation-discharging-framerate = 500;
+  # # Only applies if <animation-discharging> is used
+  # animation-discharging-0 = "";
+  # animation-discharging-1 = "";
+  # animation-discharging-2 = "";
+  # animation-discharging-3 = "";
+  # animation-discharging-4 = "";
+  # animation-discharging-5 = "";
+  # animation-discharging-6 = "";
+  # animation-discharging-7 = "";
+  # animation-discharging-8 = "";
+  # animation-discharging-9 = "";
+
+  # # Framerate in milliseconds
+  # animation-discharging-framerate = 500;
 }
