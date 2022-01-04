@@ -9,7 +9,8 @@
   ##date = %Y-%m-%d%
 
   # Optional time format
-  time = " %a %d %b %Y  %H:%M";
+  # time = "| %a %d %b %Y  %H:%M";
+  time = "| %D  %H:%M";
 
   # if `date-alt` or `time-alt` is defined, clicking
   # the module will toggle between formats
