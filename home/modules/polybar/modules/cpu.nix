@@ -11,8 +11,8 @@
   #   <ramp-load>
   #   <ramp-coreload>
   #format = <label> <ramp-coreload>
-  format = "<label>";
-  format-prefix = "";
+  format= "<label>";
+  format-prefix = "";
   format-background = "\${color.mb}";
   format-padding = "\${common.module-padding}";
 
@@ -21,19 +21,16 @@
   #   %percentage-sum% - Cumulative load on all cores
   #   %percentage-cores% - load percentage for each core
   #   %percentage-core[1-9]% - load percentage for specific core
-  label = " %percentage%%";
+  label = "%percentage%%";
 
   # Spacing between individual per-core ramps
-  #ramp-coreload-spacing = 1
-  #ramp-coreload-0 = 
-  #ramp-coreload-1 = 
-  #ramp-coreload-2 = 
-  #ramp-coreload-3 = 
-  #ramp-coreload-4 = 
-
-  #ramp-load-0 = 
-  #ramp-load-1 = 
-  #ramp-load-2 = 
-  #ramp-load-3 = 
-  #ramp-load-4 = 
+  # ramp-coreload-spacing = 1;
+  # ramp-coreload-0 = "▁";
+  # ramp-coreload-1 = "▂";
+  # ramp-coreload-2 = "▃";
+  # ramp-coreload-3 = "▄";
+  # ramp-coreload-4 = "▅";
+  # ramp-coreload-5 = "▆";
+  # ramp-coreload-6 = "▇";
+  # ramp-coreload-7 = "█";
 }
