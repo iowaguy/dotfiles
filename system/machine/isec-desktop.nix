@@ -49,11 +49,7 @@
   };
 
   services = {
-    # Enable handling of hotplug and sleep events by autorandr
-    #autorandr.enable = true;
-
     xserver = {
-#      videoDrivers = [ "ati" ];
       displayManager = {
         defaultSession = "xfce+i3";
       };
