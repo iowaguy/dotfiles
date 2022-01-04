@@ -22,7 +22,7 @@
   # Threshold temperature to display warning label (in degrees celsius)
   # Default: 80
   #
-  warn-temperature = 80;
+  warn-temperature = 70;
 
   # Whether or not to show units next to the temperature tokens (°C, °F)
   # Default: true
@@ -31,8 +31,9 @@
   # Available tags:
   #   <label> (default)
   #   <ramp>
-  format = "\<ramp> <label>";
+  format = "<ramp> <label>";
   format-background = "\${color.mb}";
+  format-foreground = "\${color.blue}";
   format-padding = "\${common.module-padding}";
 
   # Available tags:
@@ -40,6 +41,7 @@
   #   <ramp>
   format-warn = "<ramp> <label-warn>";
   format-warn-background = "\${color.mb}";
+  format-warn-foreground = "\${color.red}";
   format-warn-padding = "\${common.module-padding}";
 
   # Available tokens:
@@ -53,15 +55,15 @@
   #   %temperature-c%   (default, temperature in °C)
   #   %temperature-f%   (temperature in °F)
   label-warn = "%temperature-f%";
-  label-warn-foreground = "#f00";
+  label-warn-foreground = "\${color.red}";
 
   # Requires the <ramp> tag
   # The icon selection will range from 0 to `warn-temperature`
   # with the current temperature as index.
-  ramp-0 = "";
-  ramp-1 = "";
-  ramp-2 = "";
-  ramp-3 = "";
-  ramp-4 = "";
+  ramp-0 = "";
+  ramp-1 = "";
+  ramp-2 = "";
+  ramp-3 = "";
+  ramp-4 = "";
   ##ramp-foreground = #55
 }

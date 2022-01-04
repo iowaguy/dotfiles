@@ -22,7 +22,7 @@
 
   # Material Colors
 
-  red = "#e53935";
+  red = "#f00";
   pink = "#d81b60";
   purple = "#8e24aa";
   deep-purple = "#5e35b1";
