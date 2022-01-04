@@ -4,8 +4,6 @@
   # TODO This isn't working
   click-right = "pavucontrol &";
 
-  sink = "alsa_output.usb-Focusrite_Scarlett_2i4_USB-00.analog-surround-40";
-
   # format-volume = "<label-volume> <bar-volume>";
   format-volume = "<label-volume>";
   label-volume = "🔊 %percentage%%  ";
