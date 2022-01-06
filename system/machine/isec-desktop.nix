@@ -3,6 +3,7 @@
 {
   imports = [
     ../persist/system.nix
+    ../modules/geth
   ];
 
   boot = {
