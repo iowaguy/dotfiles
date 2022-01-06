@@ -55,7 +55,7 @@ On a new machine, do the following:
 
 12. Generate ssh key
     #+begin_src shell
-      ssh-keygen -t ed25519 -C "ben@weintraub.xyz"
+      ssh-keygen -t ed25519 -C "ben@<HOSTNAME>"
     #+end_src
 
 13. install [[https://github.com/retorquere/zotero-better-bibtex/][Better BibTeX]]
