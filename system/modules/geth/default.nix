@@ -1,4 +1,6 @@
-{
+let
+  unstable = import <nixos-unstable> {};
+in {
   networking = {
     firewall.allowedTCPPorts = [
       8545
@@ -10,15 +12,10 @@
       8546
       30303
     ];
-    # firewall.allowedUDPPortRanges = [
-    #   {
-    #     from = 30303;
-    #     to = j
-    #   }
-    # ];
   };
 
   services.geth."nu-lux-analysis" = {
+    package = unstable.go-ethereum.geth;
     enable = true;
     syncmode = "light";
     maxpeers = 200;
@@ -54,7 +51,7 @@
       "--txpool.pricebump=1"
       "--txpool.globalslots=250000"
       "--txpool.globalqueue=50000"
-      "--verbosity=5"
+      "--verbosity=3"
     ];
   };
 }
