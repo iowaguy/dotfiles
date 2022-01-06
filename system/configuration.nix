@@ -34,9 +34,6 @@
     busybox
     zfs
     emacs
-
-    # TODO remove if emacs is okay. Not sure why I needed this
-    # (emacsWithPackages (epkgs: [ epkgs.orgPackages.org-plus-contrib ]))
     xorg.xrandr # display manager (X Resize and Rotate protocol)
   ];
 
