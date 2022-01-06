@@ -8,6 +8,7 @@ let
     cachix                       # cache binaries so I don't have to rebuild
     caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
     curl
+    discord                      # A chat client
     drawio                       # good for drawing finite state machines
     entr
     fd
