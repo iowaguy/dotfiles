@@ -613,6 +613,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
           org-roam-graph-shorten-titles 'wrap
           org-roam-graph-max-title-length 50
           org-roam-graph-viewer 'org-roam-ui-open
+          org-roam-preview-function '(lambda () "")
           org-roam-graph-extra-config '(("overlap" . "no"))
           org-roam-graph-exclude-matcher '("index" "daily")
           org-roam-graph-executable "neato"
