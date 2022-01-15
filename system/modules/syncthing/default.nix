@@ -11,6 +11,7 @@
         devices = [
           "ben-isec"
           "kansas"
+          "x1-2021"
         ];
       };
       "/home/ben/.gnupg" = {
@@ -18,12 +19,16 @@
         devices = [
           "ben-isec"
           "kansas"
+          "x1-2021"
         ];
       };
     };
     devices = {
+      x1-2021 = {
+        id = "KGTWRR3-4U5RNPZ-JA5HNTG-S7UHBKS-54OYYS5-O4O4NRW-LTQRHJQ-K44XOQG";
+      };
       kansas = {
-        id = "NXBYQWZ-A7BPVNU-2V2ZGFN-77XL7WE-4MI2U6N-DUWE3Q7-33N4XG4-UDSGKA6";
+        id = "RXSK5VH-XDVDTLZ-7ULY4OI-OZPI6UQ-ONFWQS3-FJQZ7JB-G4CFXC4-ARV4XQH";
       };
       ben-isec = {
         id = "2JZNKVK-4U4JAQD-V32XHXX-Y5454TO-PNDBI3K-WO7UZFD-VUUXN4H-23GSPQW";
