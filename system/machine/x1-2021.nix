@@ -1,19 +1,31 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ../persist/system.nix
+  ];
+
   boot = {
+    supportedFilesystemss = [ "zfs" ];
     loader = {
-      # Use the GRUB 2 boot loader.
-      grub.enable = true;
-      grub.version = 2;
-      # Define on which hard drive you want to install Grub.
-      grub.device = "/dev/nvme0n1"; # or "nodev" for efi only
+      systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        version = 2;
+        efiSupport = true;
+        zfsSupport = true;
+        device = "nodev";
+        efiInstallAsRemovable = true;
+      };
     };
     cleanTmpDir = true;
   };
 
   networking = {
     hostName = "x1-2021"; # Define your hostname.
+
+    # NOTE this must be unique among machines (and has to be 32-bit)
+    hostId = "00000003";
 
     # Some desktop environments use NetworkManager for configuring
     # networking.
