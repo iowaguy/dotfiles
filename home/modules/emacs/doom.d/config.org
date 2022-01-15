@@ -96,9 +96,7 @@ to see (like out in the sun).
     (blw/apply-dark-theme))
 #+end_src
 
-=sensible-defaults= replaces the audible bell with a visual one, but I really
-don't even want that (and my Emacs/Mac pair renders it poorly). This disables
-the bell altogether.
+This disables the bell altogether.
 
 #+begin_src emacs-lisp
   (setq ring-bell-function 'ignore)
