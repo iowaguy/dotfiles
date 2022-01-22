@@ -94,6 +94,8 @@
   ];
 
   services = {
+    # Enable handling of hotplug and sleep events by autorandr
+    autorandr.enable = true;
     netdata.enable = true;
     blueman.enable = true;
     emacs.defaultEditor = true;
