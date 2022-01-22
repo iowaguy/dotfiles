@@ -9,6 +9,7 @@
     enable = true;
     # View all settings here: https://sw.kovidgoyal.net/kitty/conf/
     settings = {
+      font_size = 20;
       enable_audio_bell = false;
       scrollback_lines = 10000;
       strip_trailing_spaces = "smart";
