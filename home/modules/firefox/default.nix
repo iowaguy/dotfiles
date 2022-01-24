@@ -19,6 +19,7 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
       octotree
       refined-github
       tridactyl
+      duckduckgo-privacy-essentials
       (buildFirefoxXpiAddon {
         pname = "simple-tab-groups";
         version = "4.7.2.1";
