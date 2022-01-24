@@ -80,7 +80,8 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
     profiles.ben = {
      isDefault = true;
      settings = {
-       # Attribute set of Firefox preferences.
+       # Attribute set of Firefox preferences. Change in "about:config"
+       # Documentation for options: https://kb.mozillazine.org/About:config_entries
 
        # newtabs as blank pages
        "browser.newtabpage.enabled" = false;
@@ -98,6 +99,7 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
        "browser.search.hiddenOneOffs" =
          "Google,Yahoo,Bing,Amazon.com,Twitter";
        "browser.search.suggest.enabled" = false;
+       "browser.search.defaultenginename" = "DuckDuckGo";
        "browser.send_pings" = false;
        "browser.tabs.closeWindowWithLastTab" = true;
        "browser.urlbar.speculativeConnect.enabled" = false;
@@ -106,7 +108,7 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
        "experiments.activeExperiment" = false;
        "experiments.enabled" = false;
        "experiments.supported" = false;
-       "extensions.pocket.enabled" = false;
+       "extensions.pocket.enabled" = true;
        "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
        "general.smoothScroll" = true;
        "geo.enabled" = false;
@@ -123,12 +125,12 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
        "network.prefetch-next" = false;
        "permissions.default.shortcuts" = 2; # Don't steal my shortcuts!
        "privacy.firstparty.isolate" = true;
-       "signon.rememberSignons" = true;
+       "signon.rememberSignons" = false;
        "browser.startup.blankWindow" = true;
        "browser.bookmarks.defaultLocation" = "unfiled";
        "browser.bookmarks.editDialog.confirmationHintShowCount" = 3;
        "browser.bookmarks.restore_default_bookmarks" = false;
-       "browser.bookmarks.showMobileBookmarks" = true;
+       "browser.bookmarks.showMobileBookmarks" = false;
        "browser.newtab.privateAllowed" = true;
        "browser.sessionstore.warnOnQuit" = true;
        "browser.toolbars.bookmarks.visibility" = "always";
@@ -139,6 +141,7 @@ with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
        "privacy.trackingprotection.enabled" = true;
        "reader.color_scheme" = "dark";
        "services.sync.username" = "benweintraub34@gmail.com";
+       "svg.context-properties.content.enabled" = true;
      };
     };
   };
