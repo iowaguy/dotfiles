@@ -1171,3 +1171,8 @@ Enable some basic stuff for writing Promela.
                 )
           auto-mode-alist))
 #+end_src
+
+Show images inline for Jupyter notebooks.
+#+begin_src emacs-lisp
+ (setq ein:output-area-inlined-images t)
+#+end_src

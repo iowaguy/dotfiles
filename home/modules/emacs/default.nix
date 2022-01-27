@@ -44,6 +44,10 @@
 
     # Needed for =minted= to export with syntax highlighting
     python38Packages.pygments
+
+    # For Jupyter notebook
+    python38Packages.jupyter
+
   ];
 
   programs.emacs.enable = true;
