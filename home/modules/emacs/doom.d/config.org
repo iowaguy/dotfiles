@@ -1039,47 +1039,6 @@ Never use tabs. Tabs are the devil’s whitespace.
   (setq-default indent-tabs-mode nil)
 #+end_src
 
-=which-key= displays the possible completions for a long keybinding. That's
-really helpful for some modes (like =projectile=, for example).
-
-#+begin_src emacs-lisp
-  (use-package! which-key
-    :defer t
-    :config (which-key-mode))
-#+end_src
-
-I use =ivy= and =counsel= as my completion framework.
-
-This configuration:
-
-- Uses =counsel-M-x= for command completion,
-- Replaces =isearch= with =swiper=,
-- Uses =smex= to maintain history,
-- Enables fuzzy matching everywhere except swiper (where it's thoroughly
-  unhelpful), and
-- Includes recent files in the switch buffer.
-
-#+begin_src emacs-lisp
-  (use-package! counsel
-    :defer t
-    :bind
-    ("M-x" . 'counsel-M-x)
-    ("C-s" . 'swiper)
-
-    :config
-    (use-package! flx)
-    (use-package! smex)
-
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-count-format "(%d/%d) ")
-    (setq ivy-initial-inputs-alist nil)
-    (setq ivy-re-builders-alist
-          '((swiper . ivy--regex-plus)
-            (t . ivy--regex-fuzzy))))
-#+end_src
-
-
 When splitting a window, I invariably want to switch to the new window. This
 makes that automatic.
 
