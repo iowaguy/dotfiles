@@ -634,6 +634,17 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (map! "C-c n d" :desc "Today" #'org-journal-new-entry)
   (map! "C-c n a" :desc "Any day" #'org-journal-new-scheduled-entry)
 
+  (defun blw/visit-roam-outline ()
+    (interactive)
+    (find-file "~/workspace/zettelkasten/20220110102107-outlines.org"))
+
+  (map! :leader
+    (:prefix-map ("n" . "notes")
+      (:prefix ("r" . "roam")
+        :desc "Open outline"           "o" #'blw/visit-roam-outline
+        :desc "Unlink"                 "u" #'org-link-at-point-unlink
+        :desc "Cite"                   "c" #'org-ref-insert-link)))
+
   (org-roam-bibtex-mode)
 
   (require 'subr-x) ;; for `when-let'
