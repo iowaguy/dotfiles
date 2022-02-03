@@ -48,7 +48,6 @@ let
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with unstable; [
-    nyxt                          # An annotation-oriented browser
     zoom-us                       # Video conferencing
   ];
 
