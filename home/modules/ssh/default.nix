@@ -36,6 +36,14 @@ in {
           "ForwardAgent" = "yes";
         };
       };
+      "netviews" = {
+        extraOptions = {
+          "Hostname" = "localhost";
+          "User" = "ben";
+          "Port" = "5556";
+          "ForwardAgent" = "yes";
+        };
+      };
       "khoury-login" = {
         extraOptions = {
           "Hostname" = "login.khoury.northeastern.edu";
