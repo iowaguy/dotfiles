@@ -3,6 +3,8 @@
 with lib;
 
 let
+  sources = import ../nix/sources.nix;
+  unstable = import sources.nixos-unstable { config.allowUnfree = true; };
   defaultPkgs = with pkgs; [
     cabal-install
     cachix                       # cache binaries so I don't have to rebuild
@@ -41,11 +43,15 @@ let
     vlc
     wireshark
     xclip
-    zoom-us
     zotero
   ];
 
-  sources = import ../nix/sources.nix;
+  # These are packages that I want to keep up-to-date
+  unstablePkgs = with unstable; [
+    nyxt                          # An annotation-oriented browser
+    zoom-us                       # Video conferencing
+  ];
+
 in {
   imports = [
     ./machine/current.nix
@@ -64,7 +70,7 @@ in {
     username = "ben";
     homeDirectory = "/home/ben";
 
-    packages = defaultPkgs;
+    packages = defaultPkgs ++ unstablePkgs;
 
     file.".background-image".source = ./resources/background-image;
 
