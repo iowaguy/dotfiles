@@ -7,21 +7,24 @@ let
   unstable = import sources.nixos-unstable { config.allowUnfree = true; };
   defaultPkgs = with pkgs; [
     cabal-install
-    cachix                       # cache binaries so I don't have to rebuild
-    caffeine-ng                  # don't fall asleep when I have fullscreen vids playing
+    cachix                        # cache binaries so I don't have to rebuild
+    caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     curl
-    discord                      # A chat client
-    drawio                       # good for drawing finite state machines
+    discord                       # A chat client
+    drawio                        # good for drawing finite state machines
     entr
+    et                            # A convenient cli timer
     fd
-    file                         # classic tool for viewing file attributes
+    file                          # classic tool for viewing file attributes
     ghc
     graphviz
     jq
     keybase-gui
     libnotify
+    libreoffice                   # A horrible program I have to use sometimes to view MS office docs
     niv
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
+    ngrok                         # HTTP and TCP tunneling service
     nox
     openvpn                       # a VPN client
     pandoc
