@@ -46,12 +46,12 @@ let
     vlc
     wireshark
     xclip
-    zotero
   ];
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with unstable; [
     zoom-us                       # Video conferencing
+    zotero                        # Citation manager
   ];
 
 in {
