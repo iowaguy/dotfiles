@@ -5,12 +5,13 @@ import json
 import subprocess
 import os
 
-sources_path = f"{os.getenv('HOME')}/workspace/dotfiles/nix/sources.json"
+sources_path = f"{os.getenv('HOME')}/workspace/dotfiles"
+json_path = f"{sources_path}/nix/sources.json"
 
 if __name__ == "__main__":
-    with open(sources_path, 'r') as f:
+    with open(json_path, 'r') as f:
         sources_dict = json.load(f)
 
     for key, val in sources_dict.items():
         if 'branch' in val:
-            subprocess.run(["niv", "update", key, "-b", val['branch']])
+            subprocess.run(["niv", "update", key, "-b", val['branch']], cwd=sources_path)
