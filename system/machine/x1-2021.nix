@@ -62,6 +62,7 @@
 
   services = {
     xserver = {
+      dpi = 220;
 #      videoDrivers = [ "ati" ];
       displayManager = {
         defaultSession = "xfce+i3";
