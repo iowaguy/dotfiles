@@ -6,6 +6,9 @@
   ];
 
   boot = {
+    kernel.sysctl = {
+      "kernel.sysrq" = 255;
+    };
     supportedFilesystems = [ "zfs" ];
     loader = {
       systemd-boot.enable = true;
