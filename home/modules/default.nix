@@ -2,7 +2,7 @@
   ./autorandr
   ./direnv
   ./emacs
-  ./email
+  # ./email
   ./firefox
   ./git
   ./gpg-agent

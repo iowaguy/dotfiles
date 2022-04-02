@@ -5,6 +5,7 @@ in {
   home.packages = with pkgs; [
     afew # initial tagging for notmuch
     notmuch # an email search engine
+    thunderbird
   ];
 
   xdg.configFile."afew/config".source = ./afew-config.ini;
