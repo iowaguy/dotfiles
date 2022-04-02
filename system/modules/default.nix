@@ -3,5 +3,5 @@
   ./networking
   ./syncthing
   ./users
-  ./wm
-]
+  # ./wm
+] ++ (import ./wm)
