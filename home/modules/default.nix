@@ -1,6 +1,5 @@
 [
   ./autorandr
-  ./betterlockscreen
   ./direnv
   ./emacs
   ./email
