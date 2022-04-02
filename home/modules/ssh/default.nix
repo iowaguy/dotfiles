@@ -41,7 +41,6 @@ in {
           "Hostname" = "localhost";
           "User" = "ben";
           "Port" = "5556";
-          "ForwardAgent" = "yes";
         };
       };
       "khoury-login" = {
