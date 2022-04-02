@@ -22,6 +22,7 @@ let
     keybase-gui
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
+    mongodb-compass               # A GUI for MongoDB
     niv
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     ngrok                         # HTTP and TCP tunneling service
