@@ -8,8 +8,8 @@
     };
   };
 
-  # things can now query `pass` for my credentials
   services = {
+    # things can now query `pass` for my credentials
     pass-secret-service.enable = true;
     password-store-sync = {
       enable = true;
