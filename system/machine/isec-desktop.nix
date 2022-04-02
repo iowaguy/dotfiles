@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
-{
+let passCmd = entry: "${pkgs.pass}/bin/pass ${entry} 2> /dev/null";
+in {
   imports = [
     ../persist/system.nix
-    ../modules/geth
   ];
 
   boot = {
@@ -50,6 +50,14 @@
   };
 
   services = {
+    # Used in frontrunning project
+    mongodb = {
+      enable = true;
+      bind_ip = "0.0.0.0";
+      enableAuth = true;
+      initialRootPassword = passCmd "mongodb-root-isec-desktop";
+    };
+
     xserver = {
       displayManager = {
         defaultSession = "xfce+i3";
