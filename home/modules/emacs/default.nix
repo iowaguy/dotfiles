@@ -48,6 +48,8 @@
     # For Jupyter notebook
     python38Packages.jupyter
 
+    # LSP server for bash
+    nodePackages.bash-language-server
   ];
 
   programs.emacs.enable = true;
