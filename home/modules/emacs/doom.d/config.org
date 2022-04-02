@@ -1156,7 +1156,7 @@ Show images inline for Jupyter notebooks.
       :desc "Insert above"                 "a" #'ein:worksheet-insert-cell-above-km
       :desc "Insert below"                 "b" #'ein:worksheet-insert-cell-below-km
       :desc "Execute cell"                 "e" #'ein:worksheet-execute-cell-km
-      :desc "Execute all cells"            "A" #'ein:worksheet-execute-all-cell-km
+      :desc "Execute all cells"            "A" #'ein:worksheet-execute-all-cells
       :desc "Kill cell"                    "k" #'ein:worksheet-kill-cell-km
       :desc "Move cell up"                 "u" #'ein:worksheet-move-cell-up-km
       :desc "Move cell down"               "d" #'ein:worksheet-move-cell-down-km
