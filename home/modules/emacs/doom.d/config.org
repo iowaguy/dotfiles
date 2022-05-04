@@ -643,7 +643,9 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
       (:prefix ("r" . "roam")
         :desc "Open outline"           "o" #'blw/visit-roam-outline
         :desc "Unlink"                 "u" #'org-link-at-point-unlink
-        :desc "Cite"                   "c" #'org-ref-insert-link)))
+        :desc "Cite"                   "c" #'citar-insert-citation
+        :desc "Open paper notes"       "p" #'citar-open-notes)))
+
 
   (org-roam-bibtex-mode)
 
@@ -661,6 +663,31 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
            (e (org-element-property :end el)))
       (delete-region b e)
       (insert contents)))
+#+end_src
+
+[[https://github.com/bdarcus/citar][Citar]] for citations.
+#+begin_src emacs-lisp
+  (defun blw/citar--open-note (keys-entries)
+    ;; (error "Error!")
+          (identity (car key-entry) (cdr key-entry)))
+    ;; (let*
+    ;;     ((key-entry-alist (citar--ensure-entries keys-entries)))
+    ;;     (seq-map
+    ;;        (lambda (key-entry)
+    ;;          (identity (car key-entry) (cdr key-entry)))
+    ;;        key-entry-alist)))
+
+             ;; (citar--open-note (car key-entry) (cdr key-entry)))
+
+  (use-package citar
+    ;; :bind (("C-c b" . citar-insert-citation)
+    ;;       :map minibuffer-local-map
+    ;;       ("M-b" . citar-insert-preset))
+    :custom
+    (citar-bibliography (blw/zettelkasten-path "references.bib"))
+    (citar-notes-paths (list (blw/zettelkasten-path "references.bib")))
+    (citar-default-action 'blw/citar--open-note)
+    )
 #+end_src
 
 Want the journal to display weekly, not daily files.

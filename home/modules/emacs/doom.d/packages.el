@@ -91,7 +91,8 @@
 
 ;;;;;;;;;;;;;;; Org-roam stuff ;;;;;;;;;;;;;;;
 ;; More meta-data for my annotated bibliography.
-(package! org-roam-bibtex)
+(package! org-roam-bibtex
+  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 
 ;; A nice visualizer for my =org-roam= graph. Needs latest version
 ;; of org-roam, so I need to unpin.
