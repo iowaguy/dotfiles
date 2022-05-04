@@ -43,6 +43,7 @@ let
     stack                         # Haskell build tool
     texlive.combined.scheme-full
     tree
+    vivaldi
     vlc
     wireshark
     xclip
