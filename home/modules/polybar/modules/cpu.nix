@@ -5,7 +5,7 @@
   # Default: 1
   interval = 1;
 
-  warn-percentage = 20;
+  warn-percentage = 80;
 
   # Available tags:
   #   <label> (default)
