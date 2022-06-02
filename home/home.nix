@@ -37,7 +37,7 @@ let
     ripgrep
     rubber                        # a nice tool for compiling latex
     signal-desktop
-    skype
+    skypeforlinux
     spotify                       # Musics
     sqlite
     stack                         # Haskell build tool

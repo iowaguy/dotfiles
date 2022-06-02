@@ -5,11 +5,8 @@
   # environment.
   programs.direnv = {
     enable = true;
-    enableFishIntegration = true;
     nix-direnv = {
       enable = true;
-      # optional for nix flakes support
-      enableFlakes = true;
     };
   };
 

@@ -31,7 +31,7 @@
     # Doom wants these for Go
     gopls
     gocode
-    goimports
+    gotools
     gotests
     godef
 
