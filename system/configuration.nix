@@ -94,6 +94,9 @@
   ];
 
   services = {
+    # A Tor proxying service (helps other users find Tor bridges)
+    snowflake-proxy.enable = true;
+
     # Enable handling of hotplug and sleep events by autorandr
     autorandr.enable = true;
     netdata.enable = true;
