@@ -230,6 +230,9 @@ while :; do
   PARAM=`echo $1 | awk -F= '{print $1}'`
   VALUE=`echo $1 | awk -F= '{print $2}'`
   case "$PARAM" in
+    copy)
+      system_config ""
+      ;;
     install)
       install
       ;;
