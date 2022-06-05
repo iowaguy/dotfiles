@@ -12,22 +12,22 @@
         "homepage": "",
         "owner": "patrickf1",
         "repo": "colored_man_pages.fish",
-        "rev": "8c4965b9be9433d12ba50c28452cab8c71c59a50",
-        "sha256": "0pxm10wlngcxf8lzlfx2w1b2z6qh2jdpm7m224q6bznl0kvw46wf",
+        "rev": "f885c2507128b70d6c41b043070a8f399988bc7a",
+        "sha256": "0ifqdbaw09hd1ai0ykhxl8735fcsm0x2fwfzsk7my2z52ds60bwa",
         "type": "tarball",
-        "url": "https://github.com/patrickf1/colored_man_pages.fish/archive/8c4965b9be9433d12ba50c28452cab8c71c59a50.tar.gz",
+        "url": "https://github.com/patrickf1/colored_man_pages.fish/archive/f885c2507128b70d6c41b043070a8f399988bc7a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
-        "branch": "release-21.11",
+        "branch": "release-22.05",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a8d00f5c038cf7ec54e7dac9c57b171c1217f008",
-        "sha256": "1ix6cknhlrwpawlakrsd3616rgy1calnds2h6wfqrv6cfdwsyzzc",
+        "rev": "ac2287df5a2d6f0a44bbcbd11701dbbf6ec43675",
+        "sha256": "1bn5m4qlzxc5c264hwyy9n8f7m1pzc79fd0xh18n46wn0v8vx4jn",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/a8d00f5c038cf7ec54e7dac9c57b171c1217f008.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/ac2287df5a2d6f0a44bbcbd11701dbbf6ec43675.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -48,10 +48,10 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "788289706e903c5a4dbc24a968e92b01fb859f99",
-        "sha256": "0a9fjas2anw0bz6nc7sngs8hpclc01p2xymymgs34qxm4xz5n3fy",
+        "rev": "82e5cd1ad3c387863f0545d7591512e76ab0fc41",
+        "sha256": "090l219mzc0gi33i3psgph6s2pwsc8qy4lyrqjdj4qzkvmaj65a7",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/788289706e903c5a4dbc24a968e92b01fb859f99.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/82e5cd1ad3c387863f0545d7591512e76ab0fc41.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-unstable": {
@@ -60,22 +60,22 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9bc841fec1c0e8b9772afa29f934d2c7ce57da8e",
-        "sha256": "0hh1gpw3lcacz3qba7pcc7j1vc09gawa4lzff3mkgsrmp732hg5f",
+        "rev": "236cc2971ac72acd90f0ae3a797f9f83098b17ec",
+        "sha256": "06ydhcmzrzbvs675ycv7whhp3sjg3d76pdp27jlhx8vw9izp0ngi",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/9bc841fec1c0e8b9772afa29f934d2c7ce57da8e.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/236cc2971ac72acd90f0ae3a797f9f83098b17ec.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixos-21.11",
+        "branch": "nixos-22.05",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2c66a7a6e036971c4847cca424125f55b9eb0b0b",
-        "sha256": "00pdg5mkgqp81n4pfgigd840hvh3fwwkbipcba1p4ds3ffy3xir5",
+        "rev": "d9794b04bffb468b886c553557489977ae5f4c65",
+        "sha256": "1l41dhs1cmwx7q7s38d9dr9zyijfm6bhmv41zr7rsg94yplbr0f1",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/2c66a7a6e036971c4847cca424125f55b9eb0b0b.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/d9794b04bffb468b886c553557489977ae5f4c65.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -84,10 +84,10 @@
         "homepage": "https://nur.nix-community.org/",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "cd28278b88369426b915450c6d14072d47e87cc1",
-        "sha256": "1nh64wyj4ycwk0av0rsa5469i16shl4md9q4jqm6mqyx033wnj3h",
+        "rev": "18fa7520a7ca968eb74b46036329f3f7606bd541",
+        "sha256": "1xdimb08v9iyzm2rfr1bhri9gvsg377q1a1m8zy0wn5jppzvl1xd",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/cd28278b88369426b915450c6d14072d47e87cc1.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/18fa7520a7ca968eb74b46036329f3f7606bd541.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "theme-bobthefish": {
@@ -96,10 +96,10 @@
         "homepage": "",
         "owner": "oh-my-fish",
         "repo": "theme-bobthefish",
-        "rev": "1eaed8c39951029fa7839859abd5518977a80f83",
-        "sha256": "18c5bmg5in6shy57l6sqfshda2dp91r5kgzrysmm10kihqxw0562",
+        "rev": "14a6f2b317661e959e13a23870cf89274f867f12",
+        "sha256": "178wk0pz9vc6qn5c3my20yfr73s70kyd7zqf0xwr54q5l93rfplj",
         "type": "tarball",
-        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/1eaed8c39951029fa7839859abd5518977a80f83.tar.gz",
+        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/14a6f2b317661e959e13a23870cf89274f867f12.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
