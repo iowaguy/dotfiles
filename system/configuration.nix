@@ -103,8 +103,6 @@
     blueman.enable = true;
     emacs.defaultEditor = true;
 
-    # Used by redshift. Gets my current location.
-    geoclue2.enable = true;
 
     # make capslock := ctrl
     # make ctrl+alt+backspace kill the X server

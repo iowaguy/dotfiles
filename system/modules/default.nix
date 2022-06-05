@@ -1,4 +1,5 @@
 [
+  ./geoclue2
   ./kerberos
   ./networking
   ./syncthing
