@@ -103,7 +103,6 @@
     blueman.enable = true;
     emacs.defaultEditor = true;
 
-
     # make capslock := ctrl
     # make ctrl+alt+backspace kill the X server
     xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";

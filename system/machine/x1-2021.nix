@@ -63,6 +63,9 @@
   };
 
   services = {
+    # Used in frontrunning project. Enable when needed.
+    mongodb.enable = false;
+
     xserver = {
       dpi = 220;
 #      videoDrivers = [ "ati" ];
