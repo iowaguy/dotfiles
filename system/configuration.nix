@@ -95,11 +95,13 @@
 
   services = {
     # A Tor proxying service (helps other users find Tor bridges)
-    snowflake-proxy.enable = true;
+    # snowflake-proxy.enable = true;
 
     # Enable handling of hotplug and sleep events by autorandr
     autorandr.enable = true;
-    netdata.enable = true;
+
+    # Enable this when I want to debug
+    netdata.enable = false;
     blueman.enable = true;
     emacs.defaultEditor = true;
 

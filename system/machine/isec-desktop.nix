@@ -49,6 +49,9 @@ in {
   };
 
   services = {
+    # TODO enable this after updating to nixos 22.05
+    # snowflake-proxy.enable = true;
+
     # Used in frontrunning project
     mongodb = {
       enable = true;
