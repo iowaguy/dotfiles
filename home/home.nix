@@ -139,14 +139,4 @@ in {
       inactiveInterval = 20;
     };
   };
-
-  # Needed for flameshot to work. Remove once this bug is resolved:
-  # https://github.com/nix-community/home-manager/issues/2064
-  systemd.user.targets.tray = {
-    Unit = {
-      Description = "Home Manager System Tray";
-      Requires = [ "graphical-session-pre.target" ];
-    };
-  };
-
 }
