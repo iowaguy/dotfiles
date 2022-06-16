@@ -50,6 +50,9 @@
 
     # LSP server for bash
     nodePackages.bash-language-server
+
+    # Needed for Haskell LSP
+    haskell-language-server
   ];
 
   programs.emacs.enable = true;
