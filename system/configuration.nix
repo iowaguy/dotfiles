@@ -94,6 +94,9 @@
   ];
 
   services = {
+    # Needed for taffybar, to prevent error: https://github.com/NixOS/nixpkgs/issues/16327
+    gnome.at-spi2-core.enable = true;
+
     # A Tor proxying service (helps other users find Tor bridges)
     # snowflake-proxy.enable = true;
 

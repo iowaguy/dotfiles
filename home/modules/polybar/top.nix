@@ -3,6 +3,7 @@
   foreground = "\${common.foreground}";
   modules-center = "cpu memory temperature pulseaudio battery";
   modules-right = "date";
+  # modules-left = "xmonad";
   height = 50;
   dpi = 192;
   font-0 = "file\-icons:style=Regular";

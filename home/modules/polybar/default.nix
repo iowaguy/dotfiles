@@ -3,9 +3,9 @@
 let
   homedir = builtins.getEnv "HOME";
   mypolybar = pkgs.polybar.override {
-    i3GapsSupport = true;
+    # i3GapsSupport = true;
     alsaSupport = true;
-    i3Support = true;
+    # i3Support = true;
     pulseSupport = true;
   };
 in {
@@ -21,7 +21,8 @@ in {
       "common" = import ./common.nix;
       "bar/top" = import ./top.nix;
       "bar/bottom" = import ./bottom.nix;
-      "module/i3" = import ./modules/i3.nix;
+      #"module/i3" = import ./modules/i3.nix;
+      "module/xmonad" = import ./modules/xmonad.nix;
       "module/battery" = import ./modules/battery.nix;
       "module/cpu" = import ./modules/cpu.nix;
       "module/date" = import ./modules/date.nix;

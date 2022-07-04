@@ -1,0 +1,102 @@
+import XMonad
+import XMonad.ManageHook
+import XMonad.Config.Desktop
+import qualified XMonad.StackSet as W
+import XMonad.Util.EZConfig (additionalKeysP)
+import XMonad.Util.Ungrab
+import XMonad.Util.SpawnOnce
+import XMonad.Actions.SpawnOn (spawnOn)
+import XMonad.Hooks.EwmhDesktops
+import           XMonad.Hooks.DynamicLog
+import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run (spawnPipe)
+import Data.List (sortBy)
+import Data.Function (on)
+import Control.Monad (forM_, join)
+import XMonad.Util.Run (safeSpawn)
+import XMonad.Util.NamedWindows (getName)
+
+-- Colours
+-- gray      = "#7F7F7F"
+-- gray2     = "#222222"
+-- red       = "#900000"
+-- blue      = "#2E9AFE"
+-- white     = "#eeeeee"
+
+myTerminal :: String
+myTerminal = "kitty"
+
+-- | Width of the window border in pixels.
+--
+myBorderWidth :: Dimension
+myBorderWidth = 3
+
+myWorkspaces :: [WorkspaceId]
+-- myWorkspaces = map show [1..9]
+myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music"] ++ map show [8..9]
+
+-- | Border colors for unfocused and focused windows, respectively.
+--
+myNormalBorderColor, myFocusedBorderColor :: String
+myNormalBorderColor  = "gray" -- "#dddddd"
+myFocusedBorderColor = "blue"  -- "#ff0000" don't use hex, not <24 bit safe
+
+-- | Perform an arbitrary action at xmonad startup.
+myStartupHook :: X ()
+myStartupHook = composeAll
+                  [
+                    -- spawnOnce "1" "em"
+                    spawnOnOnce "2:shell" myTerminal
+                  , spawnOnOnce "3:web" "firefox"
+                  , spawnOnOnce "4:zotero" "zotero"
+                  , spawnOnOnce "5:chat" "signal-desktop"
+                  , spawnSingleProcess "status-notifier-watcher"
+                  -- , spawnSingleProcess "taffybar"
+                  ]
+
+spawnSingleProcess p =
+  spawnOnce $ "if [ -z $(pgrep " <> p <> ") ] ; then " <> p <> " & fi"
+
+
+launcherString :: String
+launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
+
+
+main :: IO ()
+main = do
+  xmonad $ ewmhFullscreen $ ewmh $ myConfig
+
+
+myConfig = desktopConfig
+        { modMask = mod1Mask -- Use Alt
+        , terminal = myTerminal
+        , workspaces = myWorkspaces
+        , borderWidth = myBorderWidth
+        , normalBorderColor = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
+        , startupHook = myStartupHook
+        , manageHook = manageDocks
+          -- more changes
+        } `additionalKeysP`
+          [("<Print>",      spawn "flameshot gui")
+        --("M-o d",        spawn "thunar")
+        --, ("M-o h",        promptSearch xpconfig hackage)
+        --, ("M-<Return>",   spawn =<< asks (terminal . config))
+
+        -- , ("C-S-<Space>",  spawn launcherString) -- old OSX style
+          , ("M-d",          spawn launcherString) -- linux style
+
+          , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status")
+          , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status")
+          , ("<XF86MonBrightnessUp>", spawn "light -A 10")
+          , ("<XF86MonBrightnessDown>", spawn "light -U 10")
+          , ("<XF86AudioMute>",      spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status")
+          , ("<XF86AudioMicMute>", spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status")
+          , ("S-M-p", spawn "rofi-pass")
+          , ("S-M-q", kill)
+          , ("M-<return>", spawn myTerminal)
+          ]

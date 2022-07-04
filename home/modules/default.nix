@@ -6,17 +6,19 @@
   ./firefox
   ./git
   ./gpg-agent
-  ./i3
+  #./i3
   ./mynix
   ./password-management
   ./pdfs
   ./picom
-  ./polybar
+  # ./polybar
   ./redshift
   ./rofi
   ./shell
   ./terminal
   ./slack
   ./ssh
+  ./taffybar
   ./teams
+  ./xmonad
 ]
