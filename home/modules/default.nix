@@ -18,7 +18,8 @@
   ./terminal
   ./slack
   ./ssh
-  ./taffybar
+  # ./taffybar
   ./teams
   ./xmonad
+  ./xmobar
 ]

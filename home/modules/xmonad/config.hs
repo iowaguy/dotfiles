@@ -7,7 +7,8 @@ import XMonad.Util.Ungrab
 import XMonad.Util.SpawnOnce
 import XMonad.Actions.SpawnOn (spawnOn)
 import XMonad.Hooks.EwmhDesktops
-import           XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicBars
 import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
 import qualified DBus as D
 import qualified DBus.Client as D
@@ -23,7 +24,7 @@ import XMonad.Util.NamedWindows (getName)
 -- Colours
 -- gray      = "#7F7F7F"
 -- gray2     = "#222222"
--- red       = "#900000"
+red       = "#900000"
 -- blue      = "#2E9AFE"
 -- white     = "#eeeeee"
 
@@ -50,12 +51,12 @@ myStartupHook :: X ()
 myStartupHook = composeAll
                   [
                     -- spawnOnce "1" "em"
-                    spawnOnOnce "2:shell" myTerminal
+                    dynStatusBarStartup barCreator barDestroyer
+                  , spawnOnOnce "2:shell" myTerminal
                   , spawnOnOnce "3:web" "firefox"
                   , spawnOnOnce "4:zotero" "zotero"
                   , spawnOnOnce "5:chat" "signal-desktop"
-                  , spawnSingleProcess "status-notifier-watcher"
-                  -- , spawnSingleProcess "taffybar"
+                  -- , spawnSingleProcess "status-notifier-watcher"
                   ]
 
 spawnSingleProcess p =
@@ -65,9 +66,16 @@ spawnSingleProcess p =
 launcherString :: String
 launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
+barCreator :: DynamicStatusBar
+barCreator (S sid) = spawnPipe $ "xmobar --bottom --screen " ++ show sid
+
+barDestroyer :: DynamicStatusBarCleanup
+barDestroyer = return ()
 
 main :: IO ()
 main = do
+  -- spawnPipe "xmobar --bottom &"
+  -- spawnPipe "taffybar &"
   xmonad $ ewmhFullscreen $ ewmh $ myConfig
 
 
@@ -80,6 +88,7 @@ myConfig = desktopConfig
         , focusedBorderColor = myFocusedBorderColor
         , startupHook = myStartupHook
         , manageHook = manageDocks
+        , logHook = dynamicLogString xmobarPP >>= xmonadPropLog
           -- more changes
         } `additionalKeysP`
           [("<Print>",      spawn "flameshot gui")
@@ -92,8 +101,8 @@ myConfig = desktopConfig
 
           , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status")
           , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status")
-          , ("<XF86MonBrightnessUp>", spawn "light -A 10")
-          , ("<XF86MonBrightnessDown>", spawn "light -U 10")
+          , ("<XF86MonBrightnessUp>", spawn "brightnessctl -d 'intel_backlight' +50")
+          , ("<XF86MonBrightnessDown>", spawn "brightnessctl -d 'intel_backlight' +50")
           , ("<XF86AudioMute>",      spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status")
           , ("<XF86AudioMicMute>", spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status")
           , ("S-M-p", spawn "rofi-pass")
