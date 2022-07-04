@@ -15,6 +15,7 @@ let
     entr
     et                            # A convenient cli timer
     fd
+    feh
     file                          # classic tool for viewing file attributes
     ghc
     graphviz
