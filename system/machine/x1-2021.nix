@@ -36,6 +36,9 @@
     # Per-interface useDHCP will be mandatory in the future, so this
     # generated config replicates the default behaviour.
     interfaces.wlp0s20f3.useDHCP = true;
+
+    # Use Cloudflare and Quad9 recursive resolvers
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 
   sound.enable = true;
