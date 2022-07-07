@@ -1,4 +1,7 @@
+{pkgs, lib, config, ...}:
 {
+  home.packages = with pkgs; [brightnessctl];
+
   xsession = {
     enable = true;
 
