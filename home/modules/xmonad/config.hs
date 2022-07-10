@@ -72,6 +72,7 @@ mySB :: StatusBarConfig
 mySB = statusBarProp "xmobar" $ pure xmobarPP {
     ppCurrent = xmobarColor "black" "orange"
   , ppTitle   = xmobarColor "white" "" . shorten 40
+  , ppUrgent  = xmobarColor "white" "red"
   }
 
 main :: IO ()
