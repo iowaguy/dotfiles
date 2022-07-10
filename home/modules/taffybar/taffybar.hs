@@ -44,7 +44,7 @@ myGraphConfig :: GraphConfig
 myGraphConfig = defaultGraphConfig { graphPadding         = 0
                                    , graphBorderWidth     = 0
                                    , graphWidth           = 75
-                                   -- , graphBackgroundColor = transparent
+                                   , graphBackgroundColor = transparent
                                    }
 
 netCfg :: GraphConfig
@@ -87,7 +87,7 @@ myConfig =
       netmon     = networkMonitorNew defaultNetFormat Nothing
       clock      = textClockNewWith defaultClockConfig
         { clockUpdateStrategy = ConstantInterval 1.0
-        , clockFormatString   = "%a %b %d %I:%M:%S %p"
+        , clockFormatString   = "%a %b %d %H:%M"
         }
       layout     = layoutNew defaultLayoutConfig
       windowsW   = windowsNew defaultWindowsConfig
@@ -95,8 +95,9 @@ myConfig =
       myConfig   = defaultSimpleTaffyConfig
         { startWidgets  = workspaces : map (>>= buildContentsBox) [layout, windowsW]
         , endWidgets    = map (>>= buildContentsBox)
-                            [bat, batteryIconNew, volumeNew, clock, tray, cpu, mem, netmon, net, mpris2New]
-        , barPosition   = Top
+                            [bat, batteryIconNew, volumeNew, clock, tray, cpu, mem, netmon, net]
+                            -- [bat, batteryIconNew, volumeNew, clock, tray, cpu, mem, netmon, net, mpris2New]
+        , barPosition   = Bottom
         , barPadding    = 10
         , barHeight     = 50
         , widgetSpacing = 1
