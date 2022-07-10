@@ -23,11 +23,12 @@ import XMonad.Util.Run (spawnPipe, hPutStrLn)
 -- import XMonad.Util.NamedWindows (getName)
 
 -- Colours
--- gray      = "#7F7F7F"
--- gray2     = "#222222"
--- red       = "#900000"
--- blue      = "#2E9AFE"
--- white     = "#eeeeee"
+gray      = "#7F7F7F"
+gray2     = "#222222"
+red       = "#900000"
+blue      = "#2E9AFE"
+white     = "#eeeeee"
+orange    = "#ff9604"
 
 myTerminal :: String
 myTerminal = "kitty"
@@ -68,7 +69,10 @@ launcherString :: String
 launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
 mySB :: StatusBarConfig
-mySB = statusBarProp "xmobar" (pure xmobarPP)
+mySB = statusBarProp "xmobar" $ pure xmobarPP {
+    ppCurrent = xmobarColor "black" "orange"
+  , ppTitle   = xmobarColor "white" "" . shorten 40
+  }
 
 main :: IO ()
 main = xmonad $ ewmh $ withEasySB mySB defToggleStrutsKey def
