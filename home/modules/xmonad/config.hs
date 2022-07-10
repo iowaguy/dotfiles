@@ -35,8 +35,8 @@ myTerminal = "kitty"
 
 -- | Width of the window border in pixels.
 --
--- myBorderWidth :: Dimension
--- myBorderWidth = 3
+myBorderWidth :: Dimension
+myBorderWidth = 3
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music"] ++ map show [8..9]
@@ -79,6 +79,7 @@ main = xmonad $ ewmh $ withEasySB mySB defToggleStrutsKey def
         { modMask = mod1Mask -- Use Alt
         , terminal = myTerminal
         , workspaces = myWorkspaces
+        , borderWidth = myBorderWidth
         } `additionalKeysP`
           [("<Print>", spawn "flameshot gui")
           , ("M-d", spawn launcherString)
