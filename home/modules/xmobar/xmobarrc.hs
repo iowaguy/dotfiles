@@ -2,10 +2,12 @@ Config
   {
     font = "xft:iosevka:size=11:bold:antialias=true"
   , position = Bottom
-  , template    = "%XMonadLog%}{%battery% %date%  "
+  , template    = "%XMonadLog%}{(%wlp0s20f3wi%) %battery% %date%  "
   , commands =
     [
       Run XMonadLog
+    , Run Wireless "wlp0s20f3"
+      ["--template", "<ssid> <quality>%", "-p", "--"] 100
     , Run BatteryP
       ["BAT0"]
       ["--template", "<acstatus>", "--"
