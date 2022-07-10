@@ -75,7 +75,7 @@ mySB = statusBarProp "xmobar" $ pure xmobarPP {
   }
 
 main :: IO ()
-main = xmonad $ ewmh $ withEasySB mySB defToggleStrutsKey def
+main = xmonad $ ewmh $ ewmhFullscreen $ withEasySB mySB defToggleStrutsKey def
         { modMask = mod1Mask -- Use Alt
         , terminal = myTerminal
         , workspaces = myWorkspaces
