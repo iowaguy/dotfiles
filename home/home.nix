@@ -53,6 +53,8 @@ let
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with unstable; [
+    xmobar
+    brave
     zotero                        # Citation manager
   ];
 

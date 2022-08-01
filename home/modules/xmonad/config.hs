@@ -7,13 +7,9 @@ import XMonad.Util.EZConfig (additionalKeysP)
 -- import XMonad.Util.SpawnOnce (spawnOnce)
 -- import XMonad.Actions.SpawnOn (spawnOn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
--- import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 -- import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
--- import qualified DBus as D
--- import qualified DBus.Client as D
--- import qualified Codec.Binary.UTF8.String as UTF8
 -- import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 -- import Data.List (sortBy)
@@ -68,15 +64,18 @@ myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "
 launcherString :: String
 launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
-mySB :: StatusBarConfig
-mySB = statusBarProp "xmobar" $ pure xmobarPP {
+xmobarTop :: StatusBarConfig
+xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar ~/.config/xmobar/xmobarrc_top" $ pure xmobarPP
+
+xmobarBottom :: StatusBarConfig
+xmobarBottom = statusBarPropTo "_XMONAD_LOG_2" "xmobar ~/.config/xmobar/xmobarrc_bottom" $ pure xmobarPP {
     ppCurrent = xmobarColor "black" "orange"
   , ppTitle   = xmobarColor "white" "" . shorten 40
   , ppUrgent  = xmobarColor "white" "red"
   }
 
 main :: IO ()
-main = xmonad $ ewmh $ ewmhFullscreen $ withEasySB mySB defToggleStrutsKey def
+main = xmonad $ ewmh $ ewmhFullscreen $ withEasySB (xmobarTop <> xmobarBottom) defToggleStrutsKey def
         { modMask = mod1Mask -- Use Alt
         , terminal = myTerminal
         , workspaces = myWorkspaces
