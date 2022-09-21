@@ -10,7 +10,6 @@ let
     cachix                        # cache binaries so I don't have to rebuild
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     curl
-    discord                       # A chat client
     drawio                        # good for drawing finite state machines
     entr
     et                            # A convenient cli timer
@@ -37,7 +36,6 @@ let
     qt5Full                       # needed for matplotlib
     ripgrep
     rubber                        # a nice tool for compiling latex
-    signal-desktop
     skypeforlinux
     spotify                       # Musics
     sqlite
@@ -53,8 +51,11 @@ let
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with unstable; [
-    xmobar
     brave
+    discord                       # A chat client
+    obsidian                      # Notes
+    signal-desktop
+    xmobar
     zotero                        # Citation manager
   ];
 
