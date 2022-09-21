@@ -668,26 +668,13 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 [[https://github.com/bdarcus/citar][Citar]] for citations.
 #+begin_src emacs-lisp
   (defun blw/citar--open-note (keys-entries)
-    ;; (error "Error!")
-          (identity (car key-entry) (cdr key-entry)))
-    ;; (let*
-    ;;     ((key-entry-alist (citar--ensure-entries keys-entries)))
-    ;;     (seq-map
-    ;;        (lambda (key-entry)
-    ;;          (identity (car key-entry) (cdr key-entry)))
-    ;;        key-entry-alist)))
-
-             ;; (citar--open-note (car key-entry) (cdr key-entry)))
+    (identity (car key-entry) (cdr key-entry)))
 
   (use-package citar
-    ;; :bind (("C-c b" . citar-insert-citation)
-    ;;       :map minibuffer-local-map
-    ;;       ("M-b" . citar-insert-preset))
     :custom
     (citar-bibliography (blw/zettelkasten-path "references.bib"))
-    (citar-notes-paths (list (blw/zettelkasten-path "references.bib")))
-    (citar-default-action 'blw/citar--open-note)
-    )
+    (citar-notes-paths (list (blw/persistent-file-path "zettelkasten/")))
+    (citar-default-action 'blw/citar--open-note))
 #+end_src
 
 Want the journal to display weekly, not daily files.
