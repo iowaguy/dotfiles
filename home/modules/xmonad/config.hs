@@ -4,8 +4,8 @@ import XMonad
 -- import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig (additionalKeysP)
 -- import XMonad.Util.Ungrab
--- import XMonad.Util.SpawnOnce (spawnOnce)
--- import XMonad.Actions.SpawnOn (spawnOn)
+import XMonad.Util.SpawnOnce (spawnOnce, spawnOnOnce)
+import XMonad.Actions.SpawnOn (spawnOn, manageSpawn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
@@ -35,31 +35,36 @@ myBorderWidth :: Dimension
 myBorderWidth = 3
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music"] ++ map show [8..9]
+myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:pdfs"] -- ++ map show [8..9]
 
 -- | Border colors for unfocused and focused windows, respectively.
 --
--- myNormalBorderColor, myFocusedBorderColor :: String
--- myNormalBorderColor  = "gray" -- "#dddddd"
--- myFocusedBorderColor = "blue"  -- "#ff0000" don't use hex, not <24 bit safe
+myNormalBorderColor, myFocusedBorderColor :: String
+myNormalBorderColor  = "gray" -- "#dddddd"
+myFocusedBorderColor = "blue"  -- "#ff0000" don't use hex, not <24 bit safe
 
 -- | Perform an arbitrary action at xmonad startup.
--- myStartupHook :: X ()
--- myStartupHook = composeAll
---                   [
---                     -- spawnOnce "1" "em"
---                     dynStatusBarStartup barCreator1 barDestroyer
---                   -- , dynStatusBarStartup barCreator2 barDestroyer
---                   , spawnOnOnce "2:shell" myTerminal
---                   , spawnOnOnce "3:web" "firefox"
---                   , spawnOnOnce "4:zotero" "zotero"
---                   , spawnOnOnce "5:chat" "signal-desktop"
---                   -- , spawnSingleProcess "status-notifier-watcher"
---                   ]
+myStartupHook :: X ()
+myStartupHook = composeAll
+                  [
+                    -- spawnOnce "1" "em"
+                    spawnOnOnce "2:shell" myTerminal
+                  , spawnOnOnce "3:web" "brave"
+                  , spawnOnOnce "4:zotero" "zotero"
+                  , spawnOnOnce "5:chat" "signal-desktop"
+                  , spawnOnOnce "5:chat" "slack"
+                  , spawnSingleProcess "stalonetray"
+                  ]
 
--- spawnSingleProcess p =
---   spawnOnce $ "if [ -z $(pgrep " <> p <> ") ] ; then " <> p <> " & fi"
+spawnSingleProcess p =
+  spawnOnce $ "if [ -z $(pgrep " <> p <> ") ] ; then " <> p <> " & fi"
 
+myManageHook :: ManageHook
+myManageHook =
+  composeAll
+      [ className =? "standalonetray" --> doIgnore
+      , className =? "brave"          --> doShift "3:web"
+      ]
 
 launcherString :: String
 launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
@@ -80,6 +85,10 @@ main = xmonad $ ewmh $ ewmhFullscreen $ withEasySB (xmobarTop <> xmobarBottom) d
         , terminal = myTerminal
         , workspaces = myWorkspaces
         , borderWidth = myBorderWidth
+        , normalBorderColor  = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
+        , manageHook = myManageHook <+> manageSpawn
+        , startupHook = myStartupHook
         } `additionalKeysP`
           [("<Print>", spawn "flameshot gui")
           , ("M-d", spawn launcherString)
