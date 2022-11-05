@@ -53,6 +53,7 @@ let
   unstablePkgs = with unstable; [
     brave
     discord                       # A chat client
+    notion-app-enhanced
     obsidian                      # Notes
     signal-desktop
     xmobar
