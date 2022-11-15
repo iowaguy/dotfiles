@@ -46,6 +46,7 @@ let
     vlc
     wireshark
     xclip
+    xmobar
   ];
 
   # These are packages that I want to keep up-to-date
@@ -55,7 +56,6 @@ let
     notion-app-enhanced
     obsidian                      # Notes
     signal-desktop
-    xmobar
     zotero                        # Citation manager
     zoom-us                       # Video conferencing
   ];
