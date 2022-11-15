@@ -19,6 +19,7 @@ let
     ghc
     graphviz
     jq
+    jetbrains.idea-community
     keybase-gui
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
