@@ -46,7 +46,6 @@ let
     vlc
     wireshark
     xclip
-    zoom-us                       # Video conferencing
   ];
 
   # These are packages that I want to keep up-to-date
@@ -58,6 +57,7 @@ let
     signal-desktop
     xmobar
     zotero                        # Citation manager
+    zoom-us                       # Video conferencing
   ];
 
 in {
