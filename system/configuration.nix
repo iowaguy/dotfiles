@@ -104,6 +104,8 @@
   ];
 
   services = {
+    printing.enable = true;
+
     # Needed for taffybar, to prevent error: https://github.com/NixOS/nixpkgs/issues/16327
     gnome.at-spi2-core.enable = true;
 
