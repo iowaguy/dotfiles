@@ -43,10 +43,10 @@
     gcc
 
     # Needed for =minted= to export with syntax highlighting
-    python38Packages.pygments
+    python310Packages.pygments
 
     # For Jupyter notebook
-    python38Packages.jupyter
+    python310Packages.jupyter
 
     # LSP server for bash
     nodePackages.bash-language-server
