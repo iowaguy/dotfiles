@@ -51,7 +51,14 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: rec {
+        wpa_supplicant = pkgs.wpa_supplicant.overrideAttrs (attrs: {
+          patches = attrs.patches ++ [ ./nuwave.patch ];
+        });
+      };
+  };
 
   # Nix daemon config
   nix = {
