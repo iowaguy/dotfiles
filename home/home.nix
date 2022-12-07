@@ -34,7 +34,6 @@ let
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences
     pasystray                     # pulseaudio systray
-    qt5Full                       # needed for matplotlib
     ripgrep
     rubber                        # a nice tool for compiling latex
     skypeforlinux

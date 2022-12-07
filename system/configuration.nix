@@ -62,9 +62,6 @@
 
   # Nix daemon config
   nix = {
-    # Automate `nix-store --optimise`
-    autoOptimiseStore = true;
-
     # Automate garbage collection
     gc = {
       automatic = true;
@@ -84,8 +81,13 @@
       keep-derivations = true
     '';
 
-    # Required by Cachix to be used as non-root user
-    trustedUsers = [ "root" "ben" ];
+    settings = {
+      # Required by Cachix to be used as non-root user
+      trusted-users = [ "root" "ben" ];
+
+      # Automate `nix-store --optimise`
+      auto-optimise-store = true;
+    };
   };
 
   location.provider = "geoclue2";

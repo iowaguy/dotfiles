@@ -3,11 +3,11 @@ let
   ## NOTE This is how to add package from pypi that isn't ported to nix yet
   ## To get hash, either download the tarball from pypi and run sha256sum on it,
   ## or just use the provided hash on pypi
-  # eth-hash = python38.pkgs.buildPythonPackage rec {
+  # eth-hash = python310.pkgs.buildPythonPackage rec {
   #   pname = "eth-hash";
   #   version = "0.3.2";
 
-  #   src = pkgs.python38.pkgs.fetchPypi {
+  #   src = pkgs.python310.pkgs.fetchPypi {
   #     inherit pname version;
   #     sha256 = "3f40cecd5ead88184aa9550afc19d057f103728108c5102f592f8415949b5a76";
   #   };
@@ -18,7 +18,7 @@ let
   ## NOTE This is how to add a package from a tarball that isn't ported to nix yet
   ## To get hash, either download the tarball from pypi and run sha256sum on it,
   ## or just use the provided hash on pypi
-  # web3 = python38.pkgs.buildPythonPackage rec {
+  # web3 = python310.pkgs.buildPythonPackage rec {
   #   pname = "web3";
   #   version = "5.24.0";
 
@@ -36,8 +36,8 @@ let
   #   };
   #   propagatedBuildInputs = [
   #     hexbytes
-  #     pkgs.python38Packages.protobuf
-  #     pkgs.python38Packages.aiohttp
+  #     pkgs.python310Packages.protobuf
+  #     pkgs.python310Packages.aiohttp
   #   ];
   # };
 

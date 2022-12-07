@@ -19,15 +19,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
-        "branch": "release-22.05",
+        "branch": "release-22.11",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d78b3488a76d251701ab58a9b7f0dd092b806c1e",
-        "sha256": "03ry8wyi22b0ml4dg1vjg0xrahv9x0qsxhz01b720a4qcw9c72nr",
+        "rev": "0e8125916b420e41bf0d23a0aa33fadd0328beb3",
+        "sha256": "1pcdmkw9azg2w3jxpw8xw6qak7bilaf8mdasn8rc8vl5iz5lilpy",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/d78b3488a76d251701ab58a9b7f0dd092b806c1e.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/0e8125916b420e41bf0d23a0aa33fadd0328beb3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -36,10 +36,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "def994adbdfc28974e87b0e4c949e776207d5557",
-        "sha256": "1xj0s2qj7xcq1zai6diymfza7mxwhizw1akxz392nv39az71yn24",
+        "rev": "5df9108b346f8a42021bf99e50de89c9caa251c3",
+        "sha256": "114xvdxdwmfvyi78ifb3kpscwrjkwndjxnl27dqcixpcjrjkhdj2",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/def994adbdfc28974e87b0e4c949e776207d5557.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/5df9108b346f8a42021bf99e50de89c9caa251c3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -60,22 +60,22 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a2a777538d971c6b01c6e54af89ddd6567c055e8",
-        "sha256": "1khxmc5inc4f6jzrpx5q47s4pkyjf4mgyf8n6ixh72rvky7b9rm6",
+        "rev": "6e51c97f1c849efdfd4f3b78a4870e6aa2da4198",
+        "sha256": "0d0alwdd07lsy4jl29wgn0m1z17ah9rwwggh7kpvg7a7skny24lc",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/a2a777538d971c6b01c6e54af89ddd6567c055e8.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/6e51c97f1c849efdfd4f3b78a4870e6aa2da4198.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixpkgs": {
-        "branch": "nixos-22.05",
+        "branch": "nixos-22.11",
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1404483f4531560aad73bdebae4096881c910ac0",
-        "sha256": "1f38hida5ysy98nnf449xgsm1wvyyc88gkk90qfbynw4dkjplm0f",
+        "rev": "52e3e80afff4b16ccb7c52e9f0f5220552f03d04",
+        "sha256": "0x0pc4qm0adsdbr8n20ghl7byq9n0bvj9fjiiqzp9839cippp9hn",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/1404483f4531560aad73bdebae4096881c910ac0.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/52e3e80afff4b16ccb7c52e9f0f5220552f03d04.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -84,10 +84,10 @@
         "homepage": "https://nur.nix-community.org/",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "781f77434875c7da8a9a1ea6db965379b9855d9c",
-        "sha256": "0f2jfr05dgzaqfyv3qxvcj5a3hb939zlcmram1z1pp88m6bj7r0i",
+        "rev": "af814db16c89385c65e758608296440555f61ccc",
+        "sha256": "11kjdl9j9vllh0jpmasph6ax5g25fd4jvjcnp02zp3j8js0i3zgy",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/781f77434875c7da8a9a1ea6db965379b9855d9c.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/af814db16c89385c65e758608296440555f61ccc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "theme-bobthefish": {

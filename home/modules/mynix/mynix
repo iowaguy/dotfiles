@@ -31,6 +31,7 @@ system_config() {
   sudo cp -r ${mnt_config_dir}/system/modules/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/nix/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/persist/ ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/system/nuwave.patch ${POSSIBLE_MNT}/etc/nixos/
 
   model="$(sudo dmidecode -s system-product-name)"
 

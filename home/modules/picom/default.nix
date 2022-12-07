@@ -1,14 +1,14 @@
 {
   services.picom = {
     enable = true;
-    activeOpacity = "1.0";
-    inactiveOpacity = "1.0";
+    activeOpacity = 1.0;
+    inactiveOpacity = 1.0;
     backend = "glx";
     fade = true;
     fadeDelta = 5;
-    opacityRule = [
+    opacityRules = [
       "100:name *= 'i3lock'"
-      "100:name *= 'Firefox'"
+      "100:name *= 'Brave'"
       "100:name *= 'Evince'"
       "100:name *= 'Zoom'"
       "100:name *= 'Slack'"
@@ -17,11 +17,10 @@
       "90:name *= 'Emacs'"
     ];
     shadow = true;
-    shadowOpacity = "0.75";
-    experimentalBackends = true;
-    extraOptions = ''
+    shadowOpacity = 0.75;
+    settings = {
       transparent-clipping = true;
       unredir-if-possible = true;
-    '';
+    };
   };
 }
