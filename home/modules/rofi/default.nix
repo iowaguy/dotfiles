@@ -12,6 +12,7 @@
         URL_field='url'
         USERNAME_field='login'
         AUTOTYPE_field='autotype'
+        help_color='#4872FF'
       '';
     };
 
