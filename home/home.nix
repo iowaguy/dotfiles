@@ -29,7 +29,6 @@ let
     ngrok                         # HTTP and TCP tunneling service
     nox
     openvpn                       # a VPN client
-    pandoc
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences
@@ -102,6 +101,9 @@ in {
   };
 
   programs = {
+    # for converting files between types
+    pandoc.enable = true;
+
     # A better ls
     exa.enable = true;
 
