@@ -647,8 +647,6 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
         :desc "Open paper notes"       "p" #'citar-open-notes)))
 
 
-  (org-roam-bibtex-mode)
-
   (require 'subr-x) ;; for `when-let'
 
   (defun org-link-at-point-unlink ()
@@ -712,14 +710,6 @@ For adding citations in org.
           bibtex-completion-bibliography (blw/zettelkasten-path "references.bib")
           bibtex-completion-library-path (blw/zettelkasten-path "bibtex.pdfs")
           bibtex-completion-notes-path blw/zettelkasten))
-#+end_src
-
-More meta-data for my annotated bibliography.
-#+begin_src emacs-lisp
-  (use-package! org-roam-bibtex
-    :after org-roam
-    :config
-    (require 'org-ref))
 #+end_src
 
 Higher resolution on PDFs.
@@ -1175,4 +1165,10 @@ Show images inline for Jupyter notebooks.
       :desc "Move cell up"                 "u" #'ein:worksheet-move-cell-up-km
       :desc "Move cell down"               "d" #'ein:worksheet-move-cell-down-km
       :desc "Chance cell type"             "t" #'ein:worksheet-change-cell-type-km))
+#+end_src
+
+Enable Prolog mode.
+#+begin_src emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
+  (add-to-list 'auto-mode-alist '("\\.m\\'" . mercury-mode))
 #+end_src
