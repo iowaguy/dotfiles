@@ -4,16 +4,17 @@ Config
   , position = Top
   -- , position = TopP 0 800 -- align left, with 800 pixel space on the right for the tray
   -- , position = Static { xpos = 0, ypos = 0, width = 1346, height = 20 }
-  , template = "}%cpu%  %memory% %alsa:default:Master% %bright% {(%wlp0s20f3wi%) %battery% %date%"
+  -- , template = "}%cpu%  %memory% %alsa:default:Master% %bright% {(%wlp0s20f3wi%) %battery% %date%"
+  , template = "}%cpu%  %memory% %bright% {(%wlp0s20f3wi%) %battery% %date%"
   , commands =
     [
-      Run Alsa "default" "Master"
-      ["--template"
-      , "<status> <volume>%", "--"
-      , "-O", "♪"
-      , "-o", "[muted]"
-      ]
-    , Run Cpu
+      -- Run Alsa "default" "Master"
+      -- ["--template"
+      -- , "<status> <volume>%", "--"
+      -- , "-O", "♪"
+      -- , "-o", "[muted]"
+      -- ]
+      Run Cpu
       ["--template", " <total>%", "--"]
       100
     , Run Memory [ "-t", " <usedratio>%", "-d", "1", "--", "--scale", "1024"] 100
