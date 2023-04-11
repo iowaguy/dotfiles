@@ -63,7 +63,7 @@ in mkShell rec {
     bashInteractive
 
     # Python development
-    (python39.withPackages pythonPackages)
+    (python310.withPackages pythonPackages)
   ];
 
   ## NOTE only need this for handling environment with requirements.txt
