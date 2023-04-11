@@ -1,104 +1,178 @@
 import XMonad
--- import XMonad.ManageHook
--- import XMonad.Config.Desktop
--- import qualified XMonad.StackSet as W
-import XMonad.Util.EZConfig (additionalKeysP)
--- import XMonad.Util.Ungrab
-import XMonad.Util.SpawnOnce (spawnOnce, spawnOnOnce)
-import XMonad.Actions.SpawnOn (spawnOn, manageSpawn)
+import XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
--- import XMonad.Hooks.FadeInactive (fadeInactiveLogHook)
--- import XMonad.Hooks.ManageDocks
-import XMonad.Util.Run (spawnPipe, hPutStrLn)
--- import Data.List (sortBy)
--- import Data.Function (on)
--- import Control.Monad (forM_, join)
--- import XMonad.Util.Run (safeSpawn)
--- import XMonad.Util.NamedWindows (getName)
+import XMonad.Layout.BinarySpacePartition as BSP
+import XMonad.Layout.Grid
+import XMonad.Layout.Spacing
+import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.Run (hPutStrLn, spawnPipe)
+import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 
 -- Colours
-gray      = "#7F7F7F"
-gray2     = "#222222"
-red       = "#900000"
-blue      = "#2E9AFE"
-white     = "#eeeeee"
-orange    = "#ff9604"
+gray = "#7F7F7F"
+
+gray2 = "#222222"
+
+red = "#900000"
+
+blue = "#2E9AFE"
+
+white = "#eeeeee"
+
+orange = "#ff9604"
 
 myTerminal :: String
 myTerminal = "kitty"
 
 -- | Width of the window border in pixels.
---
 myBorderWidth :: Dimension
 myBorderWidth = 3
+
+myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
+  where
+    layoutTall = Tall nmaster delta ratio
+    layoutGrid = Grid
+    layoutFull = Full
+    layoutBinarySpacePartition = emptyBSP
+    nmaster = 1
+    ratio = 1 / 2
+    delta = 3 / 100
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:pdfs"] -- ++ map show [8..9]
 
 -- | Border colors for unfocused and focused windows, respectively.
---
 myNormalBorderColor, myFocusedBorderColor :: String
-myNormalBorderColor  = "gray" -- "#dddddd"
-myFocusedBorderColor = "blue"  -- "#ff0000" don't use hex, not <24 bit safe
+myNormalBorderColor = "gray" -- "#dddddd"
+myFocusedBorderColor = "blue" -- "#ff0000" don't use hex, not <24 bit safe
 
 -- | Perform an arbitrary action at xmonad startup.
 myStartupHook :: X ()
-myStartupHook = composeAll
-                  [
-                    -- spawnOnce "1" "em"
-                    spawnOnOnce "2:shell" myTerminal
-                  , spawnOnOnce "3:web" "brave"
-                  , spawnOnOnce "4:zotero" "zotero"
-                  , spawnOnOnce "5:chat" "signal-desktop"
-                  , spawnOnOnce "5:chat" "slack"
-                  , spawnSingleProcess "stalonetray"
-                  ]
+myStartupHook =
+  composeAll
+    [ -- spawnOnce "1" "em"
+      spawnOnOnce "2:shell" myTerminal,
+      spawnOnOnce "3:web" "brave",
+      spawnOnOnce "4:zotero" "zotero",
+      spawnOnOnce "5:chat" "signal-desktop",
+      spawnOnOnce "5:chat" "slack",
+      spawnOnOnce "8:notion" "notion-app-enhanced"
+      -- , spawnOnce   "stalonetray"
+      -- , spawnSingleProcess "stalonetray"
+    ]
 
 spawnSingleProcess p =
-  spawnOnce $ "if [ -z $(pgrep " <> p <> ") ] ; then " <> p <> " & fi"
+  spawnOnce $ "if test -z (pgrep " <> p <> "); " <> p <> " &; end"
 
 myManageHook :: ManageHook
 myManageHook =
+  -- scratchpadManageHookDefault <+>
   composeAll
-      [ className =? "standalonetray" --> doIgnore
-      , className =? "brave"          --> doShift "3:web"
-      ]
+    [ className =? "standalonetray" --> doIgnore,
+      className =? "brave" --> doShift "3:web"
+    ]
 
 launcherString :: String
 launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
 xmobarTop :: StatusBarConfig
-xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar ~/.config/xmobar/xmobarrc_top" $ pure xmobarPP
+xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc_top" $ pure xmobarPP
 
 xmobarBottom :: StatusBarConfig
-xmobarBottom = statusBarPropTo "_XMONAD_LOG_2" "xmobar ~/.config/xmobar/xmobarrc_bottom" $ pure xmobarPP {
-    ppCurrent = xmobarColor "black" "orange"
-  , ppTitle   = xmobarColor "white" "" . shorten 40
-  , ppUrgent  = xmobarColor "white" "red"
-  }
+xmobarBottom =
+  statusBarPropTo "_XMONAD_LOG_2" "xmobar -v ~/.config/xmobar/xmobarrc_bottom" $
+    pure
+      xmobarPP
+        { ppCurrent = xmobarColor "black" "orange",
+          ppTitle = xmobarColor "white" "" . shorten 40,
+          ppUrgent = xmobarColor "white" "red"
+        }
+
+-- Use Alt
+myModMask :: KeyMask
+myModMask = mod1Mask
+
+_XF86AudioMute :: KeySym
+_XF86AudioMute = 0x1008ff12
+
+_XF86AudioRaiseVolume :: KeySym
+_XF86AudioRaiseVolume = 0x1008ff13
+
+_XF86AudioLowerVolume :: KeySym
+_XF86AudioLowerVolume = 0x1008ff11
+
+_XF86MonBrightnessUp :: KeySym
+_XF86MonBrightnessUp = 0x1008ff02
+
+_XF86MonBrightnessDown :: KeySym
+_XF86MonBrightnessDown = 0x1008ff03
+
+_XF86AudioMicMute :: KeySym
+_XF86AudioMicMute = 0x1008ffb2
+
+myKeys :: KeyMask -> [((ButtonMask, KeySym), X ())]
+myKeys modMask =
+  [ ((noModMask, xK_Print), spawn "flameshot gui"),
+    ((modMask, xK_Return), spawn myTerminal),
+    ((modMask, xK_d), spawn launcherString),
+    ((modMask .|. shiftMask, xK_p), spawn "rofi-pass"),
+    ((modMask .|. shiftMask, xK_q), kill),
+    ((noModMask, _XF86AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status"),
+    ((noModMask, _XF86AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status"),
+    ((noModMask, _XF86MonBrightnessUp), spawn "brightnessctl -d 'intel_backlight' set +10%"),
+    ((noModMask, _XF86MonBrightnessDown), spawn "brightnessctl -d 'intel_backlight' set 10%-"),
+    ((noModMask, _XF86AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status"),
+    ((noModMask, _XF86AudioMicMute), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status"),
+    -- -- Used by BinarySpacePartition layout
+    ((modMask, xK_r), sendMessage Rotate),
+    ((modMask, xK_s), sendMessage Swap),
+    ((modMask, xK_n), sendMessage FocusParent),
+    ((modMask .|. controlMask, xK_n), sendMessage SelectNode),
+    ((modMask .|. shiftMask, xK_n), sendMessage MoveNode)
+  ]
 
 main :: IO ()
-main = xmonad $ ewmh $ ewmhFullscreen $ withEasySB (xmobarTop <> xmobarBottom) defToggleStrutsKey def
-        { modMask = mod1Mask -- Use Alt
-        , terminal = myTerminal
-        , workspaces = myWorkspaces
-        , borderWidth = myBorderWidth
-        , normalBorderColor  = myNormalBorderColor
-        , focusedBorderColor = myFocusedBorderColor
-        , manageHook = myManageHook <+> manageSpawn
-        , startupHook = myStartupHook
-        } `additionalKeysP`
-          [("<Print>", spawn "flameshot gui")
-          , ("M-d", spawn launcherString)
-          , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status")
-          , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status")
-          , ("<XF86MonBrightnessUp>", spawn "brightnessctl -d 'intel_backlight' set +10%")
-          , ("<XF86MonBrightnessDown>", spawn "brightnessctl -d 'intel_backlight' set 10%-")
-          , ("<XF86AudioMute>",      spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status")
-          , ("<XF86AudioMicMute>", spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status")
-          , ("S-M-p", spawn "rofi-pass")
-          , ("S-M-q", kill)
-          , ("M-<return>", spawn myTerminal)
-          ]
+main =
+  xmonad $
+    ewmh $
+      ewmhFullscreen $
+        withEasySB
+          (xmobarTop <> xmobarBottom)
+          defToggleStrutsKey
+          def
+            { modMask = myModMask,
+              terminal = myTerminal,
+              workspaces = myWorkspaces,
+              borderWidth = myBorderWidth,
+              normalBorderColor = myNormalBorderColor,
+              focusedBorderColor = myFocusedBorderColor,
+              manageHook = myManageHook <+> manageSpawn,
+              startupHook = myStartupHook,
+              layoutHook = myLayout
+            }
+          `additionalKeys` myKeys myModMask
+
+-- `additionalKeysP`
+--   [
+--   -- , ("M-x", scratchpadSpawnAction def {terminal = myTerminal})
+
+--   -- Used by BinarySpacePartition layout
+--   , ("M-M1-<Left>",    sendMessage $ ExpandTowards L)
+--   , ("M-M1-<Right>",   sendMessage $ ShrinkFrom L)
+--   , ("M-M1-<Up>",      sendMessage $ ExpandTowards U)
+--   , ("M-M1-<Down>",    sendMessage $ ShrinkFrom U)
+--   , ("M-M1-C-<Left>",  sendMessage $ ShrinkFrom R)
+--   , ("M-M1-C-<Right>", sendMessage $ ExpandTowards R)
+--   , ("M-M1-C-<Up>",    sendMessage $ ShrinkFrom D)
+--   , ("M-M1-C-<Down>",  sendMessage $ ExpandTowards D)
+--   -- , ("M-s",            sendMessage $ Swap)
+--   -- , ("M-M1-s",         sendMessage $ Rotate)
+--   -- , ((myModMask,                           xK_r     ), sendMessage Rotate)
+--   -- , ((myModMask,                           xK_s     ), sendMessage Swap)
+--   -- , ((modm,                           xK_n     ), sendMessage FocusParent)
+--   -- , ((modm .|. ctrlMask,              xK_n     ), sendMessage SelectNode)
+--   -- , ((modm .|. shiftMask,             xK_n     ), sendMessage MoveNode)
+
+--   ]
