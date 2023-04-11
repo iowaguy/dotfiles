@@ -12,6 +12,7 @@
       "wheel" # Enable 'sudo' for the user.
       "networkmanager" # Allow user to change network settings
       "docker"
+      "qemu-libvirtd"
       "libvirtd"
       "power"
       "syncthing"
