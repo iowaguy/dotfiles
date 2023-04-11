@@ -7,6 +7,7 @@ import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.Grid
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig (additionalKeys)
+import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 
@@ -68,10 +69,11 @@ spawnSingleProcess p =
 
 myManageHook :: ManageHook
 myManageHook =
-  -- scratchpadManageHookDefault <+>
   composeAll
     [ className =? "standalonetray" --> doIgnore,
-      className =? "brave" --> doShift "3:web"
+      className =? "brave" --> doShift "3:web",
+      namedScratchpadManageHook myScratchPads,
+      title =? "xmessage" --> defaultFloating
     ]
 
 launcherString :: String
@@ -130,8 +132,15 @@ myKeys modMask =
     ((modMask, xK_s), sendMessage Swap),
     ((modMask, xK_n), sendMessage FocusParent),
     ((modMask .|. controlMask, xK_n), sendMessage SelectNode),
-    ((modMask .|. shiftMask, xK_n), sendMessage MoveNode)
+    ((modMask .|. shiftMask, xK_n), sendMessage MoveNode),
+    ((modMask, xK_semicolon), namedScratchpadAction myScratchPads "terminal")
   ]
+
+myScratchPads :: [NamedScratchpad]
+myScratchPads = [NS "terminal" spawnTerm findTerm defaultFloating]
+  where
+    spawnTerm = myTerminal ++ " -T=scratchpad"
+    findTerm = title =? "scratchpad"
 
 main :: IO ()
 main =
@@ -159,16 +168,6 @@ main =
 --   -- , ("M-x", scratchpadSpawnAction def {terminal = myTerminal})
 
 --   -- Used by BinarySpacePartition layout
---   , ("M-M1-<Left>",    sendMessage $ ExpandTowards L)
---   , ("M-M1-<Right>",   sendMessage $ ShrinkFrom L)
---   , ("M-M1-<Up>",      sendMessage $ ExpandTowards U)
---   , ("M-M1-<Down>",    sendMessage $ ShrinkFrom U)
---   , ("M-M1-C-<Left>",  sendMessage $ ShrinkFrom R)
---   , ("M-M1-C-<Right>", sendMessage $ ExpandTowards R)
---   , ("M-M1-C-<Up>",    sendMessage $ ShrinkFrom D)
---   , ("M-M1-C-<Down>",  sendMessage $ ExpandTowards D)
---   -- , ("M-s",            sendMessage $ Swap)
---   -- , ("M-M1-s",         sendMessage $ Rotate)
 --   -- , ((myModMask,                           xK_r     ), sendMessage Rotate)
 --   -- , ((myModMask,                           xK_s     ), sendMessage Swap)
 --   -- , ((modm,                           xK_n     ), sendMessage FocusParent)
