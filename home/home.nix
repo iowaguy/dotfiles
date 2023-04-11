@@ -6,6 +6,7 @@ let
   sources = import ../nix/sources.nix;
   unstable = import sources.nixos-unstable { config.allowUnfree = true; };
   defaultPkgs = with pkgs; [
+    arandr                        # A GUI for autorandr
     cabal-install
     cachix                        # cache binaries so I don't have to rebuild
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
@@ -29,6 +30,7 @@ let
     ngrok                         # HTTP and TCP tunneling service
     nox
     openvpn                       # a VPN client
+    ormolu
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences
@@ -36,7 +38,6 @@ let
     ripgrep
     rubber                        # a nice tool for compiling latex
     skypeforlinux
-    spotify                       # Musics
     sqlite
     stack                         # Haskell build tool
     texlive.combined.scheme-full
@@ -52,9 +53,11 @@ let
   unstablePkgs = with unstable; [
     brave
     discord                       # A chat client
+    docker-compose
     notion-app-enhanced
     obsidian                      # Notes
     signal-desktop
+    spotify                       # Musics
     zotero                        # Citation manager
     zoom-us                       # Video conferencing
   ];
