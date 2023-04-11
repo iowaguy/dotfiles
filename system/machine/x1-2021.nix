@@ -67,7 +67,10 @@
 
   services = {
     # Used in frontrunning project. Enable when needed.
-    mongodb.enable = false;
+    mongodb = {
+      enable = false;
+      package = pkgs.mongodb-5_0;
+    };
 
     xserver = {
       dpi = 220;
