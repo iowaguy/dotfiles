@@ -6,6 +6,7 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.Grid
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
@@ -33,13 +34,9 @@ myBorderWidth = 3
 
 myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
   where
-    layoutTall = Tall nmaster delta ratio
-    layoutGrid = Grid
-    layoutFull = Full
-    layoutBinarySpacePartition = emptyBSP
-    nmaster = 1
-    ratio = 1 / 2
-    delta = 3 / 100
+    layoutGrid = smartBorders Grid
+    layoutFull = smartBorders Full
+    layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:pdfs"] -- ++ map show [8..9]
