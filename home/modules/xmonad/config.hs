@@ -1,12 +1,19 @@
 import XMonad
+import XMonad.Actions.CycleWS
+  ( nextScreen,
+    prevScreen,
+    shiftNextScreen,
+    shiftPrevScreen,
+    swapNextScreen,
+  )
 import XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.Grid
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.Spacing
-import XMonad.Layout.NoBorders
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
@@ -35,7 +42,7 @@ myBorderWidth = 3
 myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
   where
     layoutGrid = smartBorders Grid
-    layoutFull = smartBorders Full
+    layoutFull = noBorders Full
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
@@ -130,7 +137,12 @@ myKeys modMask =
     ((modMask, xK_n), sendMessage FocusParent),
     ((modMask .|. controlMask, xK_n), sendMessage SelectNode),
     ((modMask .|. shiftMask, xK_n), sendMessage MoveNode),
-    ((modMask, xK_o), namedScratchpadAction myScratchPads "terminal")
+    ((modMask, xK_o), namedScratchpadAction myScratchPads "terminal"),
+    ((modMask .|. shiftMask, xK_j), nextScreen),
+    ((modMask .|. shiftMask, xK_k), prevScreen),
+    ((modMask .|. controlMask, xK_j), shiftNextScreen),
+    ((modMask .|. controlMask, xK_k), shiftPrevScreen),
+    ((modMask .|. shiftMask, xK_s), swapNextScreen)
   ]
 
 myScratchPads :: [NamedScratchpad]
