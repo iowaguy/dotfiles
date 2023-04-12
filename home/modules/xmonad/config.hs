@@ -130,7 +130,7 @@ myKeys modMask =
     ((modMask, xK_n), sendMessage FocusParent),
     ((modMask .|. controlMask, xK_n), sendMessage SelectNode),
     ((modMask .|. shiftMask, xK_n), sendMessage MoveNode),
-    ((modMask, xK_semicolon), namedScratchpadAction myScratchPads "terminal")
+    ((modMask, xK_o), namedScratchpadAction myScratchPads "terminal")
   ]
 
 myScratchPads :: [NamedScratchpad]
