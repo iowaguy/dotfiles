@@ -100,22 +100,12 @@ xmobarBottom =
 myModMask :: KeyMask
 myModMask = mod1Mask
 
-_XF86AudioMute :: KeySym
+_XF86AudioMute, _XF86AudioRaiseVolume, _XF86AudioLowerVolume, _XF86MonBrightnessUp, _XF86MonBrightnessDown, _XF86AudioMicMute :: KeySym
 _XF86AudioMute = 0x1008ff12
-
-_XF86AudioRaiseVolume :: KeySym
 _XF86AudioRaiseVolume = 0x1008ff13
-
-_XF86AudioLowerVolume :: KeySym
 _XF86AudioLowerVolume = 0x1008ff11
-
-_XF86MonBrightnessUp :: KeySym
 _XF86MonBrightnessUp = 0x1008ff02
-
-_XF86MonBrightnessDown :: KeySym
 _XF86MonBrightnessDown = 0x1008ff03
-
-_XF86AudioMicMute :: KeySym
 _XF86AudioMicMute = 0x1008ffb2
 
 myKeys :: KeyMask -> [((ButtonMask, KeySym), X ())]
@@ -171,16 +161,3 @@ main =
               layoutHook = myLayout
             }
           `additionalKeys` myKeys myModMask
-
--- `additionalKeysP`
---   [
---   -- , ("M-x", scratchpadSpawnAction def {terminal = myTerminal})
-
---   -- Used by BinarySpacePartition layout
---   -- , ((myModMask,                           xK_r     ), sendMessage Rotate)
---   -- , ((myModMask,                           xK_s     ), sendMessage Swap)
---   -- , ((modm,                           xK_n     ), sendMessage FocusParent)
---   -- , ((modm .|. ctrlMask,              xK_n     ), sendMessage SelectNode)
---   -- , ((modm .|. shiftMask,             xK_n     ), sendMessage MoveNode)
-
---   ]
