@@ -71,6 +71,7 @@ myManageHook =
   composeAll
     [ className =? "standalonetray" --> doIgnore,
       className =? "brave" --> doShift "3:web",
+      className =? "notion-app-enhanced" --> doShift "8:notion",
       namedScratchpadManageHook myScratchPads,
       title =? "xmessage" --> defaultFloating
     ]
