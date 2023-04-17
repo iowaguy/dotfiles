@@ -77,7 +77,8 @@
 #      videoDrivers = [ "ati" ];
       displayManager = {
         # defaultSession = "xfce+i3";
-        defaultSession = "xfce+xmonad";
+        # defaultSession = "xfce+xmonad";
+        defaultSession = "plasma";
         sessionCommands = ''
           # Suspends and locks session on lid close
           xfconf-query -c xfce4-session -p /general/LockCommand -s "systemctl suspend";
@@ -96,7 +97,6 @@
 
     # power savings
     upower.enable = true;
-    tlp.enable = true;
     thermald.enable = true; # So it doesn't get too toasty
   };
 

@@ -20,11 +20,15 @@
       desktopManager = {
         wallpaper.mode = "scale";
         xterm.enable = false;
-        xfce = {
+        plasma5 = {
           enable = true;
-          noDesktop = true;
-          enableXfwm = false;
+          runUsingSystemd = true;
         };
+        # xfce = {
+        #   enable = true;
+        #   noDesktop = true;
+        #   enableXfwm = false;
+        # };
       };
 
       libinput = {
@@ -40,7 +44,7 @@
       };
 
       displayManager = {
-        defaultSession = "xfce+xmonad";
+        defaultSession = "plasma";
         sessionCommands = ''
           # This command sets the background image for the session
           feh --bg-fill ~/.background-image
