@@ -53,6 +53,8 @@
 
     # Needed for Haskell LSP
     haskell-language-server
+
+    python310
   ];
 
   programs.emacs.enable = true;
