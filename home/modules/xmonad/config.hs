@@ -12,7 +12,7 @@ import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.Grid
-import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
@@ -21,15 +21,10 @@ import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 
 -- Colours
 gray = "#7F7F7F"
-
 gray2 = "#222222"
-
 red = "#900000"
-
 blue = "#2E9AFE"
-
 white = "#eeeeee"
-
 orange = "#ff9604"
 
 myTerminal :: String
@@ -42,7 +37,7 @@ myBorderWidth = 3
 myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
   where
     layoutGrid = smartBorders Grid
-    layoutFull = noBorders Full
+    layoutFull = smartBorders Full
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
