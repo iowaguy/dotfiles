@@ -1,10 +1,11 @@
 Config
   {
     font = "Iosevka Comfy Bold 25",
-    -- position = Bottom,
-    position = BottomH 30,
-  -- , position = BottomP 0 800 -- align left, with 800 pixel space on the right for the tray
-  -- , position = Static { xpos = 0, ypos = 0, width = 1346, height = 20 }
+    -- position = BottomSize L 70 40,
+    position = BottomH 40,
+    lowerOnStart = True,
+    allDesktops = True,
+    overrideRedirect = False,
     template = "%XMonadLog2%}{",
     commands =
     [

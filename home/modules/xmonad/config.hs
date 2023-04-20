@@ -52,25 +52,22 @@ myFocusedBorderColor = "blue" -- "#ff0000" don't use hex, not <24 bit safe
 myStartupHook :: X ()
 myStartupHook =
   composeAll
-    [ -- spawnOnce "1" "em"
-      spawnOnOnce "2:shell" myTerminal,
+    [ spawnOnOnce "2:shell" myTerminal,
       spawnOnOnce "3:web" "brave",
       spawnOnOnce "4:zotero" "zotero",
       spawnOnOnce "5:chat" "signal-desktop",
       spawnOnOnce "5:chat" "slack",
-      spawnOnOnce "8:notion" "notion-app-enhanced"
-      -- , spawnOnce   "stalonetray"
-      -- , spawnSingleProcess "stalonetray"
+      spawnOnOnce "8:notion" "notion-app-enhanced",
+      spawnSingleProcess "stalonetray"
     ]
 
 spawnSingleProcess p =
-  spawnOnce $ "if test -z (pgrep " <> p <> "); " <> p <> " &; end"
+  spawn $ "if test -z $(pgrep " <> p <> "); then " <> p <>"; fi"
 
 myManageHook :: ManageHook
 myManageHook =
   composeAll
-    [ className =? "standalonetray" --> doIgnore,
-      className =? "brave" --> doShift "3:web",
+    [ className =? "brave" --> doShift "3:web",
       className =? "notion-app-enhanced" --> doShift "8:notion",
       namedScratchpadManageHook myScratchPads,
       title =? "xmessage" --> defaultFloating

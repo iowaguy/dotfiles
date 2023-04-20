@@ -1,17 +1,18 @@
 Config
   {
     font = "Iosevka Comfy Bold 25",
-    position = TopH 30,
+    position = TopSize L 91 40,
+    -- position = TopH 40,
   -- , template = "}%cpu%  %memory% %alsa:default:Master% %bright% {(%wlp0s20f3wi%) %battery% %date%"
-    template = "}%cpu%  %memory% %bright% {(%wlp0s20f3wi%) %battery% %date%",
+    template = "%date%} %battery% %cpu% %memory% %bright% %alsa:default:Master% (%wlp0s20f3wi%) {",
     commands =
     [
-      -- Run Alsa "default" "Master"
-      -- ["--template"
-      -- , "<status> <volume>%", "--"
-      -- , "-O", "♪"
-      -- , "-o", "[muted]"
-      -- ]
+      Run Alsa "default" "Master"
+      ["--template",
+       "<status> <volume>%", "--",
+       "-O", "♪",
+       "-o", "[muted]"
+      ],
       Run Cpu
       ["--template", " <total>%", "--"]
       100,
@@ -20,12 +21,12 @@ Config
       ["--template", "<ssid> <quality>%", "--"] 100,
       Run BatteryP
       ["BAT0"]
-      ["--template", "<acstatus>", "--"
-      ,"-O", "<left>+ <fc=#aaffaa>|</fc>"
-      ,"-o", "<left>- <fc=#aaffaa>|</fc>"
-      ,"-P"  -- Display percent symbol with <left>
-      ,"-l", "red", "-m", "blue", "-h", "green"
-      ,"-i", ""
+      ["--template", "<acstatus>", "--",
+       "-O", "<left>+ <fc=#aaffaa>|</fc>",
+       "-o", "<left>- <fc=#aaffaa>|</fc>",
+       "-P",  -- Display percent symbol with <left>
+       "-l", "red", "-m", "blue", "-h", "green",
+       "-i", "<left> <fc=#aaffaa>|</fc>"
       ] 100,
       Run Date "%A, %d %B %H:%M %Z" "date" 100,
       Run Brightness ["--template", " <percent>%",
