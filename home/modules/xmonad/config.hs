@@ -58,7 +58,8 @@ myStartupHook =
       spawnOnOnce "5:chat" "signal-desktop",
       spawnOnOnce "5:chat" "slack",
       spawnOnOnce "8:notion" "notion-app-enhanced",
-      spawnSingleProcess "stalonetray"
+      spawnSingleProcess "stalonetray",
+      spawnSingleProcess "nm-applet"
     ]
 
 spawnSingleProcess p =

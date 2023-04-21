@@ -27,6 +27,7 @@ let
     mongodb-compass               # A GUI for MongoDB
     niv
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
+    networkmanagerapplet
     ngrok                         # HTTP and TCP tunneling service
     nox
     openvpn                       # a VPN client
