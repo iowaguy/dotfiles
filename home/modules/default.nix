@@ -1,5 +1,6 @@
 [
   ./autorandr
+  ./brave
   ./direnv
   ./emacs
   # ./email
