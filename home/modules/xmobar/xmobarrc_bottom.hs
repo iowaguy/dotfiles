@@ -5,7 +5,6 @@ Config
     position = BottomH 40,
     lowerOnStart = True,
     allDesktops = True,
-    overrideRedirect = False,
     template = "%XMonadLog2%}{",
     commands =
     [

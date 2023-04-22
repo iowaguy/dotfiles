@@ -58,9 +58,12 @@ myStartupHook =
       spawnOnOnce "5:chat" "signal-desktop",
       spawnOnOnce "5:chat" "slack",
       spawnOnOnce "8:notion" "notion-app-enhanced",
-      spawnSingleProcess "stalonetray",
+      spawnRestart "stalonetray",
       spawnSingleProcess "nm-applet"
     ]
+
+spawnRestart p =
+  spawn $ "pkill -9 " <> p <> "; " <> p
 
 spawnSingleProcess p =
   spawn $ "if test -z $(pgrep " <> p <> "); then " <> p <>"; fi"
