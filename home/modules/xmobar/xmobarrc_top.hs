@@ -28,7 +28,8 @@ Config
        "-l", "red", "-m", "blue", "-h", "green",
        "-i", "<left> <fc=#aaffaa>|</fc>"
       ] 100,
-      Run Date "%A, %d %B %H:%M %Z" "date" 100,
+      Run Date "%H%M | %m/%d/%y (%a)" "date" 100,
+      -- Run Date "%H%M %Z | %d %B (%A)" "date" 100,
       Run Brightness ["--template", " <percent>%",
                       "--", "-D", "intel_backlight"
                      ] 100,
