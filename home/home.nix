@@ -31,7 +31,7 @@ let
     ngrok                         # HTTP and TCP tunneling service
     nox
     openvpn                       # a VPN client
-    ormolu
+    ormolu                        # Haskell linter/formatter
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences
