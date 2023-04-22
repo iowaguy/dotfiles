@@ -22,6 +22,7 @@ let
     jq
     jetbrains.idea-community
     keybase-gui
+    libsForQt5.konqueror          # Needed to open links in the browser when I click on them
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
     mongodb-compass               # A GUI for MongoDB
@@ -43,7 +44,6 @@ let
     stack                         # Haskell build tool
     texlive.combined.scheme-full
     tree
-    vivaldi
     vlc
     wireshark
     xclip
@@ -52,7 +52,6 @@ let
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with unstable; [
-    brave
     discord                       # A chat client
     docker-compose
     notion-app-enhanced
