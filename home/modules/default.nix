@@ -2,6 +2,7 @@
   ./autorandr
   ./brave
   ./direnv
+  ./dunst
   ./emacs
   # ./email
   ./firefox

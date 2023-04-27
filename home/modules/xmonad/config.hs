@@ -74,7 +74,8 @@ myManageHook =
     [ className =? "brave" --> doShift "3:web",
       className =? "notion-app-enhanced" --> doShift "8:notion",
       namedScratchpadManageHook myScratchPads,
-      title =? "xmessage" --> defaultFloating
+      title =? "Dunst" --> defaultFloating
+      -- title =? "xmessage" --> defaultFloating
     ]
 
 launcherString :: String
