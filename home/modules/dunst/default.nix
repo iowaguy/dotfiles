@@ -18,7 +18,7 @@
         height = 300;
         origin = "top-right";
         scale = 0;
-        radius = 0;
+        corner_radius = 0;
         notification_limit = 0;
         progress_bar = true;
         progress_bar_height = 10;
