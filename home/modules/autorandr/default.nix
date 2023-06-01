@@ -11,34 +11,40 @@ let
   };
 in
 {
-  programs.autorandr.profiles = {
-    "unpluggedX1_2021" = {
-      fingerprint = fingerprintX1_2021;
-      config = {
-        "eDP-1" = {
-          enable = true;
-          primary = true;
-          mode = "3840x2400";
+  programs.autorandr = {
+    hooks.postswitch = {
+      "change-background" = "${pkgs.feh}/bin/feh --bg-fill ~/.background-image";
+      "restart-xmonad" = "${pkgs.xmonad}/bin/xmonad --restart";
+    };
+    profiles = {
+      "unpluggedX1_2021" = {
+        fingerprint = fingerprintX1_2021;
+        config = {
+          "eDP-1" = {
+            enable = true;
+            primary = true;
+            mode = "3840x2400";
+          };
         };
       };
-    };
-    # configure manually with: `xrandr --output eDP-1 --auto --output HDMI-1 --right-of eDP-1`
-    "home_X1_2021" = {
-      fingerprint = fingerprintX1_2021 // fingerprintLGLab;
-      config = {
-        "eDP-1" = {
-          enable = true;
-          position = "0x0";
-          mode = "3840x2400";
-          crtc = 0;
-        };
-        "HDMI-1" = {
-          primary = true;
-          enable = true;
-          mode = "3840x2160";
-          crtc = 1;
-          pos = "3828x0";
-          rate = 60.00;
+      # configure manually with: `xrandr --output eDP-1 --auto --output HDMI-1 --right-of eDP-1`
+      "home_X1_2021" = {
+        fingerprint = fingerprintX1_2021 // fingerprintLGLab;
+        config = {
+          "eDP-1" = {
+            enable = true;
+            position = "0x0";
+            mode = "3840x2400";
+            crtc = 0;
+          };
+          "HDMI-1" = {
+            primary = true;
+            enable = true;
+            mode = "3840x2160";
+            crtc = 1;
+            pos = "3828x0";
+            rate = 60.00;
+          };
         };
       };
     };
