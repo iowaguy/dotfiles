@@ -14,4 +14,13 @@
     Exec=${builtins.getEnv "HOME"}/.nix-profile/bin/slack
     Name=slack
   '';
+
+  xdg.mimeApps = {
+    associations.added = {
+      "x-scheme-handler/slack" = [ "slack.desktop" ];
+    };
+    defaultApplications = {
+      "x-scheme-handler/slack" = [ "slack.desktop" ];
+    };
+  };
 }
