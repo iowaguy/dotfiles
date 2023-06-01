@@ -144,6 +144,9 @@ in {
   };
 
   services = {
+    # Send alerts for battery events
+    poweralertd.enable = true;
+
     udiskie.enable = true;
 
     # For screenshots
