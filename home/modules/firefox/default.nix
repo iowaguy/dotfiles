@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-with import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
+with import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sources.nix {};
 {
   home.packages = with pkgs; [
     browserpass

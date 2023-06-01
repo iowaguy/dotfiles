@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  sources = import /persist/home/ben/workspace/dotfiles/nix/sources.nix {};
+  sources = import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sources.nix {};
 in {
   imports = [ "${sources.impermanence}/home-manager.nix" ];
 

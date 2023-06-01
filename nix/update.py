@@ -5,7 +5,7 @@ import json
 import subprocess
 import os
 
-sources_path = f"{os.getenv('HOME')}/workspace/dotfiles"
+sources_path = f"{os.getenv('HOME')}/workspace/areas/system-management/dotfiles"
 json_path = f"{sources_path}/nix/sources.json"
 
 if __name__ == "__main__":

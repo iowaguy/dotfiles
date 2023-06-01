@@ -5,7 +5,7 @@ set -eu -o pipefail
 shopt -s failglob
 
 HOME_MANAGER_VERSION=22.05
-DOTFILES_BASE=workspace/dotfiles
+DOTFILES_BASE=workspace/areas/system-management/dotfiles
 PERSIST=/persist
 PERSIST_HOME=$PERSIST/home/ben
 NIX_CONFIG_BASE_DIR=${PERSIST_HOME}/${DOTFILES_BASE}
@@ -221,7 +221,7 @@ fresh_install() {
   mkdir -p /mnt/persist/etc/ssh
   nixos-generate-config --root /mnt
 
-  # mkdir -p /root/workspace
+  # mkdir -p /root/workspace/projects
   # $GIT clone $GIT_HOME /root/$DOTFILES_BASE
   $GIT clone $GIT_HOME $REPO
 }
