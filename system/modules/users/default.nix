@@ -17,6 +17,6 @@
       "power"
       "syncthing"
     ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 }

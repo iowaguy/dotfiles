@@ -113,13 +113,11 @@ in {
     # Interactive fuzzy searching from the command line
     fzf = {
       enable = true;
-      enableFishIntegration = true;
     };
 
     # The z command for jumping around --- a better cd
     zoxide = {
       enable = true;
-      enableFishIntegration = true;
     };
 
     # Let Home Manager install and manage itself.
@@ -129,13 +127,8 @@ in {
     htop.enable = true;
 
     gpg.enable = true;
-
     bat.enable = true;
-
-    broot = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    broot.enable = true;
   };
 
   services = {

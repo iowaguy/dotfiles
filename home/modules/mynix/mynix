@@ -53,7 +53,6 @@ system_fresh_install() {
   nixos-enter --root /mnt -c "passwd ben"
   nixos-enter --root /mnt -c "chown -R ben $PERSIST_HOME"
   nixos-enter --root /mnt -c "rm /etc/nixos/machine/current.nix"
-  nixos-enter --root /mnt -c "rm /home/ben/.config/fish/config.fish"
 }
 
 system_install() {

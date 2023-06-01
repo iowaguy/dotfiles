@@ -26,24 +26,30 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-    vim
-    git
-    firefox
-    which
-    busybox
-    zfs
-    emacs
-    xorg.xrandr # display manager (X Resize and Rotate protocol)
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      wget
+      vim
+      git
+      firefox
+      which
+      busybox
+      zfs
+      emacs
+      xorg.xrandr # display manager (X Resize and Rotate protocol)
+    ];
+
+    # get completion for system packages (e.g. systemd).
+    pathsToLink = [ "/share/zsh" ];
+  };
+
 
   programs = {
     # TODO: move to home.nix when rycee/home-manager#1087 resolved
     # https://github.com/rycee/home-manager/issues/1087
     ssh.startAgent = true;
 
-    fish.enable = true;
+    zsh.enable = true;
 
     gnupg.agent = {
       enable = true;
