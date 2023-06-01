@@ -55,6 +55,9 @@
     haskell-language-server
 
     python310
+
+    # LSP impl for TeX
+    texlab
   ];
 
   programs.emacs.enable = true;
