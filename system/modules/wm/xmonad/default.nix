@@ -24,11 +24,6 @@
           enable = true;
           runUsingSystemd = true;
         };
-        # xfce = {
-        #   enable = true;
-        #   noDesktop = true;
-        #   enableXfwm = false;
-        # };
       };
 
       libinput = {
