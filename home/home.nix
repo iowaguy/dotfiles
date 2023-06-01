@@ -33,7 +33,6 @@ let
     nox
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
-    pdftk                         # A tool for working with PDFs
     pinentry-gtk2
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences

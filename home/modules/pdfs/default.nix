@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    pdftk                         # A tool for working with PDFs
+  ];
+
   # A pdf viewer
   programs.zathura = {
     enable = true;
