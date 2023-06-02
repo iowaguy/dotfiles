@@ -6,18 +6,6 @@
         "url_template": "https://addons.mozilla.org/firefox/downloads/file/3769373/bibitnow-<version>-fx.xpi",
         "version": "0.902"
     },
-    "colored_man_pages": {
-        "branch": "main",
-        "description": "Fish shell plugin to colorize man pages",
-        "homepage": "",
-        "owner": "patrickf1",
-        "repo": "colored_man_pages.fish",
-        "rev": "f885c2507128b70d6c41b043070a8f399988bc7a",
-        "sha256": "0ifqdbaw09hd1ai0ykhxl8735fcsm0x2fwfzsk7my2z52ds60bwa",
-        "type": "tarball",
-        "url": "https://github.com/patrickf1/colored_man_pages.fish/archive/f885c2507128b70d6c41b043070a8f399988bc7a.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
     "home-manager": {
         "branch": "release-22.11",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
@@ -88,18 +76,6 @@
         "sha256": "0r8dd8k75ds4wifibmwc5is4zs6jb2mn137lvk5zkzg8g7r0lffz",
         "type": "tarball",
         "url": "https://github.com/nix-community/NUR/archive/313425ecb994550f7b5c585f1c75a6f9c27fcf7e.tar.gz",
-        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
-    },
-    "theme-bobthefish": {
-        "branch": "master",
-        "description": "A Powerline-style, Git-aware fish theme optimized for awesome.",
-        "homepage": "",
-        "owner": "oh-my-fish",
-        "repo": "theme-bobthefish",
-        "rev": "ed896b65c3ddbdf2929c38719adfb940b0d9b90d",
-        "sha256": "1528l5jygm6ia4qpvi3gzdm58la7d9iij13l57hllkr75xjh24qd",
-        "type": "tarball",
-        "url": "https://github.com/oh-my-fish/theme-bobthefish/archive/ed896b65c3ddbdf2929c38719adfb940b0d9b90d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
