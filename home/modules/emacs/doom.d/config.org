@@ -235,15 +235,6 @@ Automagically do an =ls= when entering a new directory. Also set a cool eshell t
   (eshell-git-prompt-use-theme 'robbyrussell)
 #+end_src
 
-Emacs shells should inherit the PATH from the system shell.
-#+begin_src emacs-lisp
-  (use-package! exec-path-from-shell
-    :defer t
-    :if (memq window-system '(mac ns))
-    :config
-    (exec-path-from-shell-initialize))
-#+end_src
-
 Including =org-tempo= restores the =<s=-style easy-templates that were
 deprecated in Org 9.2.
 #+begin_src emacs-lisp
