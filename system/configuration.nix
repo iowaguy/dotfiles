@@ -55,6 +55,9 @@
       enable = true;
       pinentryFlavor = "gtk2";
     };
+
+    # Lock screen before sleeping
+    xss-lock.enable = true;
   };
 
   nixpkgs.config = {
