@@ -88,7 +88,6 @@ xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc
 xmobarBottom :: StatusBarConfig
 xmobarBottom =
   statusBarPropTo "_XMONAD_LOG_2" "xmobar -v ~/.config/xmobar/xmobarrc_bottom" $
-    -- pure clickablePP
     (clickablePP xmobarPP
         { ppCurrent = xmobarColor "black" "orange",
           ppTitle = xmobarColor "white" "" . shorten 40,
