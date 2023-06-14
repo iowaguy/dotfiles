@@ -1,6 +1,9 @@
 {pkgs, lib, config, ...}:
 {
-  home.packages = with pkgs; [brightnessctl];
+  home.packages = with pkgs; [
+    brightnessctl
+    xdotool # needed for clickable workspaces
+  ];
 
   xsession = {
     enable = true;

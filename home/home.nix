@@ -19,6 +19,11 @@ let
     feh
     file                          # classic tool for viewing file attributes
     graphviz
+    (haskellPackages.ghcWithPackages (hpkgs: [
+      hpkgs.xmobar
+      hpkgs.xmonad
+      hpkgs.xmonad-contrib
+    ])) # ghci with packages needed for debugging xmonad
     jq
     jetbrains.idea-community
     keybase-gui
