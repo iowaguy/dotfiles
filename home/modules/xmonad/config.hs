@@ -18,6 +18,7 @@ import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
+import XMonad.Util.ClickableWorkspaces (clickablePP)
 
 -- Colours
 gray = "#7F7F7F"
@@ -41,7 +42,7 @@ myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:pdfs"] -- ++ map show [8..9]
+myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:email"]
 
 -- | Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor, myFocusedBorderColor :: String
@@ -87,12 +88,12 @@ xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc
 xmobarBottom :: StatusBarConfig
 xmobarBottom =
   statusBarPropTo "_XMONAD_LOG_2" "xmobar -v ~/.config/xmobar/xmobarrc_bottom" $
-    pure
-      xmobarPP
+    -- pure clickablePP
+    (clickablePP xmobarPP
         { ppCurrent = xmobarColor "black" "orange",
           ppTitle = xmobarColor "white" "" . shorten 40,
           ppUrgent = xmobarColor "white" "red"
-        }
+        })
 
 -- Use Alt
 myModMask :: KeyMask

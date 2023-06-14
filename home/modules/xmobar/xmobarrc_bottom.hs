@@ -8,6 +8,6 @@ Config
     template = "%XMonadLog2%}{",
     commands =
     [
-      Run NamedXPropertyLog "_XMONAD_LOG_2" "XMonadLog2"
+      Run UnsafeNamedXPropertyLog "_XMONAD_LOG_2" "XMonadLog2"
     ]
 }
