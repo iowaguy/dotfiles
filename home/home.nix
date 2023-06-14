@@ -11,13 +11,13 @@ let
     cachix                        # cache binaries so I don't have to rebuild
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     curl
+    dolphin                       # file explorer
     drawio                        # good for drawing finite state machines
     entr
     et                            # A convenient cli timer
     fd
     feh
     file                          # classic tool for viewing file attributes
-    ghc
     graphviz
     jq
     jetbrains.idea-community
