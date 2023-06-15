@@ -110,17 +110,6 @@ in {
 
   programs = {
 
-    # email client
-    thunderbird = {
-      enable = true;
-      profiles = {
-        ben = {
-          isDefault = true;
-          withExternalGnupg = true;
-        };
-      };
-    };
-
     # for converting files between types
     pandoc.enable = true;
 
