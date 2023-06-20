@@ -4,7 +4,7 @@
 set -eu -o pipefail
 shopt -s failglob
 
-HOME_MANAGER_VERSION=22.05
+HOME_MANAGER_VERSION=23.05
 DOTFILES_BASE=workspace/areas/system-management/dotfiles
 PERSIST=/persist
 PERSIST_HOME=$PERSIST/home/ben
