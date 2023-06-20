@@ -1,0 +1,33 @@
+#!/usr/bin/env nix-shell
+#! nix-shell -i python3 -p sox
+
+import argparse
+import os
+import subprocess
+from typing import Dict
+
+
+def myrun(cmd: str, env: Dict={}) -> None:
+  with subprocess.Popen(cmd, env=os.environ|env, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT, shell=True, text=True) as proc:
+    proc.wait()
+
+
+def waves(_):
+  return subprocess.run(["play", "-n", "synth", "brownnoise", "synth", "pinknoise", "mix", "synth", "sine", "amod", "0.3", "10"])
+
+
+def brown(_):
+  return subprocess.run(["play", "-n", "synth", "brownnoise"])
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(prog="noise", description="Play sounds")
+    subparsers = parser.add_subparsers(required=True)
+    waves_parser = subparsers.add_parser("waves", help="Make wave sounds")
+    waves_parser.set_defaults(func=waves)
+
+    brown_parser = subparsers.add_parser("brown", help="Make brown noise")
+    brown_parser.set_defaults(func=brown)
+
+    args = parser.parse_args()
+    args.func(args)

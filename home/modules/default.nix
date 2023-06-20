@@ -10,6 +10,7 @@
   ./gpg-agent
   #./i3
   ./mynix
+  ./noise
   ./password-management
   ./pdfs
   ./picom
