@@ -62,7 +62,7 @@ in {
 
     xserver = {
       displayManager = {
-        defaultSession = "xfce+i3";
+        defaultSession = "plasma";
       };
 
       # keyboard settings
