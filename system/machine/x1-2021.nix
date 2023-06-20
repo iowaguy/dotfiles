@@ -13,14 +13,13 @@
     loader = {
       grub = {
         enable = true;
-        version = 2;
         efiSupport = true;
         zfsSupport = true;
         device = "nodev";
         efiInstallAsRemovable = true;
       };
     };
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   networking = {

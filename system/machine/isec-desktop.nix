@@ -11,7 +11,6 @@ in {
     loader = {
       grub = {
         enable = true;
-        version = 2;
         efiSupport = true;
         zfsSupport = true;
         device = "nodev";
@@ -19,6 +18,7 @@ in {
       };
     };
     cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   networking = {
