@@ -12,7 +12,6 @@
         # Define on which hard drive you want to install Grub.
         device = "nodev";
       };
-      systemd-boot.enable = true;
     };
     cleanTmpDir = true;
   };

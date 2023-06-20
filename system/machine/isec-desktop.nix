@@ -17,7 +17,6 @@ in {
         efiInstallAsRemovable = true;
       };
     };
-    cleanTmpDir = true;
     tmp.cleanOnBoot = true;
   };
 
