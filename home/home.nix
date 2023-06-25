@@ -1,6 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-with lib;
+{ pkgs, impermanence, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -67,7 +65,7 @@ let
 
 in {
   imports = [
-    ./machine/current.nix
+    impermanence.nixosModules.home-manager.impermanence
   ] ++ (import ./modules) ++ (import ./code);
 
   nixpkgs.config = {
@@ -96,6 +94,29 @@ in {
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "21.03";
+  };
+
+  home.persistence."/persist/home/ben" = {
+    directories = [
+      "workspace"
+      "Zotero"
+      ".mozilla"
+      ".emacs.d"
+      ".gnupg"
+      ".ssh"
+      ".config/Signal"
+      ".config/skypeforlinux"
+      ".config/Slack"
+      ".config/syncthing"
+      ".local/share/direnv"
+      ".local/share/keyrings"
+      ".local/share/tridactyl"
+      ".packer.d"
+      ".password-store"
+      ".terraform.d"
+      ".vagrant.d"
+    ];
+    allowOther = true;
   };
 
   # Store user configurations in .config directory
