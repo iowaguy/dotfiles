@@ -14,7 +14,6 @@
   ./password-management
   ./pdfs
   ./picom
-  # ./polybar
   ./redshift
   ./rofi
   ./shell
