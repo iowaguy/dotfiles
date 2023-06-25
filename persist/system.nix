@@ -1,14 +1,10 @@
 { config, pkgs, lib, ... }:
 
-let
-  sources = import ../nix/sources.nix {};
-in {
+{
   programs.fuse.userAllowOther = true;
   # boot.initrd.postDeviceCommands = lib.mkAfter ''
   #   zfs rollback -r rpool/local/root@blank
   # '';
-
-  imports = [ "${sources.impermanence}/nixos.nix" ];
 
   # The following sections are for persisting data after reboots: https://grahamc.com/blog/erase-your-darlings
   # systemd.tmpfiles.rules = [
