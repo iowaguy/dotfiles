@@ -1,10 +1,8 @@
-{ config, lib, pkgs, options, specialArgs, modulesPath }: #? import (import ./nix/sources.nix).home-manager {}, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
-  sources = import ../nix/sources.nix;
-  unstable = import sources.nixos-unstable { config.allowUnfree = true; };
   defaultPkgs = with pkgs; [
     arandr                        # A GUI for autorandr
     cabal-install
@@ -56,7 +54,7 @@ let
   ];
 
   # These are packages that I want to keep up-to-date
-  unstablePkgs = with unstable; [
+  unstablePkgs = with pkgs; [
     discord                       # A chat client
     docker-compose
     notion-app-enhanced
