@@ -23,15 +23,16 @@ machines['20XXS7WJ00']=x1-2021.nix
 system_config() {
   POSSIBLE_MNT=$1
   local mnt_config_dir=${POSSIBLE_MNT}/${NIX_CONFIG_BASE_DIR}
+  echo "Config dir: $mnt_config_dir"
 
   # Nix configuration
   sudo cp ${mnt_config_dir}/system/configuration.nix ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/machine/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/hardware/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/modules/ ${POSSIBLE_MNT}/etc/nixos/
-  sudo cp -r ${mnt_config_dir}/nix/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/persist/ ${POSSIBLE_MNT}/etc/nixos/
   sudo cp -r ${mnt_config_dir}/system/nuwave.patch ${POSSIBLE_MNT}/etc/nixos/
+  sudo cp -r ${mnt_config_dir}/flake.nix ${POSSIBLE_MNT}/etc/nixos/
 
   model="$(sudo dmidecode -s system-product-name)"
 
@@ -79,6 +80,11 @@ system_refresh() {
   sudo nixos-rebuild switch
 }
 
+flake_refresh() {
+  system_config ""
+  sudo nixos-rebuild --flake .#x1-2021 switch
+}
+
 hm_install() {
   # Home manager
   mkdir -p $HOME/.config/nixpkgs/
@@ -123,6 +129,14 @@ upgrade() {
 
 refresh() {
   system_refresh
+  if [ $? == 0 ]; then
+    hm_refresh
+  fi
+  exit $?
+}
+
+flake() {
+  flake_refresh
   if [ $? == 0 ]; then
     hm_refresh
   fi
@@ -232,6 +246,9 @@ while :; do
   case "$PARAM" in
     copy)
       system_config ""
+      ;;
+    flake)
+      flake
       ;;
     install)
       install

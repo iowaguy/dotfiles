@@ -1,4 +1,4 @@
-{ config, lib, pkgs ? import (import ./nix/sources.nix).home-manager {}, ... }:
+{ config, lib, pkgs, options, specialArgs, modulesPath }: #? import (import ./nix/sources.nix).home-manager {}, ... }:
 
 with lib;
 
@@ -74,9 +74,9 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
-    packageOverrides = p: {
-      nur = import (builtins.fetchTarball sources.nur.url) { inherit pkgs; };
-    };
+    # packageOverrides = p: {
+    #   nur = import (builtins.fetchTarball sources.nur.url) { inherit pkgs; };
+    # };
   };
 
   # Home Manager needs a bit of information about you and the

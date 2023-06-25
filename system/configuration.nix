@@ -2,12 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs ? import (import ./nix/sources.nix).nixpkgs {}, ... }:
+{ config, pkgs, lib, options, specialArgs, modulesPath }: # ? import (import ./nix/sources.nix).nixpkgs {}, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./machine/current.nix
+    ./hardware/x1-2021.nix
+    ./machine/x1-2021.nix
   ] ++ (import ./modules);
 
   # Set your time zone.

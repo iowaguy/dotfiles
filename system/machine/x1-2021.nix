@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../persist/system.nix
+    ../../persist/system.nix
   ];
 
   boot = {
@@ -19,7 +19,9 @@
         efiInstallAsRemovable = true;
       };
     };
-    tmp.cleanOnBoot = true;
+    # tmp.cleanOnBoot = true;
+
+    cleanTmpDir = true;
   };
 
   networking = {
