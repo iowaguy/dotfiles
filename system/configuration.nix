@@ -5,10 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ # Include the results of the hardware scan.
-    ./hardware/x1-2021.nix
-    ./machine/x1-2021.nix
-  ] ++ (import ./modules);
+  imports = import ./modules;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
