@@ -33,6 +33,19 @@
           }
         ];
       };
+      isec-desktop = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        system = "x86_64-linux";
+        modules = [
+          ./machines/isec-desktop
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.ben = import ./home/home.nix {inherit pkgs; inherit impermanence; inherit nur;};
+          }
+        ];
+      };
     };
   };
 }
