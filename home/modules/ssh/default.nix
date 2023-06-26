@@ -6,6 +6,18 @@ in {
   programs.ssh = {
     enable = true;
     matchBlocks = {
+      "vagrant" = {
+        extraOptions = {
+          "Hostname" = "127.0.0.1";
+          "User" = "vagrant";
+          "Port" = "5556";
+          "StrictHostKeyChecking" = "no";
+          "PasswordAuthentication" = "no";
+          "IdentityFile" = "/home/ben/workspace/projects/mitll/ibn/.vagrant/machines/ibn/libvirt/private_key";
+          "IdentitiesOnly" = "yes";
+          "LogLevel" = "FATAL";
+        };
+      };
       "achtung" = {
         extraOptions = {
           "ForwardAgent" = "yes";
