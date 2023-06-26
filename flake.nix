@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nur.url = "github:nix-community/NUR";
     impermanence.url = "github:nix-community/impermanence";
 
     home-manager = {
@@ -11,9 +12,11 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, impermanence, home-manager }:
+  outputs = inputs@{ self, nixpkgs, impermanence, home-manager, nur }:
     let
-      pkgs = import nixpkgs { config = { allowUnfree = true; }; };
+      pkgs = import nixpkgs {
+        config.allowUnfree = true;
+      };
     in
     {
     nixosConfigurations = {
@@ -26,7 +29,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home/home.nix {inherit pkgs; inherit impermanence;};
+            home-manager.users.ben = import ./home/home.nix {inherit pkgs; inherit impermanence; inherit nur;};
           }
         ];
       };

@@ -81,8 +81,9 @@ system_refresh() {
 }
 
 flake_refresh() {
-  system_config ""
+  pushd $HOME/workspace/areas/system-management/dotfiles
   sudo nixos-rebuild --flake .#x1-2021 switch
+  popd
 }
 
 hm_install() {

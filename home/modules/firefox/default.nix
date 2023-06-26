@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 
-with import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sources.nix {};
 {
   home.packages = with pkgs; [
     browserpass
@@ -11,7 +10,7 @@ with import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sou
 
   programs.firefox = {
     enable = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    extensions = with config.nur.repos.rycee.firefox-addons; [
       browserpass
       facebook-container
       i-dont-care-about-cookies
@@ -22,10 +21,10 @@ with import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sou
       duckduckgo-privacy-essentials
       (buildFirefoxXpiAddon {
         pname = "BitItNow";
-        version = bibitnow.version;
+        version = "0.902";
         addonId = "schuleje@ok.de";
-        url = bibitnow.url;
-        sha256 = bibitnow.sha256;
+        url = "https://addons.mozilla.org/firefox/downloads/file/3769373/bibitnow-0.902-fx.xpi";
+        sha256 = "17y6j2gabxpjbhhmsfcg5nrrvdlzhx01vyvdn7bdw1qfhw15qr6m";
         meta = {};
       })
       (buildFirefoxXpiAddon {

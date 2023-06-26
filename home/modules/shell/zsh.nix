@@ -1,6 +1,5 @@
 { pkgs, ... }:
 
-with import /persist/home/ben/workspace/areas/system-management/dotfiles/nix/sources.nix {};
 {
   home.packages = with pkgs; [
     inconsolata # font

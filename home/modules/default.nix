@@ -5,7 +5,7 @@
   ./dunst
   ./emacs
   ./email
-  # ./firefox
+  ./firefox
   ./git
   ./gpg-agent
   #./i3
