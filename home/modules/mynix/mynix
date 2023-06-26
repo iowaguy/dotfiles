@@ -80,12 +80,6 @@ system_refresh() {
   sudo nixos-rebuild switch
 }
 
-flake_refresh() {
-  pushd $HOME/workspace/areas/system-management/dotfiles
-  sudo nixos-rebuild --flake .#x1-2021 switch
-  popd
-}
-
 hm_install() {
   # Home manager
   mkdir -p $HOME/.config/nixpkgs/
@@ -137,10 +131,9 @@ refresh() {
 }
 
 flake() {
-  flake_refresh
-  if [ $? == 0 ]; then
-    hm_refresh
-  fi
+  pushd $HOME/workspace/areas/system-management/dotfiles
+  sudo nixos-rebuild --flake .#x1-2021 switch
+  popd
   exit $?
 }
 
