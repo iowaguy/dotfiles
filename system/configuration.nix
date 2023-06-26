@@ -12,6 +12,7 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
+  # time.timeZone = "CET"; # for when in Europe
   # time.timeZone = "America/Chicago";
 
   # Select internationalisation properties.

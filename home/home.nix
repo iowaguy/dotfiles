@@ -22,7 +22,6 @@ let
     ])) # ghci with packages needed for debugging xmonad
     jq
     jetbrains.idea-community
-    keybase-gui
     libsForQt5.konqueror          # Needed to open links in the browser when I click on them
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
