@@ -77,6 +77,16 @@
           fi
           ''${EDITOR:-vim} flake.nix
         }
+
+        fsw() {
+          echo "Deleting files that will be written"
+          rm -f "$HOME/.config/mimeapps.list"
+          rm -f "$HOME/.xmonad/xmonad-x86_64-linux"
+
+          pushd $HOME/workspace/areas/system-management/dotfiles
+          sudo nixos-rebuild --flake .#x1-2021 switch "$@"
+          popd
+        }
       '';
     };
   };
