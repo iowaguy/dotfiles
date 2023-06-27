@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = import ./modules;
+  imports = import ./modules/system;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -62,7 +62,7 @@
     allowUnfree = true;
     packageOverrides = pkgs: rec {
         wpa_supplicant = pkgs.wpa_supplicant.overrideAttrs (attrs: {
-          patches = attrs.patches ++ [ ./nuwave.patch ];
+          patches = attrs.patches ++ [ ./resources/nuwave.patch ];
         });
       };
   };

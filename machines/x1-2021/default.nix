@@ -2,7 +2,7 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    ../../system/configuration.nix
+    ../../configuration.nix
     ./hardware.nix
     ./machine.nix
   ];
