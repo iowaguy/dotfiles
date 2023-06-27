@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.packages = with pkgs; [
@@ -24,7 +24,7 @@
     Version=1.0
     Type=Application
     Terminal=false
-    Exec=${builtins.getEnv "HOME"}/.nix-profile/bin/zathura
+    Exec=${config.home.homeDirectory}/.nix-profile/bin/zathura
     Name=zathura
   '';
 

@@ -1,4 +1,4 @@
-{ pkgs, home, ... }:
+{ pkgs, home, config, ... }:
 
 {
   programs.rofi = {
@@ -7,7 +7,7 @@
     terminal = "${pkgs.kitty}/bin/kitty";
     pass = {
       enable = true;
-      stores = ["${builtins.getEnv "HOME"}/.password-store"];
+      stores = ["${config.home.homeDirectory}/.password-store"];
       extraConfig = ''
         URL_field='url'
         USERNAME_field='login'

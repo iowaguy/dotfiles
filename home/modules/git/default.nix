@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -30,7 +30,7 @@
         gpgsign = true;
       };
       core = {
-        excludesfiles = "${builtins.getEnv "HOME"}/.gitignore";
+        excludesfiles = "${config.home.homeDirectory}/.gitignore";
         pager = "diff-so-fancy | less --tabs=4 -RFX";
       };
       fetch.prune = true;

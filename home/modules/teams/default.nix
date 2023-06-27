@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.packages = with pkgs; [
@@ -11,7 +11,7 @@
     Version=1.0
     Type=Application
     Terminal=false
-    Exec=${builtins.getEnv "HOME"}/.nix-profile/bin/teams
+    Exec=${config.home.homeDirectory}/.nix-profile/bin/teams
     Name=teams
   '';
 
