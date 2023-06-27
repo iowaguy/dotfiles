@@ -66,7 +66,7 @@ in {
   imports = [
     impermanence.nixosModules.home-manager.impermanence
     nur.nixosModules.nur
-  ] ++ (import ../modules/home) ++ (import ./code);
+  ] ++ (import ./modules/home) ++ (import ./code);
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
