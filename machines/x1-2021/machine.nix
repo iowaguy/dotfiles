@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../../persist/system.nix
-  ];
-
   boot = {
     kernel.sysctl = {
       "kernel.sysrq" = 255;

@@ -2,10 +2,6 @@
 
 let passCmd = entry: "${pkgs.pass}/bin/pass ${entry} 2> /dev/null";
 in {
-  imports = [
-    ../persist/system.nix
-  ];
-
   boot = {
     supportedFilesystems = [ "zfs" ];
     loader = {
