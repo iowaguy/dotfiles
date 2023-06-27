@@ -2,22 +2,23 @@
 #! nix-shell -i python3 -p sox
 
 import argparse
-import os
 import subprocess
-from typing import Dict
+from typing import List
 
 
-def myrun(cmd: str, env: Dict={}) -> None:
-  with subprocess.Popen(cmd, env=os.environ|env, stdout=subprocess.STDOUT, stderr=subprocess.STDOUT, shell=True, text=True) as proc:
-    proc.wait()
+def myrun(cmd: List) -> None:
+  try:
+    subprocess.run(cmd)
+  except KeyboardInterrupt:
+    return
 
 
 def waves(_):
-  return subprocess.run(["play", "-n", "synth", "brownnoise", "synth", "pinknoise", "mix", "synth", "sine", "amod", "0.3", "10"])
+  return myrun(["play", "-n", "synth", "brownnoise", "synth", "pinknoise", "mix", "synth", "sine", "amod", "0.3", "10"])
 
 
 def brown(_):
-  return subprocess.run(["play", "-n", "synth", "brownnoise"])
+  return myrun(["play", "-n", "synth", "brownnoise"])
 
 
 if __name__ == "__main__":
