@@ -17,8 +17,7 @@
       pkgs = import nixpkgs {
         config.allowUnfree = true;
       };
-    in
-    {
+    in {
     nixosConfigurations = {
       x1-2021 = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
