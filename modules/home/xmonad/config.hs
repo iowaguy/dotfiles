@@ -80,9 +80,11 @@ myStartupHook =
       spawnSingleProcess "nm-applet"
     ]
 
+spawnRestart :: MonadIO m => String -> m ()
 spawnRestart p =
   spawn $ "pkill -9 " <> p <> "; " <> p
 
+spawnSingleProcess :: MonadIO m => String -> m ()
 spawnSingleProcess p =
   spawn $ "if test -z $(pgrep " <> p <> "); then " <> p <>"; fi"
 
