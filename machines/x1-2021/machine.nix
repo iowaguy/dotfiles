@@ -15,9 +15,7 @@
         efiInstallAsRemovable = true;
       };
     };
-    # tmp.cleanOnBoot = true;
-
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   networking = {
