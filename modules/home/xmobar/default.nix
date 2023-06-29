@@ -1,4 +1,5 @@
 {pkgs, lib, config, ...}:
+
 {
   home.packages = with pkgs; [
     stalonetray # a tray to hold app icons

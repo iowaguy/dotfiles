@@ -79,3 +79,11 @@ disk, like so:
 #+begin_src shell
   sudo dd if=/dev/zero of=<DEVICE> bs=16M status=progress
 #+end_src
+
+
+* Icons
+To find icons, use `gucharmap`.
+``` sh
+  nix-shell -p gnome.gucharmap --run gucharmap
+```
+Use `ctrl-f` to find the glyph, then right click on the icon to show what font

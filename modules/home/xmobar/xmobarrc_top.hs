@@ -14,7 +14,7 @@ Config
        "-o", "[muted]"
       ],
       Run Cpu
-      ["--template", " <total>%", "--"]
+      ["--template", "🧠<total>%", "--"]
       100,
       Run Memory [ "-t", " <usedratio>%", "-d", "1", "--", "--scale", "1024"] 100,
       Run Wireless "wlp0s20f3"
@@ -30,7 +30,7 @@ Config
       ] 100,
       Run Date "%H%M | %m/%d/%y (%a)" "date" 100,
       -- Run Date "%H%M %Z | %d %B (%A)" "date" 100,
-      Run Brightness ["--template", " <percent>%",
+      Run Brightness ["--template", "💡<percent>%",
                       "--", "-D", "intel_backlight"
                      ] 100,
 
