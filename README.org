@@ -82,8 +82,9 @@ disk, like so:
 
 
 * Icons
-To find icons, use `gucharmap`.
-``` sh
+To find icons, use =gucharmap=.
+
+#+begin_src shell
   nix-shell -p gnome.gucharmap --run gucharmap
-```
-Use `ctrl-f` to find the glyph, then right click on the icon to show what font
+#+end_src
+Use =ctrl-f= to find the glyph, then right click on the icon to show what font
