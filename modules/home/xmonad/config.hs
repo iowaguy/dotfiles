@@ -9,13 +9,30 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar
+    ( defToggleStrutsKey,
+      withEasySB,
+      statusBarPropTo,
+      StatusBarConfig )
 import XMonad.Hooks.StatusBar.PP
+    ( shorten,
+      xmobarColor,
+      xmobarPP,
+      PP(ppCurrent, ppTitle, ppUrgent) )
 import XMonad.Layout.BinarySpacePartition as BSP
-import XMonad.Layout.Grid
+    ( emptyBSP,
+      SelectMoveNode(MoveNode, SelectNode),
+      FocusParent(FocusParent),
+      Swap(Swap),
+      Rotate(Rotate) )
+import XMonad.Layout.Grid ( Grid(Grid) )
 import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.Spacing
+import XMonad.Layout.Spacing ( spacing )
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
+    ( namedScratchpadAction,
+      defaultFloating,
+      namedScratchpadManageHook,
+      NamedScratchpad(NS) )
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
 import XMonad.Util.ClickableWorkspaces (clickablePP)
