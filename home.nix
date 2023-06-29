@@ -1,4 +1,4 @@
-{ pkgs, impermanence, nur, ... }:
+{ pkgs, pkgsUnstable, impermanence, nur, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -48,10 +48,11 @@ let
     wireshark
     xclip
     xmobar
+    zoom-us                       # Video conferencing
   ];
 
   # These are packages that I want to keep up-to-date
-  unstablePkgs = with pkgs; [
+  unstablePkgs = with pkgsUnstable; [
     discord                       # A chat client
     docker-compose
     notion-app-enhanced
@@ -59,7 +60,6 @@ let
     signal-desktop
     spotify                       # Musics
     zotero                        # Citation manager
-    zoom-us                       # Video conferencing
   ];
 
 in {
