@@ -113,11 +113,9 @@
   services = {
     printing.enable = true;
 
-    # Needed for taffybar, to prevent error: https://github.com/NixOS/nixpkgs/issues/16327
-    gnome.at-spi2-core.enable = true;
-
-    # A Tor proxying service (helps other users find Tor bridges)
-    # snowflake-proxy.enable = true;
+    gnome.gnome-keyring.enable = true;
+    openssh.enable = true; # Enable the OpenSSH daemon.
+    redshift.enable = true; # Save the eyes
 
     # Enable handling of hotplug and sleep events by autorandr
     autorandr.enable = true;
