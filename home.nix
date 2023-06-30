@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, impermanence, nur, ... }:
+{ pkgs, pkgsUnstable, inputs, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -63,7 +63,7 @@ let
   ];
 
 in {
-  imports = [
+  imports = with inputs; [
     impermanence.nixosModules.home-manager.impermanence
     nur.nixosModules.nur
   ] ++ (import ./modules/home) ++ (import ./code);

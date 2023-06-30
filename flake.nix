@@ -14,38 +14,37 @@
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, impermanence, home-manager, nur }:
-    let
-      pkgs = import nixpkgs {
-        config.allowUnfree = true;
-      };
-      pkgsUnstable = import nixpkgs-unstable {
-        config.allowUnfree = true;
-      };
-    in {
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    pkgsUnstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
+  in {
     nixosConfigurations = {
       x1-2021 = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
         modules = [
           ./machines/x1-2021
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit impermanence; inherit nur;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
           }
         ];
       };
       isec-desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
         modules = [
           ./machines/isec-desktop
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit impermanence; inherit nur;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
           }
         ];
       };
