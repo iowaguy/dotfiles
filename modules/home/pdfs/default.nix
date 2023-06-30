@@ -24,7 +24,7 @@
     Version=1.0
     Type=Application
     Terminal=false
-    Exec=${config.home.homeDirectory}/.nix-profile/bin/zathura
+    Exec=${config.home.profileDirectory}/bin/zathura
     Name=zathura
   '';
 

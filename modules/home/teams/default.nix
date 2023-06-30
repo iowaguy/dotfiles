@@ -11,7 +11,7 @@
     Version=1.0
     Type=Application
     Terminal=false
-    Exec=${config.home.homeDirectory}/.nix-profile/bin/teams
+    Exec=${config.home.profileDirectory}/bin/teams
     Name=teams
   '';
 
