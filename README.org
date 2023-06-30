@@ -80,7 +80,6 @@ disk, like so:
   sudo dd if=/dev/zero of=<DEVICE> bs=16M status=progress
 #+end_src
 
-
 * Icons
 To find icons, use =gucharmap=.
 

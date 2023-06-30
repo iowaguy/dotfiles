@@ -14,6 +14,7 @@ in {
       };
     };
     tmp.cleanOnBoot = true;
+    crashDump.enable = true;
   };
 
   networking = {
@@ -22,16 +23,11 @@ in {
     # NOTE this must be unique among machines (and has to be 32-bit)
     hostId = "00000002";
 
-    # Some desktop environments use NetworkManager for configuring
-    # networking.
-    networkmanager.enable = true;
-
     # Per-interface useDHCP will be mandatory in the future, so this
     # generated config replicates the default behaviour.
     interfaces.enp0s31f6.useDHCP = true;
   };
 
-  sound.enable = true;
   hardware = {
     opengl = {
       # Apparently this is currently only supported by ati_unfree drivers, not ati
@@ -44,24 +40,8 @@ in {
   };
 
   services = {
-    # TODO enable this after updating to nixos 22.05
-    # snowflake-proxy.enable = true;
+    snowflake-proxy.enable = true;
 
-    # Used in frontrunning project
-    mongodb = {
-      enable = true;
-      bind_ip = "0.0.0.0";
-      enableAuth = true;
-      initialRootPassword = passCmd "mongodb-root-isec-desktop";
-    };
-
-    xserver = {
-      displayManager = {
-        defaultSession = "plasma";
-      };
-
-      # keyboard settings
-      xkbOptions = "altwin:swap_lalt_lwin"; # Swap left alt with left win
-    };
+    xserver.dpi = 220;
   };
 }
