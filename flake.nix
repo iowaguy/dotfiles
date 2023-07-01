@@ -33,9 +33,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable inputs;};
           }
         ];
+        specialArgs = inputs;
       };
       isec-desktop = nixpkgs.lib.nixosSystem {
         modules = [
@@ -44,9 +45,10 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable inputs;};
           }
         ];
+        specialArgs = inputs;
       };
     };
   };
