@@ -125,6 +125,9 @@
     blueman.enable = true;
     emacs.defaultEditor = true;
 
+    logind.lidSwitchDocked = "suspend";
+  };
+
   networking = {
     # Some desktop environments use NetworkManager for configuring
     # networking.
