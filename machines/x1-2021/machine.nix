@@ -5,6 +5,9 @@
     kernel.sysctl = {
       "kernel.sysrq" = 255;
     };
+    # NOTE force downgrade kernel because of screen flickering bug in 6.1. Try new kernel after 23.11 release.
+    kernelPackages = pkgs.linuxPackages_5_15;
+
     supportedFilesystems = [ "zfs" ];
     loader = {
       grub = {
