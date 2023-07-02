@@ -33,7 +33,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable inputs;};
           }
         ];
       };
@@ -44,7 +44,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs; inherit pkgsUnstable; inherit inputs;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable inputs;};
           }
         ];
       };
