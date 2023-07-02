@@ -14,6 +14,7 @@ in {
       };
     };
     tmp.cleanOnBoot = true;
+    crashDump.enable = true;
   };
 
   networking = {
