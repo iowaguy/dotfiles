@@ -84,7 +84,7 @@
           rm -f "$HOME/.xmonad/xmonad-x86_64-linux"
 
           pushd $HOME/workspace/areas/system-management/dotfiles
-          sudo nixos-rebuild --flake .#x1-2021 switch "$@"
+          sudo nixos-rebuild --flake .# switch "$@"
           popd
         }
       '';
