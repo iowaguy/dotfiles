@@ -82,10 +82,7 @@
           echo "Deleting files that will be written"
           rm -f "$HOME/.config/mimeapps.list"
           rm -f "$HOME/.xmonad/xmonad-x86_64-linux"
-
-          pushd $HOME/workspace/areas/system-management/dotfiles
-          sudo nixos-rebuild --flake .# switch "$@"
-          popd
+          sudo nixos-rebuild --flake "$HOME/workspace/areas/system-management/dotfiles/.#" switch "$@"
         }
       '';
     };
