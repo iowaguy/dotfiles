@@ -125,9 +125,17 @@
     blueman.enable = true;
     emacs.defaultEditor = true;
 
-    # make capslock := ctrl
-    # make ctrl+alt+backspace kill the X server
     xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";
+    logind.lidSwitchDocked = "suspend";
+  };
+
+  networking = {
+    # Some desktop environments use NetworkManager for configuring
+    # networking.
+    networkmanager.enable = true;
+
+    # Use Cloudflare and Quad9 recursive resolvers
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 
   # This value determines the NixOS release from which the default
