@@ -103,4 +103,7 @@
 
   # Needed for impermanence lib
   programs.fuse.userAllowOther = true;
+
+  # Needed for bluetooth
+  programs.dconf.enable = true;
 }
