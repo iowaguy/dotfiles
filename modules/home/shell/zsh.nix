@@ -23,19 +23,17 @@
       dotDir = ".config/zsh";
 
       localVariables = {
-        BROWSER = "firefox";
         PATH = "$HOME/.bin:$HOME/.emacs.d/bin:$PATH";
         EDITOR = "emacsclient";
       };
 
-      shellAliases = {
+      shellAliases = rec {
         ls = "exa";
         lla = "exa -la";
+        la = lla;
         cat = "bat";
         grep = "rg";
         xclip = "xclip -selection clipboard";
-        hms = "home-manager switch";
-        myr = "mynix refresh";
       };
 
       prezto = {
@@ -43,9 +41,7 @@
         git.submoduleIgnore = "all";
         prompt = {
           theme = "powerline";
-
-          # TODO tying uncommenting this after upgrading to 23.05
-          # showReturnVal = true;
+          showReturnVal = true;
         };
         pmodules = [
           "git"
@@ -79,9 +75,8 @@
         }
 
         fsw() {
-          echo "Deleting files that will be written"
+          # echo "Deleting files that will be written"
           rm -f "$HOME/.config/mimeapps.list"
-          rm -f "$HOME/.xmonad/xmonad-x86_64-linux"
           sudo nixos-rebuild --flake "$HOME/workspace/areas/system-management/dotfiles/.#" switch "$@"
         }
       '';

@@ -5,6 +5,8 @@
     brave
   ];
 
+  programs.zsh.localVariables.BROWSER = "brave";
+
   xdg.mimeApps = {
     associations.added = {
       "x-scheme-handler/http" = [ "brave.desktop" ];
