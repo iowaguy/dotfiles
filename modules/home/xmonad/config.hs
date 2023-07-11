@@ -128,7 +128,6 @@ _XF86AudioMicMute = 0x1008ffb2
 myKeys :: KeyMask -> [((ButtonMask, KeySym), X ())]
 myKeys modMask =
   [ ((noModMask, xK_Print), spawn "flameshot gui"),
-    ((modMask, xK_Return), spawn myTerminal),
     ((modMask, xK_d), spawn launcherString),
     ((modMask .|. shiftMask, xK_p), spawn "rofi-pass"),
     ((modMask .|. shiftMask, xK_q), kill),
