@@ -70,14 +70,35 @@ in {
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home = {
+  home = rec {
     username = "ben";
-    homeDirectory = "/home/ben";
+    homeDirectory = "/home/${username}";
 
     packages = defaultPkgs ++ unstablePkgs;
 
     file.".background-image".source = ./resources/background-image;
-
+    persistence."/persist/${homeDirectory}" = {
+        directories = [
+          "workspace"
+          "Zotero"
+          ".mozilla"
+          ".emacs.d"
+          ".gnupg"
+          ".ssh"
+          ".config/Signal"
+          ".config/skypeforlinux"
+          ".config/Slack"
+          ".config/syncthing"
+          ".local/share/direnv"
+          ".local/share/keyrings"
+          ".local/share/tridactyl"
+          ".packer.d"
+          ".password-store"
+          ".terraform.d"
+          ".vagrant.d"
+        ];
+        allowOther = true;
+      };
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
@@ -87,29 +108,6 @@ in {
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "21.03";
-  };
-
-  home.persistence."/persist/home/ben" = {
-    directories = [
-      "workspace"
-      "Zotero"
-      ".mozilla"
-      ".emacs.d"
-      ".gnupg"
-      ".ssh"
-      ".config/Signal"
-      ".config/skypeforlinux"
-      ".config/Slack"
-      ".config/syncthing"
-      ".local/share/direnv"
-      ".local/share/keyrings"
-      ".local/share/tridactyl"
-      ".packer.d"
-      ".password-store"
-      ".terraform.d"
-      ".vagrant.d"
-    ];
-    allowOther = true;
   };
 
   # Store user configurations in .config directory
