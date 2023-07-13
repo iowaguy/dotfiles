@@ -80,7 +80,7 @@
             rm -f "$HOME/.config/mimeapps.list"
             echo "Exit status of rm is $?"
           fi
-          echo -n "mimeapps.list should be a symlink or empty):"
+          echo -n "mimeapps.list should be a symlink or empty:"
           echo "$(ls -l1 $HOME/.config/mimeapps.list)"
           sudo nixos-rebuild --flake "$HOME/workspace/areas/system-management/dotfiles/.#" switch "$@"
         }
