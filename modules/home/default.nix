@@ -4,7 +4,6 @@
   ./direnv
   ./dunst
   ./emacs
-  ./email
   ./firefox
   ./git
   ./gpg-agent
