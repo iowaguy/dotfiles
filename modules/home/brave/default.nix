@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, pkgsUnstable, ... }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgsUnstable; [
     brave
   ];
 
