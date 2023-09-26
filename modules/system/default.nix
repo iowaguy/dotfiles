@@ -3,7 +3,7 @@
   ./kerberos
   ./networking
   ./persist
-  ./syncthing
   ./printing
+  # ./syncthing
   ./users
 ] ++ (import ./wm)

@@ -1,6 +1,5 @@
 [
   ./autorandr
-  ./brave
   ./direnv
   ./dunst
   ./emacs

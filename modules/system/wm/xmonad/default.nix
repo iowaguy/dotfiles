@@ -16,6 +16,7 @@
     xserver = {
       enable = true;
       layout = "us";
+      upscaleDefaultCursor = true;
 
       desktopManager = {
         wallpaper.mode = "scale";
