@@ -111,8 +111,6 @@
   ];
 
   services = {
-    printing.enable = true;
-
     gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
     redshift.enable = true; # Save the eyes

@@ -4,5 +4,6 @@
   ./networking
   ./persist
   ./syncthing
+  ./printing
   ./users
 ] ++ (import ./wm)
