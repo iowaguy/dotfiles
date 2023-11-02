@@ -49,6 +49,7 @@ let
     xclip
     xmobar
     zoom-us                       # Video conferencing
+    zotero                        # Citation manager
   ];
 
   # These are packages that I want to keep up-to-date
@@ -59,7 +60,6 @@ let
     obsidian                      # Notes
     signal-desktop
     spotify                       # Musics
-    zotero                        # Citation manager
   ];
 
 in {
