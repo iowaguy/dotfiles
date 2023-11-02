@@ -48,6 +48,8 @@
     # For Jupyter notebook
     python310Packages.jupyter
 
+    python310Packages.black
+
     # LSP server for bash
     nodePackages.bash-language-server
 
