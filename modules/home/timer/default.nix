@@ -9,7 +9,7 @@
         Service = {
           BusName = "org.weintraub.StandUpTimer";
           Restart = "on-failure";
-          ExecStart = "${pkgs.dunst}/bin/dunstify --urgency=low 'Stand Up!'";
+          ExecStart = "${pkgs.dunst}/bin/dunstify --urgency=low 'Stand Up and Drink Water!'";
         };
         Unit = {
           Description = "Stand up timer";
@@ -22,10 +22,8 @@
           Description = "Stand up timer";
         };
         Timer = {
-          OnCalendar = "Mon..Fri";
-          OnActiveSec = "30min";
+          OnUnitActiveSec = "30min"; # go off every 30min after the first run
         };
-
       };
     };
   };
