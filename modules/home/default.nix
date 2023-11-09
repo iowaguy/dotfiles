@@ -20,6 +20,7 @@
   ./ssh
   # ./taffybar
   ./teams
+  ./timer
   ./xmonad
   ./xmobar
 ]
