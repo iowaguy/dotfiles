@@ -69,6 +69,7 @@ in {
     nur.nixosModules.nur
     (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
     (import ./modules/home/brave (attrs // {inherit pkgsUnstable;}))
+    # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))
   ] ++ (import ./modules/home) ++ (import ./code);
 
   # Home Manager needs a bit of information about you and the

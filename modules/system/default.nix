@@ -1,6 +1,6 @@
 [
   ./geoclue2
-  ./jupyter
+  # ./jupyter
   ./kerberos
   ./networking
   ./persist
