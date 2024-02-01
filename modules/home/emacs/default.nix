@@ -62,9 +62,10 @@
     texlab
   ];
 
-  programs.emacs.enable = true;
-
-  services.emacs = { enable = true; };
+  services.emacs = {
+      enable = true;
+#      package = pkgs.emacs29;
+  };
 
   home.links.".doom.d" = "workspace/areas/system-management/dotfiles/modules/home/emacs/doom.d";
 

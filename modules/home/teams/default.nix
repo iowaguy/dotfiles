@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    teams
+    teams-for-linux
   ];
 
   home.file.".local/share/applications/teams.desktop".text = ''
