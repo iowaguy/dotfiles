@@ -80,24 +80,24 @@
 
 ;; This has a bunch of utilities for citing documents within =org-mode=. To cite
 ;; something, type =C-c ]=.
-(package! org-ref)
+;;(package! org-ref)
 
-;; Export to bootstrap html
-(package! ox-twbs)
+;; ;; Export to bootstrap html
+;; (package! ox-twbs)
 
-;; Export to a cool slideshow thing
-(package! ox-reveal)
+;; ;; Export to a cool slideshow thing
+;; (package! ox-reveal)
 
 
 ;;;;;;;;;;;;;;; Org-roam stuff ;;;;;;;;;;;;;;;
 ;; More meta-data for my annotated bibliography.
-(package! org-roam-bibtex
-  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
+;;(package! org-roam-bibtex
+;;  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
 
 ;; A nice visualizer for my =org-roam= graph. Needs latest version
 ;; of org-roam, so I need to unpin.
-(unpin! org-roam)
-(package! org-roam-ui)
+;;(unpin! org-roam)
+;;(package! org-roam-ui)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Use the [[https://elpa.gnu.org/packages/orgalist.html][=orgalist=]] package for more convenient list manipulation.
@@ -137,7 +137,7 @@
 
 ;; If I'm writing in Emacs lisp I'd like to use =eldoc-mode= to display
 ;; documentation.
-(package! eldoc)
+;;(package! eldoc)
 
 ;; Better commenting
 (package! comment-dwim-2)
@@ -157,3 +157,5 @@
 (package! promela-mode :recipe (:host github
                                 :repo "rudi/promela-mode"
                                 :files (:defaults "promela-mode.el")))
+
+;;(package! org :pin "806abc5a2bbcb5f884467a0145547221ba09eb59")

@@ -322,13 +322,13 @@ A nice visualizer for my =org-roam= graph.
   (use-package! websocket
       :after org-roam)
 
-  (use-package! org-roam-ui
-      :after org-roam
-      :config
-      (setq org-roam-ui-sync-theme t
-            org-roam-ui-follow t
-            org-roam-ui-update-on-save t
-            org-roam-ui-open-on-start t))
+;;  (use-package! org-roam-ui
+;;      :after org-roam
+;;     :config
+;;      (setq org-roam-ui-sync-theme t
+;;            org-roam-ui-follow t
+;;           org-roam-ui-update-on-save t
+;;            org-roam-ui-open-on-start t))
 #+end_src
 
 My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.com/][org-roam]].
@@ -436,19 +436,6 @@ other tools for other OSs.
   (setq org-download-image-org-width 500)
 #+end_src
 
-For adding citations in org.
-#+begin_src emacs-lisp
-  (use-package! org-ref
-    :after org
-    :config
-    ;; see org-ref for use of these variables
-    (setq org-ref-default-bibliography (blw/zettelkasten-path "references.bib")
-          reftex-default-bibliography (blw/zettelkasten-path "references.bib")
-          bibtex-completion-bibliography (blw/zettelkasten-path "references.bib")
-          bibtex-completion-library-path (blw/zettelkasten-path "bibtex.pdfs")
-          bibtex-completion-notes-path blw/zettelkasten))
-#+end_src
-
 Higher resolution on PDFs.
 #+begin_src emacs-lisp
   (setq doc-view-resolution 192)
@@ -460,16 +447,6 @@ Bind a few handy keys.
   (global-set-key (kbd "C-c l") 'org-store-link)
 #+end_src
 
-Allow export to markdown and beamer (for presentations).
-#+begin_src emacs-lisp
-    (use-package! ox-twbs
-      :after org
-      :config
-      (require 'ox-md)
-      (require 'ox-beamer)
-      (require 'ox-twbs))
-#+end_src
-
 Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 #+begin_src emacs-lisp
   (use-package! htmlize
@@ -479,7 +456,6 @@ Use =htmlize= to ensure that exported code blocks use syntax highlighting.
 Some of the style elements are off if these two aren't set to =css=.
 #+begin_src emacs-lisp
   (setq org-html-htmlize-output-type 'inline-css)
-  (setq org-twbs-htmlize-output-type 'inline-css)
 #+end_src
 
 
