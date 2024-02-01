@@ -7,6 +7,7 @@ let
     cachix                        # cache binaries so I don't have to rebuild
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     curl
+    dig
     dolphin                       # file explorer
     drawio                        # good for drawing finite state machines
     entr
@@ -23,14 +24,14 @@ let
     jq
     jetbrains.idea-community
     libsForQt5.konqueror          # Needed to open links in the browser when I click on them
+
+    libsForQt5.kwallet            # VS Code wants this
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
     mongodb-compass               # A GUI for MongoDB
-    niv
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     networkmanagerapplet
     ngrok                         # HTTP and TCP tunneling service
-    nox
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
     pinentry-gtk2
@@ -121,6 +122,23 @@ in {
   };
 
   programs = {
+    vscode = {
+      enable = true;
+      package = pkgsUnstable.vscode;
+      extensions = with pkgs.vscode-extensions; [
+        vscodevim.vim
+        redhat.java
+        ms-python.python
+        github.copilot
+        ms-toolsai.jupyter
+        ms-toolsai.vscode-jupyter-cell-tags
+        ms-toolsai.jupyter-renderers
+        ms-python.python
+      ] ++
+      [
+        pkgsUnstable.vscode-extensions.github.copilot-chat
+      ];
+    };
 
     # for converting files between types
     pandoc.enable = true;
