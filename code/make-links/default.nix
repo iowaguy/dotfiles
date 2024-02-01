@@ -14,7 +14,7 @@ in
 
   options = {
     home.links = mkOption {
-      type = with types; attrsOf string;
+      type = with types; attrsOf str;
       default = {};
       example = { "link/target" = "link/source"; };
       description = "Extra symlinks to make (to non-managed files).";

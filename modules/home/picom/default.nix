@@ -1,8 +1,10 @@
+{ config, pkgs, ... }:
 {
   services.picom = {
     enable = true;
     activeOpacity = 1.0;
     inactiveOpacity = 1.0;
+    package = pkgs.picom-next;
     backend = "glx";
     fade = true;
     fadeDelta = 5;

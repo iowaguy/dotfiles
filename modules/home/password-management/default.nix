@@ -11,9 +11,15 @@
   services = {
     # things can now query `pass` for my credentials
     pass-secret-service.enable = true;
-    password-store-sync = {
+    git-sync = {
       enable = true;
-      frequency = "*:0"; # sync every hour
+      repositories = {
+        "password-store" = {
+          interval = 600; # sync every hour
+          path = "${config.home.homeDirectory}/.password-store";
+          uri = "git@github.com:iowaguy/passwords.git";
+        };
+      };
     };
   };
 }

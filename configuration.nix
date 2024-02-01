@@ -101,10 +101,11 @@
 
   virtualisation = {
     docker.enable = true;
+    docker.storageDriver = "zfs";
     libvirtd.enable = true;
   };
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     powerline-fonts
     font-awesome
     nerdfonts

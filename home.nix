@@ -126,7 +126,7 @@ in {
     pandoc.enable = true;
 
     # A better ls
-    exa.enable = true;
+    eza.enable = true;
 
     # Interactive fuzzy searching from the command line
     fzf = {

@@ -17,7 +17,7 @@
     zsh = {
       enable = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
       dotDir = ".config/zsh";
@@ -66,7 +66,7 @@
 
         flakify() {
           if [ ! -e flake.nix ]; then
-            nix flake new -t github:nix-community/nix-direnv .
+            nix flake new -t github:nix-community/nix-direnv . && direnv allow
           elif [ ! -e .envrc ]; then
             echo "use flake" > .envrc
             direnv allow
