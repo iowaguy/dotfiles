@@ -48,6 +48,9 @@ orange = "#ff9604"
 myTerminal :: String
 myTerminal = "kitty"
 
+myNotes :: String
+myNotes = "obsidian"
+
 -- | Width of the window border in pixels.
 myBorderWidth :: Dimension
 myBorderWidth = 3
@@ -64,7 +67,7 @@ myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "
 -- | Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor, myFocusedBorderColor :: String
 myNormalBorderColor = "gray" -- "#dddddd"
-myFocusedBorderColor = "blue" -- "#ff0000" don't use hex, not <24 bit safe
+myFocusedBorderColor = "blue" -- "#ff0000" dont use hex, not <24 bit safe
 
 -- | Perform an arbitrary action at xmonad startup.
 myStartupHook :: X ()
@@ -144,6 +147,7 @@ myKeys modMask =
     ((modMask .|. controlMask, xK_n), sendMessage SelectNode),
     ((modMask .|. shiftMask, xK_n), sendMessage MoveNode),
     ((modMask, xK_o), namedScratchpadAction myScratchPads "terminal"),
+    ((modMask, xK_l), namedScratchpadAction myScratchPads myNotes),
     ((modMask .|. shiftMask, xK_j), nextScreen),
     ((modMask .|. shiftMask, xK_k), prevScreen),
     ((modMask .|. controlMask, xK_j), shiftNextScreen),
@@ -152,10 +156,16 @@ myKeys modMask =
   ]
 
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [NS "terminal" spawnTerm findTerm defaultFloating]
+myScratchPads = [
+                  NS "terminal" spawnTerm findTerm defaultFloating,
+                  NS myNotes spawnNotes findNotes defaultFloating
+                ]
   where
     spawnTerm = myTerminal ++ " -T=scratchpad"
     findTerm = title =? "scratchpad"
+    spawnNotes = myNotes
+    findNotes = appName =? myNotes
+
 
 main :: IO ()
 main =
