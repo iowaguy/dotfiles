@@ -43,12 +43,12 @@
     gcc
 
     # Needed for =minted= to export with syntax highlighting
-    python310Packages.pygments
+    python311Packages.pygments
 
     # For Jupyter notebook
-    python310Packages.jupyter
+    python311Packages.jupyter
 
-    python310Packages.black
+    python311Packages.black
 
     # LSP server for bash
     nodePackages.bash-language-server
@@ -56,7 +56,7 @@
     # Needed for Haskell LSP
     haskell-language-server
 
-    python310
+    python311
 
     # LSP impl for TeX
     texlab
