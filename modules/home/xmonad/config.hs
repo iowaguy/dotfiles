@@ -76,9 +76,6 @@ myStartupHook =
     [ spawnOnOnce "2:shell" myTerminal,
       spawnOnOnce "3:web" "brave",
       spawnOnOnce "4:zotero" "zotero",
-      spawnOnOnce "5:chat" "signal-desktop",
-      spawnOnOnce "5:chat" "slack",
-      spawnOnOnce "8:notion" "notion-app-enhanced",
       spawnRestart "stalonetray",
       spawnSingleProcess "nm-applet"
     ]
