@@ -81,7 +81,15 @@
             echo "Exit status of rm is $?"
           fi
           echo -n "mimeapps.list should be a symlink or empty:"
-          echo "$(ls -l1 $HOME/.config/mimeapps.list)"
+
+          if [[ ! -L "$HOME/.xmonad/xmonad-x86_64-linux" ]]; then
+            echo "Removing non-symlinked xmonad binary"
+            rm -f "$HOME/.xmonad/xmonad-x86_64-linux"
+            echo "Exit status of rm is $?"
+          fi
+          echo -n "xmonad-x86_64-linux should be a symlink or empty:"
+
+          echo "$(ls -l1 $HOME/.xmonad/xmonad-x86_64-linix)"
           sudo nixos-rebuild --flake "$HOME/workspace/areas/system-management/dotfiles/.#" switch "$@"
         }
       '';
