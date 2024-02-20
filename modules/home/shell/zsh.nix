@@ -89,7 +89,7 @@
           fi
           echo -n "xmonad-x86_64-linux should be a symlink or empty:"
 
-          echo "$(ls -l1 $HOME/.xmonad/xmonad-x86_64-linix)"
+          echo "$(ls -l1 $HOME/.xmonad/xmonad-x86_64-linux)"
           sudo nixos-rebuild --flake "$HOME/workspace/areas/system-management/dotfiles/.#" switch "$@"
         }
       '';
