@@ -1,9 +1,19 @@
 { pkgs, pkgsUnstable, ... }:
 
 {
-  home.packages = with pkgsUnstable; [
-    brave
-  ];
+  programs.chromium = {
+    enable = true;
+    # package = pkgs.brave;
+    package = pkgsUnstable.brave;
+    extensions = [
+      { id = "ldipcbpaocekfooobnbcddclnhejkcpn"; } # Google Scholar button
+      { id = "pehlnokhmjhnlghjkjbepjimjbcnjnlb"; } # Cookbook app
+      { id = "nkbihfbeogaeaoehlefnkodbefgpgknn"; } # MetaMask
+      { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; } # Zotero Connector
+      { id = "dhdgffkkebhmkfjojejmpbldmpobfkfo"; } # Tampermonkey
+      { id = "chphlpgkkbolifaimnlloiipkdnihall"; } # OneTab
+    ];
+  };
 
   programs.zsh.localVariables.BROWSER = "brave";
 
