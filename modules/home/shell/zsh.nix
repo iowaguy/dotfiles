@@ -44,7 +44,6 @@
           showReturnVal = true;
         };
         pmodules = [
-          "git"
           "prompt"
         ];
       };
