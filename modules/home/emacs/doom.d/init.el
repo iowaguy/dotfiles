@@ -132,7 +132,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        (go +lsp +tree-sitter)           ; the hipster dialect
-       ;; (haskell +lsp +tree-sitter)      ; a language that's lazier than I am
+       (haskell +lsp +tree-sitter)      ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
        json              ; At least it ain't XML
@@ -149,7 +149,7 @@
        ;;nim               ; python + lisp at the speed of c
        (nix +tree-sitter)               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +roam2 +pretty +dragndrop +journal +jupyter)   ; organize your plain life in plain text
+       (org +pretty +dragndrop +journal +jupyter)   ; organize your plain life in plain text
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
@@ -165,7 +165,7 @@
        ;;scheme            ; a fully conniving family of lisps
        (sh +zsh +lsp)     ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
-       ;;solidity          ; do you need a blockchain? No.
+       solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
        ;;terra             ; Earth and Moon in alignment for performance.
        (web +html +css)    ; the tubes

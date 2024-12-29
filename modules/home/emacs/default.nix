@@ -20,7 +20,7 @@
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
 
     # Autoformatting nix code
-    nixfmt
+    nixfmt-rfc-style
 
     # Doom wants this for faster indexing
     fd
@@ -30,7 +30,6 @@
 
     # Doom wants these for Go
     gopls
-    gocode
     gotools
     gotests
     godef
