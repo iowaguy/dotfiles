@@ -22,6 +22,7 @@
           Description = "Stand up timer";
         };
         Timer = {
+          OnBootSec = "1min";
           OnUnitActiveSec = "30min"; # go off every 30min after the first run
         };
       };
