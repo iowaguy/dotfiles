@@ -2,6 +2,7 @@ attrs@{ pkgs, pkgsUnstable, inputs, ... }:
 
 let
   defaultPkgs = with pkgs; [
+    alacritty                     # A terminal b/c sometimes kitty is incompatible
     arandr                        # A GUI for autorandr
     cabal-install
     cachix                        # cache binaries so I don't have to rebuild
@@ -22,9 +23,9 @@ let
       hpkgs.xmonad-contrib
     ])) # ghci with packages needed for debugging xmonad
     jq
-    jetbrains.idea-community
     libsForQt5.konqueror          # Needed to open links in the browser when I click on them
-
+    #libsForQt5.kdenlive           # Video editor
+    kdePackages.kdenlive
     libsForQt5.kwallet            # VS Code wants this
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
@@ -32,6 +33,7 @@ let
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     networkmanagerapplet
     ngrok                         # HTTP and TCP tunneling service
+    neovim
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
     pinentry-gtk2
@@ -40,10 +42,12 @@ let
     pasystray                     # pulseaudio systray
     ripgrep
     rubber                        # a nice tool for compiling latex
-    skypeforlinux
+    # skypeforlinux
     sqlite
     stack                         # Haskell build tool
     texlive.combined.scheme-full
+    python312Packages.tqdm
+    python312Packages.git-filter-repo
     tree
     vlc
     wireshark
@@ -57,10 +61,13 @@ let
   unstablePkgs = with pkgsUnstable; [
     discord                       # A chat client
     docker-compose
-    notion-app-enhanced
+    # jetbrains.idea-community-bin  # IntelliJ IDEA Java IDE
+    jetbrains.idea-ultimate       # IntelliJ IDEA Java IDE
     obsidian                      # Notes
     signal-desktop
     spotify                       # Musics
+    ytdownloader                  # Download youtube videos
+    jdk17
   ];
 
 in {
@@ -135,6 +142,7 @@ in {
         ms-toolsai.vscode-jupyter-cell-tags
         ms-toolsai.jupyter-renderers
         ms-python.python
+        bbenoist.nix
       ] ++
       [
         pkgsUnstable.vscode-extensions.github.copilot-chat

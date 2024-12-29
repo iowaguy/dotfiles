@@ -16,5 +16,12 @@
     firewall.allowedUDPPorts = [
       36885 # syncthing
     ];
+
+    # Some desktop environments use NetworkManager for configuring
+    # networking.
+    networkmanager.enable = true;
+
+    # Use Cloudflare and Quad9 recursive resolvers
+    nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 }

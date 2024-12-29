@@ -11,6 +11,7 @@
   time.timeZone = "America/New_York";
   # time.timeZone = "CET"; # for when in Europe
   # time.timeZone = "America/Chicago";
+  # time.timeZone = "America/Boise"; # for Mountain Time
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -138,15 +139,6 @@
 
     xserver.xkb.options = "ctrl:nocaps,terminate:ctrl_alt_bksp";
     logind.lidSwitchDocked = "suspend";
-  };
-
-  networking = {
-    # Some desktop environments use NetworkManager for configuring
-    # networking.
-    networkmanager.enable = true;
-
-    # Use Cloudflare and Quad9 recursive resolvers
-    nameservers = [ "1.1.1.1" "9.9.9.9" ];
   };
 
   # This value determines the NixOS release from which the default
