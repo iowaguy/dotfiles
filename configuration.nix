@@ -56,6 +56,17 @@
 
     # Lock screen before sleeping
     xss-lock.enable = true;
+
+    # Need this for VS Code to be able to run Java stuff
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Add any missing dynamic libraries for unpackaged programs
+        # here, NOT in environment.systemPackages
+        vscode-extensions.redhat.java
+      ];
+    };
+
   };
 
   nixpkgs.config = {
