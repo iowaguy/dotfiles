@@ -13,9 +13,24 @@
       packages = [ pkgs.dconf ];
     };
 
+    libinput = {
+      enable = true;
+      touchpad = {
+        disableWhileTyping = true;
+        naturalScrolling = true;
+      };
+      mouse = {
+        disableWhileTyping = true;
+        naturalScrolling = true;
+      };
+    };
+
+    displayManager.defaultSession = "plasma";
+    #displayManager.defaultSession = "none+xmonad";
+
     xserver = {
       enable = true;
-      layout = "us";
+      xkb.layout = "us";
       upscaleDefaultCursor = true;
 
       desktopManager = {
@@ -27,26 +42,12 @@
         };
       };
 
-      libinput = {
-        enable = true;
-        touchpad = {
-          disableWhileTyping = true;
-          naturalScrolling = true;
-        };
-        mouse = {
-          disableWhileTyping = true;
-          naturalScrolling = true;
-        };
-      };
-
       displayManager = {
-        defaultSession = "plasma";
         sessionCommands = ''
           # This command sets the background image for the session
           feh --bg-fill ~/.background-image
         '';
       };
-      #displayManager.defaultSession = "none+xmonad";
 
       windowManager.xmonad = {
         enable = true;

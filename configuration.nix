@@ -26,6 +26,7 @@
   # $ nix search wget
   environment = {
     systemPackages = with pkgs; [
+      alsa-utils
       wget
       vim
       git
@@ -51,7 +52,7 @@
 
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gtk2";
+      pinentryPackage = pkgs.pinentry-gtk2;
     };
 
     # Lock screen before sleeping
@@ -88,7 +89,7 @@
     };
 
     # TODO remove when flakes are included by default
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
 
     extraOptions = ''
       # TODO remove when flakes are included by default
@@ -135,7 +136,7 @@
     blueman.enable = true;
     emacs.defaultEditor = true;
 
-    xserver.xkbOptions = "ctrl:nocaps,terminate:ctrl_alt_bksp";
+    xserver.xkb.options = "ctrl:nocaps,terminate:ctrl_alt_bksp";
     logind.lidSwitchDocked = "suspend";
   };
 

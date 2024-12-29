@@ -14,7 +14,7 @@
     wordnet
 
     # Typechecking in python
-    nodePackages.pyright
+    pyright
 
     # Dictionaries for spelling good
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))

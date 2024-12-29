@@ -62,7 +62,7 @@ in {
       };
 
       # keyboard settings
-      xkbOptions = "altwin:swap_lalt_lwin"; # Swap left alt with left win
+      xkb.options = "altwin:swap_lalt_lwin"; # Swap left alt with left win
     };
   };
 }
