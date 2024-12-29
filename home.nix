@@ -184,10 +184,9 @@ in {
 
     # For screenshots
     flameshot.enable = true;
-    screen-locker = {
+    betterlockscreen = {
       enable = true;
-      lockCmd = "${pkgs.betterlockscreen}/bin/betterlockscreen --lock";
-      inactiveInterval = 20;
+      inactiveInterval = 60;
     };
   };
 }
