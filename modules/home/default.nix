@@ -12,6 +12,7 @@
   ./password-management
   ./pdfs
   ./picom
+  ./pomodoro
   ./redshift
   ./rofi
   ./shell
