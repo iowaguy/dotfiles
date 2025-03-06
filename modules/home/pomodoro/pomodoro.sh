@@ -7,13 +7,13 @@ status_file="$HOME/.bin/pomodoro-status.txt"
 
 # Define a function to handle Ctrl+C
 function ctrl_c() {
-    # echo -ne "Pomodoro not running" > "$status_file"
     rm "$status_file"
+    dunstify --urgency=low "Pomodoro session finished"
     exit 0
 }
 
 # Set the trap for SIGINT (Ctrl+C)
-trap ctrl_c INT
+trap ctrl_c SIGINT
 
 function countdown() {
   local minutes=$1

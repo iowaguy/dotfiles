@@ -4,7 +4,7 @@ Config
     position = TopSize L 91 40,
     -- position = TopH 40,
   -- , template = "}%cpu%  %memory% %alsa:default:Master% %bright% {(%wlp0s20f3wi%) %battery% %date%"
-    template = "%date%} %battery% %cpu% %memory% %bright% %alsa:default:Master% (%wlp0s20f3wi%) <fc=#aaffaa>|</fc> %pomodoro% {",
+    template = "%date%} %battery% %cpu% %memory% %bright% %alsa:default:Master% (%wlp0s20f3wi%) <fc=#aaffaa>|</fc> <action=`/home/ben/.bin/pomodoro-control` button=1>%pomodoro%</action> {",
     commands =
     [
       Run Alsa "default" "Master"
