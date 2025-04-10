@@ -13,7 +13,7 @@ On a new machine, do the following:
 
 4. Get my scripts
    #+begin_src shell
-     git clone https://github.com/iowaguy/dotfiles workspace/areas/system-management/dotfiles/
+     git clone https://github.com/iowaguy/dotfiles areas/system-management/dotfiles/
    #+end_src
 
 5. Run my installer script
@@ -26,8 +26,8 @@ On a new machine, do the following:
 
 7. Run post-install script
   #+begin_src shell
-    git clone https://github.com/iowaguy/dotfiles ~/workspace/areas/system-management/dotfiles
-    cd /persist/home/ben/workspace/areas/system-management/dotfiles/home/programs/mynix
+    git clone https://github.com/iowaguy/dotfiles ~/areas/system-management/dotfiles
+    cd /home/ben/areas/system-management/dotfiles/home/programs/mynix
     ./mynix install
   #+end_src
 
@@ -65,7 +65,7 @@ install [[http://zotfile.com/][zotfile]] plugin for zotero
   - go to tools -> ZotFile preferences -> renaming rules -> set format to =%b=
 
 export references to bibtex via zotero:
-- File > Export Libarary > Keep Updated > /home/ben/workspace/projects/zettelkasten/references.bib
+- File > Export Libarary > Keep Updated > /home/ben/projects/zettelkasten/references.bib
 
 ** Debugging install
 If you get an error when creating the zpool that looks like =/dev/sda2 is part

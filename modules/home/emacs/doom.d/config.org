@@ -281,7 +281,7 @@ Show Greek letters and =LaTeX= math symbols (in =org= buffer) using normal
   (setq org-pretty-entities t)
 #+end_src
 
-Store my org files in =~/workspace/resources/org=, define
+Store my org files in =~/resources/org=, define
 the location of an index file (my main todo list).
 #+begin_src emacs-lisp
   (defun blw/full-file-path (directory filename)
@@ -300,7 +300,7 @@ the location of an index file (my main todo list).
     "Return the absolute path of a file in my zettelkasten."
     (concat (blw/persistent-file-path "zettelkasten/") filename))
 
-  (setq! blw/org-persistent-directory "~/workspace/resources/"
+  (setq! blw/org-persistent-directory "~/resources/"
          org-directory (blw/persistent-file-path "org")
          org-index-file (blw/org-file-path "todos.org")
          org-gcal-file (blw/org-file-path "schedule.org")
@@ -342,7 +342,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
   (after! org-roam
     ;; This must be a string because the variable gets used before the
     ;; convenience functions in this file get called.
-    (setq org-roam-directory "~/workspace/resources/zettelkasten"
+    (setq org-roam-directory "~/resources/zettelkasten"
           org-roam-db-update-method 'immediate
           org-roam-graph-executable "dot"
           org-roam-graph-shorten-titles 'wrap
@@ -373,7 +373,7 @@ My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.c
 
   (defun blw/visit-roam-outline ()
     (interactive)
-    (find-file "~/workspace/resources/zettelkasten/20220110102107-outlines.org"))
+    (find-file "~/resources/zettelkasten/20220110102107-outlines.org"))
 
   (map! :leader
     (:prefix-map ("n" . "notes")

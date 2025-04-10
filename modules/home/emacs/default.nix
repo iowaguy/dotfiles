@@ -66,7 +66,7 @@
 #      package = pkgs.emacs29;
   };
 
-  home.links.".doom.d" = "workspace/areas/system-management/dotfiles/modules/home/emacs/doom.d";
+  home.links.".doom.d" = "areas/system-management/dotfiles/modules/home/emacs/doom.d";
 
   home.file.".bin/em" = {
     text = ''
