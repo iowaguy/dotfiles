@@ -35,6 +35,6 @@ Config
                      ] 100,
 
       Run NamedXPropertyLog "_XMONAD_LOG_2" "XMonadLog2",
-      Run ComX "cat" ["/home/ben/.bin/pomodoro-status.txt"] "Pomodoro not running" "pomodoro" 100
+      Run ComX "cat" ["/home/ben/.bin/pomodoro-status.txt"] "Pomodoro not running" "pomodoro" 9 -- refresh every 0.9 seconds
     ]
 }
