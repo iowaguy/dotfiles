@@ -661,3 +661,20 @@ Enable Prolog mode.
   (add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
   (add-to-list 'auto-mode-alist '("\\.m\\'" . mercury-mode))
 #+end_src
+
+Configure `nil`, which is an LSP for Nix.
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t)
+
+  (use-package lsp-nix
+    :ensure lsp-mode
+    :after (lsp-mode)
+    :demand t
+    :custom
+    (lsp-nix-nil-formatter ["nixfmt"]))
+
+  (use-package nix-mode
+    :hook (nix-mode . lsp-deferred)
+    :ensure t)
+#+end_src
