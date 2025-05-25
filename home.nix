@@ -1,4 +1,4 @@
-attrs@{ pkgs, pkgsUnstable, inputs, ... }:
+attrs@{ pkgs, pkgsUnstable, pkgs2405, inputs, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -21,10 +21,11 @@ let
       hpkgs.xmobar
       hpkgs.xmonad
       hpkgs.xmonad-contrib
+      hpkgs.xmonad-extras
     ])) # ghci with packages needed for debugging xmonad
     jq
     libsForQt5.konqueror          # Needed to open links in the browser when I click on them
-    #libsForQt5.kdenlive           # Video editor
+    #libsForQt5.kdenlive          # Video editor
     kdePackages.kdenlive
     libsForQt5.kwallet            # VS Code wants this
     libnotify
@@ -69,13 +70,12 @@ let
     ytdownloader                  # Download youtube videos
     jdk17
   ];
-
 in {
   imports = with inputs; [
     impermanence.nixosModules.home-manager.impermanence
     nur.nixosModules.nur
     (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
-    (import ./modules/home/brave (attrs // {inherit pkgsUnstable;}))
+    (import ./modules/home/brave (attrs // {inherit pkgs2405;}))
     # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))
   ] ++ (import ./modules/home) ++ (import ./code);
 
