@@ -37,6 +37,7 @@
       zfs
       emacs
       xorg.xrandr # display manager (X Resize and Rotate protocol)
+      libsForQt5.kscreen  # KDE display management
     ];
 
     # get completion for system packages (e.g. systemd).
