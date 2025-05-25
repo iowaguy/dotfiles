@@ -2,31 +2,23 @@
 
 {
   home.packages = with pkgs; [
-    # Used for go tools (in emacs)
-    go
-
-    # Used for spellchecking
-    ispell
+    go # Used for go tools (in emacs)
+    ispell # Used for spellchecking
 
     # Used by "lookup"
     ripgrep
     sqlite
     wordnet
 
-    # Typechecking in python
-    pyright
+    pyright # Typechecking in python
 
     # Dictionaries for spelling good
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
 
-    # Autoformatting nix code
-    nixfmt-rfc-style
-
-    # Doom wants this for faster indexing
-    fd
-
-    # Needed for formatting xml
-    html-tidy
+    nixfmt-rfc-style # Autoformatting nix code
+    nil # lsp for nix
+    fd # Doom wants this for faster indexing
+    html-tidy # Needed for formatting xml
 
     # Doom wants these for Go
     gopls
@@ -38,22 +30,13 @@
     ccls
     clang-tools
 
-    # Needed for installing emacsql-sqlite for org-roam
-    gcc
-
-    # Needed for =minted= to export with syntax highlighting
-    python311Packages.pygments
-
-    # For Jupyter notebook
-    python311Packages.jupyter
-
+    gcc # Needed for installing emacsql-sqlite for org-roam
+    glibc.dev # Include standard headers
+    python311Packages.pygments # Needed for =minted= to export with syntax highlighting
+    python311Packages.jupyter # For Jupyter notebook
     python311Packages.black
-
-    # LSP server for bash
-    nodePackages.bash-language-server
-
-    # Needed for Haskell LSP
-    haskell-language-server
+    nodePackages.bash-language-server # LSP server for bash
+    haskell-language-server # Needed for Haskell LSP
 
     python311
 
