@@ -159,5 +159,3 @@
 (package! souffle-mode :recipe (:host github
                                 :repo "gbalats/souffle-mode"
                                 :files (:defaults "souffle-mode.el")))
-
-;;(package! org :pin "806abc5a2bbcb5f884467a0145547221ba09eb59")
