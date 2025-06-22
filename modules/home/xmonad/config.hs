@@ -9,40 +9,49 @@ import XMonad.Actions.CycleWS
 import XMonad.Actions.SpawnOn (manageSpawn, spawnOn)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
 import XMonad.Hooks.StatusBar
-    ( defToggleStrutsKey,
-      withEasySB,
-      statusBarPropTo,
-      StatusBarConfig )
+  ( StatusBarConfig,
+    defToggleStrutsKey,
+    statusBarPropTo,
+    withEasySB,
+  )
 import XMonad.Hooks.StatusBar.PP
-    ( shorten,
-      xmobarColor,
-      xmobarPP,
-      PP(ppCurrent, ppTitle, ppUrgent) )
+  ( PP (ppCurrent, ppTitle, ppUrgent),
+    shorten,
+    xmobarColor,
+    xmobarPP,
+  )
 import XMonad.Layout.BinarySpacePartition as BSP
-    ( emptyBSP,
-      SelectMoveNode(MoveNode, SelectNode),
-      FocusParent(FocusParent),
-      Swap(Swap),
-      Rotate(Rotate) )
-import XMonad.Layout.Grid ( Grid(Grid) )
+  ( FocusParent (FocusParent),
+    Rotate (Rotate),
+    SelectMoveNode (MoveNode, SelectNode),
+    Swap (Swap),
+    emptyBSP,
+  )
+import XMonad.Layout.Grid (Grid (Grid))
 import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.Spacing ( spacing )
+import XMonad.Layout.Spacing (spacing)
+import XMonad.Util.ClickableWorkspaces (clickablePP)
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
-    ( namedScratchpadAction,
-      defaultFloating,
-      namedScratchpadManageHook,
-      NamedScratchpad(NS) )
+  ( NamedScratchpad (NS),
+    defaultFloating,
+    namedScratchpadAction,
+    namedScratchpadManageHook,
+  )
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
-import XMonad.Util.ClickableWorkspaces (clickablePP)
 
 -- Colours
 gray = "#7F7F7F"
+
 gray2 = "#222222"
+
 red = "#900000"
+
 blue = "#2E9AFE"
+
 white = "#eeeeee"
+
 orange = "#ff9604"
 
 myTerminal :: String
@@ -79,13 +88,13 @@ myStartupHook =
       spawnSingleProcess "nm-applet"
     ]
 
-spawnRestart :: MonadIO m => String -> m ()
+spawnRestart :: (MonadIO m) => String -> m ()
 spawnRestart p =
   spawn $ "pkill -9 " <> p <> "; " <> p
 
-spawnSingleProcess :: MonadIO m => String -> m ()
+spawnSingleProcess :: (MonadIO m) => String -> m ()
 spawnSingleProcess p =
-  spawn $ "if test -z $(pgrep " <> p <> "); then " <> p <>"; fi"
+  spawn $ "if test -z $(pgrep " <> p <> "); then " <> p <> "; fi"
 
 myManageHook :: ManageHook
 myManageHook =
@@ -106,11 +115,13 @@ xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc
 xmobarBottom :: StatusBarConfig
 xmobarBottom =
   statusBarPropTo "_XMONAD_LOG_2" "xmobar -v ~/.config/xmobar/xmobarrc_bottom" $
-    (clickablePP xmobarPP
-        { ppCurrent = xmobarColor "black" "orange",
-          ppTitle = xmobarColor "white" "" . shorten 40,
-          ppUrgent = xmobarColor "white" "red"
-        })
+    ( clickablePP
+        xmobarPP
+          { ppCurrent = xmobarColor "black" "orange",
+            ppTitle = xmobarColor "white" "" . shorten 40,
+            ppUrgent = xmobarColor "white" "red"
+          }
+    )
 
 -- Use Alt
 myModMask :: KeyMask
@@ -152,16 +163,15 @@ myKeys modMask =
   ]
 
 myScratchPads :: [NamedScratchpad]
-myScratchPads = [
-                  NS "terminal" spawnTerm findTerm defaultFloating,
-                  NS myNotes spawnNotes findNotes defaultFloating
-                ]
+myScratchPads =
+  [ NS "terminal" spawnTerm findTerm defaultFloating,
+    NS myNotes spawnNotes findNotes defaultFloating
+  ]
   where
     spawnTerm = myTerminal ++ " -T=scratchpad"
     findTerm = title =? "scratchpad"
     spawnNotes = myNotes
     findNotes = appName =? myNotes
-
 
 main :: IO ()
 main =
