@@ -14,7 +14,6 @@
   ./picom
   ./pomodoro
   ./redshift
-  ./rofi
   ./shell
   ./terminal
   ./slack

@@ -62,7 +62,7 @@ myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:emacs", "2:shell", "3:web", "4:zotero", "5:chat", "6:zoom", "7:music", "8:notion", "9:email"]
+myWorkspaces = ["1:code", "2:code", "3:web", "4:shell", "5", "6", "7:music", "8:sharing", "9:comms"]
 
 -- | Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor, myFocusedBorderColor :: String
@@ -73,9 +73,8 @@ myFocusedBorderColor = "blue" -- "#ff0000" dont use hex, not <24 bit safe
 myStartupHook :: X ()
 myStartupHook =
   composeAll
-    [ spawnOnOnce "2:shell" myTerminal,
-      spawnOnOnce "3:web" "brave",
-      spawnOnOnce "4:zotero" "zotero",
+    [ spawnOnOnce "3:web" "brave",
+      spawnOnOnce "4:shell" myTerminal,
       spawnRestart "stalonetray",
       spawnSingleProcess "nm-applet"
     ]
@@ -99,7 +98,7 @@ myManageHook =
     ]
 
 launcherString :: String
-launcherString = "rofi -show run -modi \"filebrowser#run#ssh#calc\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
+launcherString = "rofi -show run -modi \"run#ssh#calc#file-browser-extended\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
 xmobarTop :: StatusBarConfig
 xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc_top" $ pure xmobarPP

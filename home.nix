@@ -1,4 +1,4 @@
-attrs@{ pkgs, pkgsUnstable, pkgs2405, inputs, ... }:
+attrs@{ pkgs, pkgsUnstable, pkgs2405, inputs, rofi-theme, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -76,6 +76,7 @@ in {
     nur.nixosModules.nur
     (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
     (import ./modules/home/brave (attrs // {inherit pkgs2405;}))
+    (import ./modules/home/rofi (attrs // {inherit rofi-theme ;}))
     # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))
   ] ++ (import ./modules/home) ++ (import ./code);
 

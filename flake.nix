@@ -12,9 +12,15 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    rofi-theme = {
+      url = "github:newmanls/rofi-themes-collection";
+      flake = false;
+    };
+
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, impermanence, home-manager, nur, nixpkgs-24-05 }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, impermanence, home-manager, nur, nixpkgs-24-05 , rofi-theme}:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -38,7 +44,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable pkgs2405 inputs;};
+            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable pkgs2405 inputs rofi-theme;};
           }
         ];
       };

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, ... }:
 {
   # the quintessential linux password manager
   programs.password-store = {
