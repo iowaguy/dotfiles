@@ -88,3 +88,10 @@ To find icons, use =gucharmap=.
   nix-shell -p gnome.gucharmap --run gucharmap
 #+end_src
 Use =ctrl-f= to find the glyph, then right click on the icon to show what font
+
+* Debugging
+
+To view attributes of =pkgs=:
+#+begin_src nix
+  home.file."debug-nur.txt".text = builtins.toString (builtins.attrNames pkgs);
+#+end_src
