@@ -54,6 +54,7 @@ let
     wireshark
     xclip
     xmobar
+    zip                           # Zip files
     zoom-us                       # Video conferencing
     zotero                        # Citation manager
   ];
@@ -62,6 +63,7 @@ let
   unstablePkgs = with pkgsUnstable; [
     discord                       # A chat client
     docker-compose
+    gnumake                       # 'make' command
     # jetbrains.idea-community-bin  # IntelliJ IDEA Java IDE
     jetbrains.idea-ultimate       # IntelliJ IDEA Java IDE
     obsidian                      # Notes
@@ -70,19 +72,22 @@ let
     ytdownloader                  # Download youtube videos
     jdk17
   ];
+
 in {
   imports = with inputs; [
     impermanence.nixosModules.home-manager.impermanence
-    nur.nixosModules.nur
+    # nur.modules.homeManager.default
     (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
     (import ./modules/home/brave (attrs // {inherit pkgs2405;}))
-    (import ./modules/home/rofi (attrs // {inherit rofi-theme ;}))
+    (import ./modules/home/rofi (attrs // {inherit rofi-theme;}))
+    (import ./modules/home/firefox (attrs // {inherit nur;}))
     # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))
   ] ++ (import ./modules/home) ++ (import ./code);
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = rec {
+
     username = "ben";
     homeDirectory = "/home/${username}";
 

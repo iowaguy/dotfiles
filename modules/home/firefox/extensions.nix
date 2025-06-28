@@ -1,6 +1,6 @@
-{ config, ... }:
+{ pkgs, ... }:
 
-with config.nur.repos.rycee.firefox-addons;
+with pkgs.nur.repos.rycee.firefox-addons;
 [
   browserpass
   facebook-container

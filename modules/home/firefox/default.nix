@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -12,7 +12,7 @@
     enable = true;
     profiles.ben = {
       isDefault = true;
-      extensions = import ./extensions.nix {inherit config;};
+      extensions = import ./extensions.nix {inherit pkgs;};
       settings = {
         # Attribute set of Firefox preferences. Change in "about:config"
         # Documentation for options: https://kb.mozillazine.org/About:config_entries

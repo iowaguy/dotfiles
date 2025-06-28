@@ -3,7 +3,6 @@
   ./direnv
   ./dunst
   ./emacs
-  ./firefox
   ./git
   ./gpg-agent
   #./i3
