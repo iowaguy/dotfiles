@@ -28,8 +28,15 @@
     Name=zathura
   '';
 
-  xdg.mimeApps.associations.added = {
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/pdf" = [ "zathura.desktop" ];
+      "image/pdf" = [ "zathura.desktop" ];
+    };
+   defaultApplications = {
     "application/pdf" = [ "zathura.desktop" ];
     "image/pdf" = [ "zathura.desktop" ];
+    };
   };
 }
