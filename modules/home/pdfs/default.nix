@@ -18,16 +18,6 @@
     };
   };
 
-  home.file.".local/share/applications/zathura.desktop".text = ''
-    [Desktop Entry]
-    Encoding=UTF-8
-    Version=1.0
-    Type=Application
-    Terminal=false
-    Exec=${config.home.profileDirectory}/bin/zathura
-    Name=zathura
-  '';
-
   xdg.mimeApps = {
     enable = true;
     associations.added = {
