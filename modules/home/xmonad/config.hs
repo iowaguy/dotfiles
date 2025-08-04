@@ -15,21 +15,24 @@ import XMonad.Hooks.StatusBar
     withEasySB,
   )
 import XMonad.Hooks.StatusBar.PP
-  ( PP (ppCurrent, ppTitle, ppUrgent),
+  ( PP (ppCurrent, ppHidden, ppHiddenNoWindows, ppSort, ppTitle, ppUrgent),
     shorten,
     xmobarColor,
     xmobarPP,
   )
 import XMonad.Layout.BinarySpacePartition as BSP
-  ( FocusParent (FocusParent),
+  ( BinarySpacePartition,
+    FocusParent (FocusParent),
     Rotate (Rotate),
     SelectMoveNode (MoveNode, SelectNode),
     Swap (Swap),
     emptyBSP,
   )
 import XMonad.Layout.Grid (Grid (Grid))
-import XMonad.Layout.NoBorders (smartBorders)
-import XMonad.Layout.Spacing (spacing)
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
+import XMonad.Layout.NoBorders (SmartBorder, smartBorders)
+import XMonad.Layout.Spacing (Spacing, spacing)
+import XMonad.StackSet (tag)
 import XMonad.Util.ClickableWorkspaces (clickablePP)
 import XMonad.Util.EZConfig (additionalKeys)
 import XMonad.Util.NamedScratchpad
@@ -37,9 +40,11 @@ import XMonad.Util.NamedScratchpad
     defaultFloating,
     namedScratchpadAction,
     namedScratchpadManageHook,
+    scratchpadWorkspaceTag,
   )
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
+import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex)
 
 -- Colours
 gray = "#7F7F7F"
@@ -64,6 +69,7 @@ myNotes = "obsidian"
 myBorderWidth :: Dimension
 myBorderWidth = 3
 
+myLayout :: ModifiedLayout Spacing (Choose (ModifiedLayout SmartBorder Grid) (Choose (ModifiedLayout SmartBorder Full) (ModifiedLayout SmartBorder BinarySpacePartition))) Window
 myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
   where
     layoutGrid = smartBorders Grid
@@ -71,7 +77,7 @@ myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:code", "2:code", "3:web", "4:shell", "5", "6", "7:music", "8:sharing", "9:comms"]
+myWorkspaces = ["1:code", "2:shell", "3:web", "4:comms", "5:sharing", "6", "7", "8", "9"]
 
 -- | Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor, myFocusedBorderColor :: String
@@ -83,9 +89,9 @@ myStartupHook :: X ()
 myStartupHook =
   composeAll
     [ spawnOnOnce "3:web" "brave",
-      spawnOnOnce "4:shell" myTerminal,
+      spawnOnOnce "2:shell" myTerminal,
       spawnRestart "stalonetray",
-      spawnSingleProcess "nm-applet"
+      spawnRestart "nm-applet"
     ]
 
 spawnRestart :: (MonadIO m) => String -> m ()
@@ -100,14 +106,12 @@ myManageHook :: ManageHook
 myManageHook =
   composeAll
     [ className =? "brave" --> doShift "3:web",
-      className =? "notion-app-enhanced" --> doShift "8:notion",
       namedScratchpadManageHook myScratchPads,
       title =? "Dunst" --> defaultFloating
-      -- title =? "xmessage" --> defaultFloating
     ]
 
 launcherString :: String
-launcherString = "rofi -show run -modi \"run#ssh#calc#file-browser-extended\" -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
+launcherString = "rofi -show drun -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip -selection clipboard\""
 
 xmobarTop :: StatusBarConfig
 xmobarTop = statusBarPropTo "_XMONAD_LOG_1" "xmobar -v ~/.config/xmobar/xmobarrc_top" $ pure xmobarPP
@@ -119,7 +123,11 @@ xmobarBottom =
         xmobarPP
           { ppCurrent = xmobarColor "black" "orange",
             ppTitle = xmobarColor "white" "" . shorten 40,
-            ppUrgent = xmobarColor "white" "red"
+            ppUrgent = xmobarColor "white" "red",
+            ppHidden = \ws -> if ws == "NSP" then "" else xmobarColor "white" "" ws,
+            ppHiddenNoWindows = \ws -> if ws == "NSP" then "" else xmobarColor "grey" "" ws,
+            ppSort = do
+              return $ filterOutWs [scratchpadWorkspaceTag] -- <$> getSortByIndex
           }
     )
 
@@ -155,6 +163,7 @@ myKeys modMask =
     ((modMask .|. shiftMask, xK_n), sendMessage MoveNode),
     ((modMask, xK_o), namedScratchpadAction myScratchPads "terminal"),
     ((modMask, xK_l), namedScratchpadAction myScratchPads myNotes),
+    ((modMask .|. shiftMask, xK_x), spawn "xsecurelock"),
     ((modMask .|. shiftMask, xK_j), nextScreen),
     ((modMask .|. shiftMask, xK_k), prevScreen),
     ((modMask .|. controlMask, xK_j), shiftNextScreen),
