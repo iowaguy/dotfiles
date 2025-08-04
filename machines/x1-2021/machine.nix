@@ -69,7 +69,7 @@
       touchpad.clickMethod = "clickfinger";
     };
 
-    displayManager.defaultSession = "plasma";
+    displayManager.defaultSession = "plasmax11";
     # displayManager.defaultSession = "xfce+i3";
     # displayManager.defaultSession = "xfce+xmonad";
 
@@ -78,7 +78,8 @@
       displayManager = {
         sessionCommands = ''
           # Suspends and locks session on lid close
-          xfconf-query -c xfce4-session -p /general/LockCommand -s "systemctl suspend";
+          xset s 600
+          xset dpms 600 600 600
         '';
       };
 
