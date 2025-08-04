@@ -2,7 +2,7 @@
   description = "My NixOS configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-24-05.url = "github:NixOS/nixpkgs/nixos-24.05"; # needed for brave
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nur = {
@@ -12,7 +12,7 @@
     impermanence.url = "github:nix-community/impermanence";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
