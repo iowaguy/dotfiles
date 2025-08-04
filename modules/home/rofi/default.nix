@@ -46,14 +46,14 @@ in
     theme = "${customRofiTheme}";
     terminal = "${pkgs.kitty}/bin/kitty";
     extraConfig = {
-      modes = "run,ssh,calc,file-browser-extended";
+      modes = "drun,ssh,calc,file-browser-extended";
       show-icons = true;
-      display-run = "Run";
+      display-drun = "Run";
       display-calc = "Calc";
       display-ssh = "SSH";
       display-file-browser-extended = "Files";
       sidebar-mode = true;
-      matching = "fuzzy";
+      monitor = -1; # show rofi on the monitor presently in focus
     };
     pass = {
       enable = true;
