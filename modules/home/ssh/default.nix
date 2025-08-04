@@ -13,7 +13,7 @@ in {
           "Port" = "5556";
           "StrictHostKeyChecking" = "no";
           "PasswordAuthentication" = "no";
-          "IdentityFile" = "/home/ben/workspace/projects/mitll/ibn/.vagrant/machines/ibn/libvirt/private_key";
+          "IdentityFile" = "/home/ben/projects/mitll/ibn/.vagrant/machines/ibn/libvirt/private_key";
           "IdentitiesOnly" = "yes";
           "LogLevel" = "FATAL";
         };
@@ -79,7 +79,6 @@ in {
       };
       "jump.csail.mit.edu" = {
         extraOptions = {
-          "GSSAPIAuthentication" = "yes";
           "VerifyHostKeyDNS" = "yes";
         };
       };
@@ -87,8 +86,6 @@ in {
         dag.entryAfter [ "jump.csail.mit.edu" ] {
           extraOptions = {
             "ProxyJump" = "blw@jump.csail.mit.edu";
-            "GSSAPIAuthentication" = "yes";
-            "GSSAPIDelegateCredentials" = "yes";
           };
         };
     };
