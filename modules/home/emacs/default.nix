@@ -32,13 +32,13 @@
 
     gcc # Needed for installing emacsql-sqlite for org-roam
     glibc.dev # Include standard headers
-    python311Packages.pygments # Needed for =minted= to export with syntax highlighting
-    python311Packages.jupyter # For Jupyter notebook
-    python311Packages.black
+    python312Packages.pygments # Needed for =minted= to export with syntax highlighting
+    python312Packages.jupyter # For Jupyter notebook
+    python312Packages.black
     nodePackages.bash-language-server # LSP server for bash
     haskell-language-server # Needed for Haskell LSP
 
-    python311
+    python312
 
     # LSP impl for TeX
     texlab
@@ -46,7 +46,6 @@
 
   services.emacs = {
       enable = true;
-#      package = pkgs.emacs29;
   };
 
   home.links.".doom.d" = "areas/system-management/dotfiles/modules/home/emacs/doom.d";
