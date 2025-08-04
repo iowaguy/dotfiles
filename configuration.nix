@@ -132,8 +132,7 @@
   fonts.packages = with pkgs; [
     powerline-fonts
     font-awesome
-    nerdfonts
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   services = {
     gnome.gnome-keyring.enable = true;
