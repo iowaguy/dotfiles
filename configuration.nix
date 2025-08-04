@@ -138,7 +138,6 @@
   services = {
     gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
-    redshift.enable = true; # Save the eyes
 
     # Enable handling of hotplug and sleep events by autorandr
     autorandr.enable = true;
