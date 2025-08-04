@@ -48,7 +48,7 @@
         ];
       };
 
-      initExtra = ''
+      initContent = ''
         #!/bin/sh
 
         nixify() {
