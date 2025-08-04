@@ -190,9 +190,5 @@ in {
 
     # For screenshots
     flameshot.enable = true;
-    betterlockscreen = {
-      enable = true;
-      inactiveInterval = 60;
-    };
   };
 }
