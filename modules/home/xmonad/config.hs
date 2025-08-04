@@ -44,7 +44,7 @@ import XMonad.Util.NamedScratchpad
   )
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnOnce, spawnOnce)
-import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex)
+import XMonad.Util.WorkspaceCompare (filterOutWs, getSortByIndex, getWsCompare, mkWsSort)
 
 -- Colours
 gray = "#7F7F7F"
@@ -124,10 +124,10 @@ xmobarBottom =
           { ppCurrent = xmobarColor "black" "orange",
             ppTitle = xmobarColor "white" "" . shorten 40,
             ppUrgent = xmobarColor "white" "red",
-            ppHidden = \ws -> if ws == "NSP" then "" else xmobarColor "white" "" ws,
-            ppHiddenNoWindows = \ws -> if ws == "NSP" then "" else xmobarColor "grey" "" ws,
+            ppHiddenNoWindows = xmobarColor "grey" "",
             ppSort = do
-              return $ filterOutWs [scratchpadWorkspaceTag] -- <$> getSortByIndex
+              sort <- getSortByIndex
+              return $ filterOutWs [scratchpadWorkspaceTag] . sort
           }
     )
 
