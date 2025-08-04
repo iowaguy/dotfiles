@@ -1,7 +1,7 @@
 { pkgs, pkgsUnstable, ... }:
 
 {
-  home.packages = with pkgsUnstable.python311Packages; [
+  home.packages = with pkgsUnstable.python312Packages; [
     pandas
     numpy
     pymongo
