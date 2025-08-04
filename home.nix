@@ -9,7 +9,7 @@ let
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     curl
     dig
-    dolphin                       # file explorer
+    kdePackages.dolphin           # file explorer
     drawio                        # good for drawing finite state machines
     entr
     et                            # A convenient cli timer
@@ -139,7 +139,7 @@ in {
     vscode = {
       enable = true;
       package = pkgsUnstable.vscode;
-      extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-extensions; [
         vscodevim.vim
         redhat.java
         ms-python.python
