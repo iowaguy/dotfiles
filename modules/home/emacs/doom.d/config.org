@@ -6,9 +6,6 @@
 
 #+begin_src emacs-lisp
   (defun blw/set-macos-vars ()
-    (setq blw/open-firefox "open -a Firefox")
-    (setq blw/screenshot "screencapture -i %s")
-
     ;; Bind =alt= to =super=
     (setq ns-alternate-modifier (quote super))
 
@@ -17,19 +14,6 @@
 
     ;; Bind =fn= to =control=
     (setq ns-function-modifier (quote control)))
-
-  (defun blw/set-linux-vars ()
-    (setq blw/open-firefox "firefox --newtab --url")
-    (setq blw/screenshot "scrot --select %s"))
-
-  (defun blw/set-system-specific-vars ()
-    (cond
-     ((string-equal system-type "darwin") ;  macOS
-      (blw/set-macos-vars))
-     ((string-equal system-type "gnu/linux")
-      (blw/set-linux-vars))))
-
-  (blw/set-system-specific-vars)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -168,8 +152,7 @@ I use =magit= to handle version control. It's lovely, but I tweak a few things:
 #+begin_src emacs-lisp
   (use-package! magit
     :defer t
-    :bind
-    ("C-c m" . magit-status)
+    :bind* (("C-c m" . magit-status))
 
     :config
     (use-package! with-editor)
@@ -229,19 +212,6 @@ documentation.
     (add-hook! 'emacs-lisp-mode-hook 'eldoc-mode))
 #+end_src
 
-Automagically do an =ls= when entering a new directory. Also set a cool eshell theme.
-#+begin_src emacs-lisp
-  (setq eshell-list-files-after-cd t)
-  (eshell-git-prompt-use-theme 'robbyrussell)
-#+end_src
-
-Including =org-tempo= restores the =<s=-style easy-templates that were
-deprecated in Org 9.2.
-#+begin_src emacs-lisp
-  (use-package! org-tempo
-    :after org)
-#+end_src
-
 I'd like the initial scratch buffer to be in Org:
 #+begin_src emacs-lisp
   (setq initial-major-mode 'org-mode)
@@ -281,181 +251,9 @@ Show Greek letters and =LaTeX= math symbols (in =org= buffer) using normal
   (setq org-pretty-entities t)
 #+end_src
 
-Store my org files in =~/resources/org=, define
-the location of an index file (my main todo list).
-#+begin_src emacs-lisp
-  (defun blw/full-file-path (directory filename)
-    "Return the absolute path of a file, given its filename and the directory it's in."
-    (concat (file-name-as-directory directory) filename))
-
-  (defun blw/org-file-path (filename)
-    "Return the absolute address of an org file, given its relative name."
-    (blw/full-file-path org-directory filename))
-
-  (defun blw/persistent-file-path (filename)
-    "Return the absolute address of a file in whatever persistent storage I'm using, given its relative name."
-    (blw/full-file-path blw/org-persistent-directory filename))
-
-  (defun blw/zettelkasten-path (filename)
-    "Return the absolute path of a file in my zettelkasten."
-    (concat (blw/persistent-file-path "zettelkasten/") filename))
-
-  (setq! blw/org-persistent-directory "~/resources/"
-         org-directory (blw/persistent-file-path "org")
-         org-index-file (blw/org-file-path "todos.org")
-         org-gcal-file (blw/org-file-path "schedule.org")
-         blw/org-cs-reading-file (blw/org-file-path "reading.org")
-         blw/org-writing-reading-file (blw/org-file-path "reading_writing.org")
-         blw/org-fun-projects-file (blw/org-file-path "fun-projects.org")
-         blw/org-zettel-inbox-file (blw/org-file-path "zettel-inbox.org")
-         blw/zettelkasten (blw/zettelkasten-path ""))
-#+end_src
-
-Ensure that a task can't be marked as done if it contains unfinished subtasks or
-checklist items. This is handy for organizing "blocking" tasks hierarchically.
-#+begin_src emacs-lisp
-  (setq org-enforce-todo-checkbox-dependencies t)
-#+end_src
-
-A nice visualizer for my =org-roam= graph.
-#+begin_src emacs-lisp
-  (use-package! websocket
-      :after org-roam)
-
-;;  (use-package! org-roam-ui
-;;      :after org-roam
-;;     :config
-;;      (setq org-roam-ui-sync-theme t
-;;            org-roam-ui-follow t
-;;           org-roam-ui-update-on-save t
-;;            org-roam-ui-open-on-start t))
-#+end_src
-
-My [[https://zettelkasten.de/][Zettelkasten]] setup with [[https://www.orgroam.com/][org-roam]].
-#+begin_src emacs-lisp
-  (defun blw/get-string-from-file (filePath)
-    "Return filePath's file content."
-    (concat (with-temp-buffer
-              (insert-file-contents filePath)
-              (buffer-string))))
-
-  (after! org-roam
-    ;; This must be a string because the variable gets used before the
-    ;; convenience functions in this file get called.
-    (setq org-roam-directory "~/resources/zettelkasten"
-          org-roam-db-update-method 'immediate
-          org-roam-graph-executable "dot"
-          org-roam-graph-shorten-titles 'wrap
-          org-roam-graph-max-title-length 50
-          org-roam-graph-viewer 'org-roam-ui-open
-          org-roam-preview-function '(lambda () "")
-          org-roam-graph-extra-config '(("overlap" . "no"))
-          org-roam-graph-exclude-matcher '("index" "daily")
-          org-roam-graph-executable "neato"
-          org-roam-dailies-directory "daily/"
-          +org-roam-open-buffer-on-find-file nil
-          emacsql-sqlite3-executable (executable-find "sqlite3")
-          org-roam-completion-everywhere nil
-          org-roam-dailies-capture-templates
-           '(("x" "default" entry
-             #'org-roam-capture--get-point
-             "* %?"
-             :file-name "daily/%<%Y-%m-%d>"
-             :head "#+title: %<%Y-%m-%d>\n\n")))
-
-    (map! :map org-mode-map
-          (:prefix ("C-c n" . "org-roam")
-          :desc "Insert"                "i" #'org-roam-node-insert
-          :desc "Unlink"                "u" #'org-link-at-point-unlink)))
-
-  (map! "C-c n d" :desc "Today" #'org-journal-new-entry)
-  (map! "C-c n a" :desc "Any day" #'org-journal-new-scheduled-entry)
-
-  (defun blw/visit-roam-outline ()
-    (interactive)
-    (find-file "~/resources/zettelkasten/20220110102107-outlines.org"))
-
-  (map! :leader
-    (:prefix-map ("n" . "notes")
-      (:prefix ("r" . "roam")
-        :desc "Open outline"           "o" #'blw/visit-roam-outline
-        :desc "Unlink"                 "u" #'org-link-at-point-unlink
-        :desc "Cite"                   "c" #'citar-insert-citation
-        :desc "Open paper notes"       "p" #'citar-open-notes)))
-
-
-  (require 'subr-x) ;; for `when-let'
-
-  (defun org-link-at-point-unlink ()
-    "Replace link at point with description."
-    (interactive)
-    (when-let ((el (org-element-context))
-           (b (and (eq (org-element-type el) 'link)
-               (org-element-property :contents-begin el)))
-           (e (org-element-property :contents-end el))
-           (contents (buffer-substring-no-properties b e))
-           (b (org-element-property :begin el))
-           (e (org-element-property :end el)))
-      (delete-region b e)
-      (insert contents)))
-#+end_src
-
-[[https://github.com/bdarcus/citar][Citar]] for citations.
-#+begin_src emacs-lisp
-  (defun blw/citar--open-note (keys-entries)
-    (identity (car key-entry) (cdr key-entry)))
-
-  (use-package citar
-    :custom
-    (citar-bibliography (blw/zettelkasten-path "references.bib"))
-    (citar-notes-paths (list (blw/persistent-file-path "zettelkasten/")))
-    (citar-default-action 'blw/citar--open-note))
-#+end_src
-
-Want the journal to display weekly, not daily files.
-#+begin_src emacs-lisp
-(setq! org-journal-file-type 'weekly
-       org-journal-file-header 'blw/org-journal-file-header-func
-       org-journal-time-format "plan")
-
-(defun blw/org-journal-file-header-func ()
-  "Custom function to create journal header."
-  (concat
-    (pcase org-journal-file-type
-      (`daily "#+TITLE: Daily Journal\n#+STARTUP: showeverything")
-      (`weekly "#+TITLE: Weekly Journal\n#+STARTUP: showeverything")
-      (`monthly "#+TITLE: Monthly Journal\n#+STARTUP: folded")
-      (`yearly "#+TITLE: Yearly Journal\n#+STARTUP: folded"))))
-#+end_src
-
-Use this to take screenshots and embed them in =org= files. Note that
-=screencapture= is the tool to use for MacOS. Though =org-download= supports
-other tools for other OSs.
-#+begin_src emacs-lisp
-  (setq org-download-image-dir "screenshots/")
-  (setq org-download-image-org-width 500)
-#+end_src
-
 Higher resolution on PDFs.
 #+begin_src emacs-lisp
   (setq doc-view-resolution 192)
-#+end_src
-
-
-Bind a few handy keys.
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c l") 'org-store-link)
-#+end_src
-
-Use =htmlize= to ensure that exported code blocks use syntax highlighting.
-#+begin_src emacs-lisp
-  (use-package! htmlize
-      :defer t)
-#+end_src
-
-Some of the style elements are off if these two aren't set to =css=.
-#+begin_src emacs-lisp
-  (setq org-html-htmlize-output-type 'inline-css)
 #+end_src
 
 
@@ -550,18 +348,6 @@ This uses =emacs-async= to make =dired= perform actions asynchronously.
     (dired-async-mode 1))
 #+end_src
 
-I futz around with my dotfiles a lot. This binds =C-c e= to quickly open my
-Emacs configuration file.
-
-#+begin_src emacs-lisp
-  (defun blw/visit-emacs-config ()
-    (interactive)
-    (find-file "~/.doom.d/config.org"))
-
-  (global-set-key (kbd "C-c e") 'blw/visit-emacs-config)
-#+end_src
-
-
 Assume that I always want to kill the current buffer when hitting =C-x k=.
 #+begin_src emacs-lisp
   (defun blw/kill-current-buffer ()
@@ -624,7 +410,10 @@ Make commenting better with =M-;=
 In =evil-mode=, I just want to mash "jk" and have it escape, regardless of the
 actual order those keys register.
 #+begin_src emacs-lisp
+(after! evil-escape
   (setq evil-escape-unordered-key-sequence t)
+  (setq evil-escape-key-sequence "jk"
+        evil-escape-delay 0.2))
 #+end_src
 
 This is for the C/C++ LSP which uses =clangd=.
@@ -632,10 +421,7 @@ This is for the C/C++ LSP which uses =clangd=.
   (setq lsp-clients-clangd-args '("-j=3"
                                   "--background-index"
                                   "--clang-tidy"
-                                  "--completion-style=detailed"
-                                  "--header-insertion=never"
-                                  "--header-insertion-decorators=0"))
-  (after! lsp-clangd (set-lsp-priority! 'clangd 2))
+                                  "--completion-style=detailed"))
 #+end_src
 
 Enable some basic stuff for writing Promela.
