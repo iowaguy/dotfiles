@@ -1,16 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 
 with lib;
 
 let
-
   dag = config.lib.dag;
   cfg = config.home.links;
   homeDirectory = config.home.homeDirectory;
-
-in
-
-{
+in {
 
   options = {
     home.links = mkOption {
