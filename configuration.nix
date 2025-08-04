@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = import ./modules/system;
@@ -38,10 +38,17 @@
       emacs
       xorg.xrandr # display manager (X Resize and Rotate protocol)
       libsForQt5.kscreen  # KDE display management
+      xsecurelock
     ];
 
     # get completion for system packages (e.g. systemd).
     pathsToLink = [ "/share/zsh" ];
+
+    variables = {
+      XSECURELOCK_SAVER = "saver_blank";
+      XSECURELOCK_AUTH = "auth_pam_x11";
+      XSECURELOCK_SHOW_DATETIME = "1";
+    };
   };
 
 
@@ -58,7 +65,10 @@
     };
 
     # Lock screen before sleeping
-    xss-lock.enable = true;
+    xss-lock = {
+      enable = true;
+      lockerCommand = "${pkgs.xsecurelock}/bin/xsecurelock";
+    };
 
     # Need this for VS Code to be able to run Java stuff
     nix-ld = {
