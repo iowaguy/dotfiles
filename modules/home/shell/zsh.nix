@@ -91,6 +91,8 @@
           echo "$(ls -l1 $HOME/.xmonad/xmonad-x86_64-linux)"
           sudo nixos-rebuild --flake "$HOME/areas/system-management/dotfiles/.#" switch "$@"
         }
+
+        fastfetch
       '';
     };
   };
