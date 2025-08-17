@@ -16,6 +16,7 @@
     userEmail = "ben@weintraub.xyz";
     userName = "Ben Weintraub";
     extraConfig = {
+      protocol.file.allow = "always";
       pull.rebase = "true";
       github.user = "iowaguy";
       branch.autosetuprebase = "always";
