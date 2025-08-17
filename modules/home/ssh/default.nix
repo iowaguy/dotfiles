@@ -6,76 +6,49 @@ in {
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "vagrant" = {
-        extraOptions = {
-          "Hostname" = "127.0.0.1";
-          "User" = "vagrant";
-          "Port" = "5556";
-          "StrictHostKeyChecking" = "no";
-          "PasswordAuthentication" = "no";
-          "IdentityFile" = "/home/ben/projects/mitll/ibn/.vagrant/machines/ibn/libvirt/private_key";
-          "IdentitiesOnly" = "yes";
-          "LogLevel" = "FATAL";
-        };
+      "*" = {
+        setEnv = { TERM = "xterm-256color"; };
+      };
+      "pi.hole" = {
+        hostname = "192.168.0.37";
+        user = "ben";
+      };
+      "acadia" = {
+        hostname = "acadia-wg-tunnel";
+        user = "ben";
       };
       "achtung" = {
-        extraOptions = {
-          "ForwardAgent" = "yes";
-          "Hostname" = "achtung.ccs.neu.edu";
-          "User" = "bweintraub";
-        };
+        forwardAgent = true;
+        hostname = "achtung.ccs.neu.edu";
+        user = "bweintraub";
       };
       "dome" = dag.entryAfter [ "achtung" ] {
-        extraOptions = {
-          "Hostname" = "192.168.2.55";
-          "ProxyJump" = "achtung";
-          "User" = "bweintraub";
-          "ForwardAgent" = "yes";
-        };
+        hostname = "192.168.2.55";
+        proxyJump = "achtung";
+        user = "bweintraub";
+        forwardAgent = true;
       };
       "hood" = dag.entryAfter [ "achtung" ] {
-        extraOptions = {
-          "Hostname" = "192.168.2.56";
-          "ProxyJump" = "achtung";
-          "User" = "bweintraub";
-          "ForwardAgent" = "yes";
-        };
+        hostname = "192.168.2.56";
+        proxyJump = "achtung";
+        user = "bweintraub";
+        forwardAgent = true;
       };
       "zion*" = dag.entryAfter [ "achtung" ] {
-        extraOptions = {
-          "ProxyJump" = "achtung";
-          "User" = "bweintraub";
-          "ForwardAgent" = "yes";
-        };
+        proxyJump = "achtung";
+        user = "bweintraub";
+        forwardAgent = true;
       };
-      "netviews" = {
-        extraOptions = {
-          "Hostname" = "localhost";
-          "User" = "ben";
-          "Port" = "5556";
-        };
+      "honeypot" = dag.entryAfter [ "zion*" ] {
+        port = 2222;
+        proxyJump = "zion01";
+        user = "honeypot";
+        forwardAgent = true;
+        hostname = "localhost";
       };
       "khoury-login" = {
-        extraOptions = {
-          "Hostname" = "login.khoury.northeastern.edu";
-          "User" = "benweintraub";
-        };
-      };
-      "ben-isec" = dag.entryAfter [ "khoury-login" ] {
-        extraOptions = {
-          "Hostname" = "ben-isec.khoury.northeastern.edu";
-          "ProxyJump" = "khoury-login";
-          "User" = "ben";
-          "ForwardAgent" = "yes";
-        };
-      };
-      "khoury" = dag.entryAfter [ "khoury-login" ] {
-        extraOptions = {
-          "Hostname" = "vdi-linux-030.ccs.neu.edu";
-          "ProxyJump" = "khoury-login";
-          "User" = "benweintraub";
-          "ForwardAgent" = "yes";
-        };
+        hostname = "login.khoury.northeastern.edu";
+        user = "benweintraub";
       };
       "jump.csail.mit.edu" = {
         extraOptions = {
@@ -84,10 +57,8 @@ in {
       };
       "*.csail.mit.edu !jump.csail.mit.edu 128.52.* 128.30.* 128.31.* !128.31.26.*" =
         dag.entryAfter [ "jump.csail.mit.edu" ] {
-          extraOptions = {
-            "ProxyJump" = "blw@jump.csail.mit.edu";
-          };
-        };
+          proxyJump = "blw@jump.csail.mit.edu";
+      };
     };
   };
 }
