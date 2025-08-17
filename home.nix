@@ -31,6 +31,8 @@ let
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
     mongodb-compass               # A GUI for MongoDB
+    mosh                          # A connectionless ssh replacement
+    mtr                           # MyTraceroute. A nice network debugging tool
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     networkmanagerapplet
     ngrok                         # HTTP and TCP tunneling service
@@ -49,9 +51,11 @@ let
     texlive.combined.scheme-full
     python312Packages.tqdm
     python312Packages.git-filter-repo
+    tcpdump                       # Network debugging tool
     tree
     vlc
     wireshark
+    wireguard-tools
     xclip
     xmobar
     zip                           # Zip files
