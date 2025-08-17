@@ -7,4 +7,5 @@
   ./printing
   # ./syncthing
   ./users
+  ./wireguard
 ] ++ (import ./wm)
