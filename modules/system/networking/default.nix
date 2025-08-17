@@ -14,6 +14,9 @@
       127.0.0.1 googlevideo.com
       127.0.0.1 apnews.com
       127.0.0.1 cnn.com
+      192.168.0.37 pi.hole
+      acadia.ben-weintraub.com acadia
+      192.168.100.1 acadia-wg-tunnel
     '';
 
     firewall.allowedTCPPorts = [
