@@ -20,13 +20,10 @@
 
   xdg.mimeApps = {
     enable = true;
-    associations.added = {
-      "application/pdf" = [ "zathura.desktop" ];
-      "image/pdf" = [ "zathura.desktop" ];
-    };
-   defaultApplications = {
-    "application/pdf" = [ "zathura.desktop" ];
-    "image/pdf" = [ "zathura.desktop" ];
+    # Make zathura the default pdf reader
+    defaultApplications = {
+      "application/pdf" = [ "org.pwmt.zathura.desktop" ];
+      "image/pdf" = [ "org.pwmt.zathura.desktop" ];
     };
   };
 }
