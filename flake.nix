@@ -52,15 +52,15 @@
           }
         ];
       };
-      isec-desktop = nixpkgs.lib.nixosSystem {
+      glacier = nixpkgs.lib.nixosSystem {
         modules = [
-          ./machines/isec-desktop
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable pkgs2405 inputs;};
-          }
+          ./machines/glacier
+          # home-manager.nixosModules.home-manager
+          # {
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable pkgs2405 inputs;};
+          # }
         ];
       };
     };
