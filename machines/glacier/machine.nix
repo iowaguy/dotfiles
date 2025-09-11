@@ -1,7 +1,4 @@
 { pkgs, config, ... }: {
-  imports = [
-    ./hardware-configuration.nix
-  ];
 
   time.timeZone = "America/New_York";
 

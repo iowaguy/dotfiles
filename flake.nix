@@ -55,12 +55,6 @@
       glacier = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/glacier
-          # home-manager.nixosModules.home-manager
-          # {
-          #   home-manager.useGlobalPkgs = true;
-          #   home-manager.useUserPackages = true;
-          #   home-manager.users.ben = import ./home.nix {inherit pkgs pkgsUnstable pkgs2405 inputs;};
-          # }
         ];
       };
     };
