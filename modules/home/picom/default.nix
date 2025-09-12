@@ -4,8 +4,8 @@
     enable = true;
     activeOpacity = 1.0;
     inactiveOpacity = 1.0;
-    package = pkgs.picom-next;
-    backend = "glx";
+    package = pkgs.picom-pijulius;
+    backend = "egl";
     fade = true;
     fadeDelta = 5;
     opacityRules = [

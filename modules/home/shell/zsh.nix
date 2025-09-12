@@ -33,6 +33,7 @@
         la = lla;
         cat = "bat";
         grep = "rg";
+        watch = "hwatch";
         xclip = "xclip -selection clipboard";
       };
 
