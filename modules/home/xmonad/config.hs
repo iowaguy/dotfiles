@@ -60,7 +60,7 @@ white = "#eeeeee"
 orange = "#ff9604"
 
 myTerminal :: String
-myTerminal = "kitty"
+myTerminal = "alacritty"
 
 myNotes :: String
 myNotes = "obsidian"

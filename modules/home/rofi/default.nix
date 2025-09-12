@@ -44,7 +44,7 @@ in
   programs.rofi = {
     enable = true;
     theme = "${customRofiTheme}";
-    terminal = "${pkgs.kitty}/bin/kitty";
+    terminal = "${pkgs.alacritty}/bin/alacritty";
     extraConfig = {
       modes = "drun,ssh,calc,file-browser-extended";
       show-icons = true;
