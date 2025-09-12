@@ -6,9 +6,9 @@
   ./nix
   ./persist
   ./printing
-  # ./syncthing
   ./screen-lock
   ./security
+  ./syncthing
   ./time
   ./users
   ./wireguard

@@ -2,36 +2,55 @@
   services.syncthing = {
     ## Uncomment this for remote debugging
     #guiAddress = "0.0.0.0:8384";
-    enable = true;
+    # enable = true;
+    enable = false;
     user = "ben";
     dataDir = "/home/ben";
-    folders = {
-      "/home/ben/workspace" = {
-        id = "workspace";
-        devices = [
-          "ben-isec"
-          "kansas"
-          "x1-2021"
-        ];
+    settings = {
+      folders = {
+        "/home/ben/projects" = {
+          id = "projects";
+          devices = [
+            "x1-2021"
+            "acadia"
+          ];
+        };
+        "/home/ben/areas" = {
+          id = "areas";
+          devices = [
+            "x1-2021"
+            "acadia"
+          ];
+        };
+        "/home/ben/resources" = {
+          id = "resources";
+          devices = [
+            "x1-2021"
+            "acadia"
+          ];
+        };
+        "/home/ben/archive" = {
+          id = "archive";
+          devices = [
+            "x1-2021"
+            "acadia"
+          ];
+        };
+        "/home/ben/.gnupg" = {
+          id = "gpg";
+          devices = [
+            "x1-2021"
+            "acadia"
+          ];
+        };
       };
-      "/home/ben/.gnupg" = {
-        id = "gpg";
-        devices = [
-          "ben-isec"
-          "kansas"
-          "x1-2021"
-        ];
-      };
-    };
-    devices = {
-      x1-2021 = {
-        id = "KGTWRR3-4U5RNPZ-JA5HNTG-S7UHBKS-54OYYS5-O4O4NRW-LTQRHJQ-K44XOQG";
-      };
-      kansas = {
-        id = "RXSK5VH-XDVDTLZ-7ULY4OI-OZPI6UQ-ONFWQS3-FJQZ7JB-G4CFXC4-ARV4XQH";
-      };
-      ben-isec = {
-        id = "2JZNKVK-4U4JAQD-V32XHXX-Y5454TO-PNDBI3K-WO7UZFD-VUUXN4H-23GSPQW";
+      devices = {
+        x1-2021 = {
+          id = "KGTWRR3-4U5RNPZ-JA5HNTG-S7UHBKS-54OYYS5-O4O4NRW-LTQRHJQ-K44XOQG";
+        };
+        acadia = {
+          id = "NKYLM6Y-ESOB3LX-I46FCEL-RRLREZG-KXZPCKW-6ECKMD2-DRV6PYB-3BMFWAF";
+        };
       };
     };
   };
