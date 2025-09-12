@@ -2,7 +2,6 @@ attrs@{ pkgs, pkgsUnstable, pkgs2405, inputs, rofi-theme, ... }:
 
 let
   defaultPkgs = with pkgs; [
-    alacritty                     # A terminal b/c sometimes kitty is incompatible
     arandr                        # A GUI for autorandr
     cabal-install
     cachix                        # cache binaries so I don't have to rebuild
@@ -24,6 +23,7 @@ let
       hpkgs.xmonad-contrib
       hpkgs.xmonad-extras
     ])) # ghci with packages needed for debugging xmonad
+    hwatch                        # A modern alternative to the watch command
     jq
     libsForQt5.konqueror          # Needed to open links in the browser when I click on them
     kdePackages.kdenlive
@@ -45,9 +45,9 @@ let
     pasystray                     # pulseaudio systray
     ripgrep
     rubber                        # a nice tool for compiling latex
-    # skypeforlinux
     sqlite
     stack                         # Haskell build tool
+    telegram-desktop
     texlive.combined.scheme-full
     python312Packages.tqdm
     python312Packages.git-filter-repo
@@ -179,7 +179,10 @@ in {
     home-manager.enable = true;
 
     # A nice tool for viewing processes and system stats
-    htop.enable = true;
+    htop = {
+      enable = true;
+      package = pkgs.htop-vim; # allows vim keybindings in htop
+    };
 
     gpg.enable = true;
     bat.enable = true;
@@ -187,6 +190,10 @@ in {
   };
 
   services = {
+    # Tray app that prevents the system from sleeping
+    # when enabled
+    caffeine.enable = true;
+
     # Send alerts for battery events
     poweralertd.enable = true;
 
