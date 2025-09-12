@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }: {
 
   environment = {
     systemPackages = with pkgs; [
@@ -115,6 +115,8 @@
     docker.enable = true;
     libvirtd.enable = true;
   };
+
+  networking.networkmanager.enable = lib.mkForce true;
 
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
