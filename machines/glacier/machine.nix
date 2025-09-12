@@ -1,41 +1,19 @@
 { pkgs, config, ... }: {
 
-  time.timeZone = "America/New_York";
-
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
   environment = {
     systemPackages = with pkgs; [
       wget
       vim
       git
-      firefox
       which
       busybox
       emacs
       htop-vim
       bat # A better cat
       ripgrep # A better grep
-      ente
     ];
   };
 
-
-  # Members of wheel don't need a password for sudo
-  security.sudo.wheelNeedsPassword = false;
-  security.acme = {
-    defaults.email = "ben+acme@weintraub.xyz";
-    acceptTerms = true;
-    # certs = {
-    #   "docs.ben-weintraub.com" = {
-    #     webroot = "/var/lib/acme";
-    #   };
-    # };
-  };
 
   programs = {
     zoxide.enableZshIntegration = true;
@@ -56,6 +34,8 @@
         la = lla;
         cat = "bat";
         grep = "rg";
+        vim = "nvim";
+        vi = vim;
         xclip = "xclip -selection clipboard";
       };
       ohMyZsh = {
@@ -114,29 +94,6 @@
     };
   };
 
-  users.users = {
-    ben = {
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHA2+s16j8CHT54sw3eenPv48zg1gHzSabsRhkEt87Ss ben@weintraub.xyz"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxtjrPG1RJTXrI+7ftjQLfqgwL2GXDfAGyaVA1Qaaa ben@x1-2021"
-      ];
-      isNormalUser = true;
-      extraGroups = [
-        "wheel" # Enable 'sudo' for the user.
-        "networkmanager" # Allow user to change network settings
-        "docker"
-        "qemu-libvirtd"
-        "libvirtd"
-        "power"
-        "syncthing"
-      ];
-      shell = pkgs.zsh;
-    };
-
-    root.openssh.authorizedKeys.keys = [''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxtjrPG1RJTXrI+7ftjQLfqgwL2GXDfAGyaVA1Qaaa ben@x1-2021'' ];
-  };
-
-
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = false;
   networking = {
@@ -148,41 +105,10 @@
     ];
   };
 
-  # Nix daemon config
-  nix = {
-    # Automate garbage collection
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-
-    # TODO remove when flakes are included by default
-    package = pkgs.nixVersions.stable;
-
-    extraOptions = ''
-      # TODO remove when flakes are included by default
-      experimental-features = nix-command flakes
-
-      # Avoid unwanted garbage collection when using nix-direnv
-      keep-outputs     = true
-      keep-derivations = true
-    '';
-
-    settings = {
-      # Required by Cachix to be used as non-root user
-      trusted-users = [ "root" "ben" ];
-
-      # Automate `nix-store --optimise`
-      auto-optimise-store = true;
-    };
-  };
-
   location.provider = "geoclue2";
 
   virtualisation = {
     docker.enable = true;
-    # docker.storageDriver = "zfs";
     libvirtd.enable = true;
   };
 

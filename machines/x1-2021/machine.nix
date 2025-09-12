@@ -1,6 +1,37 @@
 { config, pkgs, ... }:
 
 {
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment = {
+    systemPackages = with pkgs; [
+      alsa-utils
+      wget
+      vim
+      git
+      firefox
+      which
+      busybox
+      zfs
+      emacs
+      xorg.xrandr # display manager (X Resize and Rotate protocol)
+      libsForQt5.kscreen  # KDE display management
+      xsecurelock
+    ];
+
+    # get completion for system packages (e.g. systemd).
+    pathsToLink = [ "/share/zsh" ];
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+        wpa_supplicant = pkgs.wpa_supplicant.overrideAttrs (attrs: {
+          patches = attrs.patches ++ [ ../../resources/nuwave.patch ];
+        });
+      };
+  };
+
   boot = {
     kernel.sysctl = {
       "kernel.sysrq" = 255;
@@ -54,12 +85,16 @@
   };
 
   services = {
-    # Used in frontrunning project. Enable when needed.
-    mongodb = {
-      # enable = true;
-      enable = false;
-      # package = pkgs.mongodb-5_0;
-    };
+    gnome.gnome-keyring.enable = true;
+    openssh.enable = true; # Enable the OpenSSH daemon.
+
+    # Enable handling of hotplug and sleep events by autorandr
+    autorandr.enable = true;
+
+    # Enable this when I want to debug
+    netdata.enable = false;
+    blueman.enable = true;
+    emacs.defaultEditor = true;
 
     libinput = {
       # one, two, three fingered clicks (on touchpad) map to left, right, middle clicks
@@ -81,7 +116,7 @@
       };
 
       # keyboard settings
-      xkb.options = "altwin:swap_lalt_lwin"; # Swap left alt with left win
+      xkb.options = "altwin:swap_lalt_lwin,ctrl:nocaps,terminate:ctrl_alt_bksp"; # Swap left alt with left win
     };
 
     # power savings
@@ -103,9 +138,52 @@
 
   powerManagement.powertop.enable = true;
 
-  # Needed for impermanence lib
-  programs.fuse.userAllowOther = true;
+  programs = {
+    # Needed for impermanence lib
+    fuse.userAllowOther = true;
 
-  # Needed for bluetooth
-  programs.dconf.enable = true;
+    # Needed for bluetooth
+    dconf.enable = true;
+    zsh.enable = true;
+
+    gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
+    };
+
+    # Need this for VS Code to be able to run Java stuff
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        # Add any missing dynamic libraries for unpackaged programs
+        # here, NOT in environment.systemPackages
+        vscode-extensions.redhat.java
+      ];
+    };
+  };
+
+  fonts.packages = with pkgs; [
+    powerline-fonts
+    font-awesome
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
+  virtualisation = {
+    docker.enable = true;
+    docker.storageDriver = "zfs";
+    libvirtd.enable = true;
+  };
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system = {
+    stateVersion = "20.09"; # Did you read the comment?
+    autoUpgrade = {
+      enable = false;
+      allowReboot = false;
+    };
+  };
 }

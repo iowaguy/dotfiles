@@ -44,6 +44,19 @@
       x1-2021 = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/x1-2021
+          ./modules/system/geoclue2
+          ./modules/system/kerberos
+          ./modules/system/networking
+          ./modules/system/nix
+          ./modules/system/persist
+          ./modules/system/printing
+          ./modules/system/screen-lock
+          ./modules/system/security
+          ./modules/system/syncthing
+          ./modules/system/time
+          ./modules/system/users
+          ./modules/system/wireguard
+          ./modules/system/wm/xmonad
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -55,6 +68,11 @@
       glacier = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/glacier
+          ./modules/system/time
+          ./modules/system/security
+          ./modules/system/nix
+          ./modules/system/users
+          ./modules/system/networking
         ];
       };
     };
