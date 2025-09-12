@@ -3,11 +3,16 @@
 let
   dag = config.lib.dag;
 in {
+  services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
     matchBlocks = {
       "*" = {
         setEnv = { TERM = "xterm-256color"; };
+      };
+      "glacier" = {
+        hostname = "glacier";
+        user = "ben";
       };
       "pi.hole" = {
         hostname = "192.168.0.37";
