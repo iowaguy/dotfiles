@@ -16,6 +16,10 @@
 
 
   programs = {
+    mosh = {
+      enable = true;
+      openFirewall = true;
+    };
     zoxide.enableZshIntegration = true;
     direnv.enableZshIntegration = true;
     neovim.enable = true;
