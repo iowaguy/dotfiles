@@ -49,6 +49,7 @@
           ./modules/system/networking
           ./modules/system/nix
           ./modules/system/persist
+          ./modules/system/photos
           ./modules/system/printing
           ./modules/system/screen-lock
           ./modules/system/security
