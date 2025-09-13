@@ -49,7 +49,6 @@
           ./modules/system/networking
           ./modules/system/nix
           ./modules/system/persist
-          ./modules/system/photos
           ./modules/system/printing
           ./modules/system/screen-lock
           ./modules/system/security
@@ -69,11 +68,12 @@
       glacier = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/glacier
-          ./modules/system/time
-          ./modules/system/security
-          ./modules/system/nix
-          ./modules/system/users
           ./modules/system/networking
+          ./modules/system/nix
+          ./modules/system/photos
+          ./modules/system/security
+          ./modules/system/time
+          ./modules/system/users
         ];
       };
     };
