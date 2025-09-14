@@ -69,6 +69,7 @@
         modules = [
           ./machines/glacier
           ./modules/system/docs
+          ./modules/system/email
           ./modules/system/networking
           ./modules/system/nix
           ./modules/system/photos
