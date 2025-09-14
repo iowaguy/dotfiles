@@ -21,6 +21,7 @@
       enable = true;
       configureNginx = true;
       settings = {
+        maxUploadSize = 1099511627776; # 1TiB
         httpAddress = "0.0.0.0";
         httpUnsafeOrigin = "https://docs.ben-weintraub.com";
         httpSafeOrigin = "https://sandbox-docs.ben-weintraub.com";
