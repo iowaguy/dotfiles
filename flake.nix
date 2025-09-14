@@ -68,6 +68,7 @@
       glacier = nixpkgs.lib.nixosSystem {
         modules = [
           ./machines/glacier
+          ./modules/system/docs
           ./modules/system/networking
           ./modules/system/nix
           ./modules/system/photos
