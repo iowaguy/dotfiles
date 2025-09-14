@@ -29,7 +29,6 @@
       # Increase the maximum file upload size to avoid problems uploading videos.
       maxUploadSize = "16G";
       https = true;
-      enableBrokenCiphersForSSE = false;
 
       autoUpdateApps.enable = true;
       extraAppsEnable = true;
@@ -42,16 +41,20 @@
         cookbook = pkgs.fetchNextcloudApp rec {
           url =
             "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
-          sha256 = "sha256-XgBwUr26qW6wvqhrnhhhhcN4wkI+eXDHnNSm1HDbP6M=";
+          sha256 = "sha256-H7KVeISBnu0/4Q31ihhiXvRtkXz4yLGOAsAj5ERgeCM=";
+          license = "gpl3";
         };
       };
 
+      settings = {
+        overwriteprotocol = "https";
+        default_phone_region = "ET";
+      };
+
       config = {
-        overwriteProtocol = "https";
-        defaultPhoneRegion = "ET";
         dbtype = "pgsql";
         adminuser = "admin";
-        adminpassFile = ./nextcloud-admin-pass;
+        adminpassFile = "./nextcloud-admin-pass";
       };
     };
 
