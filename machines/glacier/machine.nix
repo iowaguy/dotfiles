@@ -61,6 +61,9 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
+
+    # Block IPs (temporarily) that fail ssh auth multiple times
+    fail2ban.enable = true;
     openssh = {
       enable = true; # Enable the OpenSSH daemon.
       settings = {
