@@ -2,12 +2,15 @@
 {
   services = {
     nginx.virtualHosts = {
-      "email.ben-weintraub.com" = {
+      ${config.services.nextcloud.hostName} = {
         forceSSL = true;
         enableACME = true;
+        extraConfig = ''
+          add_header Content-Security-Policy "default-src 'self';";
+        '';
       };
 
-      "nextcloud.ben-weintraub.com" = {
+      ${config.services.nextcloud.onlyoffice.hostName} = {
         forceSSL = true;
         enableACME = true;
       };
@@ -38,12 +41,12 @@
         inherit calendar contacts mail notes onlyoffice tasks;
 
         # Custom app installation example.
-        cookbook = pkgs.fetchNextcloudApp rec {
-          url =
-            "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
-          sha256 = "sha256-H7KVeISBnu0/4Q31ihhiXvRtkXz4yLGOAsAj5ERgeCM=";
-          license = "gpl3";
-        };
+        # cookbook = pkgs.fetchNextcloudApp rec {
+        #   url =
+        #     "https://github.com/nextcloud/cookbook/releases/download/v0.10.2/Cookbook-0.10.2.tar.gz";
+        #   sha256 = "sha256-H7KVeISBnu0/4Q31ihhiXvRtkXz4yLGOAsAj5ERgeCM=";
+        #   license = "gpl3";
+        # };
       };
 
       settings = {
