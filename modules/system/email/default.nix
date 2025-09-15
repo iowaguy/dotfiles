@@ -54,7 +54,7 @@
       config = {
         dbtype = "pgsql";
         adminuser = "admin";
-        adminpassFile = "./nextcloud-admin-pass";
+        adminpassFile = "/home/ben/dotfiles/modules/system/email/nextcloud-admin-pass";
       };
     };
 
