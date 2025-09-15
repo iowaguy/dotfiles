@@ -5,12 +5,9 @@
       ${config.services.nextcloud.hostName} = {
         forceSSL = true;
         enableACME = true;
-        extraConfig = ''
-          add_header Content-Security-Policy "default-src 'self';";
-        '';
       };
 
-      ${config.services.nextcloud.onlyoffice.hostName} = {
+      ${config.services.onlyoffice.hostname} = {
         forceSSL = true;
         enableACME = true;
       };
