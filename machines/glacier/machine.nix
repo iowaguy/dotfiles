@@ -61,7 +61,15 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
-    openssh.enable = true; # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true; # Enable the OpenSSH daemon.
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = [ "ben" ];
+      };
+    };
 
     # Enable this when I want to debug
     netdata.enable = false;
