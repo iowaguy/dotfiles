@@ -53,27 +53,9 @@
 
       config = {
         dbtype = "pgsql";
-        dbhost = "/run/postgresql";
         adminuser = "admin";
         adminpassFile = "./nextcloud-admin-pass";
       };
-
-      # for redis caching
-      extraOptions = {
-        redis = {
-          host = "127.0.0.1";
-          port = 31638;
-          dbindex = 0;
-          timeout = 1.5;
-        };
-      };
-    };
-
-    # for redis caching
-    redis.servers.nextcloud = {
-      enable = true;
-      port = 31638;
-      bind = "127.0.0.1";
     };
 
     onlyoffice = {
@@ -84,10 +66,7 @@
     postgresql = {
       enable = true;
       ensureDatabases = [ "nextcloud" ];
-      ensureUsers = [{
-        name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
-      }];
+      ensureUsers = [{name = "nextcloud";}];
     };
 
     # optional backup for postgresql db
