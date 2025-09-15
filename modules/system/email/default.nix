@@ -53,14 +53,58 @@
 
       config = {
         dbtype = "pgsql";
+        dbhost = "/run/postgresql";
         adminuser = "admin";
         adminpassFile = "./nextcloud-admin-pass";
       };
+
+      # for redis caching
+      extraOptions = {
+        redis = {
+          host = "127.0.0.1";
+          port = 31638;
+          dbindex = 0;
+          timeout = 1.5;
+        };
+      };
+    };
+
+    # for redis caching
+    redis.servers.nextcloud = {
+      enable = true;
+      port = 31638;
+      bind = "127.0.0.1";
     };
 
     onlyoffice = {
       enable = true;
       hostname = "nextcloud.ben-weintraub.com";
+    };
+
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "nextcloud" ];
+      ensureUsers = [{
+        name = "nextcloud";
+        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+      }];
+    };
+
+    # optional backup for postgresql db
+    postgresqlBackup = {
+      enable = true;
+      location = "/data/backup/nextclouddb";
+      databases = [ "nextcloud" ];
+      # time to start backup in systemd.time format
+      startAt = "*-*-* 23:15:00";
+    };
+  };
+
+  # ensure postgresql db is started with nextcloud
+  systemd = {
+    services."nextcloud-setup" = {
+      requires = [ "postgresql.service" ];
+      after = [ "postgresql.service" ];
     };
   };
 }
