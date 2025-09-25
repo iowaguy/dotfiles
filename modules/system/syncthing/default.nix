@@ -1,4 +1,14 @@
 {
+  networking = {
+    firewall.allowedTCPPorts = [
+      22067 # syncthing
+      36885 # syncthing
+    ];
+    firewall.allowedUDPPorts = [
+      36885 # syncthing
+    ];
+  };
+
   services.syncthing = {
     ## Uncomment this for remote debugging
     #guiAddress = "0.0.0.0:8384";

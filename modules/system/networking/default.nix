@@ -7,13 +7,7 @@
     # Block sites that distract me
     extraHosts = builtins.readFile ./hosts.txt;
 
-    firewall.allowedTCPPorts = [
-      22067 # syncthing
-      36885 # syncthing
-    ];
-    firewall.allowedUDPPorts = [
-      36885 # syncthing
-    ];
+    firewall.enable = true;
 
     # Some desktop environments use NetworkManager for configuring
     # networking.
