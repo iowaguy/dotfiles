@@ -60,6 +60,7 @@
 
     onlyoffice = {
       enable = true;
+      hostname = "office.ben-weintraub.com";
     };
 
     postgresql = {
