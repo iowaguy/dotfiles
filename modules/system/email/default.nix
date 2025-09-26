@@ -15,7 +15,7 @@
 
     nextcloud = {
       enable = true;
-      hostName = "email.ben-weintraub.com";
+      hostName = "nextcloud.ben-weintraub.com";
 
        # Need to manually increment with every major upgrade.
       package = pkgs.nextcloud31;
@@ -60,7 +60,6 @@
 
     onlyoffice = {
       enable = true;
-      hostname = "nextcloud.ben-weintraub.com";
     };
 
     postgresql = {
