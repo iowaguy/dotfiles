@@ -1,12 +1,13 @@
-{ config, ... }:
-{
+let
+  port = "4000";
+in {
   services = {
     nginx = {
       virtualHosts."links.ben-weintraub.com" = {
         enableACME = true;
         forceSSL = true;
         locations."/" = {
-            proxyPass = "http://[::1]:${toString config.services.karakeep.extraEnvironment.PORT}";
+          proxyPass = "http://127.0.0.1:${port}";
             proxyWebsockets = true;
             recommendedProxySettings = true;
             extraConfig = ''
@@ -25,9 +26,8 @@
     karakeep = {
      enable = true;
       extraEnvironment = {
-        # PORT = "1234";
+        PORT = "${port}";
         DISABLE_SIGNUPS = "true";
-        DISABLE_NEW_RELEASE_CHECK = "true";
       };
     };
   };

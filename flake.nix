@@ -73,6 +73,7 @@
           ./modules/system/networking
           ./modules/system/nix
           ./modules/system/photos
+          ./modules/system/readlater
           ./modules/system/security
           ./modules/system/time
           ./modules/system/users
