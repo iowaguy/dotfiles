@@ -3,6 +3,7 @@
   services = {
     actual = {
       enable = true;
+      settings.port = 11000;
     };
 
     nginx = {
