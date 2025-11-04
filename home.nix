@@ -1,4 +1,4 @@
-attrs@{ pkgs, pkgsUnstable, pkgs2405, inputs, rofi-theme, ... }:
+attrs@{ pkgs, pkgsUnstable, inputs, rofi-theme, ... }:
 
 let
   defaultPkgs = with pkgs; [
@@ -82,7 +82,7 @@ in {
     impermanence.nixosModules.home-manager.impermanence
     # nur.modules.homeManager.default
     (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
-    (import ./modules/home/brave (attrs // {inherit pkgs2405;}))
+    (import ./modules/home/brave)
     (import ./modules/home/rofi (attrs // {inherit rofi-theme;}))
     (import ./modules/home/firefox (attrs // {inherit nur;}))
     # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))

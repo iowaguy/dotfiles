@@ -77,6 +77,11 @@
       # time to start backup in systemd.time format
       startAt = "*-*-* 23:15:00";
     };
+
+    roundcube = {
+      enable = true;
+      hostName = "email.ben-weintraub.com";
+    };
   };
 
   # ensure postgresql db is started with nextcloud

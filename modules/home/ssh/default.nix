@@ -9,6 +9,7 @@ in {
     matchBlocks = {
       "*" = {
         setEnv = { TERM = "xterm-256color"; };
+        serverAliveInterval = 240;
       };
       "glacier" = {
         hostname = "glacier";

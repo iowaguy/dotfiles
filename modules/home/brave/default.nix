@@ -1,10 +1,9 @@
-{ pkgs, pkgs2405, ... }:
+{ pkgs, ... }:
 
 {
   programs.chromium = {
     enable = true;
-    # package = pkgs.brave;
-    package = pkgs2405.brave;
+    package = pkgs.brave;
     extensions = [
       { id = "ldipcbpaocekfooobnbcddclnhejkcpn"; } # Google Scholar button
       { id = "pehlnokhmjhnlghjkjbepjimjbcnjnlb"; } # Cookbook app
