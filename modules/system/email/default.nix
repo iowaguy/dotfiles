@@ -35,8 +35,9 @@
       extraApps = with config.services.nextcloud.package.packages.apps; {
         # List of apps we want to install and are already packaged in
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/servers/nextcloud/packages/nextcloud-apps.json
-        inherit calendar contacts mail notes onlyoffice tasks cookbook
-          cospend forms mail maps news notes onlyoffice whiteboard;
+        inherit calendar contacts mail notes
+          onlyoffice tasks cookbook cospend
+          forms maps news whiteboard;
       };
 
       settings = {
