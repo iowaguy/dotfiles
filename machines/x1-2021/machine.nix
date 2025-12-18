@@ -15,7 +15,7 @@
       zfs
       emacs
       xorg.xrandr # display manager (X Resize and Rotate protocol)
-      libsForQt5.kscreen  # KDE display management
+      kdePackages.kscreen  # KDE display management
       xsecurelock
     ];
 
@@ -73,8 +73,8 @@
       # Apparently this is currently only supported by ati_unfree drivers, not ati
       enable32Bit = false;
       extraPackages = with pkgs; [
-        vaapiIntel
-        vaapiVdpau
+        intel-vaapi-driver
+        libva-vdpau-driver
       ];
     };
     cpu.intel.updateMicrocode = true;

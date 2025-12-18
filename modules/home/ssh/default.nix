@@ -5,6 +5,7 @@ let
 in {
   services.ssh-agent.enable = true;
   programs.ssh = {
+    enableDefaultConfig = false;
     enable = true;
     matchBlocks = {
       "*" = {

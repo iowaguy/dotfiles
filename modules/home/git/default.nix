@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    gitAndTools.pass-git-helper # for letting git get passwords from pass
-    gitAndTools.diff-so-fancy # git diff with colors
+    pass-git-helper # for letting git get passwords from pass
+    diff-so-fancy # git diff with colors
   ];
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''
@@ -13,9 +13,9 @@
   programs.git = {
     enable = true;
     ignores = [ "*~" "*.swp" ".direnv" ".envrc" ];
-    userEmail = "ben@weintraub.xyz";
-    userName = "Ben Weintraub";
-    extraConfig = {
+    settings = {
+      user.email = "ben@weintraub.xyz";
+      user.name = "Ben Weintraub";
       protocol.file.allow = "always";
       pull.rebase = "true";
       github.user = "iowaguy";
@@ -44,7 +44,7 @@
       credential = {
         "https://achtung-gitlab.ccs.neu.edu" = {
           username = "iowaguy";
-          helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
+          helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
         };
       };
       rebase.autosquash = true;

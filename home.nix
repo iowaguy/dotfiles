@@ -25,7 +25,7 @@ let
     ])) # ghci with packages needed for debugging xmonad
     hwatch                        # A modern alternative to the watch command
     jq
-    libsForQt5.konqueror          # Needed to open links in the browser when I click on them
+    kdePackages.konqueror         # Needed to open links in the browser when I click on them
     kdePackages.kdenlive
     libsForQt5.kwallet            # VS Code wants this
     libnotify

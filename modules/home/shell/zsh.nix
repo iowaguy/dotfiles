@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.packages = with pkgs; [
@@ -20,7 +20,7 @@
       syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
-      dotDir = ".config/zsh";
+      dotDir = "${config.home.homeDirectory}/.config/zsh";
 
       localVariables = {
         PATH = "$HOME/.bin:$HOME/.emacs.d/bin:$PATH";

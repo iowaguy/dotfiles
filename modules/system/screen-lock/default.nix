@@ -12,5 +12,5 @@
     lockerCommand = "${pkgs.xsecurelock}/bin/xsecurelock";
   };
 
-  services.logind.lidSwitchDocked = "suspend";
+  services.logind.settings.Login.HandleLidSwitchDocked = "suspend";
 }
