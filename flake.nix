@@ -42,6 +42,7 @@
           ./modules/system/geoclue2
           ./modules/system/kerberos
           ./modules/system/networking
+          ./modules/system/pomodoro-focus-dns
           ./modules/system/nix
           ./modules/system/persist
           ./modules/system/printing
@@ -50,7 +51,7 @@
           ./modules/system/syncthing
           ./modules/system/time
           ./modules/system/users
-          ./modules/system/wireguard
+          # ./modules/system/wireguard
           ./modules/system/wm/xmonad
           home-manager.nixosModules.home-manager
           {

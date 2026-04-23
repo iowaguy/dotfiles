@@ -10,8 +10,19 @@ counter_file_path="$bin_dir/$counter_file_name"
 counter=
 SOUND_FILE="$bin_dir/beep.wav"
 
+# Optional dnsmasq focus layer (NixOS pomodoroFocusDns). No-op if helper is absent.
+pomodoro_dns_apply() {
+    local mode="$1"
+    if command -v pomodoro-dns-apply >/dev/null 2>&1; then
+        if ! sudo -n pomodoro-dns-apply "$mode" 2>/tmp/pomodoro-dns-apply.err; then
+            dunstify --urgency=low "Pomodoro DNS ($mode) failed — see /tmp/pomodoro-dns-apply.err"
+        fi
+    fi
+}
+
 # Define a function to handle Ctrl+C
 function ctrl_c() {
+    pomodoro_dns_apply off
     # rm "$status_file"
     printf "Pomodoro not running [%s]" "$counter" > "$status_file"
     dunstify --urgency=low "Pomodoro session finished"
@@ -59,7 +70,9 @@ while true; do
   aplay $SOUND_FILE
   dunstify --urgency=low "Work session started!"
   echo "Work session started!"
+  pomodoro_dns_apply on
   countdown $work_duration "Work"
+  pomodoro_dns_apply off
   dunstify --urgency=low "Work session complete! Time for a break."
   increment_counter
   aplay $SOUND_FILE

@@ -26,6 +26,10 @@ if [ -z "$PID" ]; then
 else
     dunstify --urgency=low "Pomodoro session finished"
     kill $PID
+    # Clear focus sinkholes if the NixOS pomodoroFocusDns helper is installed.
+    if command -v pomodoro-dns-apply >/dev/null 2>&1; then
+        sudo -n pomodoro-dns-apply off 2>/tmp/pomodoro-dns-apply.err || true
+    fi
     read_or_create_counter_file
     printf "Pomodoro not running [%s]" "$counter" > "$status_file"
     # rm $status_file

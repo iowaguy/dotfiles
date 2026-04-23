@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Rewrites the dnsmasq focus fragment and reloads dnsmasq.
+#
+# Intended to run as root (via sudo). User `ben` is granted NOPASSWD for the
+# nix-store path of this script only. Each hostname from the blocklist is
+# emitted as an address= sinkhole line after validation.
+set -euo pipefail
+
+FRAGMENT=/var/lib/dnsmasq/pomodoro-focus.conf
+BLOCKLIST='@blocklistPath@'
+MAX_LINES=512
+
+valid_label() {
+  local h="$1"
+  if ((${#h} > 253)); then
+    return 1
+  fi
+  if [[ ! "$h" =~ ^[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?$ ]]; then
+    return 1
+  fi
+  if [[ "$h" == *..* ]]; then
+    return 1
+  fi
+  return 0
+}
+
+tmp="$(mktemp)"
+cleanup() { rm -f "$tmp"; }
+trap cleanup EXIT
+
+case "${1:-}" in
+  on)
+    lines=0
+    if [[ -f "$BLOCKLIST" ]]; then
+      while IFS= read -r line || [[ -n "$line" ]]; do
+        [[ "$line" =~ ^[[:space:]]*# ]] && continue
+        line="${line#"${line%%[![:space:]]*}"}"
+        line="${line%"${line##*[![:space:]]}"}"
+        [[ -z "$line" ]] && continue
+        if valid_label "$line"; then
+          printf 'address=/%s/0.0.0.0\n' "$line" >>"$tmp"
+          lines=$((lines + 1))
+        fi
+        if ((lines > MAX_LINES)); then
+          echo "pomodoro-dns-apply: more than $MAX_LINES valid entries" >&2
+          exit 1
+        fi
+      done <"$BLOCKLIST"
+    fi
+    ;;
+  off)
+    : >"$tmp"
+    ;;
+  *)
+    echo "usage: pomodoro-dns-apply on|off" >&2
+    exit 2
+    ;;
+esac
+
+install -m 0644 "$tmp" "$FRAGMENT"
+systemctl reload dnsmasq.service

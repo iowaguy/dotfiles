@@ -6,21 +6,47 @@
   environment = {
     systemPackages = with pkgs; [
       alsa-utils
+      busybox
+      emacs
+      firefox
+      git
+      kdePackages.dolphin           # File explorer
+      kdePackages.kconfig
+      kdePackages.kde-cli-tools     # Provides kde-open for Plasma 6
+      kdePackages.kdenlive
+      kdePackages.kio               # Provides kioclient6
+      kdePackages.kio-extras        # Additional KIO workers
+      kdePackages.kio-admin         # Additional KIO workers
+      kdePackages.kservice
+      kdePackages.kscreen           # KDE display management
+      kdePackages.plasma-workspace  # Needed to let Plasma open links
+      kdePackages.kwallet           # VS Code wants this
+      kdePackages.kwallet-pam  # ensures proper session integration
+      which
       wget
       vim
-      git
-      firefox
-      which
-      busybox
-      zfs
-      emacs
       xorg.xrandr # display manager (X Resize and Rotate protocol)
-      kdePackages.kscreen  # KDE display management
+      xorg.libxcb
       xsecurelock
+      zfs
     ];
 
     # get completion for system packages (e.g. systemd).
-    pathsToLink = [ "/share/zsh" ];
+    pathsToLink = [
+      "/share/zsh"
+
+      # Ensure XDG menu files are properly linked
+      "/share/applications"
+      "/share/menus"
+    ];
+
+    sessionVariables = {
+      KDE_SESSION_VERSION = "6";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "0";
+      QT_QPA_PLATFORM = "xcb";   # if on X11
+      # Or if on Wayland:
+      # QT_QPA_PLATFORM = "wayland";
+    };
   };
 
   nixpkgs.config = {
@@ -59,10 +85,6 @@
     # NOTE this must be unique among machines (and has to be 32-bit)
     hostId = "00000003";
 
-    # Some desktop environments use NetworkManager for configuring
-    # networking.
-    networkmanager.enable = true;
-
     # Per-interface useDHCP will be mandatory in the future, so this
     # generated config replicates the default behaviour.
     interfaces.wlp0s20f3.useDHCP = true;
@@ -85,6 +107,9 @@
   };
 
   services = {
+    # Work-phase DNS sinkholes from ~/.config/pomodoro/blocklist.txt (dnsmasq).
+    pomodoroFocusDns.enable = true;
+
     gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
 
