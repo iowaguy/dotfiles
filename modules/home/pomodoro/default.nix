@@ -6,8 +6,13 @@
     ".config/pomodoro/blocklist.txt" = {
       force = true;
       text = ''
-        # One hostname per line. Lines starting with # are ignored.
-        # example.com
+        # Bare hostnames or /etc/hosts-style (leading IPv4 ignored), e.g. nytimes.com or 127.0.0.1 nytimes.com
+        # Lines starting with # are ignored.
+        127.0.0.1 fastmail.com
+        127.0.0.1 outlook.cloud.microsoft
+        127.0.0.1 office.outlook.com
+        127.0.0.1 scotusblog.com
+        127.0.0.1 nytimes.com
       '';
     };
     ".bin/pomodoro" = {
