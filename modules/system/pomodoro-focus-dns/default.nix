@@ -40,7 +40,8 @@ in
         # already in use”, while resolv.conf still points at 127.0.0.1 — so *no*
         # DNS works until this is fixed (looks like “everything blocked”).
         bind-interfaces = true;
-        listen-address = [ "127.0.0.1" ];
+        # Match resolvconf (often adds ::1 alongside 127.0.0.1).
+        listen-address = [ "127.0.0.1" "::1" ];
       };
     };
 

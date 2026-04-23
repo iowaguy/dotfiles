@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Rewrites the dnsmasq focus fragment and reloads dnsmasq.
+# Rewrites the dnsmasq focus fragment and restarts dnsmasq.
+#
+# Important: `systemctl reload` sends SIGHUP; dnsmasq only reapplies that for
+# resolv-file / hosts, *not* for conf-file includes like pomodoro-focus.conf.
+# Without a restart, new address= lines never take effect.
 #
 # Intended to run as root (via sudo). User `ben` is granted NOPASSWD for the
 # nix-store path of this script only. Each hostname from the blocklist is
@@ -58,4 +62,4 @@ case "${1:-}" in
 esac
 
 install -m 0644 "$tmp" "$FRAGMENT"
-systemctl reload dnsmasq.service
+systemctl restart dnsmasq.service
