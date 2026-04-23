@@ -35,6 +35,12 @@ in
       settings = {
         server = [ "1.1.1.1" "9.9.9.9" ];
         conf-file = [ focusConf ];
+        # Libvirt’s default NAT network runs its own dnsmasq on 192.168.122.1:53.
+        # The stock system dnsmasq binds 0.0.0.0:53 and then fails with “address
+        # already in use”, while resolv.conf still points at 127.0.0.1 — so *no*
+        # DNS works until this is fixed (looks like “everything blocked”).
+        bind-interfaces = true;
+        listen-address = [ "127.0.0.1" ];
       };
     };
 
