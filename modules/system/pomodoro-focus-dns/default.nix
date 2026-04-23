@@ -6,8 +6,7 @@ let
   focusConf = "/var/lib/dnsmasq/pomodoro-focus.conf";
 
   # Bake the blocklist path into the helper; wrap PATH so coreutils + systemd are found.
-  substituted = pkgs.substituteAll {
-    src = ./pomodoro-dns-apply.sh;
+  substituted = pkgs.replaceVars ./pomodoro-dns-apply.sh {
     blocklistPath = cfg.blocklistPath;
   };
 
