@@ -68,7 +68,7 @@
           betterlockscreen
           i3lock-color
           imagemagick
-          xorg.xdpyinfo
+          xdpyinfo
           bc
 
           # for cpu_usage in i3blocks

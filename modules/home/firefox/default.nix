@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.packages = with pkgs; [
@@ -10,6 +10,11 @@
 
   programs.firefox =  {
     enable = true;
+
+    # Needed because I'm on an old NixOS state version.
+    # If I ever update past 26.05, I can remove this
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
+
     profiles.ben = {
       isDefault = true;
       extensions.packages = import ./extensions.nix {inherit pkgs;};

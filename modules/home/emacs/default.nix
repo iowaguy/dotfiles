@@ -15,7 +15,7 @@
     # Dictionaries for spelling good
     (aspellWithDicts (dicts: with dicts; [ en en-computers en-science ]))
 
-    nixfmt-rfc-style # Autoformatting nix code
+    nixfmt # Autoformatting nix code
     nil # lsp for nix
     fd # Doom wants this for faster indexing
     html-tidy # Needed for formatting xml
@@ -32,13 +32,13 @@
 
     gcc # Needed for installing emacsql-sqlite for org-roam
     glibc.dev # Include standard headers
-    python312Packages.pygments # Needed for =minted= to export with syntax highlighting
-    python312Packages.jupyter # For Jupyter notebook
-    python312Packages.black
-    nodePackages.bash-language-server # LSP server for bash
+    python313Packages.pygments # Needed for =minted= to export with syntax highlighting
+    python313Packages.jupyter # For Jupyter notebook
+    python313Packages.black
+    bash-language-server # LSP server for bash
     haskell-language-server # Needed for Haskell LSP
 
-    python312
+    python313
 
     # LSP impl for TeX
     texlab

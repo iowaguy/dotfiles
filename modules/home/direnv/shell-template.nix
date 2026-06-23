@@ -58,7 +58,7 @@ in mkShell rec {
     python
 
     # Linting + development
-    nodePackages.pyright
+    pyright
     hello
     bashInteractive
 

@@ -1,3 +1,6 @@
-[
-  ./make-links
-]
+{ ... }:
+{
+  imports = [
+    ./make-links
+  ];
+}

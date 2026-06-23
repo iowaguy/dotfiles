@@ -78,27 +78,25 @@ let
   ];
 
 in {
-  imports = with inputs; [
-    impermanence.nixosModules.home-manager.impermanence
-    # nur.modules.homeManager.default
-    (import ./modules/home/email (attrs // {inherit pkgsUnstable;}))
-    (import ./modules/home/brave)
-    (import ./modules/home/rofi (attrs // {inherit rofi-theme;}))
-    (import ./modules/home/firefox (attrs // {inherit nur;}))
-    # (import ./modules/home/jupyter (attrs // {inherit pkgsUnstable;}))
-  ] ++ (import ./modules/home) ++ (import ./code);
+  imports = [
+    ./modules/home/email
+    ./modules/home/brave
+    ./modules/home/rofi
+    ./modules/home/firefox
+    ./modules/home
+    ./code
+  ];
+  _module.args = inputs // attrs;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home = rec {
-
+  home = {
     username = "ben";
-    homeDirectory = "/home/${username}";
 
     packages = defaultPkgs ++ unstablePkgs;
 
     file.".background-image".source = ./resources/background-image;
-    persistence."/persist/${homeDirectory}" = {
+    persistence."/persist" = {
         directories = [
           "workspace"
           "Zotero"
@@ -118,7 +116,6 @@ in {
           ".terraform.d"
           ".vagrant.d"
         ];
-        allowOther = true;
       };
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
@@ -153,9 +150,7 @@ in {
         ms-toolsai.jupyter-renderers
         ms-python.python
         bbenoist.nix
-      ] ++
-      [
-        pkgsUnstable.vscode-extensions.github.copilot-chat
+        jnoortheen.nix-ide
       ];
     };
 

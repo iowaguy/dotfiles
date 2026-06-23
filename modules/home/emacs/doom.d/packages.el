@@ -67,12 +67,6 @@
 ;; =rainbow-delimiters= is convenient for coloring matching parentheses.
 (package! rainbow-delimiters)
 
-;; Use =direnv= with emacs files. When I use a file, it will use the =direnv=
-;; environment of that file.
-(package! direnv)
-  ;; :config
-  ;; (direnv-mode))
-
 ;; Set a theme for eshell which has the git status in the prompt.
 (package! eshell-git-prompt)
 

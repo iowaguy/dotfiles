@@ -7,23 +7,25 @@ in {
   programs.ssh = {
     enableDefaultConfig = false;
     enable = true;
-    matchBlocks = {
+    settings = {
       "*" = {
-        setEnv = { TERM = "xterm-256color"; };
+        setEnv = ''
+            TERM=xterm-256color
+        '';
         serverAliveInterval = 240;
       };
-      "glacier" = {
-        hostname = "glacier";
-        user = "ben";
-      };
       "pi.hole" = {
-        hostname = "192.168.0.37";
+        hostname = "pi.hole";
         user = "ben";
       };
       "acadia" = {
-        hostname = "acadia-wg-tunnel";
+        hostname = "acadia";
         user = "ben";
       };
+      # "acadia" = {
+      #   hostname = "acadia-wg-tunnel";
+      #   user = "ben";
+      # };
       "achtung" = {
         forwardAgent = true;
         hostname = "achtung.ccs.neu.edu";
@@ -56,15 +58,6 @@ in {
       "khoury-login" = {
         hostname = "login.khoury.northeastern.edu";
         user = "benweintraub";
-      };
-      "jump.csail.mit.edu" = {
-        extraOptions = {
-          "VerifyHostKeyDNS" = "yes";
-        };
-      };
-      "*.csail.mit.edu !jump.csail.mit.edu 128.52.* 128.30.* 128.31.* !128.31.26.*" =
-        dag.entryAfter [ "jump.csail.mit.edu" ] {
-          proxyJump = "blw@jump.csail.mit.edu";
       };
     };
   };

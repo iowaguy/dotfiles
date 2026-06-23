@@ -25,8 +25,8 @@
       which
       wget
       vim
-      xorg.xrandr # display manager (X Resize and Rotate protocol)
-      xorg.libxcb
+      xrandr # display manager (X Resize and Rotate protocol)
+      libxcb
       xsecurelock
       zfs
     ];
@@ -77,6 +77,7 @@
     };
     tmp.cleanOnBoot = true;
     crashDump.enable = true;
+    zfs.forceImportRoot = false;
   };
 
   networking = {
@@ -164,9 +165,6 @@
   powerManagement.powertop.enable = true;
 
   programs = {
-    # Needed for impermanence lib
-    fuse.userAllowOther = true;
-
     # Needed for bluetooth
     dconf.enable = true;
     zsh.enable = true;
