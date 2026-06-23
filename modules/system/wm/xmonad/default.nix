@@ -61,7 +61,7 @@
           perl
 
           # Messaging used by xmonad
-          xorg.xmessage
+          xmessage
         ];
       };
     };

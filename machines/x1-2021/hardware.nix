@@ -32,11 +32,13 @@
   fileSystems."/home" =
     { device = "rpool/safe/home";
       fsType = "zfs";
+      neededForBoot = true;
     };
 
   fileSystems."/persist" =
     { device = "rpool/safe/persist";
       fsType = "zfs";
+      neededForBoot = true;
     };
 
   swapDevices = [ ];

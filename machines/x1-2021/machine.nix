@@ -8,10 +8,9 @@
       alsa-utils
       wget
       vim
-      git
-      firefox
-      which
-      busybox
+      xrandr # display manager (X Resize and Rotate protocol)
+      libxcb
+      xsecurelock
       zfs
       emacs
       xorg.xrandr # display manager (X Resize and Rotate protocol)
@@ -51,6 +50,7 @@
     };
     tmp.cleanOnBoot = true;
     crashDump.enable = true;
+    zfs.forceImportRoot = false;
   };
 
   networking = {
@@ -139,9 +139,6 @@
   powerManagement.powertop.enable = true;
 
   programs = {
-    # Needed for impermanence lib
-    fuse.userAllowOther = true;
-
     # Needed for bluetooth
     dconf.enable = true;
     zsh.enable = true;

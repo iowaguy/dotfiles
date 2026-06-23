@@ -11,7 +11,11 @@
 
     # Some desktop environments use NetworkManager for configuring
     # networking.
-    networkmanager.enable = true;
+    networkmanager = {
+        enable = true;
+        wifi.macAddress = "stable-ssid";
+        logLevel = "DEBUG";
+    };
 
     # Use Cloudflare and Quad9 recursive resolvers
     # nameservers = [ "1.1.1.1" "9.9.9.9" ];
