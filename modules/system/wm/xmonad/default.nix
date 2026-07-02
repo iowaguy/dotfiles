@@ -42,7 +42,7 @@
           # This command sets the background image for the session
           feh --bg-fill ~/.background-image
         '';
-        lightdm.enable = true; # Or lightdm.enable, gdm.enable, sddm.enable, etc.
+        # lightdm.enable = true; # Or lightdm.enable, gdm.enable, sddm.enable, etc.
       };
 
       windowManager.xmonad = {

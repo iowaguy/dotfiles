@@ -4,6 +4,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     ben = {
+      uid = 1000;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHA2+s16j8CHT54sw3eenPv48zg1gHzSabsRhkEt87Ss ben@weintraub.xyz"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxtjrPG1RJTXrI+7ftjQLfqgwL2GXDfAGyaVA1Qaaa ben@x1-2021"
@@ -24,5 +25,13 @@
     root.openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxtjrPG1RJTXrI+7ftjQLfqgwL2GXDfAGyaVA1Qaaa ben@x1-2021"
     ];
+    dhcpcd.uid = 993;
+    dnsmasq.uid = 983;
+    fwupd-refresh.uid = 984;
+    geoclue.uid = 999;
+    nm-iodine.uid = 997;
+    nscd.uid = 991;
+    sshd.uid = 995;
+    systemd-oom.uid = 990;
   };
 }
