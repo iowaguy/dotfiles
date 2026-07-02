@@ -11,7 +11,7 @@
         127.0.0.1 fastmail.com
         127.0.0.1 outlook.cloud.microsoft
         127.0.0.1 office.outlook.com
-        127.0.0.1 scotusblog.com
+        127.0.0.1 www.scotusblog.com
         127.0.0.1 nytimes.com
       '';
     };

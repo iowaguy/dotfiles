@@ -1,20 +1,54 @@
-attrs@{ pkgs, pkgsUnstable, inputs, rofi-theme, ... }:
+attrs@{ pkgs, pkgsUnstable, inputs, ... }:
 
 let
   defaultPkgs = with pkgs; [
+    texlive.combined.scheme-full  # Don't want to rebuild frequently b/c it's big
+  ];
+
+  # These are packages that I want to keep up-to-date
+  unstablePkgs = with pkgsUnstable; [
     arandr                        # A GUI for autorandr
+    caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
+    claude-code
+    code-cursor                   # AI IDE
+    curl
+    cursor-cli
+    delve                         # Golang debugger
+    dig
+    discord                       # A chat client
+    docker-compose
+    drawio                        # Good for drawing finite state machines
+    feh
+    gnumake                       # 'make' command
+    jdk17
+    jetbrains.idea                # IntelliJ IDEA Java IDE
+    karere                        # Whatsapp for Linux
+    mongodb-compass               # A GUI for MongoDB
+    mosh                          # A connectionless ssh replacement
+    mtr                           # MyTraceroute. A nice network debugging tool
+    neovim
+    obsidian                      # Notes
+    pavucontrol                   # pulseaudio volume control
+    paprefs                       # pulseaudio preferences
+    pasystray                     # pulseaudio systray
+    python313Packages.tqdm
+    ripgrep
+    rubber                        # a nice tool for compiling latex
+    signal-desktop
+    spotify                       # Musics
+    telegram-desktop
+    tcpdump                       # Network debugging tool
+    tree
+    vlc
+    ytdownloader                  # Download youtube videos
+    zoom-us                       # Video conferencing
+    zotero                        # Citation manager
     cabal-install
     cachix                        # cache binaries so I don't have to rebuild
-    caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
-    curl
-    dig
-    kdePackages.dolphin           # file explorer
-    drawio                        # good for drawing finite state machines
     entr
     et                            # A convenient cli timer
     fastfetch                     # Pretty print system stats
     fd
-    feh
     file                          # classic tool for viewing file attributes
     graphviz
     (haskellPackages.ghcWithPackages (hpkgs: [
@@ -25,56 +59,22 @@ let
     ])) # ghci with packages needed for debugging xmonad
     hwatch                        # A modern alternative to the watch command
     jq
-    kdePackages.konqueror         # Needed to open links in the browser when I click on them
-    kdePackages.kdenlive
-    libsForQt5.kwallet            # VS Code wants this
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
-    mongodb-compass               # A GUI for MongoDB
-    mosh                          # A connectionless ssh replacement
-    mtr                           # MyTraceroute. A nice network debugging tool
+    libxcb-cursor
     networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
     networkmanagerapplet
-    ngrok                         # HTTP and TCP tunneling service
-    neovim
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
     pinentry-gtk2
-    pavucontrol                   # pulseaudio volume control
-    paprefs                       # pulseaudio preferences
-    pasystray                     # pulseaudio systray
-    ripgrep
-    rubber                        # a nice tool for compiling latex
     sqlite
     stack                         # Haskell build tool
-    telegram-desktop
-    texlive.combined.scheme-full
-    python312Packages.tqdm
-    python312Packages.git-filter-repo
-    tcpdump                       # Network debugging tool
-    tree
-    vlc
     wireshark
     wireguard-tools
     xclip
+    xdg-utils
     xmobar
     zip                           # Zip files
-    zoom-us                       # Video conferencing
-    zotero                        # Citation manager
-  ];
-
-  # These are packages that I want to keep up-to-date
-  unstablePkgs = with pkgsUnstable; [
-    discord                       # A chat client
-    docker-compose
-    gnumake                       # 'make' command
-    # jetbrains.idea-community-bin  # IntelliJ IDEA Java IDE
-    jetbrains.idea-ultimate       # IntelliJ IDEA Java IDE
-    obsidian                      # Notes
-    signal-desktop
-    spotify                       # Musics
-    ytdownloader                  # Download youtube videos
-    jdk17
   ];
 
 in {
@@ -134,6 +134,14 @@ in {
 
     # Let me define what programs should open what files
     mimeApps.enable = true;
+
+    # Enable xdg portal
+    portal = {
+      enable = true;
+      extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+      xdgOpenUsePortal = true;
+      config.common.default = "kde";
+    };
   };
 
   programs = {
