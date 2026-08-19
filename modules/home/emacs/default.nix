@@ -6,7 +6,6 @@
     ispell # Used for spellchecking
 
     # Used by "lookup"
-    ripgrep
     sqlite
     wordnet
 
