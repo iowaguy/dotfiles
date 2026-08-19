@@ -32,7 +32,6 @@ let
     paprefs                       # pulseaudio preferences
     pasystray                     # pulseaudio systray
     python313Packages.tqdm
-    ripgrep
     rubber                        # a nice tool for compiling latex
     signal-desktop
     spotify                       # Musics
@@ -48,7 +47,6 @@ let
     entr
     et                            # A convenient cli timer
     fastfetch                     # Pretty print system stats
-    fd
     file                          # classic tool for viewing file attributes
     graphviz
     (haskellPackages.ghcWithPackages (hpkgs: [
