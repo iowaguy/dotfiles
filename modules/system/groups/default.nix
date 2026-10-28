@@ -7,7 +7,6 @@
     docker.gid = 131;
     qemu-libvirtd.gid = 301;
     dhcpcd.gid = 992;
-    dnsmasq.gid = 980;
     fwupd-refresh.gid = 982;
     geoclue.gid = 999;
     nscd.gid = 990;

@@ -1,6 +1,9 @@
 { pkgs, config, ... }:
 
 {
+  # UI scale comes from Xft.dpi / services.xserver.dpi on the machine (see
+  # machines/x1-2021/machine.nix). No --force-device-scale-factor so Chromium
+  # keeps following that DPI after login.
   programs.chromium = {
     enable = true;
     package = pkgs.brave;

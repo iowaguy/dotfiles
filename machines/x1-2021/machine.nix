@@ -1,5 +1,13 @@
 { config, pkgs, ... }:
 
+# HiDPI for the X1's 3840x2400 panel. Xorg gets -dpi from services.xserver.dpi;
+# Chromium/Brave (and other Xft clients) need the same value as Xft.dpi in the
+# resource database or they fall back to EDID physical size / 96dpi and look wrong.
+# Qt is deliberately separate: QT_AUTO_SCREEN_SCALE_FACTOR=0 so Plasma owns Qt scale.
+let
+  # ~2.29× relative to the 96 DPI baseline Chromium uses for deviceScaleFactor.
+  screenDpi = 220;
+in
 {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -13,7 +21,7 @@
       xsecurelock
       zfs
       emacs
-      xorg.xrandr # display manager (X Resize and Rotate protocol)
+      xrandr # display manager (X Resize and Rotate protocol)
       kdePackages.kscreen  # KDE display management
       xsecurelock
     ];
@@ -69,9 +77,12 @@
   };
 
   hardware = {
+    enableAllFirmware = true;
     graphics = {
+      enable = true;
+
       # Apparently this is currently only supported by ati_unfree drivers, not ati
-      enable32Bit = false;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         intel-vaapi-driver
         libva-vdpau-driver
@@ -85,6 +96,7 @@
   };
 
   services = {
+    hardware.bolt.enable = true;
     gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.
 
@@ -106,17 +118,24 @@
     # displayManager.defaultSession = "xfce+xmonad";
 
     xserver = {
-      dpi = 220;
+      dpi = screenDpi;
       displayManager = {
         sessionCommands = ''
           # Suspends and locks session on lid close
           xset s 600
           xset dpms 600 600 600
+
+          # Drive Chromium/Brave UI scale from the same DPI as services.xserver.dpi
+          # (deviceScaleFactor ≈ ${toString screenDpi}/96). Do not set
+          # --force-device-scale-factor; that would bypass DPI-based scaling.
+          echo 'Xft.dpi: ${toString screenDpi}' | ${pkgs.xrdb}/bin/xrdb -merge
         '';
       };
 
       # keyboard settings
       xkb.options = "altwin:swap_lalt_lwin,ctrl:nocaps,terminate:ctrl_alt_bksp"; # Swap left alt with left win
+
+      videoDrivers = [ "modesetting" ];
     };
 
     # power savings
@@ -145,7 +164,7 @@
 
     gnupg.agent = {
       enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     # Need this for VS Code to be able to run Java stuff
@@ -165,8 +184,11 @@
   ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   virtualisation = {
-    docker.enable = true;
-    docker.storageDriver = "zfs";
+    docker = {
+      enable = true;
+      autoPrune.enable = true;
+      storageDriver = "zfs";
+    };
     libvirtd.enable = true;
   };
 

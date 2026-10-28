@@ -17,7 +17,7 @@ in {
     user = "ben";
     notebookDir = "/home/${user}";
     group = "jupyter";
-    package = pkgs.python310Packages.jupyterlab;
+    package = pkgs.python314Packages.jupyterlab;
     password = passCmd "jupyter-x1-2021";
     command = "jupyter-lab";
   };

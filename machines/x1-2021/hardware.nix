@@ -13,6 +13,7 @@
   boot.kernelModules = [ "kvm-intel" "kvm-amd" ];
   boot.kernel.sysctl."kernel.sysreq" = 1;
   boot.extraModulePackages = [ ];
+  boot.kernelParams = [ "i915.enable_guc=3" ];
 
   fileSystems."/" =
     { device = "rpool/local/root";

@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781981105,
-        "narHash": "sha256-/1nNBbA7PrSQpTc9Qazkhl4kIPg+TNl0CjxS3UQJKlw=",
+        "lastModified": 1792818383,
+        "narHash": "sha256-199i7ubVSXTMl+0AAlL7cVCXSjcI+jWByMcimYjeMX0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7bfff44b465909f69a442701293bc0badcf476dc",
+        "rev": "24f2190587513b9c2f73db112a17844ae912d965",
         "type": "github"
       },
       "original": {
@@ -69,11 +69,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1769548169,
-        "narHash": "sha256-03+JxvzmfwRu+5JafM0DLbxgHttOQZkUtDWBmeUkN8Y=",
+        "lastModified": 1792739756,
+        "narHash": "sha256-s0TeXWG5Ci75Y/Hzon0Z7NrN/fG773Rc54/z6oPFszQ=",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "7b1d382faf603b6d264f58627330f9faa5cba149",
+        "rev": "fa627f4c8b8e92f58f58a73d99ee4e1304e64eb2",
         "type": "github"
       },
       "original": {
@@ -100,11 +100,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1782723713,
-        "narHash": "sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=",
+        "lastModified": 1793110635,
+        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b5aa0fbd538984f6e3d201be0005b4463d8b09f8",
+        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
         "type": "github"
       },
       "original": {
@@ -138,11 +138,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782169228,
-        "narHash": "sha256-CpV9woSmD4MRDZSlfAmVBfxz6HqtF6xajypHG/sH654=",
+        "lastModified": 1793195179,
+        "narHash": "sha256-jsUFB9V4iKamULCF/zmWRUNGmv2y8ct6kI4lUV5AsSA=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "fc1c3bee95e586ea77eeffafb03f80520ba601d9",
+        "rev": "2fa8ae3328ac38596feb36366094d49ac525d14b",
         "type": "github"
       },
       "original": {
@@ -154,11 +154,11 @@
     "rofi-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1772549077,
-        "narHash": "sha256-pMlvbXY9NEOaDPzU1/bnzdy/a+u0m9S0Aw2ysRB8uNA=",
+        "lastModified": 1784378246,
+        "narHash": "sha256-YdsuzmpU/fokvF1/vKuiK/eOLFGfhJcFu8HvUIqx9Ao=",
         "owner": "newmanls",
         "repo": "rofi-themes-collection",
-        "rev": "43ec2f5000eb77509b21a46fee07af2c30d815ce",
+        "rev": "911cc27afe9c66d7e2cb06a47c905d046ea3dfd2",
         "type": "github"
       },
       "original": {

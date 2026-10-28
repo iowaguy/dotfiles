@@ -26,7 +26,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGVxtjrPG1RJTXrI+7ftjQLfqgwL2GXDfAGyaVA1Qaaa ben@x1-2021"
     ];
     dhcpcd.uid = 993;
-    dnsmasq.uid = 983;
     fwupd-refresh.uid = 984;
     geoclue.uid = 999;
     nm-iodine.uid = 997;

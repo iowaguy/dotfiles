@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     pass-git-helper # for letting git get passwords from pass
     diff-so-fancy # git diff with colors
-    python313Packages.git-filter-repo
+    python314Packages.git-filter-repo
   ];
 
   xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''
@@ -14,6 +14,7 @@
   programs.git = {
     enable = true;
     ignores = [ "*~" "*.swp" ".direnv" ".envrc" ];
+    lfs.enable = true;
     settings = {
       user.email = "ben@weintraub.xyz";
       user.name = "Ben Weintraub";

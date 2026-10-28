@@ -19,7 +19,6 @@
       url = "github:newmanls/rofi-themes-collection";
       flake = false;
     };
-
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, impermanence, home-manager, nur , rofi-theme}:

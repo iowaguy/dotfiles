@@ -32,7 +32,7 @@
         lla = "exa -la";
         la = lla;
         cat = "bat";
-        grep = "rg";
+        # grep = "rg";
         watch = "hwatch";
         xclip = "xclip -selection clipboard";
       };

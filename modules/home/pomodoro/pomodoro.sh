@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Pomodoro Timer
-work_duration=25 # Work duration in minutes
-break_duration=5 # Break duration in minutes
+work_duration=${1:-50} # Work duration in minutes
+break_duration=${2:-10} # Break duration in minutes
 bin_dir="$HOME/.bin"
 status_file="$bin_dir/pomodoro-status.txt"
 counter_file_name="pomodoro-counter-$(date +%Y-%m-%d).txt"

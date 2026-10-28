@@ -77,7 +77,7 @@ myLayout = spacing 10 $ layoutGrid ||| layoutFull ||| layoutBinarySpacePartition
     layoutBinarySpacePartition = smartBorders emptyBSP
 
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:code", "2:shell", "3:web", "4:comms", "5:sharing", "6:intents", "7:honeypot", "8", "9"]
+myWorkspaces = ["1:code", "2:shell", "3:web", "4:comms", "5:sharing", "6:servers", "7", "8", "9"]
 
 -- | Border colors for unfocused and focused windows, respectively.
 myNormalBorderColor, myFocusedBorderColor :: String
@@ -180,7 +180,7 @@ myScratchPads =
     spawnTerm = myTerminal ++ " -T=scratchpad"
     findTerm = title =? "scratchpad"
     spawnNotes = myNotes
-    findNotes = appName =? myNotes
+    findNotes = appName =? ("md." ++ myNotes)
 
 main :: IO ()
 main =

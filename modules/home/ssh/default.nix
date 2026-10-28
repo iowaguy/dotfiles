@@ -22,6 +22,11 @@ in {
         hostname = "acadia";
         user = "ben";
       };
+      "ngrok-acadia" = {
+        hostname = "0.tcp.eu.ngrok.io";
+        user = "ben";
+        port = 19673;
+      };
       # "acadia" = {
       #   hostname = "acadia-wg-tunnel";
       #   user = "ben";

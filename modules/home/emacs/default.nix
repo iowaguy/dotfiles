@@ -31,13 +31,12 @@
 
     gcc # Needed for installing emacsql-sqlite for org-roam
     glibc.dev # Include standard headers
-    python313Packages.pygments # Needed for =minted= to export with syntax highlighting
-    python313Packages.jupyter # For Jupyter notebook
-    python313Packages.black
+    python314Packages.pygments # Needed for =minted= to export with syntax highlighting
+    python314Packages.jupyter # For Jupyter notebook
+    python314Packages.black
     bash-language-server # LSP server for bash
-    haskell-language-server # Needed for Haskell LSP
 
-    python313
+    python314
 
     # LSP impl for TeX
     texlab

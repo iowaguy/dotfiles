@@ -2,17 +2,17 @@ attrs@{ pkgs, pkgsUnstable, inputs, ... }:
 
 let
   defaultPkgs = with pkgs; [
+    mongodb-compass               # A GUI for MongoDB
     texlive.combined.scheme-full  # Don't want to rebuild frequently b/c it's big
   ];
 
   # These are packages that I want to keep up-to-date
   unstablePkgs = with pkgsUnstable; [
     arandr                        # A GUI for autorandr
+    btop                          # Nicer than htop
     caffeine-ng                   # don't fall asleep when I have fullscreen vids playing
     claude-code
-    code-cursor                   # AI IDE
     curl
-    cursor-cli
     delve                         # Golang debugger
     dig
     discord                       # A chat client
@@ -20,10 +20,10 @@ let
     drawio                        # Good for drawing finite state machines
     feh
     gnumake                       # 'make' command
+    hlint                         # Linter for Haskell
     jdk17
     jetbrains.idea                # IntelliJ IDEA Java IDE
     karere                        # Whatsapp for Linux
-    mongodb-compass               # A GUI for MongoDB
     mosh                          # A connectionless ssh replacement
     mtr                           # MyTraceroute. A nice network debugging tool
     neovim
@@ -31,7 +31,7 @@ let
     pavucontrol                   # pulseaudio volume control
     paprefs                       # pulseaudio preferences
     pasystray                     # pulseaudio systray
-    python313Packages.tqdm
+    python314Packages.tqdm
     rubber                        # a nice tool for compiling latex
     signal-desktop
     spotify                       # Musics
@@ -47,6 +47,7 @@ let
     entr
     et                            # A convenient cli timer
     fastfetch                     # Pretty print system stats
+    fastmail-desktop
     file                          # classic tool for viewing file attributes
     graphviz
     (haskellPackages.ghcWithPackages (hpkgs: [
@@ -54,8 +55,10 @@ let
       hpkgs.xmonad
       hpkgs.xmonad-contrib
       hpkgs.xmonad-extras
+      hpkgs.haskell-language-server
     ])) # ghci with packages needed for debugging xmonad
     hwatch                        # A modern alternative to the watch command
+    inetutils
     jq
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
@@ -64,15 +67,17 @@ let
     networkmanagerapplet
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
-    pinentry-gtk2
-    sqlite
+    pinentry-gnome3
+    ripe-atlas-tools
     stack                         # Haskell build tool
+    unzip
     wireshark
     wireguard-tools
     xclip
     xdg-utils
     xmobar
     zip                           # Zip files
+    zulip
   ];
 
 in {
@@ -81,6 +86,7 @@ in {
     ./modules/home/brave
     ./modules/home/rofi
     ./modules/home/firefox
+    ./modules/home/ai
     ./modules/home
     ./code
   ];
