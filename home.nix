@@ -4,6 +4,13 @@ let
   defaultPkgs = with pkgs; [
     mongodb-compass               # A GUI for MongoDB
     texlive.combined.scheme-full  # Don't want to rebuild frequently b/c it's big
+    zotero                        # Citation manager
+
+    # These must come from the same nixpkgs as the system's NetworkManager
+    # plugins. nm-applet spawns the plugins' auth dialogs and passes them its
+    # GIO_EXTRA_MODULES, so an unstable nm-applet breaks TLS in those dialogs.
+    networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
+    networkmanagerapplet
   ];
 
   # These are packages that I want to keep up-to-date
