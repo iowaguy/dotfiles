@@ -96,6 +96,7 @@ in
   };
 
   services = {
+    fwupd.enable = true;
     hardware.bolt.enable = true;
     gnome.gnome-keyring.enable = true;
     openssh.enable = true; # Enable the OpenSSH daemon.

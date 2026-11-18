@@ -180,7 +180,7 @@ myScratchPads =
     spawnTerm = myTerminal ++ " -T=scratchpad"
     findTerm = title =? "scratchpad"
     spawnNotes = myNotes
-    findNotes = appName =? ("md." ++ myNotes)
+    findNotes = appName =? ("md." ++ myNotes ++ "." ++ myNotes)
 
 main :: IO ()
 main =

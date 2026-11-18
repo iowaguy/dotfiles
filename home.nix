@@ -48,7 +48,6 @@ let
     vlc
     ytdownloader                  # Download youtube videos
     zoom-us                       # Video conferencing
-    zotero                        # Citation manager
     cabal-install
     cachix                        # cache binaries so I don't have to rebuild
     entr
@@ -70,8 +69,6 @@ let
     libnotify
     libreoffice                   # A horrible program I have to use sometimes to view MS office docs
     libxcb-cursor
-    networkmanager-openvpn        # a nice GUI interface for openVPN in NetworkManager
-    networkmanagerapplet
     openvpn                       # a VPN client
     ormolu                        # Haskell linter/formatter
     pinentry-gnome3
@@ -156,6 +153,8 @@ in {
   };
 
   programs = {
+    gh.enable = true;
+
     vscode = {
       enable = true;
       package = pkgsUnstable.vscode;

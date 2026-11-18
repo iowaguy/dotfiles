@@ -1,6 +1,7 @@
+{ pkgs, ... }:
 {
   services.printing = {
     enable = true;
-    extraConf = builtins.readFile ./cups.conf;
+    drivers = [ pkgs.canon-cups-ufr2 ];
   };
 }
